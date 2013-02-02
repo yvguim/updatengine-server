@@ -1,0 +1,147 @@
+{% load i18n grp_tags %}{% load url from future %}
+
+<div id="grp-navigation">
+        {% load admin_urls %}
+	<h1 id="grp-admin-title"><img src="{{ STATIC_URL }}/images/logo-updatengine.png" alt="updatengine logo"></h1>
+    {% if user.is_authenticated and user.is_staff %}
+        <ul id="grp-user-tools">
+            <!-- inventory -->
+            {% if perms.inventory %}
+            <li class="grp-user-options-container grp-collapse grp-closed">
+                <a href="javascript://" class="user-options-handler grp-collapse-handler">Inventory</a>
+                <ul class="grp-user-options">
+                    {% if perms.inventory.change_machine %}
+                        {%url 'admin:inventory_machine_changelist' as machine_url %}
+                        <li><a href="{{ machine_url }}">{% trans 'machine|machines'|capfirst %}</a></li>
+                    {% endif %}
+                    {% if perms.inventory.change_entity %}
+                        {%url 'admin:inventory_entity_changelist' as entity_url %}
+                        <li><a href="{{ entity_url }}">{% trans 'entity|entities'|capfirst %}</a></li>
+                    {% endif %}
+                    {% if perms.inventory.change_software %}
+                        {%url 'admin:inventory_software_changelist' as software_url %}
+                        <li><a href="{{ software_url }}">{% trans 'software|softwares'|capfirst %}</a></li>
+                    {% endif %}
+                    {% if perms.inventory.change_net %}
+                        {%url 'admin:inventory_net_changelist' as net_url %}
+                        <li><a href="{{ net_url }}">{% trans 'net|networks'|capfirst %}</a></li>
+                    {% endif %}
+                    {% if perms.inventory.change_osdistribution %}
+                        {%url 'admin:inventory_osdistribution_changelist' as os_url %}
+                        <li><a href="{{ os_url }}">{% trans 'osdistribution|osdistributions'|capfirst %}</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            {% endif %}
+            <!-- deploy -->
+            {% if perms.deploy %}
+            <li class="grp-user-options-container grp-collapse grp-closed">
+                <a href="javascript://" class="user-options-handler grp-collapse-handler">Deploy</a>
+                <ul class="grp-user-options">
+                    {% if perms.deploy.change_packagehistory %}
+                        {%url 'admin:deploy_packagehistory_changelist' as ph_url %}
+                        <li><a href="{{ ph_url }}">{% trans 'packagehistory|packages history'|capfirst %}</a></li>
+                    {% endif %}
+                    {% if perms.deploy.change_package %}
+                        {%url 'admin:deploy_package_changelist' as package_url %}
+                       <li><a href="{{ package_url }}">{% trans 'package|deployment packages'|capfirst %}</a></li>
+                    {% endif %}
+                    {% if perms.deploy.change_packagecondition %}
+                        {%url 'admin:deploy_packagecondition_changelist' as pc_url %}
+                        <li><a href="{{ pc_url }}">{% trans 'packagecondition|packages conditions'|capfirst %}</a></li>
+                    {% endif %}
+                    {% if perms.deploy.change_packageprofile %}
+                        {%url 'admin:deploy_packageprofile_changelist' as pp_url %}
+                        <li><a href="{{ pp_url }}">{% trans 'packageprofile|packages profiles'|capfirst %}</a></li>
+                    {% endif %}
+                    {% if perms.deploy.change_timeprofile %}
+                        {%url 'admin:deploy_timeprofile_changelist' as tp_url %}
+                        <li><a href="{{ tp_url }}">{% trans 'timeprofile|time profiles'|capfirst %}</a></li>
+                    {% endif %}
+                    {% if perms.deploy.change_packagewakeonlan %}
+                        {%url 'admin:deploy_packagewakeonlan_changelist' as wk_url %}
+                        <li><a href="{{ wk_url }}">{% trans 'packagewakeonlan|packages wakeonlan'|capfirst %}</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            {% endif %}
+            <!-- conf -->
+            {% if perms.configuration %}
+            <li class="grp-user-options-container grp-collapse grp-closed">
+                <a href="javascript://" class="user-options-handler grp-collapse-handler">Configuration</a>
+                <ul class="grp-user-options">
+                    {% if perms.configuration.change_deployconfig %}
+                        {%url 'admin:configuration_deployconfig_changelist' as deployconfig_url %}
+                        <li><a href="{{ deployconfig_url }}">{% trans 'deployconfig|deployconfigs'|capfirst %}</a></li>
+                    {% endif %}
+                </ul>
+            </li>
+            {% endif %}
+	    <!-- Authentification -->
+            {% if perms.Auth %}
+            <li class="grp-user-options-container grp-collapse grp-closed">
+                <a href="javascript://" class="user-options-handler grp-collapse-handler">Auth</a>
+                <ul class="grp-user-options">
+                {% if perms.Auth.change_group %}
+                    {%url 'admin:auth_group_changelist' as group_url %}
+                    <li><a href="{{ group_url }}">{% trans 'groups'|capfirst %}</a></li>
+		{% endif %}
+		{% if perms.Auth.change_user %}
+			{%url 'admin:auth_user_changelist' as user_url %}
+                	<li><a href="{{ user_url }}">{% trans 'users'|capfirst %}</a></li>
+                {% endif %}
+		
+                </ul>
+            </li>
+            {% endif %}
+	    <!-- Username -->
+            <li class="grp-user-options-container grp-collapse grp-closed">
+                <a href="javascript://" class="user-options-handler grp-collapse-handler">{% firstof user.first_name user.username %}</a>
+                <ul class="grp-user-options">
+                    <!-- Change Password -->
+                    {% url 'admin:password_change' as password_change_url %}
+                    {% if password_change_url %}
+                        <li><a href="{{ password_change_url }}">
+                    {% else %}
+                        <li><a href="{{ root_path }}password_change/">
+                    {% endif %}
+                    {% trans 'Change password' %}</a></li>
+                    <!-- Logout -->
+                    {% url 'admin:logout' as logout_url %}
+                    {% if logout_url %}
+                        <li><a href="{{ logout_url }}">
+                    {% else %}
+                        <li><a href="{{ root_path }}logout/">
+                    {% endif %}
+                    {% trans 'Log out' %}</a></li>
+                </ul>
+            </li>
+            <li>
+	    <form action="{{ PROJECT_URL }}/i18n/setlang/" method="post">{% csrf_token %}
+      <input name="next" type="hidden" value="{{ PROJECT_URL }}" />
+      <select name="language">
+        {% for lang in LANGUAGES %}
+          <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+        {% endfor %}
+      </select>
+      <input type="submit" value="Go" />
+    </form>
+
+	
+            </li>
+       </ul>
+    {% endif %}
+
+    {% block nav-global %}
+    {% endblock %}
+</div>
+
+<script type="text/javascript" charset="utf-8">
+    (function($) {
+        $(document).ready(function() {
+            $("#grp-navigation .grp-collapse").grp_collapsible();
+        });
+    })(grp.jQuery);
+</script>
+
+
