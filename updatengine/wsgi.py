@@ -19,7 +19,7 @@
 ###################################################################################
 
 """
-WSGI config for UpdatEngine project.
+WSGI config for updatengine project.
 
 This module contains the WSGI application used by Django's development server
 and any production WSGI deployments. It should expose a module-level variable
@@ -38,7 +38,7 @@ path = os.path.join(os.path.dirname(os.path.dirname(__file__)))
 if path not in sys.path:
 	    sys.path.append(path)
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "UpdatEngine.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "updatengine.settings")
 
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION

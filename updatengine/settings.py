@@ -1,3 +1,23 @@
+###################################################################################
+# UpdatEngine - Software Packages Deployment and Administration tool              #  
+#                                                                                 #
+# Copyright (C) Yves Guimard - yves.guimard@gmail.com                             #
+#                                                                                 #
+# This program is free software; you can redistribute it and/or                   #
+# modify it under the terms of the GNU General Public License                     #
+# as published by the Free Software Foundation; either version 2                  #
+# of the License, or (at your option) any later version.                          #
+#                                                                                 #
+# This program is distributed in the hope that it will be useful,                 #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of                  #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the                   #
+# GNU General Public License for more details.                                    #
+#                                                                                 #
+# You should have received a copy of the GNU General Public License               #
+# along with this program; if not, write to the Free Software                     #
+# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA. #
+###################################################################################
+
 # Django settings for UpdatEngine project.
 from django.utils.translation import gettext_lazy as _
 import os
@@ -5,7 +25,7 @@ PROJECT_DIR = os.path.dirname(__file__)
 
 ### -- Modify informations below -- ###
 
-PROJECT_URL = 'http://127.0.0.1:1978'
+PROJECT_URL = 'http://127.0.0.1:1979'
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -22,7 +42,7 @@ LANGUAGE_CODE = 'fr'
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-GRAPPELLI_INDEX_DASHBOARD = 'UpdatEngine.dashboard.CustomIndexDashboard'
+GRAPPELLI_INDEX_DASHBOARD = 'updatengine.dashboard.CustomIndexDashboard'
 ADMINS = (
      #('admin', 'admin@your_adress.tld'),
 )
@@ -130,10 +150,10 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'UpdatEngine.urls'
+ROOT_URLCONF = 'updatengine.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
-WSGI_APPLICATION = 'UpdatEngine.wsgi.application'
+WSGI_APPLICATION = 'updatengine.wsgi.application'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -141,7 +161,7 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 os.path.join(PROJECT_DIR, 'templates'),    )
 
-GRAPPELLI_ADMIN_TITLE = 'UpdatEngine'
+GRAPPELLI_ADMIN_TITLE = 'updatengine'
 
 INSTALLED_APPS = (
     'django.contrib.auth',

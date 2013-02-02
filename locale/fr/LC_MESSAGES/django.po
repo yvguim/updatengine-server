@@ -1,5 +1,5 @@
 ###################################################################################
-# UpdatEngine - Software Packages Deployment and Administration tool              #  
+# updatengine - Software Packages Deployment and Administration tool              #  
 #                                                                                 #
 # Copyright (C) Yves Guimard - yves.guimard@gmail.com                             #
 #                                                                                 #
@@ -32,99 +32,99 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: UpdatEngine/dashboard.py:50
+#: updatengine/dashboard.py:50
 msgid "Recent Actions"
 msgstr "Actions récentes"
 
-#: UpdatEngine/dashboard.py:58
+#: updatengine/dashboard.py:58
 msgid "ModelList: Administration"
 msgstr "Gestion des droits"
 
-#: UpdatEngine/dashboard.py:75
+#: updatengine/dashboard.py:75
 msgid "ModelList: Links"
 msgstr "Liens"
 
-#: UpdatEngine/settings.py:57
+#: updatengine/settings.py:57
 msgid "french"
 msgstr "français"
 
-#: UpdatEngine/settings.py:58
+#: updatengine/settings.py:58
 msgid "english"
 msgstr "anglais"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:15
+#: updatengine/templates/admin/includes_grappelli/header.html:15
 #: inventory/models.py:46
 msgid "machine|machines"
 msgstr "    Machines"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:19
+#: updatengine/templates/admin/includes_grappelli/header.html:19
 #: inventory/models.py:14
 msgid "entity|entities"
 msgstr "   Entités"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:23
+#: updatengine/templates/admin/includes_grappelli/header.html:23
 #: inventory/models.py:111
 msgid "software|softwares"
 msgstr "  Logiciels"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:27
+#: updatengine/templates/admin/includes_grappelli/header.html:27
 #: inventory/models.py:91
 msgid "net|networks"
 msgstr " Réseaux"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:31
+#: updatengine/templates/admin/includes_grappelli/header.html:31
 #: inventory/models.py:71
 msgid "osdistribution|osdistributions"
 msgstr "Systèmes et architectures"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:43
+#: updatengine/templates/admin/includes_grappelli/header.html:43
 #: deploy/models.py:139
 msgid "packagehistory|packages history"
 msgstr "    Historique des déploiements"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:47
+#: updatengine/templates/admin/includes_grappelli/header.html:47
 #: deploy/models.py:47
 msgid "package|deployment packages"
 msgstr "   Paquets de déploiements"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:51
+#: updatengine/templates/admin/includes_grappelli/header.html:51
 #: deploy/models.py:28
 msgid "packagecondition|packages conditions"
 msgstr "  Conditions d'installations"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:55
+#: updatengine/templates/admin/includes_grappelli/header.html:55
 #: deploy/models.py:152
 msgid "packageprofile|packages profiles"
 msgstr " Profils de configurations"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:59
+#: updatengine/templates/admin/includes_grappelli/header.html:59
 #: deploy/models.py:182
 msgid "timeprofile|time profiles"
 msgstr "Périodes de déploiement"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:63
+#: updatengine/templates/admin/includes_grappelli/header.html:63
 #: deploy/models.py:166
 msgid "packagewakeonlan|packages wakeonlan"
 msgstr "Tâches de wake on lan"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:75
+#: updatengine/templates/admin/includes_grappelli/header.html:75
 #: configuration/models.py:18
 msgid "deployconfig|deployconfigs"
 msgstr "Configuration des déploiements"
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:87
+#: updatengine/templates/admin/includes_grappelli/header.html:87
 msgid "groups"
 msgstr ""
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:91
+#: updatengine/templates/admin/includes_grappelli/header.html:91
 msgid "users"
 msgstr ""
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:108
+#: updatengine/templates/admin/includes_grappelli/header.html:108
 msgid "Change password"
 msgstr ""
 
-#: UpdatEngine/templates/admin/includes_grappelli/header.html:116
+#: updatengine/templates/admin/includes_grappelli/header.html:116
 msgid "Log out"
 msgstr ""
 
@@ -328,7 +328,7 @@ msgstr "Nom"
 msgid "packagewakeonlan|packagewakeonlan help text"
 msgstr ""
 "Attention: Dans cette version cette tâche ne peut être utile que sur le sous-"
-"réseau \td'installation du serveur UpdatEngine ou sur les vlans \"environnant"
+"réseau \td'installation du serveur updatengine ou sur les vlans \"environnant"
 "\" \t(nécessite le paramétrage de vos équipements.)"
 
 #: deploy/models.py:159
