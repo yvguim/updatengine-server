@@ -151,7 +151,7 @@ class packagehistory(models.Model):
 	filename  = models.CharField(max_length=500, null=True, blank=True, verbose_name = _('packagehistory|filename'))
 	machine = models.ForeignKey(machine, verbose_name = _('packagehistory|machine'))
 	package = models.ForeignKey(package, null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('packagehistory|package'))
-	status = models.CharField(max_length=100, default = 'Programmed', null=True, blank = True, verbose_name = _('packagehistory|status'))
+	status = models.CharField(max_length=500, default = 'Programmed', null=True, blank = True, verbose_name = _('packagehistory|status'))
 	date = models.DateTimeField(auto_now=True, verbose_name = _('packagehistory|date'))
 	
 	class Meta:
