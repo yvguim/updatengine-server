@@ -59,7 +59,7 @@ class CustomIndexDashboard(Dashboard):
 		title='',
 		title_url='',
 		collapsible=False,
-		column=1,
+		column=2,
 		css_classes=('collapse closed',),
 		models=('configuration.*',)
 		))

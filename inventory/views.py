@@ -32,33 +32,28 @@ def is_deploy_authorized(m,handling):
 	config = deployconfig.objects.get(pk=1)
 	now = datetime.now().time()
 	deploy_auth = False
-	# if deployment are active
-	if config.activate_deploy == 'yes':
-		# if a global time period is defined
-		if config.activate_time_deploy == 'yes':
-			start = config.start_time
-			end = config.end_time
-			if (start <= now and now <= end) or \
-			(end <= start and (start <= now or now <= end)):
-				deploy_auth = True
-			else:
-				deploy_auth = False
-				handling.append('<info>Not in deployment period (global configuration)</info>\n')
-			# if a time period is defined for this machine
-		elif m.timeprofile is not None:
-			start = m.timeprofile.start_time
-			end = m.timeprofile.end_time
-			if (start <= now and now <= end) or \
-			(end <= start and (start <= now or now <= end)):
-				deploy_auth = True
-			else:
-				deploy_auth = False
-				handling.append('<info>Not in deployment period (timeprofile)</info>\n')
-		else:
+	# if a global time period is defined
+	if config.activate_time_deploy == 'yes':
+		start = config.start_time
+		end = config.end_time
+		if (start <= now and now <= end) or \
+		(end <= start and (start <= now or now <= end)):
 			deploy_auth = True
+		else:
+			deploy_auth = False
+			handling.append('<info>Not in deployment period (global configuration)</info>\n')
+		# if a time period is defined for this machine
+	elif m.timeprofile is not None:
+		start = m.timeprofile.start_time
+		end = m.timeprofile.end_time
+		if (start <= now and now <= end) or \
+		(end <= start and (start <= now or now <= end)):
+			deploy_auth = True
+		else:
+			deploy_auth = False
+			handling.append('<info>Not in deployment period (timeprofile)</info>\n')
 	else:
-		deploy_auth = False
-		handling.append('<info>deployment function is not active </info>\n')
+		deploy_auth = True
 	return deploy_auth
 
 
@@ -99,6 +94,37 @@ def status(xml):
 	handling.append('</Response>')
 	return handling
 
+def check_conditions(m,pack):
+	install = True
+	# All types of conditions are checked one by one
+	for condition in pack.conditions.filter(depends='notinstalled'):
+		if software.objects.filter(host_id=m.id, name=condition.softwarename, version=condition.softwareversion).exists():
+			install = False
+			status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning Software already installed. Condition: '+condition.name+'</Status></Packagestatus>')
+	for condition in pack.conditions.filter(depends='installed'):
+		if not software.objects.filter(host_id=m.id, name=condition.softwarename, version=condition.softwareversion).exists():
+			install = False
+			status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
+
+	for condition in pack.conditions.filter(depends='is_W64_bits'):
+		if not osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='64').exists():
+			install = False
+			status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
+	
+	for condition in pack.conditions.filter(depends='is_W32_bits'):
+		if not osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='32').exists():
+			install = False
+			status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
+
+	for condition in pack.conditions.filter(depends='lower'):
+		if software.objects.filter(host_id=m.id, name=condition.softwarename, version__gte=condition.softwareversion).exists():
+			install = False
+			status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
+	for condition in pack.conditions.filter(depends='higher'):
+		if not software.objects.filter(host_id=m.id, name=condition.softwarename, version__gt=condition.softwareversion).exists():
+			install = False
+			status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
+	return install
 
 
 def inventory(xml):
@@ -181,116 +207,44 @@ def inventory(xml):
 		# check if it's the time to deploy and if it's authorized
 
 	    	period_to_deploy = is_deploy_authorized(m, handling)
+		config = deployconfig.objects.get(pk=1)
+		if config.activate_deploy == 'yes':
+			# Packages programmed manualy on machine
+			for pack in m.packages.all():
+				if period_to_deploy  or pack.ignoreperiod == 'yes':
+					if check_conditions(m, pack):
+						if pack.packagesum != 'nofile':
+							packurl = pack.filename.url
+						else:
+							packurl = ''
+						handling.append('<Package>\n\
+								<Id>'+str(m.id)+'</Id>\n\
+								<Pid>'+str(pack.id)+'</Pid>\n\
+								<Name>'+pack.name+'</Name>\n\
+								<Description>'+pack.description+'</Description>\n\
+								<Command>'+pack.command+'</Command>\n\
+								<Packagesum>'+pack.packagesum+'</Packagesum>\n\
+								<Url>'+packurl+'</Url>\n</Package>')
 
-		# Packages programmed manualy to deploy on machine
-		for pack in m.packages.all():
-			if (period_to_deploy == False) and (pack.ignoreperiod == 'no'):
-				install = False
-			else:
-				install = True
-			# Install if no condition or if one or more condition are false
-			for condition in pack.conditions.filter(depends='notinstalled'):
-				if software.objects.filter(host_id=m.id, name=condition.softwarename, version=condition.softwareversion).exists():
-					install = False
-					status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Error Software already installed. Condition: '+condition.name+'</Status></Packagestatus>')
-			for condition in pack.conditions.filter(depends='installed'):
-				if not software.objects.filter(host_id=m.id, name=condition.softwarename, version=condition.softwareversion).exists():
-					install = False
-					status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Error condition: '+condition.name+'</Status></Packagestatus>')
-
-			for condition in pack.conditions.filter(depends='is_W64_bits'):
-				if not osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='64').exists():
-					install = False
-					status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Error condition: '+condition.name+'</Status></Packagestatus>')
-			
-			for condition in pack.conditions.filter(depends='is_W32_bits'):
-				if not osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='32').exists():
-					install = False
-					status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Error condition: '+condition.name+'</Status></Packagestatus>')
-	
-
-			for condition in pack.conditions.filter(depends='lower'):
-				if software.objects.filter(host_id=m.id, name=condition.softwarename, version__gte=condition.softwareversion).exists():
-					install = False
-					status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Error condition: '+condition.name+'</Status></Packagestatus>')
-			for condition in pack.conditions.filter(depends='higher'):
-				if not software.objects.filter(host_id=m.id, name=condition.softwarename, version__gt=condition.softwareversion).exists():
-					install = False
-					status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Error condition: '+condition.name+'</Status></Packagestatus>')
-			
-
-
-
-
-			if install:
-				if pack.packagesum != 'nofile':
-					packurl = pack.filename.url
-				else:
-					packurl = ''
-				handling.append('<Package>\n\
-						<Id>'+str(m.id)+'</Id>\n\
-						<Pid>'+str(pack.id)+'</Pid>\n\
-						<Name>'+pack.name+'</Name>\n\
-						<Description>'+pack.description+'</Description>\n\
-						<Command>'+pack.command+'</Command>\n\
-						<Packagesum>'+pack.packagesum+'</Packagesum>\n\
-						<Url>'+packurl+'</Url>\n</Package>')
-
-		# Packages included in machine profilepackage
-		if m.packageprofile:
-			for pack in m.packageprofile.packages.all():
-				
-				if (period_to_deploy == False) and (pack.ignoreperiod == 'no'):
-					install = False
-				else:
-					install = True
-
-				if packagehistory.objects.filter(machine=m, package=pack, status__startswith="Error when executing action").exists():
-					install = False
-				
-				for condition in pack.conditions.filter(depends='notinstalled'):
-					if software.objects.filter(host_id=m.id, name=condition.softwarename, version=condition.softwareversion).exists():
-						install = False
-				for condition in pack.conditions.filter(depends='installed'):
-					if not software.objects.filter(host_id=m.id, name=condition.softwarename, version=condition.softwareversion).exists():
-						install = False
-						status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Error condition: '+condition.name+'</Status></Packagestatus>')
-
-				for condition in pack.conditions.filter(depends='is_W64_bits'):
-					if not osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='64').exists():
-						install = False
-						status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Error condition: '+condition.name+'</Status></Packagestatus>')
-				
-				for condition in pack.conditions.filter(depends='is_W32_bits'):
-					if not (osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='32').exists() or osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='undefined').exists()):
-						install = False
-						status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Error condition: '+condition.name+'</Status></Packagestatus>')
-			
-
-
-				for condition in pack.conditions.filter(depends='lower'):
-					if software.objects.filter(host_id=m.id, name=condition.softwarename, version__gte=condition.softwareversion).exists():
-						install = False
-				for condition in pack.conditions.filter(depends='higher'):
-					if not software.objects.filter(host_id=m.id, name=condition.softwarename, version__gt=condition.softwareversion).exists():
-						install = False
-			
-
-				if install:
-					if pack.packagesum != 'nofile':
-						packurl = pack.filename.url
-					else:
-						packurl = ''
-					handling.append('<Package>\n\
-							<Id>'+str(m.id)+'</Id>\n\
-							<Pid>'+str(pack.id)+'</Pid>\n\
-							<Name>'+pack.name+'</Name>\n\
-							<Description>'+pack.description+'</Description>\n\
-							<Command>'+pack.command+'</Command>\n\
-							<Packagesum>'+pack.packagesum+'</Packagesum>\n\
-							<Url>'+packurl+'</Url>\n</Package>')
-
-
+			# Packages included in machine profilepackage
+			if m.packageprofile:
+				for pack in m.packageprofile.packages.all():
+					if period_to_deploy or pack.ignoreperiod == 'no':
+						if check_conditions(m, pack):
+							if pack.packagesum != 'nofile':
+								packurl = pack.filename.url
+							else:
+								packurl = ''
+							handling.append('<Package>\n\
+									<Id>'+str(m.id)+'</Id>\n\
+									<Pid>'+str(pack.id)+'</Pid>\n\
+									<Name>'+pack.name+'</Name>\n\
+									<Description>'+pack.description+'</Description>\n\
+									<Command>'+pack.command+'</Command>\n\
+									<Packagesum>'+pack.packagesum+'</Packagesum>\n\
+									<Url>'+packurl+'</Url>\n</Package>')
+		else:
+			handling.append('<info>deployment function is not active </info>\n')
 	except:
 		handling.append('Error when importing inventory: ' + sys.exec_info()[0])
 	handling.append('</Response>')
