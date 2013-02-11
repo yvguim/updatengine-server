@@ -46,7 +46,7 @@ class machineAdmin(admin.ModelAdmin):
 			('lastsave',DateFieldListFilter)
 			)
       	search_fields = ('name', 'serial','vendor','product')
-        readonly_fields = ('manualy_created',)
+        readonly_fields = ('typemachine', 'manualy_created',)
 	inlines = [osInline, netInline]
 	filter_horizontal = ('packages',)
         date_hierarchy = 'lastsave'
