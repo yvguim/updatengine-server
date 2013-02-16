@@ -2,16 +2,16 @@ Listen 1979
 NameVirtualHost *:1979
 <VirtualHost *:1979>
 	WSGIDaemonProcess updatengine display-name=updatengine user=www-data processes=2 threads=15
-	WSGIScriptAlias / /var/www/UE-environment/UpdatEngine/UpdatEngine/wsgi.py
-	Alias /static/ /var/www/UE-environment/UpdatEngine/UpdatEngine/static/
-	Alias /media/ /var/www/UE-environment/UpdatEngine/UpdatEngine/media/
+	WSGIScriptAlias / /var/www/UE-environment/updatengine-server/updatengine/wsgi.py
+	Alias /static/ /var/www/UE-environment/updatengine-server/updatengine/static/
+	Alias /media/ /var/www/UE-environment/updatengine-server/updatengine/media/
 
-<Directory /var/www/UE-environment/UpdatEngine/UpdatEngine/static>
+<Directory /var/www/UE-environment/updatengine-server/updatengine/static>
 Order deny,allow
 Allow from all
 </Directory>
 
-<Directory /var/www/UE-environment/UpdatEngine/UpdatEngine/media>
+<Directory /var/www/UE-environment/updatengine-server/updatengine/media>
 Order deny,allow
 Allow from all
 </Directory>
