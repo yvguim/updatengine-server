@@ -104,6 +104,7 @@ def check_conditions(m,pack):
         if software.objects.filter(host_id=m.id, name=condition.softwarename, version=condition.softwareversion).exists():
             install = False
             status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning Software already installed. Condition: '+condition.name+'</Status></Packagestatus>')
+
     for condition in pack.conditions.filter(depends='installed'):
         if not software.objects.filter(host_id=m.id, name=condition.softwarename, version=condition.softwareversion).exists():
             install = False
@@ -159,6 +160,7 @@ def inventory(xml):
         m.product=p
         m.typemachine_id=ch.id
         m.manualy_created='no'
+        
         # System info import
         if ossum != m.ossum:
             m.ossum = ossum
@@ -173,13 +175,14 @@ def inventory(xml):
                      osdistribution.objects.create(name = osname, version = osversion, arch = osarch, systemdrive = ossystemdrive, host_id=m.id, manualy_created='no')
                     except:
                         handling.append('<warning>creation off System: '+osname+' -- '+osversion+' failed</warning>')
+        
         # Software import
         if softsum != m.softsum:
             # if software checksum has change:
             #delete all soft belonging to this machine and create new according to xml.
             m.softsum = softsum
             m.save()
-            software.objects.filter(host_id=m.id,manualy_created='no').delete()
+            software.objects.filter(host_id=m.id, manualy_created='no').delete()
             for soft in root.findall('Software'):
                     softname = soft.find('Name').text
                     softversion = soft.find('Version').text
@@ -188,6 +191,7 @@ def inventory(xml):
                         software.objects.create(name = softname, version = softversion,uninstall=softuninstall, host_id=m.id, manualy_created='no')
                     except:
                         handling.append('<warning>creation off Software: '+softname+' -- '+softversion+' failed</warning>')
+        
         # Network import
         # Delete all network information belonging to this machine and create new according to xml.
         if netsum != m.netsum:
@@ -208,6 +212,7 @@ def inventory(xml):
         except:
             handling.append('<Error>can\'t save machine!</Import>')
 
+        # packages program
         # check if it's the time to deploy and if it's authorized
 
             period_to_deploy = is_deploy_authorized(m, handling)
@@ -255,6 +260,8 @@ def inventory(xml):
     return handling
 
 def post(request):
+    """Post function redirect inventory and status client request
+    to dedicated functions"""
     handling = list()
 
     if (request.POST.get('action')):
