@@ -22,7 +22,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 class entity(models.Model):
-	name = models.CharField(max_length=10,verbose_name = _('entity|name'))
+	name = models.CharField(max_length=100,verbose_name = _('entity|name'))
 	description = models.TextField(max_length=1000,verbose_name = _('entity|description'))
 	parent = models.ForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.SET_NULL,verbose_name = _('entity|parent'))
 

@@ -183,14 +183,19 @@ def inventory(xml):
             m.softsum = softsum
             m.save()
             software.objects.filter(host_id=m.id, manualy_created='no').delete()
+            slist = list()
             for soft in root.findall('Software'):
+                try:
                     softname = soft.find('Name').text
                     softversion = soft.find('Version').text
                     softuninstall = soft.find('Uninstall').text
-                    try:
-                        software.objects.create(name = softname, version = softversion,uninstall=softuninstall, host_id=m.id, manualy_created='no')
-                    except:
-                        handling.append('<warning>creation off Software: '+softname+' -- '+softversion+' failed</warning>')
+                    slist.append(software(name = softname, version = softversion,uninstall=softuninstall, host_id=m.id, manualy_created='no'))
+                except:
+                    pass
+            try:
+               software.objects.bulk_create(slist)
+            except:
+               handling.append('<warning>creation off Software: '+softname+' -- '+softversion+' failed</warning>')
         
         # Network import
         # Delete all network information belonging to this machine and create new according to xml.
@@ -215,7 +220,7 @@ def inventory(xml):
         # packages program
         # check if it's the time to deploy and if it's authorized
 
-            period_to_deploy = is_deploy_authorized(m, handling)
+        period_to_deploy = is_deploy_authorized(m, handling)
         config = deployconfig.objects.get(pk=1)
         if config.activate_deploy == 'yes':
             # Packages programmed manualy on machine
