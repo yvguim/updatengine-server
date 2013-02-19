@@ -1,5 +1,5 @@
 ###################################################################################
-# UpdatEngine - Software Packages Deployment and Administration tool              #  
+# UpdatEngine - Software Packages Deployment and Administration tool              #
 #                                                                                 #
 # Copyright (C) Yves Guimard - yves.guimard@gmail.com                             #
 #                                                                                 #
@@ -40,7 +40,7 @@ class packagecondition(models.Model):
 	name = models.CharField(max_length=100, unique=True, verbose_name = _('packagecondition|name'))
 	#description = models.CharField(max_length=500, verbose_name = _('packagecondition|description'))
 	depends = models.CharField(max_length=12, choices=choice, default='installed', verbose_name = _('packagecondition|depends'))
-	softwarename = models.CharField(max_length=100, null= True, blank=True, default="undefined", verbose_name = _('packagecondition|softwarename'), help_text= _('packagecondition|softwarename help text')) 
+	softwarename = models.CharField(max_length=100, null= True, blank=True, default="undefined", verbose_name = _('packagecondition|softwarename'), help_text= _('packagecondition|softwarename help text'))
 	softwareversion = models.CharField(max_length=500, null= True, blank=True, default="undefined", verbose_name = _('packagecondition|softwareversion'), help_text= _('packagecondition|softwareversion help text'))
 
 	class Meta:
@@ -61,11 +61,12 @@ class package(models.Model):
 	command = models.TextField(max_length=1000, verbose_name = _('package|command'), help_text= _('package|command help text'))
 	packagesum = models.CharField(max_length=40, null= True, blank=True, verbose_name = _('package|packagesum'))
 	filename  = models.FileField(upload_to="package-file/", null=True, blank=True, verbose_name = _('package|filename'))
-	ignoreperiod = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package|ignore deploy period'))	
+	ignoreperiod = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package|ignore deploy period'))
+	public = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package| public package'))
 	class Meta:
 		verbose_name = _('package|deployment package')
 		verbose_name_plural = _('package|deployment packages')
-	
+
 	def save(self, *args, **kwargs):
 		# delete old file when replacing by updating the file
 		try :
@@ -73,7 +74,7 @@ class package(models.Model):
 			if p.filename != self.filename:
 				p.filename.delete(save=False)
 		except :
-			pass # when new photo then we do nothing, normal case          
+			pass # when new photo then we do nothing, normal case
 		super(package, self).save(*args, **kwargs)
 
 	def md5_for_file(self,block_size=2**20):
@@ -97,7 +98,7 @@ class package(models.Model):
 def postcreate_package(sender, instance, created, **kwargs):
 	# Update of packagesum field
 	if instance.filename == None:
-		instance.packagesum = 'nofile'	
+		instance.packagesum = 'nofile'
 	else:
 			instance.packagesum = instance.md5_for_file()
 	# Update of all package history wish are programmed
@@ -136,9 +137,9 @@ def packages_changed(sender, instance, **kwargs):
 		if package.packagesum != 'nofile':
 			obj.filename = package.filename.path
 		obj.save()
-	# delete packagehistory object if just programmed and deleted from machine	
+	# delete packagehistory object if just programmed and deleted from machine
 	for package in packagehistory.objects.filter(machine=instance,status='Programmed'):
-		
+
 		if not machine.objects.filter(packages__in=allpackages).exists():
 			package.delete()
 
@@ -153,7 +154,7 @@ class packagehistory(models.Model):
 	package = models.ForeignKey(package, null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('packagehistory|package'))
 	status = models.CharField(max_length=500, default = 'Programmed', null=True, blank = True, verbose_name = _('packagehistory|status'))
 	date = models.DateTimeField(auto_now=True, verbose_name = _('packagehistory|date'))
-	
+
 	class Meta:
 		verbose_name = _('packagehistory|package history')
 		verbose_name_plural = _('packagehistory|packages history')
@@ -170,7 +171,7 @@ class packageprofile(models.Model):
 	class Meta:
 		verbose_name = _('packageprofile|package profile')
 		verbose_name_plural = _('packageprofile|packages profiles')
-	
+
 	def __unicode__(self):
 		return self.name
 
@@ -180,7 +181,7 @@ class packagewakeonlan(models.Model):
 	machines = models.ManyToManyField('inventory.machine',null = True, blank = True, verbose_name = _('packagewakeonlan|machines to start'))
 	date = models.DateTimeField(verbose_name = _('packagewakeonlan|start_time'))
 	status = models.CharField(max_length=100, default='Programmed', verbose_name = _('packagewakeonlan|status'))
-	
+
 	class Meta:
 		verbose_name = _('packagewakeonlan|package wakeonlan')
 		verbose_name_plural = _('packagewakeonlan|packages wakeonlan')
@@ -196,10 +197,10 @@ class timeprofile(models.Model):
 	description = models.CharField(max_length=500,null= True, blank= True, verbose_name = _('timeprofile|description'))
 	start_time = models.TimeField(verbose_name = _('timeprofile|start_time'))
 	end_time = models.TimeField(verbose_name = _('timeprofile|end_time'))
-	
+
 	class Meta:
 		verbose_name = _('timeprofile|time profile')
 		verbose_name_plural = _('timeprofile|time profiles')
-	
+
 	def __unicode__(self):
 		return self.name

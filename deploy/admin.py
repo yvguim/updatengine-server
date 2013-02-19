@@ -1,5 +1,5 @@
 ###################################################################################
-# UpdatEngine - Software Packages Deployment and Administration tool              #  
+# UpdatEngine - Software Packages Deployment and Administration tool              #
 #                                                                                 #
 # Copyright (C) Yves Guimard - yves.guimard@gmail.com                             #
 #                                                                                 #
@@ -23,9 +23,9 @@ from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
 
 class packageAdmin(admin.ModelAdmin):
-	list_display = ('name','description','command','filename','ignoreperiod','packagesum')
-	list_editable = ('ignoreperiod',)
-	search_fields = ('name','description','command','filename','packagesum')
+	list_display = ('name','description','command','filename','ignoreperiod','public','packagesum')
+	list_editable = ('ignoreperiod','public')
+	search_fields = ('name','description','command','filename','public','packagesum')
 	list_filter = ('ignoreperiod',)
 	filter_horizontal = ('conditions',)
 
@@ -51,12 +51,12 @@ class packageprofileAdmin(admin.ModelAdmin):
 class timeprofileAdmin(admin.ModelAdmin):
 	list_display = ('name','description','start_time','end_time')
 	search_fields = ('name','description')
-	list_editable = ('start_time','end_time')	
+	list_editable = ('start_time','end_time')
 
 class wakeonlanAdmin(admin.ModelAdmin):
 	list_display = ('name','description','date','status')
 	search_fields = ('name','description')
-	list_editable = ('date',)	
+	list_editable = ('date',)
 	filter_horizontal = ('machines',)
 	readonly_fields = ('status',)
 

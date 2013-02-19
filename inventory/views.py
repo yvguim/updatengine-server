@@ -1,5 +1,5 @@
 ###################################################################################
-# UpdatEngine - Software Packages Deployment and Administration tool              #  
+# UpdatEngine - Software Packages Deployment and Administration tool              #
 #                                                                                 #
 # Copyright (C) Yves Guimard - yves.guimard@gmail.com                             #
 #                                                                                 #
@@ -114,7 +114,7 @@ def check_conditions(m,pack):
         if not osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='64').exists():
             install = False
             status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
-    
+
     for condition in pack.conditions.filter(depends='is_W32_bits'):
         if not osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='32').exists():
             install = False
@@ -160,7 +160,7 @@ def inventory(xml):
         m.product=p
         m.typemachine_id=ch.id
         m.manualy_created='no'
-        
+
         # System info import
         if ossum != m.ossum:
             m.ossum = ossum
@@ -175,7 +175,7 @@ def inventory(xml):
                      osdistribution.objects.create(name = osname, version = osversion, arch = osarch, systemdrive = ossystemdrive, host_id=m.id, manualy_created='no')
                     except:
                         handling.append('<warning>creation off System: '+osname+' -- '+osversion+' failed</warning>')
-        
+
         # Software import
         if softsum != m.softsum:
             # if software checksum has change:
@@ -196,7 +196,7 @@ def inventory(xml):
                software.objects.bulk_create(slist)
             except:
                handling.append('<warning>creation off Software: '+softname+' -- '+softversion+' failed</warning>')
-        
+
         # Network import
         # Delete all network information belonging to this machine and create new according to xml.
         if netsum != m.netsum:
@@ -264,6 +264,29 @@ def inventory(xml):
     handling.append('</Response>')
     return handling
 
+def public_soft_list(pack=None):
+    handling = list()
+    handling.append('<Response>\n')
+    if pack is None:
+        slist = package.objects.filter(public='yes')
+    else:
+        slist = package.objects.filter(id=pack, public='yes')
+
+    for pack in slist:
+        if pack.packagesum != 'nofile':
+            packurl = pack.filename.url
+        else:
+            packurl = ''
+        handling.append('<Package>\n\
+            <Pid>'+str(pack.id)+'</Pid>\n\
+            <Name>'+pack.name+'</Name>\n\
+            <Description>'+pack.description+'</Description>\n\
+            <Command>'+pack.command+'</Command>\n\
+            <Packagesum>'+pack.packagesum+'</Packagesum>\n\
+            <Url>'+packurl+'</Url>\n</Package>')
+    handling.append('</Response>')
+    return handling
+
 def post(request):
     """Post function redirect inventory and status client request
     to dedicated functions"""
@@ -278,6 +301,12 @@ def post(request):
         elif action == 'status':
             xml = request.POST.get('xml')
             handling = status(xml)
+            response = render_to_response("response_xml.html", {"list": handling})
+        elif action == 'softlist':
+            if request.POST.get('pack') is not None:
+                handling = public_soft_list(request.POST.get('pack'))
+            else:
+                handling = public_soft_list()
             response = render_to_response("response_xml.html", {"list": handling})
         else:
             handling.append('<Error>No action found in sent xml</Error>')
