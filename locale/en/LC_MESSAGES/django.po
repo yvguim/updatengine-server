@@ -250,7 +250,7 @@ msgstr "software profile configuration"
 #: deploy/models.py:173
 #: updatengine/templates/admin/includes_grappelli/header.html:77
 msgid "packageprofile|packages profiles"
-msgstr " Software packages profiles configurations"
+msgstr " Software packages profiles"
 
 #: deploy/models.py:179
 msgid "packagewakeonlan|name"
