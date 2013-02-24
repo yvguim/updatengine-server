@@ -21,14 +21,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-19 12:44+0100\n"
+"POT-Creation-Date: 2013-02-20 23:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 #: configuration/models.py:27 inventory/models.py:46 inventory/models.py:76
@@ -521,6 +521,63 @@ msgstr "logiciel"
 msgid "software|softwares"
 msgstr "  Logiciels"
 
+#: massadmin/massadmin.py:59
+msgid "Global edition"
+msgstr "Modification massive"
+
+#: massadmin/massadmin.py:86
+#, python-format
+msgid "Selected %(name)s were changed successfully."
+msgstr ""
+
+#: massadmin/massadmin.py:137
+#, python-format
+msgid "%(name)s object with primary key %(key)r does not exist."
+msgstr ""
+
+#: massadmin/massadmin.py:231
+#, python-format
+msgid "Change %s"
+msgstr ""
+
+#: massadmin/templates/admin/mass_change_form.html:18
+msgid "Home"
+msgstr ""
+
+#: massadmin/templates/admin/mass_change_form.html:21
+msgid "Add"
+msgstr ""
+
+#: massadmin/templates/admin/mass_change_form.html:39
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: massadmin/templates/admin/mass_change_form.html:52
+msgid "Mass Change"
+msgstr "Modification massive"
+
+#: massadmin/templates/admin/save_only_submit_line.html:3
+msgid "Save"
+msgstr "Sauvegarder"
+
+#: massadmin/templates/admin/includes/mass_fieldset.html:14
+msgid "Mass Update?"
+msgstr "Cocher les champs à modifier"
+
+#: massadmin/templates/admin/includes/mass_fieldset.html:17
+msgid "Field"
+msgstr "Champs"
+
+#: massadmin/templates/admin/includes/mass_fieldset.html:36
+msgid "is read only."
+msgstr "est en lecture seule"
+
+#: massadmin/templates/admin/includes/mass_fieldset.html:43
+msgid "is unique."
+msgstr "est un champs unique, vous ne pouvez le modifier."
+
 #: updatengine/dashboard.py:70
 msgid "Recent Actions"
 msgstr "Actions récentes"
@@ -533,11 +590,11 @@ msgstr "Gestion des droits"
 msgid "ModelList: Links"
 msgstr "Liens"
 
-#: updatengine/settings.py:85
+#: updatengine/settings.py:75
 msgid "french"
 msgstr "français"
 
-#: updatengine/settings.py:86
+#: updatengine/settings.py:76
 msgid "english"
 msgstr "anglais"
 

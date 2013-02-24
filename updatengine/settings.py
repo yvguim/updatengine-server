@@ -180,6 +180,7 @@ INSTALLED_APPS = (
     'deploy',
     'configuration',
     'south',
+    'massadmin',
 )
 
 # A sample logging configuration. The only tangible logging

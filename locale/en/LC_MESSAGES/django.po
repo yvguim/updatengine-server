@@ -21,14 +21,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-19 12:44+0100\n"
+"POT-Creation-Date: 2013-02-20 23:19+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
 #: configuration/models.py:27 inventory/models.py:46 inventory/models.py:76
@@ -158,8 +158,8 @@ msgstr "command"
 #: deploy/models.py:61
 msgid "package|command help text"
 msgstr ""
-"Command will be launched from extraction temporary directory "
-"will use environment variables"
+"Command will be launched from extraction temporary directory will use "
+"environment variables"
 
 #: deploy/models.py:62
 msgid "package|packagesum"
@@ -293,7 +293,8 @@ msgstr "profile name"
 #: deploy/models.py:196
 msgid "timeprofile|timeprofile help text"
 msgstr ""
-"Warning: a deployment period can be override by a global configuration (see configuration menu) or if a package is configured to ignore them."
+"Warning: a deployment period can be override by a global configuration (see "
+"configuration menu) or if a package is configured to ignore them."
 
 #: deploy/models.py:197
 msgid "timeprofile|description"
@@ -376,7 +377,8 @@ msgstr "software configuration profile"
 #: inventory/models.py:54
 msgid "machine|packages profile help text"
 msgstr ""
-"Software profile defines wich software must be installer on a host. Software profile are independent of software packages choose below."
+"Software profile defines wich software must be installer on a host. Software "
+"profile are independent of software packages choose below."
 
 #: inventory/models.py:55
 msgid "machine|time deploy profile"
@@ -515,6 +517,63 @@ msgstr "software"
 msgid "software|softwares"
 msgstr "  Software packages"
 
+#: massadmin/massadmin.py:59
+msgid "Global edition"
+msgstr "Mass edition"
+
+#: massadmin/massadmin.py:86
+#, python-format
+msgid "Selected %(name)s were changed successfully."
+msgstr ""
+
+#: massadmin/massadmin.py:137
+#, python-format
+msgid "%(name)s object with primary key %(key)r does not exist."
+msgstr ""
+
+#: massadmin/massadmin.py:231
+#, fuzzy, python-format
+msgid "Change %s"
+msgstr "Change password"
+
+#: massadmin/templates/admin/mass_change_form.html:18
+msgid "Home"
+msgstr ""
+
+#: massadmin/templates/admin/mass_change_form.html:21
+msgid "Add"
+msgstr ""
+
+#: massadmin/templates/admin/mass_change_form.html:39
+msgid "Please correct the error below."
+msgid_plural "Please correct the errors below."
+msgstr[0] ""
+msgstr[1] ""
+
+#: massadmin/templates/admin/mass_change_form.html:52
+msgid "Mass Change"
+msgstr ""
+
+#: massadmin/templates/admin/save_only_submit_line.html:3
+msgid "Save"
+msgstr ""
+
+#: massadmin/templates/admin/includes/mass_fieldset.html:14
+msgid "Mass Update?"
+msgstr ""
+
+#: massadmin/templates/admin/includes/mass_fieldset.html:17
+msgid "Field"
+msgstr ""
+
+#: massadmin/templates/admin/includes/mass_fieldset.html:36
+msgid "is read only."
+msgstr ""
+
+#: massadmin/templates/admin/includes/mass_fieldset.html:43
+msgid "is unique."
+msgstr ""
+
 #: updatengine/dashboard.py:70
 msgid "Recent Actions"
 msgstr "Recent actions"
@@ -527,11 +586,11 @@ msgstr "Rights confguration"
 msgid "ModelList: Links"
 msgstr "Links"
 
-#: updatengine/settings.py:85
+#: updatengine/settings.py:75
 msgid "french"
 msgstr "french"
 
-#: updatengine/settings.py:86
+#: updatengine/settings.py:76
 msgid "english"
 msgstr "english"
 
