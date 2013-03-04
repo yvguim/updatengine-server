@@ -610,11 +610,11 @@ msgstr "Change password"
 msgid "Log out"
 msgstr "Log out"
 
-#~ msgid "Django site admin"
-#~ msgstr "UpdatEngine administration"
+msgid "Django site admin"
+msgstr "UpdatEngine administration"
 
-#~ msgid "Django administration"
-#~ msgstr "UpdatEngine administration"
+msgid "Django administration"
+msgstr "UpdatEngine administration"
 
 #~ msgid "packageprofile|packages wakeonlan"
 #~ msgstr "Tâches de wake on lan"

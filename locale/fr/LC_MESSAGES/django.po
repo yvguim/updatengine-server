@@ -614,18 +614,18 @@ msgstr ""
 msgid "Log out"
 msgstr ""
 
-#~ msgid "Django site admin"
-#~ msgstr "UpdatEngine administration"
+msgid "Django site admin"
+msgstr "UpdatEngine administration"
 
-#~ msgid "Django administration"
-#~ msgstr "UpdatEngine administration"
+msgid "Django administration"
+msgstr "UpdatEngine administration"
 
 #~ msgid "packageprofile|packages wakeonlan"
 #~ msgstr "Tâches de wake on lan"
 
 # template header.html
-#~ msgid "header|subtitle"
-#~ msgstr "Maîtrisez vos mises à jour de logiciels"
+msgid "header|subtitle"
+msgstr "Maîtrisez vos mises à jour de logiciels"
 
 #~ msgid "ModelList: Latest News"
 #~ msgstr "Dernières informations"
