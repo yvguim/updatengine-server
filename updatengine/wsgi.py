@@ -40,6 +40,13 @@ if path not in sys.path:
 
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "updatengine.settings")
 
+# Force mod_wsgi to use virtual env python version
+
+venv_path = os.path.join(os.path.dirname(path))
+activate_this = os.path.join(venv_path, "bin/activate_this.py")
+execfile(activate_this, dict(__file__=activate_this))
+
+
 # This application object is used by any WSGI server configured to use this
 # file. This includes Django's development server, if the WSGI_APPLICATION
 # setting points here.
