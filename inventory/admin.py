@@ -23,24 +23,34 @@ from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
 from django.core.urlresolvers import reverse
 
+
+class ueAdmin(admin.ModelAdmin):
+	list_max_show_all = 600
+	list_per_page = 200
+    	actions_selection_counter = True
+	    
+
 class netInline(admin.TabularInline):
 	model = net
 	max_num = 0
         readonly_fields = ('manualy_created',)
+
 
 class osInline(admin.TabularInline):
 	model = osdistribution
 	max_num = 0
         readonly_fields = ('manualy_created',)
 
-class entityAdmin(admin.ModelAdmin):
+
+class entityAdmin(ueAdmin):
 	fields = ['name','description','parent']
 	list_display = ('name','description','parent')
         ordering =('name',)
 
-class machineAdmin(admin.ModelAdmin):
-	fields = ['serial', 'name', 'manualy_created','vendor','product','entity','typemachine','timeprofile','packageprofile','packages']
-	list_display = ('name','lastsave','serial','vendor','product','entity','typemachine','packageprofile','timeprofile', 'manualy_created')
+
+class machineAdmin(ueAdmin):
+	fields = ['name', 'serial', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
+	list_display = ('lastsave','name','serial','vendor','product','entity','typemachine','packageprofile','timeprofile', 'manualy_created')
 	list_editable = ('entity','packageprofile','timeprofile')
 	list_filter = ('entity','typemachine', 'manualy_created','timeprofile','packageprofile',
 			('lastsave',DateFieldListFilter)
@@ -52,48 +62,30 @@ class machineAdmin(admin.ModelAdmin):
         date_hierarchy = 'lastsave'
         ordering =('-lastsave',)
 
-class netAdmin(admin.ModelAdmin):
-	list_display = ('ip','mask','mac','machine', 'manualy_created')
+
+class netAdmin(ueAdmin):
+	list_display = ('ip','mask','mac','host', 'manualy_created')
 	search_fields = ('ip','mask','mac','host__name')
 	list_filter = ('manualy_created','host')
         readonly_fields = ('manualy_created',)
         ordering =('ip',)
 
-	def machine(self, obj):
-	        url = reverse('admin:inventory_machine_change', args=(obj.host.id,))
-		return '<a href="%s">%s</a>' % (url, unicode(obj.host)) 
-	machine.allow_tags = True
 
-
-	def __init__(self, *args, **kwargs):
-		super(netAdmin, self).__init__(*args, **kwargs)
-		self.list_display_links = ('ip','machine', )
-
-
-
-class osAdmin(admin.ModelAdmin):
+class osAdmin(ueAdmin):
 	list_display = ('name','version','arch','systemdrive','host','manualy_created')
 	search_fields = ('name','version','arch','systemdrive','host__name')
 	list_filter = ('name','version','arch','systemdrive','host','manualy_created')
         readonly_fields = ('manualy_created',)
         ordering =('name',)
 
-class softwareAdmin(admin.ModelAdmin):
-	list_display = ('name','version', 'uninstall','machine','manualy_created')
+
+class softwareAdmin(ueAdmin):
+	list_display = ('name','version', 'uninstall','host','manualy_created')
 	search_fields = ('name','version','host__name')
-	list_filter = ('host','name','manualy_created')
+	list_filter = ('host','manualy_created')
         readonly_fields = ('manualy_created',)
         ordering =('name',)
 	
-	def machine(self, obj):
-	        url = reverse('admin:inventory_machine_change', args=(obj.host.id,))
-		return '<a href="%s">%s</a>' % (url, unicode(obj.host)) 
-	machine.allow_tags = True
-
-
-	def __init__(self, *args, **kwargs):
-		super(softwareAdmin, self).__init__(*args, **kwargs)
-		self.list_display_links = ('name','host', )
 
 admin.site.register(osdistribution,osAdmin)
 admin.site.register(machine, machineAdmin)
