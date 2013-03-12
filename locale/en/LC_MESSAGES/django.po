@@ -517,63 +517,6 @@ msgstr "software"
 msgid "software|softwares"
 msgstr "  Software packages"
 
-#: massadmin/massadmin.py:59
-msgid "Global edition"
-msgstr "Mass edition"
-
-#: massadmin/massadmin.py:86
-#, python-format
-msgid "Selected %(name)s were changed successfully."
-msgstr ""
-
-#: massadmin/massadmin.py:137
-#, python-format
-msgid "%(name)s object with primary key %(key)r does not exist."
-msgstr ""
-
-#: massadmin/massadmin.py:231
-#, fuzzy, python-format
-msgid "Change %s"
-msgstr "Change password"
-
-#: massadmin/templates/admin/mass_change_form.html:18
-msgid "Home"
-msgstr ""
-
-#: massadmin/templates/admin/mass_change_form.html:21
-msgid "Add"
-msgstr ""
-
-#: massadmin/templates/admin/mass_change_form.html:39
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
-
-#: massadmin/templates/admin/mass_change_form.html:52
-msgid "Mass Change"
-msgstr ""
-
-#: massadmin/templates/admin/save_only_submit_line.html:3
-msgid "Save"
-msgstr ""
-
-#: massadmin/templates/admin/includes/mass_fieldset.html:14
-msgid "Mass Update?"
-msgstr ""
-
-#: massadmin/templates/admin/includes/mass_fieldset.html:17
-msgid "Field"
-msgstr ""
-
-#: massadmin/templates/admin/includes/mass_fieldset.html:36
-msgid "is read only."
-msgstr ""
-
-#: massadmin/templates/admin/includes/mass_fieldset.html:43
-msgid "is unique."
-msgstr ""
-
 #: updatengine/dashboard.py:70
 msgid "Recent Actions"
 msgstr "Recent actions"

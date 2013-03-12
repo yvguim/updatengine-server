@@ -39,7 +39,7 @@ LANGUAGE_CODE = 'fr'
 ### ------------------------------- ###
 
 #Activate DEBUG
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 GRAPPELLI_INDEX_DASHBOARD = 'updatengine.dashboard.CustomIndexDashboard'
@@ -180,7 +180,6 @@ INSTALLED_APPS = (
     'deploy',
     'configuration',
     'south',
-    'massadmin',
 )
 
 # A sample logging configuration. The only tangible logging

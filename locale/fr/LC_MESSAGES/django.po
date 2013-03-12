@@ -521,62 +521,6 @@ msgstr "logiciel"
 msgid "software|softwares"
 msgstr "  Logiciels"
 
-#: massadmin/massadmin.py:59
-msgid "Global edition"
-msgstr "Modification massive"
-
-#: massadmin/massadmin.py:86
-#, python-format
-msgid "Selected %(name)s were changed successfully."
-msgstr ""
-
-#: massadmin/massadmin.py:137
-#, python-format
-msgid "%(name)s object with primary key %(key)r does not exist."
-msgstr ""
-
-#: massadmin/massadmin.py:231
-#, python-format
-msgid "Change %s"
-msgstr ""
-
-#: massadmin/templates/admin/mass_change_form.html:18
-msgid "Home"
-msgstr ""
-
-#: massadmin/templates/admin/mass_change_form.html:21
-msgid "Add"
-msgstr ""
-
-#: massadmin/templates/admin/mass_change_form.html:39
-msgid "Please correct the error below."
-msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
-
-#: massadmin/templates/admin/mass_change_form.html:52
-msgid "Mass Change"
-msgstr "Modification massive"
-
-#: massadmin/templates/admin/save_only_submit_line.html:3
-msgid "Save"
-msgstr "Sauvegarder"
-
-#: massadmin/templates/admin/includes/mass_fieldset.html:14
-msgid "Mass Update?"
-msgstr "Cocher les champs à modifier"
-
-#: massadmin/templates/admin/includes/mass_fieldset.html:17
-msgid "Field"
-msgstr "Champs"
-
-#: massadmin/templates/admin/includes/mass_fieldset.html:36
-msgid "is read only."
-msgstr "est en lecture seule"
-
-#: massadmin/templates/admin/includes/mass_fieldset.html:43
-msgid "is unique."
-msgstr "est un champs unique, vous ne pouvez le modifier."
 
 #: updatengine/dashboard.py:70
 msgid "Recent Actions"

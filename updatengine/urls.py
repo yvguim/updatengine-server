@@ -19,7 +19,6 @@
 ###################################################################################
 
 from django.conf.urls import patterns, include, url
-from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 
 from django.contrib import admin
@@ -34,7 +33,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^post/', post),
     url(r'^i18n/', include('django.conf.urls.i18n')),
-    url(r'^admin/', include("massadmin.urls")),
     url(r'^$', include(admin.site.urls)),
     )
 # Use lines below only during development if you want django 
