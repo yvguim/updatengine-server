@@ -100,7 +100,8 @@ def export_as_csv(modeladmin, request, queryset):
                 messages.error(request, str(e))
                 return
 
-            filename = "%s.csv" % queryset.model._meta.verbose_name_plural.lower().replace(" ", "_")
+            #filename = "%s.csv" % queryset.model._meta.verbose_name_plural.lower().replace(" ", "_")
+            filename = "updatengine_export.csv"
             response = HttpResponse(mimetype='text/csv')
             response['Content-Disposition'] = 'attachment;filename="%s"' % filename
             try:
