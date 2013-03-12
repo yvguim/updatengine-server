@@ -7,3 +7,4 @@ argparse==1.2.1
 django-grappelli==2.4.3
 lxml==3.1beta1
 wsgiref==0.1.2
+unicodecsv==0.9.4

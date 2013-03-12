@@ -1,0 +1,377 @@
+import datetime
+from itertools import chain
+from operator import attrgetter
+from django.core.serializers import get_serializer_formats
+from django.db import router
+from django.db.models import ManyToManyField, ForeignKey
+from django.db.models.deletion import Collector
+from django.forms.widgets import SelectMultiple
+from django.utils.translation import ugettext_lazy as _
+from django import forms
+from django.contrib import messages
+from django.http import HttpResponse, HttpResponseRedirect
+from adminactions.exceptions import ActionInterrupted
+from adminactions.signals import adminaction_requested, adminaction_start, adminaction_end
+from adminactions.templatetags.actions import get_field_value
+
+
+try:
+    import unicodecsv as csv
+except ImportError:
+    import csv
+from django.shortcuts import render_to_response
+from django.template.context import RequestContext
+from django.utils.encoding import smart_str
+from django.utils.safestring import mark_safe
+from django.contrib.admin import helpers
+from django.utils import formats
+from django.utils import dateformat
+import django.core.serializers as ser
+
+
+delimiters = ",;|:"
+quotes = "'\"`"
+escapechars = " \\"
+
+
+class CSVOptions(forms.Form):
+    _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
+    select_across = forms.BooleanField(label='', required=False, initial=0,
+                                       widget=forms.HiddenInput({'class': 'select-across'}))
+    action = forms.CharField(label='', required=True, initial='', widget=forms.HiddenInput())
+
+    header = forms.BooleanField(required=False)
+    delimiter = forms.ChoiceField(choices=zip(delimiters, delimiters))
+    quotechar = forms.ChoiceField(choices=zip(quotes, quotes))
+    quoting = forms.ChoiceField(
+        choices=((csv.QUOTE_ALL, 'All'),
+                 (csv.QUOTE_MINIMAL, 'Minimal'),
+                 (csv.QUOTE_NONE, 'None'),
+                 (csv.QUOTE_NONNUMERIC, 'Non Numeric')))
+
+    escapechar = forms.ChoiceField(choices=(('', ''), ('\\', '\\')), required=False)
+    datetime_format = forms.CharField(initial=formats.get_format('DATETIME_FORMAT'))
+    date_format = forms.CharField(initial=formats.get_format('DATE_FORMAT'))
+    time_format = forms.CharField(initial=formats.get_format('TIME_FORMAT'))
+    columns = forms.MultipleChoiceField(widget=SelectMultiple(attrs={'size': 20}))
+
+
+def export_as_csv(modeladmin, request, queryset):
+    """
+        export a queryset to csv file
+    """
+    if not request.user.has_perm('adminactions.export'):
+        messages.error(request, _('Sorry you do not have rights to execute this action'))
+        return
+
+    try:
+        adminaction_requested.send(sender=modeladmin.model,
+                                   action='export_as_csv',
+                                   request=request,
+                                   queryset=queryset)
+    except ActionInterrupted as e:
+        messages.error(request, str(e))
+        return
+
+    cols = [(f.name, f.verbose_name) for f in queryset.model._meta.fields]
+    initial = {'_selected_action': request.POST.getlist(helpers.ACTION_CHECKBOX_NAME),
+               'select_across': request.POST.get('select_across') == '1',
+               'action': request.POST.get('action'),
+               'date_format': 'd/m/Y',
+               'datetime_format': 'N j, Y, P',
+               'time_format': 'P',
+               'quotechar': '"',
+               'columns': [x for x, v in cols],
+               'quoting': csv.QUOTE_ALL,
+               'delimiter': ';',
+               'escapechar': '\\', }
+
+    if 'apply' in request.POST:
+        form = CSVOptions(request.POST)
+        form.fields['columns'].choices = cols
+        if form.is_valid():
+            try:
+                adminaction_start.send(sender=modeladmin.model,
+                                       action='export_as_csv',
+                                       request=request,
+                                       queryset=queryset,
+                                       form=form)
+            except ActionInterrupted as e:
+                messages.error(request, str(e))
+                return
+
+            filename = "%s.csv" % queryset.model._meta.verbose_name_plural.lower().replace(" ", "_")
+            response = HttpResponse(mimetype='text/csv')
+            response['Content-Disposition'] = 'attachment;filename="%s"' % filename
+            try:
+                writer = csv.writer(response,
+                                    escapechar=str(form.cleaned_data['escapechar']),
+                                    delimiter=str(form.cleaned_data['delimiter']),
+                                    quotechar=str(form.cleaned_data['quotechar']),
+                                    quoting=int(form.cleaned_data['quoting']))
+                if form.cleaned_data.get('header', False):
+                    writer.writerow([f for f in form.cleaned_data['columns']])
+                for obj in queryset:
+                    row = []
+                    for fieldname in form.cleaned_data['columns']:
+                        value = get_field_value(obj, fieldname)
+                        if isinstance(value, datetime.datetime):
+                            value = dateformat.format(value, form.cleaned_data['datetime_format'])
+                        elif isinstance(value, datetime.date):
+                            value = dateformat.format(value, form.cleaned_data['date_format'])
+                        elif isinstance(value, datetime.time):
+                            value = dateformat.format(value, form.cleaned_data['time_format'])
+                        row.append(smart_str(value))
+                    writer.writerow(row)
+            except Exception as e:
+                messages.error(request, "Error: (%s)" % str(e))
+            else:
+                adminaction_end.send(sender=modeladmin.model, action='export_as_csv', request=request, queryset=queryset)
+                return response
+    else:
+        form = CSVOptions(initial=initial)
+        form.fields['columns'].choices = cols
+
+    adminForm = helpers.AdminForm(form, modeladmin.get_fieldsets(request), {}, [], model_admin=modeladmin)
+    media = modeladmin.media + adminForm.media
+    tpl = 'adminactions/export_csv.html'
+    ctx = {'adminform': adminForm,
+           'change': True,
+           'title': _('Export to CSV'),
+           'is_popup': False,
+           'save_as': False,
+           'has_delete_permission': False,
+           'has_add_permission': False,
+           'has_change_permission': True,
+           'queryset': queryset,
+           'opts': queryset.model._meta,
+           'app_label': queryset.model._meta.app_label,
+           'media': mark_safe(media)}
+    return render_to_response(tpl, RequestContext(request, ctx))
+
+
+export_as_csv.short_description = "Export as CSV"
+
+
+class FlatCollector(object):
+    def __init__(self, using):
+        self._visited = []
+        super(FlatCollector, self).__init__()
+
+    def collect(self, objs):
+        self.data = objs
+        self.models = set([o.__class__ for o in self.data])
+
+
+class ForeignKeysCollector(object):
+    def __init__(self, using):
+        self._visited = []
+        super(ForeignKeysCollector, self).__init__()
+
+    def _collect(self, objs):
+        objects = []
+        for obj in objs:
+            if obj and obj not in self._visited:
+                concrete_model = obj._meta.concrete_model
+                obj = concrete_model.objects.get(pk=obj.pk)
+                opts = obj._meta
+
+                self._visited.append(obj)
+                objects.append(obj)
+                for field in chain(opts.fields, opts.local_many_to_many):
+                    if isinstance(field, ManyToManyField):
+                        target = getattr(obj, field.name).all()
+                        objects.extend(self._collect(target))
+                    elif isinstance(field, ForeignKey):
+                        target = getattr(obj, field.name)
+                        objects.extend(self._collect([target]))
+        return objects
+
+    def collect(self, objs):
+        self._visited = []
+        self.data = self._collect(objs)
+        self.models = set([o.__class__ for o in self.data])
+
+    def __str__(self):
+        return mark_safe(self.data)
+
+
+class DependenciesCollector(Collector):
+    def collect(self, objs, source=None, nullable=False, collect_related=True, source_attr=None, reverse_dependency=False):
+        super(DependenciesCollector, self).collect(objs, source, nullable, collect_related, source_attr, reverse_dependency)
+        alls = []
+        for model, instances in self.data.items():
+            alls.extend(sorted(instances, key=attrgetter("pk")))
+        self.data = alls
+
+    def delete(self):
+        pass
+
+
+class FixtureOptions(forms.Form):
+    _selected_action = forms.CharField(widget=forms.MultipleHiddenInput)
+    select_across = forms.BooleanField(label='', required=False, initial=0,
+                                       widget=forms.HiddenInput({'class': 'select-across'}))
+    action = forms.CharField(label='', required=True, initial='', widget=forms.HiddenInput())
+
+    use_natural_key = forms.BooleanField(required=False)
+    on_screen = forms.BooleanField(label='Dump on screen', required=False)
+    add_foreign_keys = forms.BooleanField(required=False)
+
+    indent = forms.IntegerField(required=True, max_value=10, min_value=0)
+    serializer = forms.ChoiceField(choices=zip(get_serializer_formats(), get_serializer_formats()))
+
+
+def _dump_qs(form, queryset, data):
+    fmt = form.cleaned_data.get('serializer')
+
+    json = ser.get_serializer(fmt)()
+    ret = json.serialize(data, use_natural_keys=form.cleaned_data.get('use_natural_key', False),
+                         indent=form.cleaned_data.get('indent'))
+
+    response = HttpResponse(mimetype='text/plain')
+    if not form.cleaned_data.get('on_screen', False):
+        filename = "%s.%s" % (queryset.model._meta.verbose_name_plural.lower().replace(" ", "_"), fmt)
+        response['Content-Disposition'] = 'attachment;filename="%s"' % filename
+    response.content = ret
+    return response
+
+
+def export_as_fixture(modeladmin, request, queryset):
+    initial = {'_selected_action': request.POST.getlist(helpers.ACTION_CHECKBOX_NAME),
+               'select_across': request.POST.get('select_across') == '1',
+               'action': request.POST.get('action'),
+               'serializer': 'json',
+               'indent': 4}
+    if not request.user.has_perm('adminactions_export'):
+        messages.error(request, _('Sorry you do not have rights to execute this action'))
+        return
+    try:
+        adminaction_requested.send(sender=modeladmin.model,
+                                   action='export_as_fixture',
+                                   request=request,
+                                   queryset=queryset)
+    except ActionInterrupted as e:
+        messages.error(request, str(e))
+        return
+
+    if 'apply' in request.POST:
+        form = FixtureOptions(request.POST)
+        if form.is_valid():
+            try:
+                adminaction_start.send(sender=modeladmin.model,
+                                       action='export_as_fixture',
+                                       request=request,
+                                       queryset=queryset,
+                                       form=form)
+            except ActionInterrupted as e:
+                messages.error(request, str(e))
+                return
+            try:
+                _collector = ForeignKeysCollector if form.cleaned_data.get('add_foreign_keys') else FlatCollector
+                c = _collector(None)
+                c.collect(queryset)
+                adminaction_end.send(sender=modeladmin.model, action='export_as_fixture', request=request,
+                                     queryset=queryset, form=form)
+
+                return _dump_qs(form, queryset, c.data)
+            except AttributeError as e:
+                messages.error(request, str(e))
+                return HttpResponseRedirect(request.path)
+    else:
+        form = FixtureOptions(initial=initial)
+
+    adminForm = helpers.AdminForm(form, modeladmin.get_fieldsets(request), {}, model_admin=modeladmin)
+    media = modeladmin.media + adminForm.media
+    tpl = 'adminactions/export_fixture.html'
+    ctx = {'adminform': adminForm,
+           'change': True,
+           'title': _('Export as Fixture'),
+           'is_popup': False,
+           'save_as': False,
+           'has_delete_permission': False,
+           'has_add_permission': False,
+           'has_change_permission': True,
+           'queryset': queryset,
+           'opts': queryset.model._meta,
+           'app_label': queryset.model._meta.app_label,
+           'media': mark_safe(media)}
+    return render_to_response(tpl, RequestContext(request, ctx))
+
+
+export_as_fixture.short_description = "Export as fixture"
+
+
+def export_delete_tree(modeladmin, request, queryset):
+    """
+    Export as fixture selected queryset and all the records that belong to.
+    That mean that dump what will be deleted if the queryset was deleted
+    """
+    if not request.user.has_perm('adminactions_export'):
+        messages.error(request, _('Sorry you do not have rights to execute this action'))
+        return
+    try:
+        adminaction_requested.send(sender=modeladmin.model,
+                                   action='export_delete_tree',
+                                   request=request,
+                                   queryset=queryset)
+    except ActionInterrupted as e:
+        messages.error(request, str(e))
+        return
+
+    initial = {'_selected_action': request.POST.getlist(helpers.ACTION_CHECKBOX_NAME),
+               'select_across': request.POST.get('select_across') == '1',
+               'action': request.POST.get('action'),
+               'serializer': 'json',
+               'indent': 4}
+
+    if 'apply' in request.POST:
+        form = FixtureOptions(request.POST)
+        if form.is_valid():
+            try:
+                adminaction_start.send(sender=modeladmin.model,
+                                       action='export_delete_tree',
+                                       request=request,
+                                       queryset=queryset,
+                                       form=form)
+            except ActionInterrupted as e:
+                messages.error(request, str(e))
+                return
+            try:
+                collect_related = form.cleaned_data.get('add_foreign_keys')
+                using = router.db_for_write(modeladmin.model)
+
+                c = Collector(using)
+                c.collect(queryset, collect_related=collect_related)
+                data = []
+                for model, instances in c.data.items():
+                    data.extend(instances)
+                adminaction_end.send(sender=modeladmin.model, action='export_delete_tree', request=request,
+                                     queryset=queryset)
+                return _dump_qs(form, queryset, data)
+            except AttributeError as e:
+                messages.error(request, str(e))
+                return HttpResponseRedirect(request.path)
+    else:
+        form = FixtureOptions(initial=initial)
+
+    adminForm = helpers.AdminForm(form, modeladmin.get_fieldsets(request), {}, model_admin=modeladmin)
+    media = modeladmin.media + adminForm.media
+    tpl = 'adminactions/export_fixture.html'
+    ctx = {'adminform': adminForm,
+           'change': True,
+           'title': _('Export Delete Tree'),
+           'is_popup': False,
+           'save_as': False,
+           'has_delete_permission': False,
+           'has_add_permission': False,
+           'has_change_permission': True,
+           'queryset': queryset,
+           'opts': queryset.model._meta,
+           'app_label': queryset.model._meta.app_label,
+           'media': mark_safe(media)}
+    return render_to_response(tpl, RequestContext(request, ctx))
+
+
+export_delete_tree.short_description = "Export delete tree"
+

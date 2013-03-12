@@ -19,6 +19,7 @@
 ###################################################################################
 
 from django.conf.urls import patterns, include, url
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.conf import settings
 
 from django.contrib import admin
@@ -26,12 +27,19 @@ admin.autodiscover()
 
 from inventory.views import post
 from inventory.machine import machineviews
+from django.contrib.admin import site
+import adminactions.actions as actions
+
+# register all adminactions
+site.add_action(actions.mass_update)
+site.add_action(actions.export_as_csv)
 
 urlpatterns = patterns('',
     url(r'^/machine/(?P<machine_id>\d+)/$', machineviews),
     url(r'^grappelli/', include('grappelli.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^post/', post),
+    url(r'^adminactions/', include('adminactions.urls')),
     url(r'^i18n/', include('django.conf.urls.i18n')),
     url(r'^$', include(admin.site.urls)),
     )
@@ -43,5 +51,5 @@ urlpatterns = patterns('',
 #		       (r'^media/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.MEDIA_ROOT}),
 #		       (r'^static/(?P<path>.*)$', 'django.views.static.serve',{'document_root': settings.STATIC_ROOT}),
 #		)
-if settings.DEBUG:
-	urlpatterns += patterns('', url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),)
+#if settings.DEBUG:
+#	urlpatterns += patterns('', url(r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT,}),)
