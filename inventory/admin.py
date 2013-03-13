@@ -59,7 +59,7 @@ class machineAdmin(ueAdmin):
     fields = ['name', 'serial', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
     list_display = ('lastsave','name','serial','vendor','product','entity','typemachine','packageprofile','timeprofile', 'manualy_created')
     list_editable = ('entity','packageprofile','timeprofile')
-    list_filter = ('entity','typemachine', 'manualy_created','timeprofile','packageprofile','soft',
+    list_filter = ('entity','typemachine', 'manualy_created','timeprofile','packageprofile',
             ('lastsave',DateFieldListFilter)
             )
     search_fields = ('name', 'serial','vendor','product')

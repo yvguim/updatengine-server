@@ -51,8 +51,8 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-	'NAME' : os.path.join(PROJECT_DIR, 'db/updatengine.db')
+    'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+	'NAME' : os.path.join(PROJECT_DIR, 'db/updatengine.db'),
        # 'USER': 'name_of_sql_user',                      # Not used with sqlite3.
        # 'PASSWORD': 'password_of_user',                  # Not used with sqlite3.
        # 'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
