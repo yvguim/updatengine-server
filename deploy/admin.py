@@ -22,14 +22,23 @@ from deploy.models import package, packagehistory, packageprofile, packagecondit
 from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
 
-class packageAdmin(admin.ModelAdmin):
+class ueAdmin(admin.ModelAdmin):
+    list_max_show_all = 600
+    list_per_page = 200
+    actions_selection_counter = True
+    list_select_related = True
+    
+    def get_export_as_csv_filename(self, request, queryset):
+        return 'deploy'
+
+class packageAdmin(ueAdmin):
 	list_display = ('name','description','command','filename','ignoreperiod','public','packagesum')
 	list_editable = ('ignoreperiod','public')
 	search_fields = ('name','description','command','filename','public','packagesum')
 	list_filter = ('ignoreperiod',)
 	filter_horizontal = ('conditions',)
 
-class packagehistoryAdmin(admin.ModelAdmin):
+class packagehistoryAdmin(ueAdmin):
 	list_display = ('date','machine','status','name','description','command','filename','packagesum','package')
 	search_fields = ('date','machine','status','name','description','command','filename','packagesum','package')
 	list_filter = ('machine','package','status',
@@ -44,23 +53,23 @@ class packagehistoryAdmin(admin.ModelAdmin):
 		super(packagehistoryAdmin, self).__init__(*args, **kwargs)
 		self.list_display_links = (None, )
 
-class packageprofileAdmin(admin.ModelAdmin):
+class packageprofileAdmin(ueAdmin):
 	list_display = ('name','description')
 	filter_horizontal = ('packages',)
 
-class timeprofileAdmin(admin.ModelAdmin):
+class timeprofileAdmin(ueAdmin):
 	list_display = ('name','description','start_time','end_time')
 	search_fields = ('name','description')
 	list_editable = ('start_time','end_time')
 
-class wakeonlanAdmin(admin.ModelAdmin):
+class wakeonlanAdmin(ueAdmin):
 	list_display = ('name','description','date','status')
 	search_fields = ('name','description')
 	list_editable = ('date',)
 	filter_horizontal = ('machines',)
 	readonly_fields = ('status',)
 
-class packageconditionAdmin(admin.ModelAdmin):
+class packageconditionAdmin(ueAdmin):
 	list_display = ('id','name','depends','softwarename','softwareversion')
 	list_editable = ('name','depends')
 

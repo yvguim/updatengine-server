@@ -21,71 +21,78 @@
 from inventory.models import entity, machine, net, software, osdistribution
 from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
-from django.core.urlresolvers import reverse
 
 
 class ueAdmin(admin.ModelAdmin):
-	list_max_show_all = 600
-	list_per_page = 200
-    	actions_selection_counter = True
-	    
+    list_max_show_all = 600
+    list_per_page = 200
+    actions_selection_counter = True
+    list_select_related = True      
+    
+    def get_export_as_csv_filename(self, request, queryset):
+        return 'inventory'
 
 class netInline(admin.TabularInline):
-	model = net
-	max_num = 0
-        readonly_fields = ('manualy_created',)
+    model = net
+    max_num = 0
+    readonly_fields = ('manualy_created',)
 
 
 class osInline(admin.TabularInline):
-	model = osdistribution
-	max_num = 0
-        readonly_fields = ('manualy_created',)
+    model = osdistribution
+    max_num = 0
+    readonly_fields = ('manualy_created',)
 
+class softInline(admin.TabularInline):
+    model = software
+    max_num = 0
+    readonly_fields = ('name', 'version', 'uninstall', 'manualy_created',)
 
 class entityAdmin(ueAdmin):
-	fields = ['name','description','parent']
-	list_display = ('name','description','parent')
-        ordering =('name',)
+    fields = ['name','description','parent']
+    list_display = ('name','description','parent')
+    ordering =('name',)
 
 
 class machineAdmin(ueAdmin):
-	fields = ['name', 'serial', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
-	list_display = ('lastsave','name','serial','vendor','product','entity','typemachine','packageprofile','timeprofile', 'manualy_created')
-	list_editable = ('entity','packageprofile','timeprofile')
-	list_filter = ('entity','typemachine', 'manualy_created','timeprofile','packageprofile',
-			('lastsave',DateFieldListFilter)
-			)
-      	search_fields = ('name', 'serial','vendor','product')
-        readonly_fields = ('typemachine', 'manualy_created',)
-	inlines = [osInline, netInline]
-	filter_horizontal = ('packages',)
-        date_hierarchy = 'lastsave'
-        ordering =('-lastsave',)
+    select_related = True
+    fields = ['name', 'serial', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
+    list_display = ('lastsave','name','serial','vendor','product','entity','typemachine','packageprofile','timeprofile', 'manualy_created')
+    list_editable = ('entity','packageprofile','timeprofile')
+    list_filter = ('entity','typemachine', 'manualy_created','timeprofile','packageprofile','soft',
+            ('lastsave',DateFieldListFilter)
+            )
+    search_fields = ('name', 'serial','vendor','product')
+    readonly_fields = ('typemachine', 'manualy_created',)
+    inlines = [osInline, netInline, softInline]
+    filter_horizontal = ('packages',)
+    date_hierarchy = 'lastsave'
+    ordering =('-lastsave',)
 
 
 class netAdmin(ueAdmin):
-	list_display = ('ip','mask','mac','host', 'manualy_created')
-	search_fields = ('ip','mask','mac','host__name')
-	list_filter = ('manualy_created','host')
-        readonly_fields = ('manualy_created',)
-        ordering =('ip',)
+    list_display = ('ip','mask','mac','host', 'manualy_created')
+    search_fields = ('ip','mask','mac','host__name')
+    list_filter = ('manualy_created','host')
+    readonly_fields = ('manualy_created',)
+    ordering =('ip',)
 
 
 class osAdmin(ueAdmin):
-	list_display = ('name','version','arch','systemdrive','host','manualy_created')
-	search_fields = ('name','version','arch','systemdrive','host__name')
-	list_filter = ('name','version','arch','systemdrive','host','manualy_created')
-        readonly_fields = ('manualy_created',)
-        ordering =('name',)
+    list_display = ('name','version','arch','systemdrive','host','manualy_created')
+    search_fields = ('name','version','arch','systemdrive','host__name')
+    list_filter = ('name','version','arch','systemdrive','host','manualy_created')
+    readonly_fields = ('manualy_created',)
+    ordering =('name',)
 
 
 class softwareAdmin(ueAdmin):
-	list_display = ('name','version', 'uninstall','host','manualy_created')
-	search_fields = ('name','version','host__name')
-	list_filter = ('host','manualy_created')
-        readonly_fields = ('manualy_created',)
-        ordering =('name',)
-	
+    list_display = ('name','version', 'uninstall','host','manualy_created')
+    search_fields = ('name','version','host__name')
+    list_filter = ('host','manualy_created')
+    readonly_fields = ('manualy_created',)
+    ordering =('name',)
+    
 
 admin.site.register(osdistribution,osAdmin)
 admin.site.register(machine, machineAdmin)
