@@ -1,5 +1,5 @@
 ###################################################################################
-# UpdatEngine - Software Packages Deployment and Administration tool              #  
+# UpdatEngine - Software Packages Deployment and Administration tool              #
 #                                                                                 #
 # Copyright (C) Yves Guimard - yves.guimard@gmail.com                             #
 #                                                                                 #
@@ -21,14 +21,104 @@
 from inventory.models import entity, machine, net, software, osdistribution
 from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
+from django.contrib.admin import SimpleListFilter
+from django.utils.translation import ugettext_lazy as _
+from django.contrib.admin import SimpleListFilter
+from django.utils.encoding import force_unicode
 
+
+class enableFilter(SimpleListFilter):
+    title = _('Activate advanced filter')
+    parameter_name = 'enablefilter'
+
+    def lookups(self, request, model_admin):
+        return [('True',_('yes')),]
+
+    def queryset(self, request, queryset):
+        return queryset
+
+    def choices(self, cl):
+        yield {
+            'selected': self.value() is None,
+            'query_string': cl.get_query_string({}, [self.parameter_name]),
+            'display': _('no'),
+        }
+        for lookup, title in self.lookup_choices:
+            yield {
+                'selected': self.value() == force_unicode(lookup),
+                'query_string': cl.get_query_string({
+                    self.parameter_name: lookup,
+                }, []),
+                'display': title,
+            }
+
+class softwareFilter(SimpleListFilter):
+   # Human-readable title which will be displayed in the
+   # right admin sidebar just above the filter options.
+   title = _('software')
+
+   # Parameter for the filter that will be used in the URL query.
+   parameter_name = 'softname'
+
+   def lookups(self, request, model_admin):
+       """
+       Returns a list of tuples. The first element in each
+       tuple is the coded value for the option that will
+       appear in the URL query. The second element is the
+       human-readable name for the option that will appear
+       in the right sidebar.
+       """
+       if 'enablefilter' in request.GET:
+           return software.objects.order_by('name').values_list('name','name').distinct()
+
+   def queryset(self, request, queryset):
+       """
+       Returns the filtered queryset based on the value
+       provided in the query string and retrievable via
+       `self.value()`.
+       """
+       if self.value() is not None:
+           return queryset.filter(software__name=self.value())
+       else:
+           return queryset
+
+class versionFilter(SimpleListFilter):
+   # Human-readable title which will be displayed in the
+   # right admin sidebar just above the filter options.
+   title = _('softversion')
+
+   # Parameter for the filter that will be used in the URL query.
+   parameter_name = 'softversion'
+
+   def lookups(self, request, model_admin):
+       """
+       Returns a list of tuples. The first element in each
+       tuple is the coded value for the option that will
+       appear in the URL query. The second element is the
+       human-readable name for the option that will appear
+       in the right sidebar.
+       """
+
+       if 'softname' in request.GET:
+          return software.objects.filter(name=request.GET['softname'] ).order_by('version').values_list('version','version').distinct()
+
+   def queryset(self, request, queryset):
+       """
+       Returns the filtered queryset based on the value
+       provided in the query string and retrievable via
+       `self.value()`.
+       """
+       if self.value() is not None:
+           return queryset.filter(software__version=self.value())
+       else:
+           return queryset
 
 class ueAdmin(admin.ModelAdmin):
     list_max_show_all = 600
     list_per_page = 200
     actions_selection_counter = True
-    list_select_related = True      
-    
+    list_select_related = True
+
     def get_export_as_csv_filename(self, request, queryset):
         return 'inventory'
 
@@ -59,9 +149,7 @@ class machineAdmin(ueAdmin):
     fields = ['name', 'serial', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
     list_display = ('lastsave','name','serial','vendor','product','entity','typemachine','packageprofile','timeprofile', 'manualy_created')
     list_editable = ('entity','packageprofile','timeprofile')
-    list_filter = ('entity','typemachine', 'manualy_created','timeprofile','packageprofile',
-            ('lastsave',DateFieldListFilter)
-            )
+    list_filter = (('lastsave', DateFieldListFilter), 'entity','typemachine', 'manualy_created','timeprofile','packageprofile', enableFilter,softwareFilter, versionFilter)
     search_fields = ('name', 'serial','vendor','product')
     readonly_fields = ('typemachine', 'manualy_created',)
     inlines = [osInline, netInline, softInline]
@@ -92,7 +180,7 @@ class softwareAdmin(ueAdmin):
     list_filter = ('host','manualy_created')
     readonly_fields = ('manualy_created',)
     ordering =('name',)
-    
+
 
 admin.site.register(osdistribution,osAdmin)
 admin.site.register(machine, machineAdmin)
