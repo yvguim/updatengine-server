@@ -78,7 +78,7 @@ class softwareFilter(SimpleListFilter):
        `self.value()`.
        """
        if self.value() is not None:
-           return queryset.filter(software__name=self.value())
+           return queryset.filter(software__name__iexact=self.value())
        else:
            return queryset
 
@@ -100,7 +100,7 @@ class versionFilter(SimpleListFilter):
        """
 
        if 'softname' in request.GET:
-          return software.objects.filter(name=request.GET['softname'] ).order_by('version').values_list('version','version').distinct()
+          return software.objects.filter(name__iexact=request.GET['softname'] ).order_by('version').values_list('version','version').distinct()
 
    def queryset(self, request, queryset):
        """
@@ -109,13 +109,13 @@ class versionFilter(SimpleListFilter):
        `self.value()`.
        """
        if self.value() is not None:
-           return queryset.filter(software__version=self.value())
+           return queryset.filter(software__version__iexact=self.value())
        else:
            return queryset
 
 class ueAdmin(admin.ModelAdmin):
     list_max_show_all = 600
-    list_per_page = 200
+    list_per_page = 100
     actions_selection_counter = True
     list_select_related = True
 
@@ -147,9 +147,9 @@ class entityAdmin(ueAdmin):
 class machineAdmin(ueAdmin):
     select_related = True
     fields = ['name', 'serial', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
-    list_display = ('lastsave','name','serial','vendor','product','entity','typemachine','packageprofile','timeprofile', 'manualy_created')
+    list_display = ('lastsave','name','serial','vendor','product','entity','typemachine','packageprofile','timeprofile')
     list_editable = ('entity','packageprofile','timeprofile')
-    list_filter = (('lastsave', DateFieldListFilter), 'entity','typemachine', 'manualy_created','timeprofile','packageprofile', enableFilter,softwareFilter, versionFilter)
+    list_filter = (('lastsave', DateFieldListFilter), 'entity','typemachine', 'timeprofile','packageprofile', enableFilter,softwareFilter, versionFilter)
     search_fields = ('name', 'serial','vendor','product')
     readonly_fields = ('typemachine', 'manualy_created',)
     inlines = [osInline, netInline, softInline]
@@ -159,25 +159,25 @@ class machineAdmin(ueAdmin):
 
 
 class netAdmin(ueAdmin):
-    list_display = ('ip','mask','mac','host', 'manualy_created')
+    list_display = ('ip','mask','mac','host')
     search_fields = ('ip','mask','mac','host__name')
-    list_filter = ('manualy_created','host')
+    list_filter = ('host',)
     readonly_fields = ('manualy_created',)
     ordering =('ip',)
 
 
 class osAdmin(ueAdmin):
-    list_display = ('name','version','arch','systemdrive','host','manualy_created')
+    list_display = ('name','version','arch','systemdrive','host')
     search_fields = ('name','version','arch','systemdrive','host__name')
-    list_filter = ('name','version','arch','systemdrive','host','manualy_created')
+    list_filter = ('name','version','arch','systemdrive','host')
     readonly_fields = ('manualy_created',)
     ordering =('name',)
 
 
 class softwareAdmin(ueAdmin):
-    list_display = ('name','version', 'uninstall','host','manualy_created')
+    list_display = ('name','version','host')
     search_fields = ('name','version','host__name')
-    list_filter = ('host','manualy_created')
+    list_filter = ('host',)
     readonly_fields = ('manualy_created',)
     ordering =('name',)
 
