@@ -25,6 +25,7 @@ from inventory.models import machine, typemachine, software, net, osdistribution
 from deploy.models import package, packagehistory
 from configuration.models import deployconfig
 from datetime import datetime
+from django.utils.timezone import utc
 import sys
 
 def is_deploy_authorized(m,handling):
@@ -160,7 +161,7 @@ def inventory(xml):
         m.product=p
         m.typemachine_id=ch.id
         m.manualy_created='no'
-
+        m.lastsave = datetime.utcnow().replace(tzinfo=utc)
         # System info import
         if ossum != m.ossum:
             m.ossum = ossum

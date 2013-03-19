@@ -53,7 +53,7 @@ class machine(models.Model):
 	entity = models.ForeignKey(entity,null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('machine|entity'))
 	packageprofile = models.ForeignKey('deploy.packageprofile',null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('machine|package profile'), help_text= _('machine|packages profile help text'))
 	timeprofile = models.ForeignKey('deploy.timeprofile',null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('machine|time deploy profile'))
-	lastsave = models.DateTimeField(auto_now=True, verbose_name = _('machine|lastsave'))
+	lastsave = models.DateTimeField(auto_now=False, null=True, blank=True, verbose_name = _('machine|lastsave'))
 	typemachine = models.ForeignKey(typemachine, null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('machine|typemachine'))
 	netsum = models.CharField(max_length=40, null = True, blank=True, verbose_name = _('machine|netsum'))
 	ossum = models.CharField(max_length=40, null = True, blank=True, verbose_name = _('machine|ossum'))
