@@ -117,7 +117,7 @@ def check_conditions(m,pack):
             status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
 
     for condition in pack.conditions.filter(depends='is_W32_bits'):
-        if not osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='32').exists():
+        if not (osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='32').exists() or osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='undefined').exists()):
             install = False
             status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
 
@@ -225,7 +225,7 @@ def inventory(xml):
         config = deployconfig.objects.get(pk=1)
         if config.activate_deploy == 'yes':
             # Packages programmed manualy on machine
-            for pack in m.packages.all():
+            for pack in m.packages.all().order_by('name'):
                 if period_to_deploy  or pack.ignoreperiod == 'yes':
                     if check_conditions(m, pack):
                         if pack.packagesum != 'nofile':
@@ -243,7 +243,7 @@ def inventory(xml):
 
             # Packages included in machine profilepackage
             if m.packageprofile:
-                for pack in m.packageprofile.packages.all():
+                for pack in m.packageprofile.packages.all().order_by('name'):
                     if period_to_deploy or pack.ignoreperiod == 'no':
                         if check_conditions(m, pack):
                             if pack.packagesum != 'nofile':

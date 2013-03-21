@@ -27,7 +27,7 @@ class ueAdmin(admin.ModelAdmin):
     list_per_page = 200
     actions_selection_counter = True
     list_select_related = True
-    
+
     def get_export_as_csv_filename(self, request, queryset):
         return 'deploy'
 
@@ -40,7 +40,7 @@ class packageAdmin(ueAdmin):
 
 class packagehistoryAdmin(ueAdmin):
 	list_display = ('date','machine','status','name','description','command','filename','packagesum','package')
-	search_fields = ('date','machine','status','name','description','command','filename','packagesum','package')
+	search_fields = ('status','name','description','command')
 	list_filter = ('machine','package','status',
 			('date', DateFieldListFilter))
 	ordering =('-date',)
