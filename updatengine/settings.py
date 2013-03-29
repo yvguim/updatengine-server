@@ -53,10 +53,13 @@ DATABASES = {
     'default': {
     'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
 	'NAME' : os.path.join(PROJECT_DIR, 'db/updatengine.db'),
-  # 'USER': 'name_of_sql_user',                      # Not used with sqlite3.
-  # 'PASSWORD': 'password_of_user',                  # Not used with sqlite3.
-  # 'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
+   # 'USER': 'name_of_sql_user',                      # Not used with sqlite3.
+   # 'PASSWORD': 'password_of_user',                  # Not used with sqlite3.
+   # 'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
   # 'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+  #   'OPTIONS': {
+  #                 'init_command': 'SET storage_engine=InnoDB',
+  #             }
     }
 }
 
