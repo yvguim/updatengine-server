@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-20 23:19+0100\n"
+"POT-Creation-Date: 2013-04-02 23:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,13 +31,125 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: configuration/models.py:27 inventory/models.py:46 inventory/models.py:76
-#: inventory/models.py:97 inventory/models.py:117
+#: mass_update.py:174 adminactions/export.py:65 adminactions/export.py:251
+#: adminactions/export.py:319 adminactions/mass_update.py:174
+msgid "Sorry you do not have rights to execute this action"
+msgstr "Désolé mais vous n'avez pas les droits d'exécuter cette action"
+
+#: mass_update.py:227 adminactions/mass_update.py:227
+#, python-format
+msgid "Updated %s records"
+msgstr "Mis à jour %s enregistrements"
+
+#: adminactions/export.py:144
+msgid "Export to CSV"
+msgstr "Exporter en CSV"
+
+#: adminactions/export.py:297
+msgid "Export as Fixture"
+msgstr "Exporter comme 'Fixture'"
+
+#: adminactions/export.py:375
+msgid "Export Delete Tree"
+msgstr "Exporter comme 'Delete Tree'"
+
+#: adminactions/mass_update.py:61
+msgid "set"
+msgstr "Fixer à"
+
+#: adminactions/mass_update.py:62
+msgid "set null"
+msgstr "Fixer à nul"
+
+#: adminactions/merge.py:25
+msgid "Dependencies"
+msgstr "Dépendances"
+
+#: adminactions/merge.py:26
+msgid "Move"
+msgstr "Déplacer"
+
+#: adminactions/merge.py:26
+msgid "Delete"
+msgstr "Supprimer"
+
+#: adminactions/merge.py:28
+msgid "Search GenericForeignKeys"
+msgstr "Recherche de clefs étrangères"
+
+#: adminactions/merge.py:29
+msgid "Search for generic relation"
+msgstr "Recherche de relation"
+
+#: adminactions/merge.py:30
+msgid "No"
+msgstr "Non"
+
+#: adminactions/merge.py:31
+msgid "Only Related (look for Managers)"
+msgstr "Seulement 'Related'"
+
+#: adminactions/merge.py:32
+msgid "Analyze Mode (very slow)"
+msgstr "Mode analyse (très lent)"
+
+#: adminactions/merge.py:107
+msgid "Please select exactly 2 records"
+msgstr "Choisissez exactement deux enregistrements"
+
+#: adminactions/templates/adminactions/any_model.html:26
+#: adminactions/templates/adminactions/charts.html:34
+#: adminactions/templates/adminactions/export_csv.html:46
+#: adminactions/templates/adminactions/export_fixture.html:6
+#: adminactions/templates/adminactions/mass_update.html:26
+#: adminactions/templates/adminactions/merge.html:5
+#: adminactions/templates/adminactions/merge_preview.html:5
+msgid "Home"
+msgstr "Accueil"
+
+#: adminactions/templates/adminactions/mass_update.html:63
+msgid "field name"
+msgstr "Nom du champ"
+
+#: adminactions/templates/adminactions/mass_update.html:64
+msgid "update"
+msgstr "Mettre à jour"
+
+#: adminactions/templates/adminactions/mass_update.html:65
+msgid "function"
+msgstr "Action"
+
+#: adminactions/templates/adminactions/mass_update.html:66
+msgid "new value"
+msgstr "Nouvelle valeur"
+
+#: adminactions/templates/adminactions/mass_update.html:67
+msgid "existing values"
+msgstr "Valeurs existantes"
+
+#: adminactions/templates/adminactions/mass_update.html:68
+msgid "(sample)"
+msgstr "(exemples)"
+
+#: adminactions/templates/adminactions/mass_update.html:92
+msgid "Update records"
+msgstr "Mettre à jour"
+
+#: adminactions/templates/adminactions/merge.html:70
+msgid "Preview"
+msgstr "Aperçu"
+
+#: adminactions/templates/adminactions/merge_preview.html:40
+msgid "Merge"
+msgstr "Fusionner"
+
+#: configuration/models.py:27 inventory/admin.py:35 inventory/models.py:46
+#: inventory/models.py:76 inventory/models.py:97 inventory/models.py:117
 msgid "yes"
 msgstr "oui"
 
-#: configuration/models.py:28 inventory/models.py:47 inventory/models.py:77
-#: inventory/models.py:98 inventory/models.py:118
+#: configuration/models.py:28 inventory/admin.py:44 inventory/models.py:47
+#: inventory/models.py:77 inventory/models.py:98 inventory/models.py:118
 msgid "no"
 msgstr "non"
 
@@ -320,6 +432,18 @@ msgstr "Période de déploiement"
 msgid "timeprofile|time profiles"
 msgstr "Périodes de déploiement"
 
+#: inventory/admin.py:31
+msgid "Activate advanced filter"
+msgstr "Activer la recherche par logiciels"
+
+#: inventory/admin.py:58
+msgid "software"
+msgstr "nom du logiciel"
+
+#: inventory/admin.py:88
+msgid "softversion"
+msgstr "version"
+
 #: inventory/models.py:25
 msgid "entity|name"
 msgstr "nom"
@@ -411,11 +535,6 @@ msgstr "softsum"
 #: inventory/models.py:61
 msgid "machine|packages"
 msgstr "paquets à installer statiquement"
-
-#: inventory/models.py:61
-#, fuzzy
-msgid "machine|packages help text"
-msgstr "paquets"
 
 #: inventory/models.py:62
 msgid "machine|manualy_created"
@@ -521,7 +640,6 @@ msgstr "logiciel"
 msgid "software|softwares"
 msgstr "  Logiciels"
 
-
 #: updatengine/dashboard.py:70
 msgid "Recent Actions"
 msgstr "Actions récentes"
@@ -534,29 +652,33 @@ msgstr "Gestion des droits"
 msgid "ModelList: Links"
 msgstr "Liens"
 
-#: updatengine/settings.py:75
+#: updatengine/settings.py:80
 msgid "french"
 msgstr "français"
 
-#: updatengine/settings.py:76
+#: updatengine/settings.py:81
 msgid "english"
 msgstr "anglais"
 
 #: updatengine/templates/admin/includes_grappelli/header.html:109
 msgid "groups"
-msgstr ""
+msgstr "groupes"
 
 #: updatengine/templates/admin/includes_grappelli/header.html:113
 msgid "users"
-msgstr ""
+msgstr "utilisateurs"
 
 #: updatengine/templates/admin/includes_grappelli/header.html:130
 msgid "Change password"
-msgstr ""
+msgstr "changer le mot de passe"
 
 #: updatengine/templates/admin/includes_grappelli/header.html:138
 msgid "Log out"
-msgstr ""
+msgstr "Se déconnecter"
+
+#, fuzzy
+#~ msgid "machine|packages help text"
+#~ msgstr "paquets"
 
 msgid "Django site admin"
 msgstr "UpdatEngine administration"
@@ -564,38 +686,36 @@ msgstr "UpdatEngine administration"
 msgid "Django administration"
 msgstr "UpdatEngine administration"
 
-#~ msgid "packageprofile|packages wakeonlan"
-#~ msgstr "Tâches de wake on lan"
+msgid "packageprofile|packages wakeonlan"
+msgstr "Tâches de wake on lan"
 
 # template header.html
 msgid "header|subtitle"
 msgstr "Maîtrisez vos mises à jour de logiciels"
 
-#~ msgid "ModelList: Latest News"
-#~ msgstr "Dernières informations"
+msgid "ModelList: Latest News"
+msgstr "Dernières informations"
 
 #~ msgid "AppList: Applications"
 #~ msgstr "Fonctions principales"
 
-#, fuzzy
-#~ msgid "Administration"
-#~ msgstr "%s"
+msgid "Administration"
+msgstr "Administration"
 
-#, fuzzy
-#~ msgid "Applications"
-#~ msgstr "Menu"
+msgid "Applications"
+msgstr "Applications"
 
-#~ msgid "packagecondition|description"
-#~ msgstr "description de la condition"
+msgid "packagecondition|description"
+msgstr "description de la condition"
 
-#~ msgid "inventory|name"
-#~ msgstr "Inventaire et déploiement"
+msgid "inventory|name"
+msgstr "Inventaire et déploiement"
 
-#~ msgid "is"
-#~ msgstr "Est présent"
+msgid "is"
+msgstr "Est présent"
 
-#~ msgid "isnot"
-#~ msgstr "N'est pas présent"
+msgid "isnot"
+msgstr "N'est pas présent"
 
 #~ msgid "template|test"
 #~ msgstr "test"

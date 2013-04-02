@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-02-20 23:19+0100\n"
+"POT-Creation-Date: 2013-04-02 23:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,13 +31,125 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: configuration/models.py:27 inventory/models.py:46 inventory/models.py:76
-#: inventory/models.py:97 inventory/models.py:117
+#: mass_update.py:174 adminactions/export.py:65 adminactions/export.py:251
+#: adminactions/export.py:319 adminactions/mass_update.py:174
+msgid "Sorry you do not have rights to execute this action"
+msgstr ""
+
+#: mass_update.py:227 adminactions/mass_update.py:227
+#, python-format
+msgid "Updated %s records"
+msgstr ""
+
+#: adminactions/export.py:144
+msgid "Export to CSV"
+msgstr ""
+
+#: adminactions/export.py:297
+msgid "Export as Fixture"
+msgstr ""
+
+#: adminactions/export.py:375
+msgid "Export Delete Tree"
+msgstr ""
+
+#: adminactions/mass_update.py:61
+msgid "set"
+msgstr ""
+
+#: adminactions/mass_update.py:62
+msgid "set null"
+msgstr ""
+
+#: adminactions/merge.py:25
+msgid "Dependencies"
+msgstr ""
+
+#: adminactions/merge.py:26
+msgid "Move"
+msgstr ""
+
+#: adminactions/merge.py:26
+msgid "Delete"
+msgstr ""
+
+#: adminactions/merge.py:28
+msgid "Search GenericForeignKeys"
+msgstr ""
+
+#: adminactions/merge.py:29
+msgid "Search for generic relation"
+msgstr ""
+
+#: adminactions/merge.py:30
+msgid "No"
+msgstr ""
+
+#: adminactions/merge.py:31
+msgid "Only Related (look for Managers)"
+msgstr ""
+
+#: adminactions/merge.py:32
+msgid "Analyze Mode (very slow)"
+msgstr ""
+
+#: adminactions/merge.py:107
+msgid "Please select exactly 2 records"
+msgstr ""
+
+#: adminactions/templates/adminactions/any_model.html:26
+#: adminactions/templates/adminactions/charts.html:34
+#: adminactions/templates/adminactions/export_csv.html:46
+#: adminactions/templates/adminactions/export_fixture.html:6
+#: adminactions/templates/adminactions/mass_update.html:26
+#: adminactions/templates/adminactions/merge.html:5
+#: adminactions/templates/adminactions/merge_preview.html:5
+msgid "Home"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:63
+msgid "field name"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:64
+msgid "update"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:65
+msgid "function"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:66
+msgid "new value"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:67
+msgid "existing values"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:68
+msgid "(sample)"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:92
+msgid "Update records"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge.html:70
+msgid "Preview"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge_preview.html:40
+msgid "Merge"
+msgstr ""
+
+#: configuration/models.py:27 inventory/admin.py:35 inventory/models.py:46
+#: inventory/models.py:76 inventory/models.py:97 inventory/models.py:117
 msgid "yes"
 msgstr "yes"
 
-#: configuration/models.py:28 inventory/models.py:47 inventory/models.py:77
-#: inventory/models.py:98 inventory/models.py:118
+#: configuration/models.py:28 inventory/admin.py:44 inventory/models.py:47
+#: inventory/models.py:77 inventory/models.py:98 inventory/models.py:118
 msgid "no"
 msgstr "no"
 
@@ -317,6 +429,20 @@ msgstr "Deployment period"
 msgid "timeprofile|time profiles"
 msgstr "Deployment periods"
 
+#: inventory/admin.py:31
+msgid "Activate advanced filter"
+msgstr ""
+
+#: inventory/admin.py:58
+#, fuzzy
+msgid "software"
+msgstr "name"
+
+#: inventory/admin.py:88
+#, fuzzy
+msgid "softversion"
+msgstr "version"
+
 #: inventory/models.py:25
 msgid "entity|name"
 msgstr "name"
@@ -407,11 +533,6 @@ msgstr "softsum"
 #: inventory/models.py:61
 msgid "machine|packages"
 msgstr "software to install manualy"
-
-#: inventory/models.py:61
-#, fuzzy
-msgid "machine|packages help text"
-msgstr "paquets"
 
 #: inventory/models.py:62
 msgid "machine|manualy_created"
@@ -529,11 +650,11 @@ msgstr "Rights confguration"
 msgid "ModelList: Links"
 msgstr "Links"
 
-#: updatengine/settings.py:75
+#: updatengine/settings.py:80
 msgid "french"
 msgstr "french"
 
-#: updatengine/settings.py:76
+#: updatengine/settings.py:81
 msgid "english"
 msgstr "english"
 
@@ -553,11 +674,15 @@ msgstr "Change password"
 msgid "Log out"
 msgstr "Log out"
 
-msgid "Django site admin"
-msgstr "UpdatEngine administration"
+#, fuzzy
+#~ msgid "machine|packages help text"
+#~ msgstr "paquets"
 
-msgid "Django administration"
-msgstr "UpdatEngine administration"
+#~ msgid "Django site admin"
+#~ msgstr "UpdatEngine administration"
+
+#~ msgid "Django administration"
+#~ msgstr "UpdatEngine administration"
 
 #~ msgid "packageprofile|packages wakeonlan"
 #~ msgstr "Tâches de wake on lan"

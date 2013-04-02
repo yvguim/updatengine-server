@@ -58,8 +58,8 @@ class OperationManager(object):
     description: string description of the operator
     """
 
-    COMMON = [('set', (None, True, disable_if_unique, "")),
-              ('set null', (lambda old_value: None, False, disable_if_not_nullable, ""))]
+    COMMON = [(_('set'), (None, True, disable_if_unique, "")),
+              (_('set null'), (lambda old_value: None, False, disable_if_not_nullable, ""))]
 
     def __init__(self, _dict):
         self._dict = dict()
@@ -85,21 +85,29 @@ class OperationManager(object):
         return self.get(field_class)
 
 
+#OPERATIONS = OperationManager({
+#    df.CharField: [('upper', (string.upper, False, True, "convert to uppercase")),
+#                   ('lower', (string.lower, False, True, "convert to lowercase")),
+#                   ('capitalize', (string.capitalize, False, True, "capitalize first character")),
+#                   ('capwords', (string.capwords, False, True, "capitalize each word")),
+#                   ('swapcase', (string.swapcase, False, True, "")),
+#                   ('trim', (string.strip, False, True, "leading and trailing whitespace"))],
+#    df.IntegerField: [('add percent', (add_percent, True, True, "add <arg> percent to existing value")),
+#                      ('sub percent', (sub_percent, True, True, "")),
+#                      ('sub', (sub_percent, True, True, "")),
+#                      ('add', (add, True, True, ""))],
+#    df.BooleanField: [('swap', (negate, False, True, ""))],
+#    df.NullBooleanField: [('swap', (negate, False, True, ""))],
+#    df.EmailField: [('change domain', (change_domain, True, True, ""))],
+#    df.URLField: [('change protocol', (change_protocol, True, True, ""))]
+#})
 OPERATIONS = OperationManager({
-    df.CharField: [('upper', (string.upper, False, True, "convert to uppercase")),
-                   ('lower', (string.lower, False, True, "convert to lowercase")),
-                   ('capitalize', (string.capitalize, False, True, "capitalize first character")),
-                   ('capwords', (string.capwords, False, True, "capitalize each word")),
-                   ('swapcase', (string.swapcase, False, True, "")),
-                   ('trim', (string.strip, False, True, "leading and trailing whitespace"))],
-    df.IntegerField: [('add percent', (add_percent, True, True, "add <arg> percent to existing value")),
-                      ('sub percent', (sub_percent, True, True, "")),
-                      ('sub', (sub_percent, True, True, "")),
-                      ('add', (add, True, True, ""))],
-    df.BooleanField: [('swap', (negate, False, True, ""))],
-    df.NullBooleanField: [('swap', (negate, False, True, ""))],
-    df.EmailField: [('change domain', (change_domain, True, True, ""))],
-    df.URLField: [('change protocol', (change_protocol, True, True, ""))]
+    df.CharField: [],
+    df.IntegerField: [],
+    df.BooleanField: [],
+    df.NullBooleanField: [],
+    df.EmailField: [],
+    df.URLField: []
 })
 
 
