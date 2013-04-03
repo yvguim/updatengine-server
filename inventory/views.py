@@ -89,7 +89,8 @@ def status(xml):
         obj.status=status
         obj.save()
         # remove package from machine if package as been successfully installed
-        if status == 'Operation completed':
+        # or produce an error
+        if status == 'Operation completed' or 'Error when executing' in status:
             m.packages.remove(p)
         handling.append('Status saved')
     except:
