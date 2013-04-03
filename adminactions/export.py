@@ -41,19 +41,19 @@ class CSVOptions(forms.Form):
                                        widget=forms.HiddenInput({'class': 'select-across'}))
     action = forms.CharField(label='', required=True, initial='', widget=forms.HiddenInput())
 
-    header = forms.BooleanField(required=False)
-    delimiter = forms.ChoiceField(choices=zip(delimiters, delimiters))
-    quotechar = forms.ChoiceField(choices=zip(quotes, quotes))
-    quoting = forms.ChoiceField(
-        choices=((csv.QUOTE_ALL, 'All'),
-                 (csv.QUOTE_MINIMAL, 'Minimal'),
-                 (csv.QUOTE_NONE, 'None'),
-                 (csv.QUOTE_NONNUMERIC, 'Non Numeric')))
+    header = forms.BooleanField(label=_('header'), required=False)
+    delimiter = forms.ChoiceField(label=_('delimiter'), choices=zip(delimiters, delimiters))
+    quotechar = forms.ChoiceField(label=_('quotechar'), choices=zip(quotes, quotes))
+    quoting = forms.ChoiceField(label=_('quoting'), 
+    choices=((csv.QUOTE_ALL, _('All')),
+                 (csv.QUOTE_MINIMAL, _('Minimal')),
+                 (csv.QUOTE_NONE, _('None')),
+                 (csv.QUOTE_NONNUMERIC, _('Non Numeric'))))
 
-    escapechar = forms.ChoiceField(choices=(('', ''), ('\\', '\\')), required=False)
-    datetime_format = forms.CharField(initial=formats.get_format('DATETIME_FORMAT'))
-    date_format = forms.CharField(initial=formats.get_format('DATE_FORMAT'))
-    time_format = forms.CharField(initial=formats.get_format('TIME_FORMAT'))
+    escapechar = forms.ChoiceField(label=_('escapechar'), choices=(('', ''), ('\\', '\\')), required=False)
+    #datetime_format = forms.CharField(initial=formats.get_format('DATETIME_FORMAT'))
+    #date_format = forms.CharField(initial=formats.get_format('DATE_FORMAT'))
+    #time_format = forms.CharField(initial=formats.get_format('TIME_FORMAT'))
     columns = forms.MultipleChoiceField(widget=SelectMultiple(attrs={'size': 20}))
 
 
@@ -79,14 +79,13 @@ def export_as_csv(modeladmin, request, queryset):
                'select_across': request.POST.get('select_across') == '1',
                'action': request.POST.get('action'),
                'date_format': 'd/m/Y',
-               'datetime_format': 'N j, Y, P',
+               'datetime_format': 'j F Y H:i:s',
                'time_format': 'P',
                'quotechar': '"',
                'columns': [x for x, v in cols],
                'quoting': csv.QUOTE_ALL,
                'delimiter': ';',
                'escapechar': '\\', }
-
     if 'apply' in request.POST:
         form = CSVOptions(request.POST)
         form.fields['columns'].choices = cols
@@ -119,12 +118,15 @@ def export_as_csv(modeladmin, request, queryset):
                     row = []
                     for fieldname in form.cleaned_data['columns']:
                         value = get_field_value(obj, fieldname)
+                        datetime_format = 'j F Y H:i:s'
+                        date_format = 'd/m/Y'
+                        time_format = 'P'
                         if isinstance(value, datetime.datetime):
-                            value = dateformat.format(value, form.cleaned_data['datetime_format'])
+                            value = dateformat.format(value, datetime_format)
                         elif isinstance(value, datetime.date):
-                            value = dateformat.format(value, form.cleaned_data['date_format'])
+                            value = dateformat.format(value, date_format)
                         elif isinstance(value, datetime.time):
-                            value = dateformat.format(value, form.cleaned_data['time_format'])
+                            value = dateformat.format(value, time_format)
                         row.append(smart_str(value))
                     writer.writerow(row)
             except Exception as e:
@@ -154,7 +156,7 @@ def export_as_csv(modeladmin, request, queryset):
     return render_to_response(tpl, RequestContext(request, ctx))
 
 
-export_as_csv.short_description = "Export as CSV"
+export_as_csv.short_description = _('Export as CSV')
 
 
 class FlatCollector(object):

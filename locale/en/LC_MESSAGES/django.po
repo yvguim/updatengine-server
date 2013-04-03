@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-02 23:58+0200\n"
+"POT-Creation-Date: 2013-04-03 11:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,25 +31,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: mass_update.py:174 adminactions/export.py:65 adminactions/export.py:251
-#: adminactions/export.py:319 adminactions/mass_update.py:174
+#: adminactions/export.py:44
+msgid "header"
+msgstr ""
+
+#: adminactions/export.py:45
+msgid "delimiter"
+msgstr ""
+
+#: adminactions/export.py:46
+msgid "quotechar"
+msgstr ""
+
+#: adminactions/export.py:47
+msgid "quoting"
+msgstr ""
+
+#: adminactions/export.py:48
+msgid "All"
+msgstr ""
+
+#: adminactions/export.py:49
+msgid "Minimal"
+msgstr ""
+
+#: adminactions/export.py:50
+msgid "None"
+msgstr ""
+
+#: adminactions/export.py:51
+msgid "Non Numeric"
+msgstr ""
+
+#: adminactions/export.py:53
+msgid "escapechar"
+msgstr ""
+
+#: adminactions/export.py:65 adminactions/export.py:253
+#: adminactions/export.py:321 adminactions/mass_update.py:182
 msgid "Sorry you do not have rights to execute this action"
 msgstr ""
 
-#: mass_update.py:227 adminactions/mass_update.py:227
-#, python-format
-msgid "Updated %s records"
-msgstr ""
-
-#: adminactions/export.py:144
+#: adminactions/export.py:146
 msgid "Export to CSV"
 msgstr ""
 
-#: adminactions/export.py:297
+#: adminactions/export.py:159
+msgid "Export as CSV"
+msgstr ""
+
+#: adminactions/export.py:299
 msgid "Export as Fixture"
 msgstr ""
 
-#: adminactions/export.py:375
+#: adminactions/export.py:377
 msgid "Export Delete Tree"
 msgstr ""
 
@@ -59,6 +94,20 @@ msgstr ""
 
 #: adminactions/mass_update.py:62
 msgid "set null"
+msgstr ""
+
+#: adminactions/mass_update.py:235
+#, python-format
+msgid "Updated %s records"
+msgstr ""
+
+#: adminactions/mass_update.py:292
+#, python-format
+msgid "Mass update %s"
+msgstr ""
+
+#: adminactions/mass_update.py:312
+msgid "Mass update"
 msgstr ""
 
 #: adminactions/merge.py:25
@@ -105,6 +154,10 @@ msgstr ""
 #: adminactions/templates/adminactions/merge.html:5
 #: adminactions/templates/adminactions/merge_preview.html:5
 msgid "Home"
+msgstr ""
+
+#: adminactions/templates/adminactions/export_csv.html:50
+msgid "CSV Export Options"
 msgstr ""
 
 #: adminactions/templates/adminactions/mass_update.html:63

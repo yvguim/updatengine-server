@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-02 23:58+0200\n"
+"POT-Creation-Date: 2013-04-03 11:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,25 +31,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: mass_update.py:174 adminactions/export.py:65 adminactions/export.py:251
-#: adminactions/export.py:319 adminactions/mass_update.py:174
+#: adminactions/export.py:44
+msgid "header"
+msgstr "Entêtes des colonnes"
+
+#: adminactions/export.py:45
+msgid "delimiter"
+msgstr "Séparateur de champ"
+
+#: adminactions/export.py:46
+msgid "quotechar"
+msgstr "Séparateur de texte"
+
+#: adminactions/export.py:47
+msgid "quoting"
+msgstr "Séparer"
+
+#: adminactions/export.py:48
+msgid "All"
+msgstr "Tout"
+
+#: adminactions/export.py:49
+msgid "Minimal"
+msgstr "Minimum"
+
+#: adminactions/export.py:50
+msgid "None"
+msgstr "Aucun"
+
+#: adminactions/export.py:51
+msgid "Non Numeric"
+msgstr "Non numérique"
+
+#: adminactions/export.py:53
+msgid "escapechar"
+msgstr "Caractère d'echappement"
+
+#: adminactions/export.py:65 adminactions/export.py:253
+#: adminactions/export.py:321 adminactions/mass_update.py:182
 msgid "Sorry you do not have rights to execute this action"
 msgstr "Désolé mais vous n'avez pas les droits d'exécuter cette action"
 
-#: mass_update.py:227 adminactions/mass_update.py:227
-#, python-format
-msgid "Updated %s records"
-msgstr "Mis à jour %s enregistrements"
-
-#: adminactions/export.py:144
+#: adminactions/export.py:146
 msgid "Export to CSV"
 msgstr "Exporter en CSV"
 
-#: adminactions/export.py:297
+#: adminactions/export.py:159
+msgid "Export as CSV"
+msgstr "Exporter en CSV"
+
+#: adminactions/export.py:299
 msgid "Export as Fixture"
 msgstr "Exporter comme 'Fixture'"
 
-#: adminactions/export.py:375
+#: adminactions/export.py:377
 msgid "Export Delete Tree"
 msgstr "Exporter comme 'Delete Tree'"
 
@@ -60,6 +95,19 @@ msgstr "Fixer à"
 #: adminactions/mass_update.py:62
 msgid "set null"
 msgstr "Fixer à nul"
+
+#: adminactions/mass_update.py:235
+#, python-format
+msgid "Updated %s records"
+msgstr "Mis à jour %s enregistrements"
+
+#: adminactions/mass_update.py:292
+msgid "Mass update %s"
+msgstr "Modifications massives: %s "
+
+#: adminactions/mass_update.py:312
+msgid "Mass update"
+msgstr "Modifications massives"
 
 #: adminactions/merge.py:25
 msgid "Dependencies"
@@ -106,6 +154,10 @@ msgstr "Choisissez exactement deux enregistrements"
 #: adminactions/templates/adminactions/merge_preview.html:5
 msgid "Home"
 msgstr "Accueil"
+
+#: adminactions/templates/adminactions/export_csv.html:50
+msgid "CSV Export Options"
+msgstr "Options d'export"
 
 #: adminactions/templates/adminactions/mass_update.html:63
 msgid "field name"

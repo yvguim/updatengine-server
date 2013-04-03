@@ -47,7 +47,7 @@
         <a href="{% url 'admin:index' %}{{ app_label}}">{{ app_label|capfirst }}</a> &rsaquo;
         {% if has_change_permission %}<a
                 href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo;
-        CSV Export Options
+            {% trans 'CSV Export Options' %}
     </div>
 {% endif %}{% endblock %}
 
@@ -70,12 +70,12 @@
         </form>
     </div>
     {% url 'adminactions.format_date' as url_format_date %}
-    {% if url_format_date %}
+    <!--YG: Dirty hack to remove format date legend -->
+    {% if url_format_date and False %}
     <div id='legend-date'>
     <table xmlns="http://www.w3.org/1999/xhtml" lass="doctable table">
     <caption><b>The following characters are recognized in the
         <i><tt class="parameter">format</tt></i> parameter string</b></caption>
-
     <thead valign="middle">
     <tr valign="middle">
         <th><i><tt class="parameter">format</tt></i> character</th>
