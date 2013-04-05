@@ -245,7 +245,7 @@ def inventory(xml):
             # Packages included in machine profilepackage
             if m.packageprofile:
                 for pack in m.packageprofile.packages.all().order_by('name'):
-                    if period_to_deploy or pack.ignoreperiod == 'no':
+                    if period_to_deploy or pack.ignoreperiod == 'yes':
                         if check_conditions(m, pack):
                             if pack.packagesum != 'nofile':
                                 packurl = pack.filename.url
