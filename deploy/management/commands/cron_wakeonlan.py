@@ -47,7 +47,7 @@ def wake_on_lan(ethernet_address):
   s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
   s.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
   s.sendto(msg, ('<broadcast>', 9))
-  sleep(5)
+  sleep(1)
   s.sendto(msg, ('<broadcast>', 7))
   s.close()
 
@@ -61,6 +61,6 @@ class Command(BaseCommand):
 					print 'Wakeonlan of '+machine.name+' Mac: '+netcard.mac
 					wake_on_lan(str(netcard.mac))
 					
-				sleep(30)
+				sleep(5)
 			package.status = 'Completed'
 			package.save()
