@@ -26,6 +26,7 @@ from deploy.models import package, packagehistory
 from configuration.models import deployconfig
 from datetime import datetime
 from django.utils.timezone import utc
+from xml.sax.saxutils import escape
 import sys
 
 def is_deploy_authorized(m,handling):
@@ -105,31 +106,31 @@ def check_conditions(m,pack):
     for condition in pack.conditions.filter(depends='notinstalled'):
         if software.objects.filter(host_id=m.id, name=condition.softwarename, version=condition.softwareversion).exists():
             install = False
-            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning Software already installed. Condition: '+condition.name+'</Status></Packagestatus>')
+            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning Software already installed. Condition: '+escape(condition.name)+'</Status></Packagestatus>')
 
     for condition in pack.conditions.filter(depends='installed'):
         if not software.objects.filter(host_id=m.id, name=condition.softwarename, version=condition.softwareversion).exists():
             install = False
-            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
+            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
 
     for condition in pack.conditions.filter(depends='is_W64_bits'):
         if not osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='64').exists():
             install = False
-            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
+            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
 
     for condition in pack.conditions.filter(depends='is_W32_bits'):
         if not (osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='32').exists() or osdistribution.objects.filter(host_id=m.id, name__icontains='Windows', arch__contains='undefined').exists()):
             install = False
-            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
+            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
 
     for condition in pack.conditions.filter(depends='lower'):
         if software.objects.filter(host_id=m.id, name=condition.softwarename, version__gte=condition.softwareversion).exists():
             install = False
-            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
+            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
     for condition in pack.conditions.filter(depends='higher'):
         if not software.objects.filter(host_id=m.id, name=condition.softwarename, version__gt=condition.softwareversion).exists():
             install = False
-            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+condition.name+'</Status></Packagestatus>')
+            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
     return install
 
 
