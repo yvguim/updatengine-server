@@ -139,18 +139,23 @@
                 </ul>
             </li>
             <li>
-	    <form action="{{ PROJECT_URL }}/i18n/setlang/" method="post">{% csrf_token %}
-      <input name="next" type="hidden" value="{{ PROJECT_URL }}" />
-      <select name="language">
-        {% for lang in LANGUAGES %}
-          <option value="{{ lang.0 }}">{{ lang.1 }}</option>
-        {% endfor %}
-      </select>
-      <input type="submit" value="Go" />
-    </form>
-
-	
-            </li>
+            <ul>
+                <li>
+                    <a href="http://www.updatengine.com"><small>UpdatEngine Version 1.0</small></a>
+                </li>
+                <li>&nbsp
+	           <form action="{{ PROJECT_URL }}/i18n/setlang/" method="post">{% csrf_token %}
+                   <input name="next" type="hidden" value="{{ PROJECT_URL }}" />
+                   <select name="language">
+			{% for lang in LANGUAGES %}
+			 <option value="{{ lang.0 }}">{{ lang.1 }}</option>
+			{% endfor %}
+                   </select>
+                   <input type="submit" value="Go" />
+                    </form>	
+                </li>
+             </ul>
+	    </li>
        </ul>
     {% endif %}
 
