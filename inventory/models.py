@@ -1,4 +1,4 @@
-###################################################################################
+##################################################################################
 # UpdatEngine - Software Packages Deployment and Administration tool              #  
 #                                                                                 #
 # Copyright (C) Yves Guimard - yves.guimard@gmail.com                             #
@@ -20,11 +20,23 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from django.dispatch import receiver
+from django.db.models.signals import post_save
 
 class entity(models.Model):
+	choice = (
+			('yes', _('yes')),
+			('no', _('no'))
+		)
 	name = models.CharField(max_length=100,verbose_name = _('entity|name'))
 	description = models.TextField(max_length=1000,verbose_name = _('entity|description'))
 	parent = models.ForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.SET_NULL,verbose_name = _('entity|parent'))
+	packageprofile = models.ForeignKey('deploy.packageprofile',null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('entity|package profile'), help_text= _('entity|packages profile help text'))
+	old_packageprofile = models.ForeignKey('deploy.packageprofile',null=True, blank=True, on_delete=models.SET_NULL, related_name = 'old_packageprofile', verbose_name = _('entity|old package profile'), help_text= _('entity|old packages profile help text'))
+	force_packageprofile = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('entity|force_packageprofile'))
+	timeprofile = models.ForeignKey('deploy.timeprofile',null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('entity|time profile'), help_text= _('entity|time profile help text'))
+	old_timeprofile = models.ForeignKey('deploy.timeprofile',null=True, blank=True, on_delete=models.SET_NULL, related_name = 'old_timeprofile', verbose_name = _('entity|old time profile'), help_text= _('entity|old time profile help text'))
+	force_timeprofile = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('entity|force_timeprofile'))
 
 	def __unicode__(self):
 		return self.name
@@ -32,6 +44,8 @@ class entity(models.Model):
 	class Meta:
 		verbose_name = _('entity|entity')
 		verbose_name_plural = _('entity|entities')
+
+
 
 class typemachine (models.Model):
 	name = models.CharField(max_length=100, verbose_name = _('typemachine|name'))
@@ -130,7 +144,32 @@ class software(models.Model):
 		verbose_name = _('software|software')
 		verbose_name_plural = _('software|softwares')
 
-	@staticmethod
-	def autocomplete_search_fields():
-		return("name__iexact", "name__icontains",)
 
+# Add a post_save function to update packagesum after each save on
+# a package object
+@receiver(post_save, sender=entity)
+def postsave_entity(sender, instance, created, **kwargs):
+        # Update packageprofile for machine of entity
+        if instance.force_packageprofile == 'yes':
+		mm = machine.objects.filter(entity = instance)
+	else:
+		mm = machine.objects.filter(entity = instance, packageprofile = instance.old_packageprofile)
+		
+	for m in mm:
+		m.packageprofile = instance.packageprofile
+		m.save()	
+
+        if instance.force_timeprofile == 'yes':
+		mm = machine.objects.filter(entity = instance)
+	else:
+		mm = machine.objects.filter(entity = instance, timeprofile = instance.old_timeprofile)
+		
+	for m in mm:
+		m.timeprofile = instance.timeprofile
+		m.save()	
+
+        post_save.disconnect(receiver=postsave_entity, sender=entity)
+	instance.old_packageprofile = instance.packageprofile
+	instance.old_timeprofile = instance.timeprofile
+        instance.save()
+        post_save.connect(receiver=postsave_entity, sender=entity)

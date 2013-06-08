@@ -139,8 +139,9 @@ class softInline(admin.TabularInline):
     readonly_fields = ('name', 'version', 'uninstall', 'manualy_created',)
 
 class entityAdmin(ueAdmin):
-    fields = ['name','description','parent']
-    list_display = ('name','description','parent')
+    fields = ['name','description','parent','packageprofile','force_packageprofile','timeprofile','force_timeprofile']
+    list_display = ('name','description','parent','packageprofile','force_packageprofile','timeprofile','force_timeprofile')
+    list_editable = ('packageprofile','force_packageprofile','timeprofile','force_timeprofile')
     ordering =('name',)
 
 
