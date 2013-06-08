@@ -536,7 +536,7 @@ msgstr ""
 
 #: inventory/models.py:36
 msgid "entity|force_packageprofile"
-msgstr "Forcer l'application du profil de configuration à tous les postes (oui) ou conserver les modifications manuelles (non)"
+msgstr "Forcer l'application du profil?"
 
 #: inventory/models.py:37
 msgid "entity|time profile"
@@ -562,7 +562,7 @@ msgstr ""
 
 #: inventory/models.py:39
 msgid "entity|force_timeprofile"
-msgstr "Forcer l'application de la période de déploiement (oui) ou conserver les modification manuelle(non) "
+msgstr "Forcer l'application de la période de déploiement?"
 
 #: inventory/models.py:45
 msgid "entity|entity"

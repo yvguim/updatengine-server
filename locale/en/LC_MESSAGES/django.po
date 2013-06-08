@@ -532,7 +532,7 @@ msgstr ""
 
 #: inventory/models.py:36
 msgid "entity|force_packageprofile"
-msgstr "Force software configuration profile (yes) or preserver modifications (no)"
+msgstr "Force software configuration profile?"
 
 #: inventory/models.py:37
 msgid "entity|time profile"
@@ -556,7 +556,7 @@ msgstr ""
 
 #: inventory/models.py:39
 msgid "entity|force_timeprofile"
-msgstr "Force deployment period (yes) or preserve modifications (no)"
+msgstr "Force deployment period?"
 
 #: inventory/models.py:45
 msgid "entity|entity"
