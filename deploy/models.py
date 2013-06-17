@@ -25,8 +25,10 @@ from django.db.models.signals import m2m_changed
 from django.dispatch import receiver
 from inventory.models import machine
 import hashlib
+import os, string, random, shutil
 
-
+def random_directory(size=8, chars=string.ascii_lowercase + string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for x in range(size))
 
 class packagecondition(models.Model):
 	choice = (
@@ -60,7 +62,7 @@ class package(models.Model):
 	conditions = models.ManyToManyField('packagecondition',null = True, blank = True, verbose_name = _('package|conditions'))
 	command = models.TextField(max_length=1000, verbose_name = _('package|command'), help_text= _('package|command help text'))
 	packagesum = models.CharField(max_length=40, null= True, blank=True, verbose_name = _('package|packagesum'))
-	filename  = models.FileField(upload_to="package-file/", null=True, blank=True, verbose_name = _('package|filename'))
+	filename  = models.FileField(upload_to="package-file/"+random_directory()+'/', null=True, blank=True, verbose_name = _('package|filename'))
 	ignoreperiod = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package|ignore deploy period'))
 	public = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package| public package'))
 	class Meta:
@@ -72,9 +74,14 @@ class package(models.Model):
 		try :
 			p = package.objects.get(id=self.id)
 			if p.filename != self.filename:
-				p.filename.delete(save=False)
+				if os.path.split(os.path.dirname(p.filename.path))[1] == 'package-file':
+					if p.filename != '':
+						p.filename.delete(save=False)
+				else:
+					shutil.rmtree(os.path.dirname(p.filename.path))
+
 		except :
-			pass # when new photo then we do nothing, normal case
+			pass # when new file then we do nothing, normal case
 		super(package, self).save(*args, **kwargs)
 
 	def md5_for_file(self,block_size=2**20):
@@ -121,7 +128,10 @@ def postcreate_package(sender, instance, created, **kwargs):
 @receiver(pre_delete, sender=package)
 def predelete_package(sender, instance, **kwargs):
 	if instance.filename.name !='':
-		instance.filename.delete(False)
+		if os.path.split(os.path.dirname(instance.filename.path))[1] == 'package-file':
+			instance.filename.delete(save=False)
+		else:
+			shutil.rmtree(os.path.dirname(instance.filename.path))
 
 # call packages_changed only when packages m2m changed
 @receiver(m2m_changed, sender=machine.packages.through)
