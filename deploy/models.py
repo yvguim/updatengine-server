@@ -186,11 +186,15 @@ class packageprofile(models.Model):
 		return self.name
 
 class packagewakeonlan(models.Model):
+	choice = (
+			('Programmed', _('packagewakeonlan|Programmed')),
+			('Completed', _('packagewakeonlan|Completed'))
+		)
 	name = models.CharField(max_length=100, unique=True, verbose_name = _('packagewakeonlan|name'), help_text= _('packagewakeonlan|packagewakeonlan help text'))
 	description = models.CharField(max_length=500, verbose_name = _('packagewakeonlan|description'))
 	machines = models.ManyToManyField('inventory.machine',null = True, blank = True, verbose_name = _('packagewakeonlan|machines to start'))
 	date = models.DateTimeField(verbose_name = _('packagewakeonlan|start_time'))
-	status = models.CharField(max_length=100, default='Programmed', verbose_name = _('packagewakeonlan|status'))
+	status = models.CharField(max_length=100, choices=choice, default='Programmed', verbose_name = _('packagewakeonlan|status'))
 
 	class Meta:
 		verbose_name = _('packagewakeonlan|package wakeonlan')

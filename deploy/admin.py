@@ -65,9 +65,8 @@ class timeprofileAdmin(ueAdmin):
 class wakeonlanAdmin(ueAdmin):
 	list_display = ('name','description','date','status')
 	search_fields = ('name','description')
-	list_editable = ('date',)
+	list_editable = ('date','status',)
 	filter_horizontal = ('machines',)
-	readonly_fields = ('status',)
 
 class packageconditionAdmin(ueAdmin):
 	list_display = ('id','name','depends','softwarename','softwareversion')
