@@ -84,6 +84,10 @@
                         {%url 'admin:deploy_packagewakeonlan_changelist' as wk_url %}
                         <li><a href="{{ wk_url }}">{% trans 'packagewakeonlan|packages wakeonlan'|capfirst %}</a></li>
                     {% endif %}
+                    {% if perms.deploy.change_impex %}
+                        {%url 'admin:deploy_impex_changelist' as wk_url %}
+                        <li><a href="{{ wk_url }}">{% trans 'impex|impex title'|capfirst %}</a></li>
+                    {% endif %}
                 </ul>
             </li>
             {% endif %}
