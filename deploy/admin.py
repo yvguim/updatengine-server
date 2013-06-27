@@ -18,7 +18,7 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA. #
 ###################################################################################
 
-from deploy.models import package, packagehistory, packageprofile, packagecondition, timeprofile, packagewakeonlan
+from deploy.models import package, packagehistory, packageprofile, packagecondition, timeprofile, packagewakeonlan, impex
 from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
 
@@ -72,9 +72,20 @@ class packageconditionAdmin(ueAdmin):
 	list_display = ('id','name','depends','softwarename','softwareversion')
 	list_editable = ('name','depends')
 
+class impexAdmin(ueAdmin):
+    list_display = ('date','name','description','filename_link','package')
+    search_fields = ('name','description')
+    readonly_fields = ('packagesum',)
+
+    def get_readonly_fields(self, request, obj=None):
+        if obj: # editing an existing object
+            return self.readonly_fields + ('filename', 'package')
+        return self.readonly_fields
+
 admin.site.register(packagewakeonlan, wakeonlanAdmin)
 admin.site.register(timeprofile, timeprofileAdmin)
 admin.site.register(packagecondition, packageconditionAdmin)
 admin.site.register(packageprofile, packageprofileAdmin)
 admin.site.register(packagehistory, packagehistoryAdmin)
 admin.site.register(package, packageAdmin)
+admin.site.register(impex, impexAdmin)

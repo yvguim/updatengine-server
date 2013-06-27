@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-19 21:01+0200\n"
+"POT-Creation-Date: 2013-06-27 22:59+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -233,267 +233,303 @@ msgid "deployconfig|deployconfig"
 msgstr "configuration des déploiements"
 
 #: configuration/models.py:38
-#: updatengine/templates/admin/includes_grappelli/header.html:97
+#: updatengine/templates/admin/includes_grappelli/header.html:101
 msgid "deployconfig|deployconfigs"
 msgstr "Configuration des déploiements"
 
-#: deploy/models.py:35
+#: deploy/models.py:38
 msgid "installed"
 msgstr "Logiciel / version est installé"
 
-#: deploy/models.py:36
+#: deploy/models.py:39
 msgid "notinstalled"
 msgstr "Logiciel / version n'est pas installé"
 
-#: deploy/models.py:37
+#: deploy/models.py:40
 msgid "is_W64_bits"
 msgstr "Poste Windows 64 bits"
 
-#: deploy/models.py:38
+#: deploy/models.py:41
 msgid "is_W32_bits"
 msgstr "Poste Windows 32 bits"
 
-#: deploy/models.py:39
+#: deploy/models.py:42
 msgid "lower"
 msgstr "Logiciel non installé ou version inférieure à :"
 
-#: deploy/models.py:40
+#: deploy/models.py:43
 msgid "higher"
 msgstr "Logiciel installé et version supérieure à :"
 
-#: deploy/models.py:42
+#: deploy/models.py:45
 msgid "packagecondition|name"
 msgstr "nom de la condition"
 
-#: deploy/models.py:44
+#: deploy/models.py:46
 msgid "packagecondition|depends"
 msgstr "Condition à vérifier:"
 
-#: deploy/models.py:45
+#: deploy/models.py:47
 msgid "packagecondition|softwarename"
 msgstr "nom du logiciel"
 
-#: deploy/models.py:45
+#: deploy/models.py:47
 msgid "packagecondition|softwarename help text"
 msgstr ""
 "Le champs doit correspondre à la valeur présente en base de registre: "
 "\"DisplayName\""
 
-#: deploy/models.py:46
+#: deploy/models.py:48
 msgid "packagecondition|softwareversion"
 msgstr "version du logiciel"
 
-#: deploy/models.py:46
+#: deploy/models.py:48
 msgid "packagecondition|softwareversion help text"
 msgstr ""
 "Le champs doit correspondre à la valeur présente en base de registre: "
 "\"DisplayVersion\"."
 
-#: deploy/models.py:49
+#: deploy/models.py:51
 msgid "packagecondition|package condition"
 msgstr "condition d'installation de logiciel"
 
-#: deploy/models.py:50
+#: deploy/models.py:52
 #: updatengine/templates/admin/includes_grappelli/header.html:73
 msgid "packagecondition|packages conditions"
 msgstr "  Conditions d'installations"
 
-#: deploy/models.py:57
+#: deploy/models.py:59
 msgid "package|yes"
 msgstr "oui"
 
-#: deploy/models.py:58
+#: deploy/models.py:60
 msgid "package|no"
 msgstr "non"
 
-#: deploy/models.py:60
+#: deploy/models.py:62
 msgid "package|name"
 msgstr "nom"
 
-#: deploy/models.py:61
+#: deploy/models.py:63
 msgid "package|description"
 msgstr "description"
 
-#: deploy/models.py:62
+#: deploy/models.py:64
 msgid "package|conditions"
 msgstr "conditions"
 
-#: deploy/models.py:63
+#: deploy/models.py:65
 msgid "package|command"
 msgstr "commande"
 
-#: deploy/models.py:63
+#: deploy/models.py:65
 msgid "package|command help text"
 msgstr ""
 "La commande sera lancée depuis le répertoire d'extraction du paquet "
 "(répertoire temporaire découvert \tvia les variables d'environnement."
 
-#: deploy/models.py:64
+#: deploy/models.py:66
 msgid "package|packagesum"
 msgstr "somme md5"
 
-#: deploy/models.py:65
+#: deploy/models.py:67
 msgid "package|filename"
 msgstr "fichier"
 
-#: deploy/models.py:66
+#: deploy/models.py:68
 msgid "package|ignore deploy period"
 msgstr "ignorer les horaires de déploiement"
 
-#: deploy/models.py:67
+#: deploy/models.py:69
 msgid "package| public package"
 msgstr "Paquet public"
 
-#: deploy/models.py:69
+#: deploy/models.py:71
 msgid "package|deployment package"
 msgstr "paquet de déploiement"
 
-#: deploy/models.py:70
+#: deploy/models.py:72
 #: updatengine/templates/admin/includes_grappelli/header.html:69
 msgid "package|deployment packages"
 msgstr "   Paquets de déploiements"
 
-#: deploy/models.py:158
+#: deploy/models.py:159
 msgid "packagehistory|name"
 msgstr "nom"
 
-#: deploy/models.py:159
+#: deploy/models.py:160
 msgid "packagehistory|description"
 msgstr "description"
 
-#: deploy/models.py:160
+#: deploy/models.py:161
 msgid "packagehistory|command"
 msgstr "commande"
 
-#: deploy/models.py:161
+#: deploy/models.py:162
 msgid "packagehistory|packagesum"
 msgstr "somme md5"
 
-#: deploy/models.py:162
+#: deploy/models.py:163
 msgid "packagehistory|filename"
 msgstr "fichier"
 
-#: deploy/models.py:163
+#: deploy/models.py:164
 msgid "packagehistory|machine"
 msgstr "machine"
 
-#: deploy/models.py:164
+#: deploy/models.py:165
 msgid "packagehistory|package"
 msgstr "paquet"
 
-#: deploy/models.py:165
+#: deploy/models.py:166
 msgid "packagehistory|status"
 msgstr "statut"
 
-#: deploy/models.py:166
+#: deploy/models.py:167
 msgid "packagehistory|date"
 msgstr "date"
 
-#: deploy/models.py:169
+#: deploy/models.py:170
 msgid "packagehistory|package history"
 msgstr "historique de déploiement"
 
-#: deploy/models.py:170
+#: deploy/models.py:171
 #: updatengine/templates/admin/includes_grappelli/header.html:65
 msgid "packagehistory|packages history"
 msgstr "    Historique des déploiements"
 
-#: deploy/models.py:177
+#: deploy/models.py:178
 msgid "packageprofile|name"
 msgstr "nom"
 
-#: deploy/models.py:178
+#: deploy/models.py:179
 msgid "packageprofile|description"
 msgstr "description"
 
-#: deploy/models.py:179
+#: deploy/models.py:180
 msgid "packageprofile|packages"
 msgstr "paquets"
 
-#: deploy/models.py:182
+#: deploy/models.py:183
 msgid "packageprofile|package profile"
 msgstr "profil de configuration logicielle"
 
-#: deploy/models.py:183
+#: deploy/models.py:184
 #: updatengine/templates/admin/includes_grappelli/header.html:77
 msgid "packageprofile|packages profiles"
 msgstr " Profils de configurations"
 
-#: deploy/models.py:190
+#: deploy/models.py:191
 msgid "packagewakeonlan|Programmed"
 msgstr "Tâche programmée"
 
-#: deploy/models.py:191
+#: deploy/models.py:192
 msgid "packagewakeonlan|Completed"
 msgstr "Tâche terminée"
 
-#: deploy/models.py:193
+#: deploy/models.py:194
 msgid "packagewakeonlan|name"
 msgstr "Nom"
 
-#: deploy/models.py:193
+#: deploy/models.py:194
 msgid "packagewakeonlan|packagewakeonlan help text"
 msgstr ""
 "Attention: Dans cette version cette tâche ne peut être utile que sur le sous-"
 "réseau \td'installation du serveur updatengine ou sur les vlans \"environnant"
 "\" \t(nécessite le paramétrage de vos équipements.)"
 
-#: deploy/models.py:194
+#: deploy/models.py:195
 msgid "packagewakeonlan|description"
 msgstr "description"
 
-#: deploy/models.py:195
+#: deploy/models.py:196
 msgid "packagewakeonlan|machines to start"
 msgstr "machines à démarrer"
 
-#: deploy/models.py:196
+#: deploy/models.py:197
 msgid "packagewakeonlan|start_time"
 msgstr "date et heure de démarrage"
 
-#: deploy/models.py:197
+#: deploy/models.py:198
 msgid "packagewakeonlan|status"
 msgstr "statut"
 
-#: deploy/models.py:200
+#: deploy/models.py:201
 msgid "packagewakeonlan|package wakeonlan"
 msgstr "tâche de wake on lan"
 
-#: deploy/models.py:201
+#: deploy/models.py:202
 #: updatengine/templates/admin/includes_grappelli/header.html:85
 msgid "packagewakeonlan|packages wakeonlan"
 msgstr "Tâches de wake on lan"
 
-#: deploy/models.py:210
+#: deploy/models.py:208
 msgid "timeprofile|name"
 msgstr "nom du profil"
 
-#: deploy/models.py:210
+#: deploy/models.py:208
 msgid "timeprofile|timeprofile help text"
 msgstr ""
 "Attention les périodes de déploiement peuvent être ignorées si une période "
 "globale est activée \t(menu configuration) ou si un paquet est configuré "
 "pour ignorer ces périodes."
 
-#: deploy/models.py:211
+#: deploy/models.py:209
 msgid "timeprofile|description"
 msgstr "description"
 
-#: deploy/models.py:212
+#: deploy/models.py:210
 msgid "timeprofile|start_time"
 msgstr "Heure de début de période"
 
-#: deploy/models.py:213
+#: deploy/models.py:211
 msgid "timeprofile|end_time"
 msgstr "Heure de fin de période"
 
-#: deploy/models.py:216
+#: deploy/models.py:214
 msgid "timeprofile|time profile"
 msgstr "Période de déploiement"
 
-#: deploy/models.py:217
+#: deploy/models.py:215
 #: updatengine/templates/admin/includes_grappelli/header.html:81
 msgid "timeprofile|time profiles"
 msgstr "Périodes de déploiement"
+
+#: deploy/models.py:221
+msgid "impex|name"
+msgstr "Nom de l'import/export"
+
+#: deploy/models.py:222
+msgid "impex|description"
+msgstr "description"
+
+#: deploy/models.py:223
+msgid "impex|packagesum"
+msgstr "somme md5"
+
+#: deploy/models.py:224
+msgid "impex|filename"
+msgstr "fichier"
+
+#: deploy/models.py:225
+msgid "impex|package"
+msgstr "paquet"
+
+#: deploy/models.py:226
+msgid "impex|date"
+msgstr "Date de dernière sauvegarde"
+
+#: deploy/models.py:235
+msgid "impex|filename_link"
+msgstr "fichier d'export"
+
+#: deploy/models.py:237
+msgid "impex|import/export"
+msgstr "import/export"
+
+#: deploy/models.py:238
+msgid "impex|imports/exports"
+msgstr "Imports/Exports"
 
 #: inventory/admin.py:31
 msgid "Activate advanced filter"
@@ -776,65 +812,56 @@ msgstr "français"
 msgid "english"
 msgstr "anglais"
 
-#: updatengine/templates/admin/includes_grappelli/header.html:109
+#: updatengine/templates/admin/includes_grappelli/header.html:89
+msgid "impex|impex title"
+msgstr "imports/exports"
+
+#: updatengine/templates/admin/includes_grappelli/header.html:113
 msgid "groups"
 msgstr "groupes"
 
-#: updatengine/templates/admin/includes_grappelli/header.html:113
+#: updatengine/templates/admin/includes_grappelli/header.html:117
 msgid "users"
 msgstr "utilisateurs"
 
-#: updatengine/templates/admin/includes_grappelli/header.html:130
+#: updatengine/templates/admin/includes_grappelli/header.html:134
 msgid "Change password"
 msgstr "changer le mot de passe"
 
-#: updatengine/templates/admin/includes_grappelli/header.html:138
+#: updatengine/templates/admin/includes_grappelli/header.html:142
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#, fuzzy
-#~ msgid "machine|packages help text"
-#~ msgstr "paquets"
-
 msgid "Django site admin"
 msgstr "UpdatEngine administration"
-
-msgid "Django administration"
-msgstr "UpdatEngine administration"
-
-msgid "packageprofile|packages wakeonlan"
-msgstr "Tâches de wake on lan"
 
 # template header.html
 msgid "header|subtitle"
 msgstr "Maîtrisez vos mises à jour de logiciels"
 
-msgid "ModelList: Latest News"
-msgstr "Dernières informations"
+#, fuzzy
+#~ msgid "machine|packages help text"
+#~ msgstr "paquets"
 
-msgid "AppList: Applications"
-msgstr "Fonctions principales"
 
-msgid "Administration"
-msgstr "Administration"
+#~ msgid "Django administration"
+#~ msgstr "UpdatEngine administration"
 
-msgid "Applications"
-msgstr "Applications"
 
-msgid "packagecondition|description"
-msgstr "description de la condition"
+#~ msgid "ModelList: Latest News"
+#~ msgstr "Dernières informations"
 
-msgid "inventory|name"
-msgstr "Inventaire et déploiement"
+#~ msgid "AppList: Applications"
+#~ msgstr "Fonctions principales"
 
-msgid "is"
-msgstr "Est présent"
+#~ msgid "Administration"
+#~ msgstr "Administration"
 
-msgid "isnot"
-msgstr "N'est pas présent"
+#~ msgid "Applications"
+#~ msgstr "Applications"
 
-#~ msgid "template|test"
-#~ msgstr "test"
+#~ msgid "packagecondition|description"
+#~ msgstr "description de la condition"
 
-#~ msgid "App name"
-#~ msgstr "Gestion du parc"
+#~ msgid "inventory|name"
+#~ msgstr "Inventaire et déploiement"
