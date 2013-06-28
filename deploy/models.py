@@ -178,6 +178,7 @@ class packageprofile(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name = _('packageprofile|name'))
     description = models.CharField(max_length=500, verbose_name = _('packageprofile|description'))
     packages = models.ManyToManyField('package',null = True, blank = True, verbose_name = _('packageprofile|packages'))
+    parent = models.ForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.SET_NULL,verbose_name = _('packageprofile|parent'))
 
     class Meta:
         verbose_name = _('packageprofile|package profile')
@@ -185,6 +186,27 @@ class packageprofile(models.Model):
 
     def __unicode__(self):
         return self.name
+	
+    def get_all_parents(self,plist = list()):
+	    if self.parent != None and self.parent not in plist:
+		plist.append(self.parent)
+	        return self.parent.get_all_parents(plist)
+	    else:
+	        return plist
+	
+    def get_soft(self,plist = list()):
+		packlist = list()
+		# Add packages of profile
+		for package in self.packages.all():
+			if package not in packlist:
+				packlist.append(package)
+
+		# Add packages of profile's parents
+		for profile in self.get_all_parents():
+			for package in profile.packages.all():
+				if package not in packlist:
+					packlist.append(package)
+		return packlist
 
 class packagewakeonlan(models.Model):
     choice = (

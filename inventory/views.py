@@ -253,7 +253,7 @@ def inventory(xml):
 
             # Packages included in machine profilepackage
             if m.packageprofile:
-                for pack in m.packageprofile.packages.all().order_by('name'):
+                for pack in m.packageprofile.get_soft():
                     if period_to_deploy or pack.ignoreperiod == 'yes':
                         if check_conditions(m, pack):
                             if pack.packagesum != 'nofile':
