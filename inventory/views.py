@@ -153,6 +153,8 @@ def inventory(xml):
         handling.append('</Response>')
         return handling
     try:
+	    # Load default config
+        config = deployconfig.objects.get(pk=1)
 
         # Typemachine import:
         ch, created = typemachine.objects.get_or_create(name=c)
@@ -164,6 +166,12 @@ def inventory(xml):
         m.typemachine_id=ch.id
         m.manualy_created='no'
         m.lastsave = datetime.utcnow().replace(tzinfo=utc)
+	
+        if created:
+	        m.timeprofile = config.timeprofile
+	        m.packageprofile = config.packageprofile
+	        m.entity = config.entity
+        
         # System info import
         if ossum != m.ossum:
             m.ossum = ossum

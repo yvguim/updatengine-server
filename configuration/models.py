@@ -22,20 +22,24 @@ from django.utils.translation import ugettext_lazy as _
 from django.db import models
 
 class deployconfig(models.Model):
-	unique = True
-	choice = (
-			('yes', _('yes')),
-			('no', _('no'))
-		)
-	name =  models.CharField(max_length='100', verbose_name = _('deployconfig|name'))
-	activate_deploy = models.CharField(max_length=3, choices=choice, default='yes', verbose_name = _('deployconfig|activate_deploy'))
-	activate_time_deploy = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('deployconfig|activate_time_deploy'))
-	start_time = models.TimeField(verbose_name = _('deployconfig|start_time'))
-	end_time = models.TimeField(verbose_name = _('deployconfig|end_time'))
-	
-	class Meta:
-		verbose_name = _('deployconfig|deployconfig')
-		verbose_name_plural = _('deployconfig|deployconfigs')
+    unique = True
+    choice = (
+            ('yes', _('yes')),
+            ('no', _('no'))
+        )
+    name =  models.CharField(max_length='100', verbose_name = _('deployconfig|name'))
+    activate_deploy = models.CharField(max_length=3, choices=choice, default='yes', verbose_name = _('deployconfig|activate_deploy'))
+    activate_time_deploy = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('deployconfig|activate_time_deploy'))
+    start_time = models.TimeField(verbose_name = _('deployconfig|start_time'))
+    end_time = models.TimeField(verbose_name = _('deployconfig|end_time'))
+    entity = models.ForeignKey('inventory.entity',null=True, blank=True, default=None, on_delete=models.SET_NULL, verbose_name = _('deployconfig|entity'))
+    packageprofile = models.ForeignKey('deploy.packageprofile',null=True, blank=True, default=None,on_delete=models.SET_NULL, 
+            verbose_name = _('deployconfig|package profile'), help_text= _('machine|packages profile help text'))
+    timeprofile = models.ForeignKey('deploy.timeprofile',null=True, blank=True, default=None, on_delete=models.SET_NULL, verbose_name = _('deployconfig|time deploy profile'))
 
-	def __unicode__(self):
-		return self.activate_deploy
+    class Meta:
+        verbose_name = _('deployconfig|deployconfig')
+        verbose_name_plural = _('deployconfig|deployconfigs')
+
+    def __unicode__(self):
+        return self.activate_deploy

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-27 22:59+0200\n"
+"POT-Creation-Date: 2013-06-28 17:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -228,11 +228,29 @@ msgstr "Start of deployment period"
 msgid "deployconfig|end_time"
 msgstr "End of deployment period"
 
+#: configuration/models.py:35
+msgid "deployconfig|entity"
+msgstr "Entity for new machines"
+
 #: configuration/models.py:37
+msgid "deployconfig|package profile"
+msgstr "Software profile for new machines"
+
+#: configuration/models.py:37 inventory/models.py:68
+msgid "machine|packages profile help text"
+msgstr ""
+"Software profile defines wich software must be installer on a host. Software "
+"profile are independent of software packages choose below."
+
+#: configuration/models.py:38
+msgid "deployconfig|time deploy profile"
+msgstr "Time profile for new machines"
+
+#: configuration/models.py:41
 msgid "deployconfig|deployconfig"
 msgstr "deployment configuration"
 
-#: configuration/models.py:38
+#: configuration/models.py:42
 #: updatengine/templates/admin/includes_grappelli/header.html:101
 msgid "deployconfig|deployconfigs"
 msgstr "Deployment configurations"
@@ -536,7 +554,7 @@ msgstr "Activate advanced filter"
 msgid "software"
 msgstr "name"
 
-#: inventory/admin.py:88
+#: inventory/admin.py:91
 msgid "softversion"
 msgstr "version"
 
@@ -644,12 +662,6 @@ msgstr "entity"
 #: inventory/models.py:68
 msgid "machine|package profile"
 msgstr "software configuration profile"
-
-#: inventory/models.py:68
-msgid "machine|packages profile help text"
-msgstr ""
-"Software profile defines wich software must be installer on a host. Software "
-"profile are independent of software packages choose below."
 
 #: inventory/models.py:69
 msgid "machine|time deploy profile"
@@ -795,14 +807,6 @@ msgstr "Rights confguration"
 msgid "ModelList: Links"
 msgstr "Links"
 
-#: updatengine/settings.py:80
-msgid "french"
-msgstr "french"
-
-#: updatengine/settings.py:81
-msgid "english"
-msgstr "english"
-
 #: updatengine/templates/admin/includes_grappelli/header.html:89
 msgid "impex|impex title"
 msgstr "imports/exports"
@@ -823,6 +827,11 @@ msgstr "Change password"
 msgid "Log out"
 msgstr "Log out"
 
+msgid "french"
+msgstr "french"
+
+msgid "english"
+msgstr "english"
 
 msgid "Django administration"
 msgstr "UpdatEngine administration"
@@ -837,12 +846,10 @@ msgstr "Free your updates"
 #~ msgid "Django site admin"
 #~ msgstr "UpdatEngine administration"
 
-
 #~ msgid "packageprofile|packages wakeonlan"
 #~ msgstr "Tâches de wake on lan"
 
 # template header.html
-
 #~ msgid "ModelList: Latest News"
 #~ msgstr "Dernières informations"
 

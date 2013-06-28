@@ -22,14 +22,14 @@ from configuration.models import deployconfig
 from django.contrib import admin
 
 class deployconfigAdmin(admin.ModelAdmin):
-	actions = None
-	list_display = ('name','activate_deploy','activate_time_deploy','start_time','end_time')
-	list_editable = ('activate_deploy','activate_time_deploy','start_time','end_time')
-	list_display_links = ('name',)
+    actions = None
+    list_display = ('name','activate_deploy','activate_time_deploy','start_time','end_time', 'entity', 'packageprofile', 'timeprofile')
+    list_editable = ('activate_deploy','activate_time_deploy','start_time','end_time', 'entity', 'packageprofile', 'timeprofile')
+    list_display_links = ('name',)
 
-	readonly_fields = ('name',)
-	def has_add_permission(self, request):
-		return False
-	def has_delete_permission(self, request, obj=None):
-		return False
+    readonly_fields = ('name',)
+    def has_add_permission(self, request):
+        return False
+    def has_delete_permission(self, request, obj=None):
+        return False
 admin.site.register(deployconfig, deployconfigAdmin)

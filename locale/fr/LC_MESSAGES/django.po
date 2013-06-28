@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-27 22:59+0200\n"
+"POT-Creation-Date: 2013-06-28 17:38+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -228,11 +228,30 @@ msgstr "Heure de début de période"
 msgid "deployconfig|end_time"
 msgstr "Heure de fin de période"
 
+#: configuration/models.py:35
+msgid "deployconfig|entity"
+msgstr "Entité (nouvelles machines)"
+
 #: configuration/models.py:37
+msgid "deployconfig|package profile"
+msgstr "Profil logiciel (nouvelles machines)"
+
+#: configuration/models.py:37 inventory/models.py:68
+msgid "machine|packages profile help text"
+msgstr ""
+"Les profils de configuration logiciels définissent la liste des logiciels "
+"\tpar défaut à installer sur ce poste. Cette liste est indépendante des "
+"logiciels choisis ci-dessous (champs paquets)."
+
+#: configuration/models.py:38
+msgid "deployconfig|time deploy profile"
+msgstr "Profil horaire (nouvelles machines)"
+
+#: configuration/models.py:41
 msgid "deployconfig|deployconfig"
 msgstr "configuration des déploiements"
 
-#: configuration/models.py:38
+#: configuration/models.py:42
 #: updatengine/templates/admin/includes_grappelli/header.html:101
 msgid "deployconfig|deployconfigs"
 msgstr "Configuration des déploiements"
@@ -539,7 +558,7 @@ msgstr "Activer la recherche par logiciels"
 msgid "software"
 msgstr "nom du logiciel"
 
-#: inventory/admin.py:88
+#: inventory/admin.py:91
 msgid "softversion"
 msgstr "version"
 
@@ -652,13 +671,6 @@ msgstr "entité"
 #: inventory/models.py:68
 msgid "machine|package profile"
 msgstr "profil de configuration logicielle"
-
-#: inventory/models.py:68
-msgid "machine|packages profile help text"
-msgstr ""
-"Les profils de configuration logiciels définissent la liste des logiciels "
-"\tpar défaut à installer sur ce poste. Cette liste est indépendante des "
-"logiciels choisis ci-dessous (champs paquets)."
 
 #: inventory/models.py:69
 msgid "machine|time deploy profile"
@@ -804,14 +816,6 @@ msgstr "Gestion des droits"
 msgid "ModelList: Links"
 msgstr "Liens"
 
-#: updatengine/settings.py:80
-msgid "french"
-msgstr "français"
-
-#: updatengine/settings.py:81
-msgid "english"
-msgstr "anglais"
-
 #: updatengine/templates/admin/includes_grappelli/header.html:89
 msgid "impex|impex title"
 msgstr "imports/exports"
@@ -832,6 +836,12 @@ msgstr "changer le mot de passe"
 msgid "Log out"
 msgstr "Se déconnecter"
 
+msgid "french"
+msgstr "français"
+
+msgid "english"
+msgstr "anglais"
+
 msgid "Django site admin"
 msgstr "UpdatEngine administration"
 
@@ -843,10 +853,8 @@ msgstr "Maîtrisez vos mises à jour de logiciels"
 #~ msgid "machine|packages help text"
 #~ msgstr "paquets"
 
-
 #~ msgid "Django administration"
 #~ msgstr "UpdatEngine administration"
-
 
 #~ msgid "ModelList: Latest News"
 #~ msgstr "Dernières informations"
