@@ -78,7 +78,10 @@ class softwareFilter(SimpleListFilter):
        `self.value()`.
        """
        if self.value() is not None:
-           return queryset.filter(software__name__iexact=self.value())
+           if 'softversion' in request.GET:
+               return queryset.filter(software__name__iexact=self.value(), software__version__iexact=request.GET['softversion'])
+           else:
+               return queryset.filter(software__name__iexact=self.value())
        else:
            return queryset
 
@@ -109,7 +112,7 @@ class versionFilter(SimpleListFilter):
        `self.value()`.
        """
        if self.value() is not None:
-           return queryset.filter(software__version__iexact=self.value())
+           return queryset.filter(software__name__iexact=request.GET['softname'], software__version__iexact=self.value())
        else:
            return queryset
 
