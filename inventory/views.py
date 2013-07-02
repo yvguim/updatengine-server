@@ -95,7 +95,7 @@ def status(xml):
             m.packages.remove(p)
         handling.append('Status saved')
     except:
-        handling.append('Error when modifying status: ' + sys.exec_info()[0])
+        handling.append('Error when modifying status: %s' % str(sys.exc_info()))
     handling.append('</Response>')
     return handling
 
@@ -158,6 +158,8 @@ def inventory(xml):
         ch, created = typemachine.objects.get_or_create(name=c)
 
         # Machine import
+        if s == None:
+            s = 'undefined'
         m, created = machine.objects.get_or_create(serial=s, name=n)
         m.vendor=v
         m.product=p
@@ -263,7 +265,7 @@ def inventory(xml):
         else:
             handling.append('<info>deployment function is not active </info>')
     except:
-        handling.append('Error when importing inventory: ' + sys.exec_info()[0])
+        handling.append('Error when importing inventory: %s' % str(sys.exc_info()))
     handling.append('</Response>')
     return handling
 
