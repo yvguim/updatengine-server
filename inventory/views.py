@@ -145,9 +145,15 @@ def inventory(xml):
         v = root.find('Manufacturer').text
         p = root.find('Product').text
         c = root.find('Chassistype').text
-        u = root.find('Uuid').text
-        d = root.find('Domain').text
-        l = root.find('Language').text
+        # Maintain compatibility with old (< 2.3) UpdatEngine Client
+        try:
+            u = root.find('Uuid').text
+            d = root.find('Domain').text
+            l = root.find('Language').text
+        except:
+            u = 'Unknown'
+            d = 'Unknown'
+            l = 'Unknown'
         softsum = root.find('Softsum').text
         ossum = root.find('Ossum').text
         netsum = root.find('Netsum').text
