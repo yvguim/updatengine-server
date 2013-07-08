@@ -145,6 +145,9 @@ def inventory(xml):
         v = root.find('Manufacturer').text
         p = root.find('Product').text
         c = root.find('Chassistype').text
+        u = root.find('Uuid').text
+        d = root.find('Domain').text
+        l = root.find('Language').text
         softsum = root.find('Softsum').text
         ossum = root.find('Ossum').text
         netsum = root.find('Netsum').text
@@ -165,6 +168,9 @@ def inventory(xml):
         m, created = machine.objects.get_or_create(serial=s, name=n)
         m.vendor=v
         m.product=p
+        m.uuid = u
+        m.domain = d
+        m.language = l
         m.typemachine_id=ch.id
         m.manualy_created='no'
         m.lastsave = datetime.utcnow().replace(tzinfo=utc)

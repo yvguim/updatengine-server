@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-06-28 22:23+0200\n"
+"POT-Creation-Date: 2013-07-08 13:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,14 +197,14 @@ msgid "Merge"
 msgstr "Fusionner"
 
 #: configuration/models.py:27 inventory/admin.py:35 inventory/models.py:28
-#: inventory/models.py:60 inventory/models.py:90 inventory/models.py:111
-#: inventory/models.py:131
+#: inventory/models.py:60 inventory/models.py:93 inventory/models.py:114
+#: inventory/models.py:134
 msgid "yes"
 msgstr "oui"
 
 #: configuration/models.py:28 inventory/admin.py:44 inventory/models.py:29
-#: inventory/models.py:61 inventory/models.py:91 inventory/models.py:112
-#: inventory/models.py:132
+#: inventory/models.py:61 inventory/models.py:94 inventory/models.py:115
+#: inventory/models.py:135
 msgid "no"
 msgstr "non"
 
@@ -236,7 +236,7 @@ msgstr "Entité (nouvelles machines)"
 msgid "deployconfig|package profile"
 msgstr "Profil logiciel (nouvelles machines)"
 
-#: configuration/models.py:37 inventory/models.py:68
+#: configuration/models.py:37 inventory/models.py:71
 msgid "machine|packages profile help text"
 msgstr ""
 "Les profils de configuration logiciels définissent la liste des logiciels "
@@ -669,141 +669,153 @@ msgid "machine|product"
 msgstr "modèle"
 
 #: inventory/models.py:67
+msgid "machine|domain"
+msgstr "domaine"
+
+#: inventory/models.py:68
+msgid "machine|uuid"
+msgstr "UUID"
+
+#: inventory/models.py:69
+msgid "machine|language"
+msgstr "langue"
+
+#: inventory/models.py:70
 msgid "machine|entity"
 msgstr "entité"
 
-#: inventory/models.py:68
+#: inventory/models.py:71
 msgid "machine|package profile"
 msgstr "profil de configuration logicielle"
 
-#: inventory/models.py:69
+#: inventory/models.py:72
 msgid "machine|time deploy profile"
 msgstr "profil horaire de déploiement"
 
-#: inventory/models.py:70
+#: inventory/models.py:73
 msgid "machine|lastsave"
 msgstr "dernière sauvegarde"
 
-#: inventory/models.py:71
+#: inventory/models.py:74
 msgid "machine|typemachine"
 msgstr "type de machine"
 
-#: inventory/models.py:72
+#: inventory/models.py:75
 msgid "machine|netsum"
 msgstr "netsum"
 
-#: inventory/models.py:73
+#: inventory/models.py:76
 msgid "machine|ossum"
 msgstr "ossum"
 
-#: inventory/models.py:74
+#: inventory/models.py:77
 msgid "machine|softsum"
 msgstr "softsum"
 
-#: inventory/models.py:75
+#: inventory/models.py:78
 msgid "machine|packages"
 msgstr "paquets à installer statiquement"
 
-#: inventory/models.py:76
+#: inventory/models.py:79
 msgid "machine|manualy_created"
 msgstr "machine créée manuellement"
 
-#: inventory/models.py:79
+#: inventory/models.py:82
 msgid "machine|machine"
 msgstr "machine"
 
-#: inventory/models.py:80
+#: inventory/models.py:83
 #: updatengine/templates/admin/includes_grappelli/header.html:37
 msgid "machine|machines"
 msgstr "    Machines"
 
-#: inventory/models.py:93
+#: inventory/models.py:96
 msgid "osdistribution|name"
 msgstr "nom"
 
-#: inventory/models.py:94
+#: inventory/models.py:97
 msgid "osdistribution|version"
 msgstr "version"
 
-#: inventory/models.py:95
+#: inventory/models.py:98
 msgid "osdistribution|arch"
 msgstr "architecture"
 
-#: inventory/models.py:96
+#: inventory/models.py:99
 msgid "osdistribution|systemdrive"
 msgstr "disque système"
 
-#: inventory/models.py:97
+#: inventory/models.py:100
 msgid "osdistribution|host"
 msgstr "machine"
 
-#: inventory/models.py:98
+#: inventory/models.py:101
 msgid "osdistribution|manualy_created"
 msgstr "système créé manuellement"
 
-#: inventory/models.py:104
+#: inventory/models.py:107
 msgid "osdistribution|osdistribution"
 msgstr "système et architecture"
 
-#: inventory/models.py:105
+#: inventory/models.py:108
 #: updatengine/templates/admin/includes_grappelli/header.html:53
 msgid "osdistribution|osdistributions"
 msgstr "Systèmes et architectures"
 
-#: inventory/models.py:114
+#: inventory/models.py:117
 msgid "net|ip"
 msgstr "adresse IP"
 
-#: inventory/models.py:115
+#: inventory/models.py:118
 msgid "net|mask"
 msgstr "masque"
 
-#: inventory/models.py:116
+#: inventory/models.py:119
 msgid "net|mac"
 msgstr "adresse MAC"
 
-#: inventory/models.py:117
+#: inventory/models.py:120
 msgid "net|host"
 msgstr "machine"
 
-#: inventory/models.py:118
+#: inventory/models.py:121
 msgid "net|manualy_created"
 msgstr "réseau créé manuellement"
 
-#: inventory/models.py:124
+#: inventory/models.py:127
 msgid "net|network"
 msgstr "réseau"
 
-#: inventory/models.py:125
+#: inventory/models.py:128
 #: updatengine/templates/admin/includes_grappelli/header.html:49
 msgid "net|networks"
 msgstr " Réseaux"
 
-#: inventory/models.py:134
+#: inventory/models.py:137
 msgid "software|name"
 msgstr "nom"
 
-#: inventory/models.py:135
+#: inventory/models.py:138
 msgid "software|version"
 msgstr "version"
 
-#: inventory/models.py:136
+#: inventory/models.py:139
 msgid "software|uninstall"
 msgstr "desinstalleur"
 
-#: inventory/models.py:137
+#: inventory/models.py:140
 msgid "software|host"
 msgstr "machine"
 
-#: inventory/models.py:138
+#: inventory/models.py:141
 msgid "software|manualy_created"
 msgstr "logiciel créé manuellement"
 
-#: inventory/models.py:144
+#: inventory/models.py:147
 msgid "software|software"
 msgstr "logiciel"
 
-#: inventory/models.py:145
+#: inventory/models.py:148
 #: updatengine/templates/admin/includes_grappelli/header.html:45
 msgid "software|softwares"
 msgstr "  Logiciels"
