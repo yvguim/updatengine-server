@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-08 13:10+0200\n"
+"POT-Creation-Date: 2013-07-09 15:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -562,6 +562,10 @@ msgstr "name"
 msgid "softversion"
 msgstr "version"
 
+#: inventory/admin.py:166
+msgid "force_inventory"
+msgstr "Force inventory now"
+
 #: inventory/models.py:31
 msgid "entity|name"
 msgstr "name"
@@ -884,6 +888,3 @@ msgstr "Free your updates"
 
 #~ msgid "packagecondition|description"
 #~ msgstr "description"
-
-#~ msgid "inventory|name"
-#~ msgstr "Inventory and deployment"

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-08 13:10+0200\n"
+"POT-Creation-Date: 2013-07-09 15:27+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -566,6 +566,10 @@ msgstr "nom du logiciel"
 msgid "softversion"
 msgstr "version"
 
+#: inventory/admin.py:166
+msgid "force_inventory"
+msgstr "Forcer la remontée maintenant"
+
 #: inventory/models.py:31
 msgid "entity|name"
 msgstr "nom"
@@ -888,6 +892,3 @@ msgstr "Maîtrisez vos mises à jour de logiciels"
 
 #~ msgid "packagecondition|description"
 #~ msgstr "description de la condition"
-
-#~ msgid "inventory|name"
-#~ msgstr "Inventaire et déploiement"
