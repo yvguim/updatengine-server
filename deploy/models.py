@@ -70,7 +70,12 @@ class package(models.Model):
     class Meta:
         verbose_name = _('package|deployment package')
         verbose_name_plural = _('package|deployment packages')
-
+    
+    def get_conditions(self):
+        return "<br/>".join([c.name for c in self.conditions.all()])
+    get_conditions.allow_tags = True
+    get_conditions.short_description = _('packageAdmin|get_conditions')
+    
     def save(self, *args, **kwargs):
         # delete old file when replacing by updating the file
         try :

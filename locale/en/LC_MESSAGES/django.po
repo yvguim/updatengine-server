@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-09 15:27+0200\n"
+"POT-Creation-Date: 2013-07-13 11:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -153,6 +153,7 @@ msgstr ""
 #: adminactions/templates/adminactions/mass_update.html:26
 #: adminactions/templates/adminactions/merge.html:5
 #: adminactions/templates/adminactions/merge_preview.html:5
+#: updatengine/templates/admin/base.html:224
 msgid "Home"
 msgstr ""
 
@@ -250,8 +251,7 @@ msgstr "Time profile for new machines"
 msgid "deployconfig|deployconfig"
 msgstr "deployment configuration"
 
-#: configuration/models.py:42
-#: updatengine/templates/admin/includes_grappelli/header.html:101
+#: configuration/models.py:42 updatengine/templates/admin/base.html:150
 msgid "deployconfig|deployconfigs"
 msgstr "Deployment configurations"
 
@@ -311,8 +311,7 @@ msgstr ""
 msgid "packagecondition|package condition"
 msgstr "package software condition"
 
-#: deploy/models.py:52
-#: updatengine/templates/admin/includes_grappelli/header.html:73
+#: deploy/models.py:52 updatengine/templates/admin/base.html:122
 msgid "packagecondition|packages conditions"
 msgstr "  Packages software conditions"
 
@@ -366,187 +365,186 @@ msgstr "public package"
 msgid "package|deployment package"
 msgstr "deployment package"
 
-#: deploy/models.py:72
-#: updatengine/templates/admin/includes_grappelli/header.html:69
+#: deploy/models.py:72 updatengine/templates/admin/base.html:118
 msgid "package|deployment packages"
 msgstr "   Deployment packages"
 
-#: deploy/models.py:159
+#: deploy/models.py:77
+msgid "packageAdmin|get_conditions"
+msgstr "conditions"
+
+#: deploy/models.py:164
 msgid "packagehistory|name"
 msgstr "name"
 
-#: deploy/models.py:160
+#: deploy/models.py:165
 msgid "packagehistory|description"
 msgstr "description"
 
-#: deploy/models.py:161
+#: deploy/models.py:166
 msgid "packagehistory|command"
 msgstr "command"
 
-#: deploy/models.py:162
+#: deploy/models.py:167
 msgid "packagehistory|packagesum"
 msgstr "md5 sum"
 
-#: deploy/models.py:163
+#: deploy/models.py:168
 msgid "packagehistory|filename"
 msgstr "file"
 
-#: deploy/models.py:164
+#: deploy/models.py:169
 msgid "packagehistory|machine"
 msgstr "machine"
 
-#: deploy/models.py:165
+#: deploy/models.py:170
 msgid "packagehistory|package"
 msgstr "package"
 
-#: deploy/models.py:166
+#: deploy/models.py:171
 msgid "packagehistory|status"
 msgstr "status"
 
-#: deploy/models.py:167
+#: deploy/models.py:172
 msgid "packagehistory|date"
 msgstr "date"
 
-#: deploy/models.py:170
+#: deploy/models.py:175
 msgid "packagehistory|package history"
 msgstr "deployment history"
 
-#: deploy/models.py:171
-#: updatengine/templates/admin/includes_grappelli/header.html:65
+#: deploy/models.py:176 updatengine/templates/admin/base.html:114
 msgid "packagehistory|packages history"
 msgstr "    Deployment history"
 
-#: deploy/models.py:178
+#: deploy/models.py:183
 msgid "packageprofile|name"
 msgstr "name"
 
-#: deploy/models.py:179
+#: deploy/models.py:184
 msgid "packageprofile|description"
 msgstr "description"
 
-#: deploy/models.py:180
+#: deploy/models.py:185
 msgid "packageprofile|packages"
 msgstr "packages"
 
-#: deploy/models.py:181
+#: deploy/models.py:186
 msgid "packageprofile|parent"
 msgstr "Profile's parent"
 
-#: deploy/models.py:184
+#: deploy/models.py:189
 msgid "packageprofile|package profile"
 msgstr "software profile configuration"
 
-#: deploy/models.py:185
-#: updatengine/templates/admin/includes_grappelli/header.html:77
+#: deploy/models.py:190 updatengine/templates/admin/base.html:126
 msgid "packageprofile|packages profiles"
 msgstr " Software packages profiles"
 
-#: deploy/models.py:213
+#: deploy/models.py:218
 msgid "packagewakeonlan|Programmed"
 msgstr "Programmed"
 
-#: deploy/models.py:214
+#: deploy/models.py:219
 msgid "packagewakeonlan|Completed"
 msgstr "Completed"
 
-#: deploy/models.py:216
+#: deploy/models.py:221
 msgid "packagewakeonlan|name"
 msgstr "Name"
 
-#: deploy/models.py:216
+#: deploy/models.py:221
 msgid "packagewakeonlan|packagewakeonlan help text"
 msgstr ""
 "Warning: this function can only be used on the lan of the updatengine server"
 
-#: deploy/models.py:217
+#: deploy/models.py:222
 msgid "packagewakeonlan|description"
 msgstr "description"
 
-#: deploy/models.py:218
+#: deploy/models.py:223
 msgid "packagewakeonlan|machines to start"
 msgstr "machines to wake up"
 
-#: deploy/models.py:219
+#: deploy/models.py:224
 msgid "packagewakeonlan|start_time"
 msgstr "date and time of start"
 
-#: deploy/models.py:220
+#: deploy/models.py:225
 msgid "packagewakeonlan|status"
 msgstr "status"
 
-#: deploy/models.py:223
+#: deploy/models.py:228
 msgid "packagewakeonlan|package wakeonlan"
 msgstr "wake on lan planning"
 
-#: deploy/models.py:224
-#: updatengine/templates/admin/includes_grappelli/header.html:85
+#: deploy/models.py:229 updatengine/templates/admin/base.html:134
 msgid "packagewakeonlan|packages wakeonlan"
 msgstr "Wake on lan planning"
 
-#: deploy/models.py:230
+#: deploy/models.py:235
 msgid "timeprofile|name"
 msgstr "profile name"
 
-#: deploy/models.py:230
+#: deploy/models.py:235
 msgid "timeprofile|timeprofile help text"
 msgstr ""
 "Warning: a deployment period can be override by a global configuration (see "
 "configuration menu) or if a package is configured to ignore them."
 
-#: deploy/models.py:231
+#: deploy/models.py:236
 msgid "timeprofile|description"
 msgstr "description"
 
-#: deploy/models.py:232
+#: deploy/models.py:237
 msgid "timeprofile|start_time"
 msgstr "Start of period"
 
-#: deploy/models.py:233
+#: deploy/models.py:238
 msgid "timeprofile|end_time"
 msgstr "End of period"
 
-#: deploy/models.py:236
+#: deploy/models.py:241
 msgid "timeprofile|time profile"
 msgstr "Deployment period"
 
-#: deploy/models.py:237
-#: updatengine/templates/admin/includes_grappelli/header.html:81
+#: deploy/models.py:242 updatengine/templates/admin/base.html:130
 msgid "timeprofile|time profiles"
 msgstr "Deployment periods"
 
-#: deploy/models.py:243
+#: deploy/models.py:248
 msgid "impex|name"
 msgstr "Name"
 
-#: deploy/models.py:244
+#: deploy/models.py:249
 msgid "impex|description"
 msgstr "description"
 
-#: deploy/models.py:245
+#: deploy/models.py:250
 msgid "impex|packagesum"
 msgstr "md5 sum"
 
-#: deploy/models.py:246
+#: deploy/models.py:251
 msgid "impex|filename"
 msgstr "file name"
 
-#: deploy/models.py:247
+#: deploy/models.py:252
 msgid "impex|package"
 msgstr "package"
 
-#: deploy/models.py:248
+#: deploy/models.py:253
 msgid "impex|date"
 msgstr "date"
 
-#: deploy/models.py:257
+#: deploy/models.py:262
 msgid "impex|filename_link"
 msgstr "export's file"
 
-#: deploy/models.py:259
+#: deploy/models.py:264
 msgid "impex|import/export"
 msgstr "import/export"
 
-#: deploy/models.py:260
+#: deploy/models.py:265
 msgid "impex|imports/exports"
 msgstr "Imports/Exports"
 
@@ -562,7 +560,7 @@ msgstr "name"
 msgid "softversion"
 msgstr "version"
 
-#: inventory/admin.py:166
+#: inventory/admin.py:169
 msgid "force_inventory"
 msgstr "Force inventory now"
 
@@ -630,8 +628,7 @@ msgstr "Force deployment period?"
 msgid "entity|entity"
 msgstr "entity"
 
-#: inventory/models.py:46
-#: updatengine/templates/admin/includes_grappelli/header.html:41
+#: inventory/models.py:46 updatengine/templates/admin/base.html:90
 msgid "entity|entities"
 msgstr "   Entities"
 
@@ -719,8 +716,7 @@ msgstr "manualy created machine"
 msgid "machine|machine"
 msgstr "machine"
 
-#: inventory/models.py:83
-#: updatengine/templates/admin/includes_grappelli/header.html:37
+#: inventory/models.py:83 updatengine/templates/admin/base.html:86
 msgid "machine|machines"
 msgstr "    Machines"
 
@@ -752,8 +748,7 @@ msgstr "system created manualy"
 msgid "osdistribution|osdistribution"
 msgstr "system and architecture"
 
-#: inventory/models.py:108
-#: updatengine/templates/admin/includes_grappelli/header.html:53
+#: inventory/models.py:108 updatengine/templates/admin/base.html:102
 msgid "osdistribution|osdistributions"
 msgstr "Systems and architectures"
 
@@ -781,8 +776,7 @@ msgstr "network created manualy"
 msgid "net|network"
 msgstr "network"
 
-#: inventory/models.py:128
-#: updatengine/templates/admin/includes_grappelli/header.html:49
+#: inventory/models.py:128 updatengine/templates/admin/base.html:98
 msgid "net|networks"
 msgstr " Networks"
 
@@ -810,8 +804,7 @@ msgstr "software created manualy"
 msgid "software|software"
 msgstr "software"
 
-#: inventory/models.py:148
-#: updatengine/templates/admin/includes_grappelli/header.html:45
+#: inventory/models.py:148 updatengine/templates/admin/base.html:94
 msgid "software|softwares"
 msgstr "  Software packages"
 
@@ -835,23 +828,23 @@ msgstr "french"
 msgid "english"
 msgstr "english"
 
-#: updatengine/templates/admin/includes_grappelli/header.html:89
+#: updatengine/templates/admin/base.html:138
 msgid "impex|impex title"
 msgstr "imports/exports"
 
-#: updatengine/templates/admin/includes_grappelli/header.html:113
+#: updatengine/templates/admin/base.html:162
 msgid "groups"
 msgstr "groups"
 
-#: updatengine/templates/admin/includes_grappelli/header.html:117
+#: updatengine/templates/admin/base.html:166
 msgid "users"
 msgstr "users"
 
-#: updatengine/templates/admin/includes_grappelli/header.html:134
+#: updatengine/templates/admin/base.html:183
 msgid "Change password"
 msgstr "Change password"
 
-#: updatengine/templates/admin/includes_grappelli/header.html:142
+#: updatengine/templates/admin/base.html:191
 msgid "Log out"
 msgstr "Log out"
 

@@ -32,14 +32,14 @@ class ueAdmin(admin.ModelAdmin):
         return 'deploy'
 
 class packageAdmin(ueAdmin):
-	list_display = ('name','description','command','filename','ignoreperiod','public','packagesum')
+	list_display = ('name','description','command','filename','get_conditions','ignoreperiod','public')
 	list_editable = ('ignoreperiod','public')
-	search_fields = ('name','description','command','filename','public','packagesum')
+	search_fields = ('name','description','command','filename','public')
 	list_filter = ('ignoreperiod',)
 	filter_horizontal = ('conditions',)
 
 class packagehistoryAdmin(ueAdmin):
-	list_display = ('date','machine','status','name','description','command','filename','packagesum','package')
+	list_display = ('date','machine','status','name','description','command','filename','package')
 	search_fields = ('status','name','description','command')
 	list_filter = ('machine','package','status',
 			('date', DateFieldListFilter))
@@ -81,7 +81,6 @@ class impexAdmin(ueAdmin):
         if obj: # editing an existing object
             return self.readonly_fields + ('filename', 'package')
         return self.readonly_fields
-
 admin.site.register(packagewakeonlan, wakeonlanAdmin)
 admin.site.register(timeprofile, timeprofileAdmin)
 admin.site.register(packagecondition, packageconditionAdmin)
