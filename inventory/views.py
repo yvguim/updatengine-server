@@ -182,10 +182,21 @@ def inventory(xml):
         m.lastsave = datetime.utcnow().replace(tzinfo=utc)
 	
         if created:
-	        m.timeprofile = config.timeprofile
-	        m.packageprofile = config.packageprofile
 	        m.entity = config.entity
-        
+	        if config.entity != None and config.entity.packageprofile != None and config.packageprofile == None:
+			m.packageprofile = config.entity.packageprofile
+		else:
+	        	m.packageprofile = config.packageprofile
+	        if config.entity != None and config.entity.timeprofile != None and config.timeprofile == None:
+			m.timeprofile = config.entity.timeprofile
+		else:
+			m.timeprofile = config.timeprofile
+        if not created:
+		if m.entity != None and m.entity.packageprofile != None and m.entity.force_packageprofile == 'yes':
+                        m.packageprofile = m.entity.packageprofile
+ 
+		if m.entity != None and m.entity.timeprofile != None and m.entity.force_timeprofile == 'yes':
+                        m.timeprofile = m.entity.timeprofile
         # System info import
         if ossum != m.ossum:
             m.ossum = ossum
