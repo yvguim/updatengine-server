@@ -127,18 +127,21 @@ class ueAdmin(admin.ModelAdmin):
 
 class netInline(admin.TabularInline):
     model = net
-    max_num = 0
+    max_num = 5000
+    extra = 0
     readonly_fields = ('manualy_created',)
 
 
 class osInline(admin.TabularInline):
     model = osdistribution
-    max_num = 0
+    max_num = 5000
+    extra = 0
     readonly_fields = ('manualy_created',)
 
 class softInline(admin.TabularInline):
     model = software
-    max_num = 0
+    max_num = 10000
+    extra = 0
     readonly_fields = ('name', 'version', 'uninstall', 'manualy_created',)
 
 class entityAdmin(ueAdmin):
