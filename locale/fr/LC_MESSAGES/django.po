@@ -584,7 +584,7 @@ msgstr "parent"
 
 #: inventory/models.py:34
 msgid "entity|package profile"
-msgstr "Profil de configuration logicielle"
+msgstr "Profil de configuration"
 
 #: inventory/models.py:34
 msgid "entity|packages profile help text"
@@ -690,11 +690,11 @@ msgstr "entité"
 
 #: inventory/models.py:71
 msgid "machine|package profile"
-msgstr "profil de configuration logicielle"
+msgstr "profil de configuration"
 
 #: inventory/models.py:72
 msgid "machine|time deploy profile"
-msgstr "profil horaire de déploiement"
+msgstr "période de déploiement"
 
 #: inventory/models.py:73
 msgid "machine|lastsave"
