@@ -142,7 +142,7 @@ def predelete_package(sender, instance, **kwargs):
 
 # call packages_changed only when packages m2m changed
 @receiver(m2m_changed, sender=machine.packages.through)
-def packages_changed(sender, instance, **kwargs):
+def packages_changed(sender, action, instance, **kwargs):
     # Create and update packagehistory object
     allpackages = instance.packages.all()
     for package in allpackages :
@@ -151,6 +151,8 @@ def packages_changed(sender, instance, **kwargs):
         obj.description = package.description
         obj.command = package.command
         obj.packagesum = package.packagesum
+        if action == 'post_add':
+            obj.status = 'Programmed'
         if package.packagesum != 'nofile':
             obj.filename = package.filename.path
         obj.save()
