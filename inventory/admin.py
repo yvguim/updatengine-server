@@ -150,24 +150,6 @@ class entityAdmin(ueAdmin):
     list_editable = ('packageprofile','force_packageprofile','timeprofile','force_timeprofile')
     ordering =('name',)
 
-def force_contact(modeladmin, request, queryset):
-    import socket, time
-    Sock = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-
-    # definition des informations :
-    Port = 2010
-    for machine in queryset:
-        try:
-            for netcard in net.objects.filter(host=machine):
-                if netcard.ip != '127.0.0.1':
-                    Sock.connect((netcard.ip,Port))
-                    Sock.send(machine.softsum)
-                    Sock.close()
-                    time.sleep(3)
-        except:
-            pass
-force_contact.short_description = _('force_inventory')
-
 class machineAdmin(ueAdmin):
     select_related = True
     fields = ['name', 'serial','uuid','domain','language', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
@@ -180,7 +162,17 @@ class machineAdmin(ueAdmin):
     filter_horizontal = ('packages',)
     date_hierarchy = 'lastsave'
     ordering =('-lastsave',)
-    actions = [force_contact]
+    actions = ['force_contact', 'force_wakeup']
+   
+    def force_wakeup(self, request, queryset):
+        for machine in queryset:
+            machine.wakeup()
+    force_wakeup.short_description = _('force_wakeup')
+
+    def force_contact(modeladmin, request, queryset):
+        for machine in queryset:
+            machine.force_contact()
+    force_contact.short_description = _('force_inventory')
 
 class netAdmin(ueAdmin):
     list_display = ('ip','mask','mac','host')

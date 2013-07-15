@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-13 11:25+0200\n"
+"POT-Creation-Date: 2013-07-15 21:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,14 +198,14 @@ msgid "Merge"
 msgstr ""
 
 #: configuration/models.py:27 inventory/admin.py:35 inventory/models.py:28
-#: inventory/models.py:60 inventory/models.py:93 inventory/models.py:114
-#: inventory/models.py:134
+#: inventory/models.py:60 inventory/models.py:129 inventory/models.py:150
+#: inventory/models.py:170
 msgid "yes"
 msgstr "yes"
 
 #: configuration/models.py:28 inventory/admin.py:44 inventory/models.py:29
-#: inventory/models.py:61 inventory/models.py:94 inventory/models.py:115
-#: inventory/models.py:135
+#: inventory/models.py:61 inventory/models.py:130 inventory/models.py:151
+#: inventory/models.py:171
 msgid "no"
 msgstr "no"
 
@@ -560,7 +560,11 @@ msgstr "name"
 msgid "softversion"
 msgstr "version"
 
-#: inventory/admin.py:169
+#: inventory/admin.py:170
+msgid "force_wakeup"
+msgstr "Wake up now"
+
+#: inventory/admin.py:175
 msgid "force_inventory"
 msgstr "Force inventory now"
 
@@ -720,91 +724,91 @@ msgstr "machine"
 msgid "machine|machines"
 msgstr "    Machines"
 
-#: inventory/models.py:96
+#: inventory/models.py:132
 msgid "osdistribution|name"
 msgstr "name"
 
-#: inventory/models.py:97
+#: inventory/models.py:133
 msgid "osdistribution|version"
 msgstr "version"
 
-#: inventory/models.py:98
+#: inventory/models.py:134
 msgid "osdistribution|arch"
 msgstr "architecture"
 
-#: inventory/models.py:99
+#: inventory/models.py:135
 msgid "osdistribution|systemdrive"
 msgstr "system drive"
 
-#: inventory/models.py:100
+#: inventory/models.py:136
 msgid "osdistribution|host"
 msgstr "machine"
 
-#: inventory/models.py:101
+#: inventory/models.py:137
 msgid "osdistribution|manualy_created"
 msgstr "system created manualy"
 
-#: inventory/models.py:107
+#: inventory/models.py:143
 msgid "osdistribution|osdistribution"
 msgstr "system and architecture"
 
-#: inventory/models.py:108 updatengine/templates/admin/base.html:102
+#: inventory/models.py:144 updatengine/templates/admin/base.html:102
 msgid "osdistribution|osdistributions"
 msgstr "Systems and architectures"
 
-#: inventory/models.py:117
+#: inventory/models.py:153
 msgid "net|ip"
 msgstr "IP adress"
 
-#: inventory/models.py:118
+#: inventory/models.py:154
 msgid "net|mask"
 msgstr "netmask"
 
-#: inventory/models.py:119
+#: inventory/models.py:155
 msgid "net|mac"
 msgstr "Mac address"
 
-#: inventory/models.py:120
+#: inventory/models.py:156
 msgid "net|host"
 msgstr "machine"
 
-#: inventory/models.py:121
+#: inventory/models.py:157
 msgid "net|manualy_created"
 msgstr "network created manualy"
 
-#: inventory/models.py:127
+#: inventory/models.py:163
 msgid "net|network"
 msgstr "network"
 
-#: inventory/models.py:128 updatengine/templates/admin/base.html:98
+#: inventory/models.py:164 updatengine/templates/admin/base.html:98
 msgid "net|networks"
 msgstr " Networks"
 
-#: inventory/models.py:137
+#: inventory/models.py:173
 msgid "software|name"
 msgstr "name"
 
-#: inventory/models.py:138
+#: inventory/models.py:174
 msgid "software|version"
 msgstr "version"
 
-#: inventory/models.py:139
+#: inventory/models.py:175
 msgid "software|uninstall"
 msgstr "uninstall"
 
-#: inventory/models.py:140
+#: inventory/models.py:176
 msgid "software|host"
 msgstr "machine"
 
-#: inventory/models.py:141
+#: inventory/models.py:177
 msgid "software|manualy_created"
 msgstr "software created manualy"
 
-#: inventory/models.py:147
+#: inventory/models.py:183
 msgid "software|software"
 msgstr "software"
 
-#: inventory/models.py:148 updatengine/templates/admin/base.html:94
+#: inventory/models.py:184 updatengine/templates/admin/base.html:94
 msgid "software|softwares"
 msgstr "  Software packages"
 
