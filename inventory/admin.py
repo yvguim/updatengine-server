@@ -52,39 +52,84 @@ class enableFilter(SimpleListFilter):
                 'display': title,
             }
 
+class as_or_notFilter(SimpleListFilter):
+    title = _('As software or not?')
+    parameter_name = 'asornot'
+
+    def lookups(self, request, model_admin):
+        if 'enablefilter' in request.GET:
+            return [('True',_('as_not_software')),]
+        else:
+            return
+
+    def queryset(self, request, queryset):
+        return queryset
+
+    def choices(self, cl):
+        yield {
+            'selected': self.value() is None,
+            'query_string': cl.get_query_string({}, [self.parameter_name]),
+            'display': _('as_software'),
+        }
+        for lookup, title in self.lookup_choices:
+            yield {
+                'selected': self.value() == force_unicode(lookup),
+                'query_string': cl.get_query_string({
+                    self.parameter_name: lookup,
+                }, []),
+                'display': title,
+            }
+
 class softwareFilter(SimpleListFilter):
-   # Human-readable title which will be displayed in the
-   # right admin sidebar just above the filter options.
-   title = _('software')
-
-   # Parameter for the filter that will be used in the URL query.
-   parameter_name = 'softname'
-
-   def lookups(self, request, model_admin):
-       """
-       Returns a list of tuples. The first element in each
-       tuple is the coded value for the option that will
-       appear in the URL query. The second element is the
-       human-readable name for the option that will appear
-       in the right sidebar.
-       """
-       if 'enablefilter' in request.GET:
-           return software.objects.order_by('name').values_list('name','name').distinct()
-
-   def queryset(self, request, queryset):
-       """
-       Returns the filtered queryset based on the value
-       provided in the query string and retrievable via
-       `self.value()`.
-       """
-       if self.value() is not None:
-           if 'softversion' in request.GET:
-               return queryset.filter(software__name__iexact=self.value(), software__version__iexact=request.GET['softversion'])
-           else:
-               return queryset.filter(software__name__iexact=self.value())
-       else:
-           return queryset
-
+    # Human-readable title which will be displayed in the
+    # right admin sidebar just above the filter options.
+    title = _('software')
+ 
+    # Parameter for the filter that will be used in the URL query.
+    parameter_name = 'softname'
+ 
+    def lookups(self, request, model_admin):
+         """
+         Returns a list of tuples. The first element in each
+         tuple is the coded value for the option that will
+         appear in the URL query. The second element is the
+         human-readable name for the option that will appear
+         in the right sidebar.
+         """
+         if 'enablefilter' in request.GET:
+             return software.objects.order_by('name').values_list('name','name').distinct()
+         else:
+             return
+    
+    def queryset(self, request, queryset):
+         """
+         Returns the filtered queryset based on the value
+         provided in the query string and retrievable via
+         `self.value()`.
+         """
+         if 'asornot' in request.GET and 'enablefilter' in request.GET:
+             if self.value() is not None:
+                 if 'softversion' in request.GET:
+                     if software.objects.filter(version__iexact=request.GET['softversion'], name__iexact=self.value()).exists():
+                         return queryset.exclude(software__version__iexact=request.GET['softversion'], software__name__iexact=self.value())
+                     else:
+                         return queryset.exclude(software__name__iexact=self.value())
+                 else:
+                     return queryset.exclude(software__name__iexact=self.value())
+         elif 'enablefilter' in request.GET: 
+             if self.value() is not None:
+                 if 'softversion' in request.GET:
+                     if software.objects.filter(version__iexact=request.GET['softversion'], name__iexact=self.value()).exists():
+                         return queryset.filter(software__name__iexact=self.value(), software__version__iexact=request.GET['softversion'])
+                     else:
+                         return queryset.filter(software__name__iexact=self.value())
+                 else:
+                     return queryset.filter(software__name__iexact=self.value())
+             else:
+                 return queryset
+         else:
+             return queryset
+ 
 class versionFilter(SimpleListFilter):
    # Human-readable title which will be displayed in the
    # right admin sidebar just above the filter options.
@@ -94,27 +139,26 @@ class versionFilter(SimpleListFilter):
    parameter_name = 'softversion'
 
    def lookups(self, request, model_admin):
-       """
-       Returns a list of tuples. The first element in each
-       tuple is the coded value for the option that will
-       appear in the URL query. The second element is the
-       human-readable name for the option that will appear
-       in the right sidebar.
-       """
+        """
+        Returns a list of tuples. The first element in each
+        tuple is the coded value for the option that will
+        appear in the URL query. The second element is the
+        human-readable name for the option that will appear
+        in the right sidebar.
+        """
 
-       if 'softname' in request.GET:
-          return software.objects.filter(name__iexact=request.GET['softname'] ).order_by('version').values_list('version','version').distinct()
-
+        if 'enablefilter' in request.GET:
+            if 'softname' in request.GET:
+                return software.objects.filter(name__iexact=request.GET['softname'] ).order_by('version').values_list('version','version').distinct()
+        else:
+            return
    def queryset(self, request, queryset):
        """
        Returns the filtered queryset based on the value
        provided in the query string and retrievable via
        `self.value()`.
        """
-       if self.value() is not None:
-           return queryset.filter(software__name__iexact=request.GET['softname'], software__version__iexact=self.value())
-       else:
-           return queryset
+       return queryset
 
 class ueAdmin(admin.ModelAdmin):
     list_max_show_all = 600
@@ -131,7 +175,6 @@ class netInline(admin.TabularInline):
     extra = 0
     readonly_fields = ('manualy_created',)
 
-
 class osInline(admin.TabularInline):
     model = osdistribution
     max_num = 5000
@@ -143,6 +186,8 @@ class softInline(admin.TabularInline):
     max_num = 10000
     extra = 0
     readonly_fields = ('name', 'version', 'uninstall', 'manualy_created',)
+    def has_add_permission(self, request):
+                return False
 
 class entityAdmin(ueAdmin):
     fields = ['name','description','parent','packageprofile','force_packageprofile','timeprofile','force_timeprofile']
@@ -155,7 +200,7 @@ class machineAdmin(ueAdmin):
     fields = ['name', 'serial','uuid','domain','language', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
     list_display = ('lastsave','name','serial','domain','vendor','product','entity','typemachine','packageprofile','timeprofile')
     list_editable = ('entity','packageprofile','timeprofile')
-    list_filter = (('lastsave', DateFieldListFilter), 'entity','domain','language','typemachine', 'timeprofile','packageprofile', enableFilter,softwareFilter, versionFilter)
+    list_filter = (('lastsave', DateFieldListFilter), 'entity','domain','language','typemachine', 'timeprofile','packageprofile', enableFilter, as_or_notFilter, softwareFilter, versionFilter)
     search_fields = ('name', 'serial','vendor','product','domain','language')
     readonly_fields = ('typemachine', 'manualy_created',)
     inlines = [osInline, netInline, softInline]

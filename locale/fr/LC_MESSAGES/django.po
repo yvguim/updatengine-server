@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-15 21:37+0200\n"
+"POT-Creation-Date: 2013-07-16 11:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,14 +198,14 @@ msgid "Merge"
 msgstr "Fusionner"
 
 #: configuration/models.py:27 inventory/admin.py:35 inventory/models.py:28
-#: inventory/models.py:60 inventory/models.py:129 inventory/models.py:150
-#: inventory/models.py:170
+#: inventory/models.py:60 inventory/models.py:130 inventory/models.py:151
+#: inventory/models.py:171
 msgid "yes"
 msgstr "oui"
 
 #: configuration/models.py:28 inventory/admin.py:44 inventory/models.py:29
-#: inventory/models.py:61 inventory/models.py:130 inventory/models.py:151
-#: inventory/models.py:171
+#: inventory/models.py:61 inventory/models.py:131 inventory/models.py:152
+#: inventory/models.py:172
 msgid "no"
 msgstr "non"
 
@@ -374,181 +374,181 @@ msgstr "   Paquets de déploiements"
 msgid "packageAdmin|get_conditions"
 msgstr "conditions"
 
-#: deploy/models.py:164
+#: deploy/models.py:166
 msgid "packagehistory|name"
 msgstr "nom"
 
-#: deploy/models.py:165
+#: deploy/models.py:167
 msgid "packagehistory|description"
 msgstr "description"
 
-#: deploy/models.py:166
+#: deploy/models.py:168
 msgid "packagehistory|command"
 msgstr "commande"
 
-#: deploy/models.py:167
+#: deploy/models.py:169
 msgid "packagehistory|packagesum"
 msgstr "somme md5"
 
-#: deploy/models.py:168
+#: deploy/models.py:170
 msgid "packagehistory|filename"
 msgstr "fichier"
 
-#: deploy/models.py:169
+#: deploy/models.py:171
 msgid "packagehistory|machine"
 msgstr "machine"
 
-#: deploy/models.py:170
+#: deploy/models.py:172
 msgid "packagehistory|package"
 msgstr "paquet"
 
-#: deploy/models.py:171
+#: deploy/models.py:173
 msgid "packagehistory|status"
 msgstr "statut"
 
-#: deploy/models.py:172
+#: deploy/models.py:174
 msgid "packagehistory|date"
 msgstr "date"
 
-#: deploy/models.py:175
+#: deploy/models.py:177
 msgid "packagehistory|package history"
 msgstr "historique de déploiement"
 
-#: deploy/models.py:176 updatengine/templates/admin/base.html:114
+#: deploy/models.py:178 updatengine/templates/admin/base.html:114
 msgid "packagehistory|packages history"
 msgstr "    Historique des déploiements"
 
-#: deploy/models.py:183
+#: deploy/models.py:185
 msgid "packageprofile|name"
 msgstr "nom"
 
-#: deploy/models.py:184
+#: deploy/models.py:186
 msgid "packageprofile|description"
 msgstr "description"
 
-#: deploy/models.py:185
+#: deploy/models.py:187
 msgid "packageprofile|packages"
 msgstr "paquets"
 
-#: deploy/models.py:186
+#: deploy/models.py:188
 msgid "packageprofile|parent"
 msgstr "profile parent"
 
-#: deploy/models.py:189
+#: deploy/models.py:191
 msgid "packageprofile|package profile"
 msgstr "profil de configuration logicielle"
 
-#: deploy/models.py:190 updatengine/templates/admin/base.html:126
+#: deploy/models.py:192 updatengine/templates/admin/base.html:126
 msgid "packageprofile|packages profiles"
 msgstr " Profils de configurations"
 
-#: deploy/models.py:218
+#: deploy/models.py:220
 msgid "packagewakeonlan|Programmed"
 msgstr "Tâche programmée"
 
-#: deploy/models.py:219
+#: deploy/models.py:221
 msgid "packagewakeonlan|Completed"
 msgstr "Tâche terminée"
 
-#: deploy/models.py:221
+#: deploy/models.py:223
 msgid "packagewakeonlan|name"
 msgstr "Nom"
 
-#: deploy/models.py:221
+#: deploy/models.py:223
 msgid "packagewakeonlan|packagewakeonlan help text"
 msgstr ""
 "Attention: Dans cette version cette tâche ne peut être utile que sur le sous-"
 "réseau \td'installation du serveur updatengine ou sur les vlans \"environnant"
 "\" \t(nécessite le paramétrage de vos équipements.)"
 
-#: deploy/models.py:222
+#: deploy/models.py:224
 msgid "packagewakeonlan|description"
 msgstr "description"
 
-#: deploy/models.py:223
+#: deploy/models.py:225
 msgid "packagewakeonlan|machines to start"
 msgstr "machines à démarrer"
 
-#: deploy/models.py:224
+#: deploy/models.py:226
 msgid "packagewakeonlan|start_time"
 msgstr "date et heure de démarrage"
 
-#: deploy/models.py:225
+#: deploy/models.py:227
 msgid "packagewakeonlan|status"
 msgstr "statut"
 
-#: deploy/models.py:228
+#: deploy/models.py:230
 msgid "packagewakeonlan|package wakeonlan"
 msgstr "tâche de wake on lan"
 
-#: deploy/models.py:229 updatengine/templates/admin/base.html:134
+#: deploy/models.py:231 updatengine/templates/admin/base.html:134
 msgid "packagewakeonlan|packages wakeonlan"
 msgstr "Tâches de wake on lan"
 
-#: deploy/models.py:235
+#: deploy/models.py:237
 msgid "timeprofile|name"
 msgstr "nom du profil"
 
-#: deploy/models.py:235
+#: deploy/models.py:237
 msgid "timeprofile|timeprofile help text"
 msgstr ""
 "Attention les périodes de déploiement peuvent être ignorées si une période "
 "globale est activée \t(menu configuration) ou si un paquet est configuré "
 "pour ignorer ces périodes."
 
-#: deploy/models.py:236
+#: deploy/models.py:238
 msgid "timeprofile|description"
 msgstr "description"
 
-#: deploy/models.py:237
+#: deploy/models.py:239
 msgid "timeprofile|start_time"
 msgstr "Heure de début de période"
 
-#: deploy/models.py:238
+#: deploy/models.py:240
 msgid "timeprofile|end_time"
 msgstr "Heure de fin de période"
 
-#: deploy/models.py:241
+#: deploy/models.py:243
 msgid "timeprofile|time profile"
 msgstr "Période de déploiement"
 
-#: deploy/models.py:242 updatengine/templates/admin/base.html:130
+#: deploy/models.py:244 updatengine/templates/admin/base.html:130
 msgid "timeprofile|time profiles"
 msgstr "Périodes de déploiement"
 
-#: deploy/models.py:248
+#: deploy/models.py:250
 msgid "impex|name"
 msgstr "Nom de l'import/export"
 
-#: deploy/models.py:249
+#: deploy/models.py:251
 msgid "impex|description"
 msgstr "description"
 
-#: deploy/models.py:250
+#: deploy/models.py:252
 msgid "impex|packagesum"
 msgstr "somme md5"
 
-#: deploy/models.py:251
+#: deploy/models.py:253
 msgid "impex|filename"
 msgstr "fichier"
 
-#: deploy/models.py:252
+#: deploy/models.py:254
 msgid "impex|package"
 msgstr "paquet"
 
-#: deploy/models.py:253
+#: deploy/models.py:255
 msgid "impex|date"
 msgstr "Date de dernière sauvegarde"
 
-#: deploy/models.py:262
+#: deploy/models.py:264
 msgid "impex|filename_link"
 msgstr "fichier d'export"
 
-#: deploy/models.py:264
+#: deploy/models.py:266
 msgid "impex|import/export"
 msgstr "import/export"
 
-#: deploy/models.py:265
+#: deploy/models.py:267
 msgid "impex|imports/exports"
 msgstr "Imports/Exports"
 
@@ -556,19 +556,31 @@ msgstr "Imports/Exports"
 msgid "Activate advanced filter"
 msgstr "Activer la recherche par logiciels"
 
-#: inventory/admin.py:58
+#: inventory/admin.py:56
+msgid "As software or not?"
+msgstr "Condition de recherche:"
+
+#: inventory/admin.py:61
+msgid "as_not_software"
+msgstr "Postes ne possédent pas"
+
+#: inventory/admin.py:72
+msgid "as_software"
+msgstr "Postes possédent"
+
+#: inventory/admin.py:86
 msgid "software"
 msgstr "nom du logiciel"
 
-#: inventory/admin.py:91
+#: inventory/admin.py:136
 msgid "softversion"
 msgstr "version"
 
-#: inventory/admin.py:170
+#: inventory/admin.py:214
 msgid "force_wakeup"
 msgstr "Réveiller maintenant (Wake on lan)"
 
-#: inventory/admin.py:175
+#: inventory/admin.py:219
 msgid "force_inventory"
 msgstr "Forcer la remontée maintenant"
 
@@ -733,91 +745,91 @@ msgstr "machine"
 msgid "machine|machines"
 msgstr "    Machines"
 
-#: inventory/models.py:132
+#: inventory/models.py:133
 msgid "osdistribution|name"
 msgstr "nom"
 
-#: inventory/models.py:133
+#: inventory/models.py:134
 msgid "osdistribution|version"
 msgstr "version"
 
-#: inventory/models.py:134
+#: inventory/models.py:135
 msgid "osdistribution|arch"
 msgstr "architecture"
 
-#: inventory/models.py:135
+#: inventory/models.py:136
 msgid "osdistribution|systemdrive"
 msgstr "disque système"
 
-#: inventory/models.py:136
+#: inventory/models.py:137
 msgid "osdistribution|host"
 msgstr "machine"
 
-#: inventory/models.py:137
+#: inventory/models.py:138
 msgid "osdistribution|manualy_created"
 msgstr "système créé manuellement"
 
-#: inventory/models.py:143
+#: inventory/models.py:144
 msgid "osdistribution|osdistribution"
 msgstr "système et architecture"
 
-#: inventory/models.py:144 updatengine/templates/admin/base.html:102
+#: inventory/models.py:145 updatengine/templates/admin/base.html:102
 msgid "osdistribution|osdistributions"
 msgstr "Systèmes et architectures"
 
-#: inventory/models.py:153
+#: inventory/models.py:154
 msgid "net|ip"
 msgstr "adresse IP"
 
-#: inventory/models.py:154
+#: inventory/models.py:155
 msgid "net|mask"
 msgstr "masque"
 
-#: inventory/models.py:155
+#: inventory/models.py:156
 msgid "net|mac"
 msgstr "adresse MAC"
 
-#: inventory/models.py:156
+#: inventory/models.py:157
 msgid "net|host"
 msgstr "machine"
 
-#: inventory/models.py:157
+#: inventory/models.py:158
 msgid "net|manualy_created"
 msgstr "réseau créé manuellement"
 
-#: inventory/models.py:163
+#: inventory/models.py:164
 msgid "net|network"
 msgstr "réseau"
 
-#: inventory/models.py:164 updatengine/templates/admin/base.html:98
+#: inventory/models.py:165 updatengine/templates/admin/base.html:98
 msgid "net|networks"
 msgstr " Réseaux"
 
-#: inventory/models.py:173
+#: inventory/models.py:174
 msgid "software|name"
 msgstr "nom"
 
-#: inventory/models.py:174
+#: inventory/models.py:175
 msgid "software|version"
 msgstr "version"
 
-#: inventory/models.py:175
+#: inventory/models.py:176
 msgid "software|uninstall"
 msgstr "desinstalleur"
 
-#: inventory/models.py:176
+#: inventory/models.py:177
 msgid "software|host"
 msgstr "machine"
 
-#: inventory/models.py:177
+#: inventory/models.py:178
 msgid "software|manualy_created"
 msgstr "logiciel créé manuellement"
 
-#: inventory/models.py:183
+#: inventory/models.py:184
 msgid "software|software"
 msgstr "logiciel"
 
-#: inventory/models.py:184 updatengine/templates/admin/base.html:94
+#: inventory/models.py:185 updatengine/templates/admin/base.html:94
 msgid "software|softwares"
 msgstr "  Logiciels"
 
@@ -861,11 +873,11 @@ msgstr "changer le mot de passe"
 msgid "Log out"
 msgstr "Se déconnecter"
 
-msgid "Django site admin"
-msgstr "UpdatEngine administration"
+#~ msgid "Django site admin"
+#~ msgstr "UpdatEngine administration"
 
-msgid "header|subtitle"
-msgstr "Maîtrisez vos mises à jour de logiciels"
+#~ msgid "header|subtitle"
+#~ msgstr "Maîtrisez vos mises à jour de logiciels"
 
 #, fuzzy
 #~ msgid "machine|packages help text"
