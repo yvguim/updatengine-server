@@ -219,7 +219,7 @@ msgstr "Activer les déploiements"
 
 #: configuration/models.py:32
 msgid "deployconfig|activate_time_deploy"
-msgstr "Activer un horaire de déploiement global"
+msgstr "Activer une période de déploiement global"
 
 #: configuration/models.py:33
 msgid "deployconfig|start_time"
