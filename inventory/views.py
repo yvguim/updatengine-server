@@ -223,6 +223,8 @@ def inventory(xml):
             for soft in root.findall('Software'):
                 try:
                     softname = soft.find('Name').text
+                    if softname is None:
+                        softname = 'Not defined'
                     softversion = soft.find('Version').text
                     softuninstall = soft.find('Uninstall').text
                     slist.append(software(name = softname, version = softversion,uninstall=softuninstall, host_id=m.id, manualy_created='no'))
