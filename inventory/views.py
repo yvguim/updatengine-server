@@ -230,8 +230,8 @@ def inventory(xml):
                     pass
             try:
                software.objects.bulk_create(slist)
-            except:
-               handling.append('<warning>creation off Software: '+softname+' -- '+softversion+' failed</warning>')
+            except Exception as inst:
+               handling.append('<warning>Error saving software list: '+str(inst)+'</warning>')
 
         # Network import
         # Delete all network information belonging to this machine and create new according to xml.
