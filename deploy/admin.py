@@ -54,7 +54,7 @@ class packagehistoryAdmin(ueAdmin):
 		self.list_display_links = (None, )
 
 class packageprofileAdmin(ueAdmin):
-	list_display = ('name','description', 'parent')
+	list_display = ('name','description', 'get_packages', 'parent')
 	filter_horizontal = ('packages',)
 
 class timeprofileAdmin(ueAdmin):

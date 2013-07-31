@@ -186,10 +186,11 @@ class packageprofile(models.Model):
     description = models.CharField(max_length=500, verbose_name = _('packageprofile|description'))
     packages = models.ManyToManyField('package',null = True, blank = True, verbose_name = _('packageprofile|packages'))
     parent = models.ForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.SET_NULL,verbose_name = _('packageprofile|parent'))
-
+    
     class Meta:
         verbose_name = _('packageprofile|package profile')
         verbose_name_plural = _('packageprofile|packages profiles')
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -214,6 +215,11 @@ class packageprofile(models.Model):
 				if package not in packlist:
 					packlist.append(package)
 		return packlist
+    
+    def get_packages(self):
+        return "<br/>".join([p.name for p in self.get_soft()])
+    get_packages.allow_tags = True
+    get_packages.short_description = _('packageAdmin|get_packages')
 
 class packagewakeonlan(models.Model):
     choice = (

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-16 11:11+0200\n"
+"POT-Creation-Date: 2013-07-31 13:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -441,110 +441,114 @@ msgstr "software profile configuration"
 msgid "packageprofile|packages profiles"
 msgstr " Software packages profiles"
 
-#: deploy/models.py:220
+#: deploy/models.py:221
+msgid "packageAdmin|get_packages"
+msgstr "Software packages"
+
+#: deploy/models.py:225
 msgid "packagewakeonlan|Programmed"
 msgstr "Programmed"
 
-#: deploy/models.py:221
+#: deploy/models.py:226
 msgid "packagewakeonlan|Completed"
 msgstr "Completed"
 
-#: deploy/models.py:223
+#: deploy/models.py:228
 msgid "packagewakeonlan|name"
 msgstr "Name"
 
-#: deploy/models.py:223
+#: deploy/models.py:228
 msgid "packagewakeonlan|packagewakeonlan help text"
 msgstr ""
 "Warning: this function can only be used on the lan of the updatengine server"
 
-#: deploy/models.py:224
+#: deploy/models.py:229
 msgid "packagewakeonlan|description"
 msgstr "description"
 
-#: deploy/models.py:225
+#: deploy/models.py:230
 msgid "packagewakeonlan|machines to start"
 msgstr "machines to wake up"
 
-#: deploy/models.py:226
+#: deploy/models.py:231
 msgid "packagewakeonlan|start_time"
 msgstr "date and time of start"
 
-#: deploy/models.py:227
+#: deploy/models.py:232
 msgid "packagewakeonlan|status"
 msgstr "status"
 
-#: deploy/models.py:230
+#: deploy/models.py:235
 msgid "packagewakeonlan|package wakeonlan"
 msgstr "wake on lan planning"
 
-#: deploy/models.py:231 updatengine/templates/admin/base.html:134
+#: deploy/models.py:236 updatengine/templates/admin/base.html:134
 msgid "packagewakeonlan|packages wakeonlan"
 msgstr "Wake on lan planning"
 
-#: deploy/models.py:237
+#: deploy/models.py:242
 msgid "timeprofile|name"
 msgstr "profile name"
 
-#: deploy/models.py:237
+#: deploy/models.py:242
 msgid "timeprofile|timeprofile help text"
 msgstr ""
 "Warning: a deployment period can be override by a global configuration (see "
 "configuration menu) or if a package is configured to ignore them."
 
-#: deploy/models.py:238
+#: deploy/models.py:243
 msgid "timeprofile|description"
 msgstr "description"
 
-#: deploy/models.py:239
+#: deploy/models.py:244
 msgid "timeprofile|start_time"
 msgstr "Start of period"
 
-#: deploy/models.py:240
+#: deploy/models.py:245
 msgid "timeprofile|end_time"
 msgstr "End of period"
 
-#: deploy/models.py:243
+#: deploy/models.py:248
 msgid "timeprofile|time profile"
 msgstr "Deployment period"
 
-#: deploy/models.py:244 updatengine/templates/admin/base.html:130
+#: deploy/models.py:249 updatengine/templates/admin/base.html:130
 msgid "timeprofile|time profiles"
 msgstr "Deployment periods"
 
-#: deploy/models.py:250
+#: deploy/models.py:255
 msgid "impex|name"
 msgstr "Name"
 
-#: deploy/models.py:251
+#: deploy/models.py:256
 msgid "impex|description"
 msgstr "description"
 
-#: deploy/models.py:252
+#: deploy/models.py:257
 msgid "impex|packagesum"
 msgstr "md5 sum"
 
-#: deploy/models.py:253
+#: deploy/models.py:258
 msgid "impex|filename"
 msgstr "file name"
 
-#: deploy/models.py:254
+#: deploy/models.py:259
 msgid "impex|package"
 msgstr "package"
 
-#: deploy/models.py:255
+#: deploy/models.py:260
 msgid "impex|date"
 msgstr "date"
 
-#: deploy/models.py:264
+#: deploy/models.py:269
 msgid "impex|filename_link"
 msgstr "export's file"
 
-#: deploy/models.py:266
+#: deploy/models.py:271
 msgid "impex|import/export"
 msgstr "import/export"
 
-#: deploy/models.py:267
+#: deploy/models.py:272
 msgid "impex|imports/exports"
 msgstr "Imports/Exports"
 
@@ -572,11 +576,11 @@ msgstr "name"
 msgid "softversion"
 msgstr "version"
 
-#: inventory/admin.py:214
+#: inventory/admin.py:215
 msgid "force_wakeup"
 msgstr "Wake up now"
 
-#: inventory/admin.py:219
+#: inventory/admin.py:220
 msgid "force_inventory"
 msgstr "Force inventory now"
 
@@ -836,11 +840,11 @@ msgstr "Rights confguration"
 msgid "ModelList: Links"
 msgstr "Links"
 
-#: updatengine/settings.py:80
+#: updatengine/settings.py:81
 msgid "french"
 msgstr "french"
 
-#: updatengine/settings.py:81
+#: updatengine/settings.py:82
 msgid "english"
 msgstr "english"
 
@@ -864,11 +868,11 @@ msgstr "Change password"
 msgid "Log out"
 msgstr "Log out"
 
-#~ msgid "Django administration"
-#~ msgstr "UpdatEngine administration"
+msgid "Django administration"
+msgstr "UpdatEngine administration"
 
-#~ msgid "header|subtitle"
-#~ msgstr "Free your updates"
+msgid "header|subtitle"
+msgstr "Free your updates"
 
 #, fuzzy
 #~ msgid "machine|packages help text"

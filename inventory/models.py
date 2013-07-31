@@ -44,6 +44,7 @@ class entity(models.Model):
     class Meta:
         verbose_name = _('entity|entity')
         verbose_name_plural = _('entity|entities')
+        ordering = ['name']
 
 
 
