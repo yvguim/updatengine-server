@@ -64,7 +64,7 @@ class package(models.Model):
     conditions = models.ManyToManyField('packagecondition',null = True, blank = True, verbose_name = _('package|conditions'))
     command = models.TextField(max_length=1000, verbose_name = _('package|command'), help_text= _('package|command help text'))
     packagesum = models.CharField(max_length=40, null= True, blank=True, verbose_name = _('package|packagesum'))
-    filename  = models.FileField(upload_to="package-file/"+random_directory()+'/', null=True, blank=True, verbose_name = _('package|filename'))
+    filename  = models.FileField(upload_to="package-file/"+(lambda:random_directory())()+'/', null=True, blank=True, verbose_name = _('package|filename'))
     ignoreperiod = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package|ignore deploy period'))
     public = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package| public package'))
     class Meta:
@@ -256,7 +256,7 @@ class impex(models.Model):
     name = models.CharField(max_length=100, unique=True, verbose_name = _('impex|name'))
     description = models.TextField(max_length=500, verbose_name = _('impex|description'))
     packagesum = models.CharField(max_length=40, null= True, blank=True, verbose_name = _('impex|packagesum'))
-    filename  = models.FileField(upload_to="package-file/"+random_directory()+"/", null=True, blank=True, default=None, verbose_name = _('impex|filename'))
+    filename  = models.FileField(upload_to="package-file/"+(lambda:random_directory())()+"/", null=True, blank=True, default=None, verbose_name = _('impex|filename'))
     package = models.ForeignKey(package, null=True, blank=True, default=None, on_delete=models.SET_NULL, verbose_name = _('impex|package'))
     date = models.DateTimeField(auto_now=True, verbose_name = _('impex|date'))
     
