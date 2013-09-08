@@ -158,10 +158,12 @@ def inventory(xml):
         # Maintain compatibility with old (< 2.3) UpdatEngine Client
         try:
             u = root.find('Uuid').text
+            un = root.find('UserName').text
             d = root.find('Domain').text
             l = root.find('Language').text
         except:
             u = 'Unknown'
+            un = 'Unknown'
             d = 'Unknown'
             l = 'Unknown'
         softsum = root.find('Softsum').text
@@ -185,6 +187,8 @@ def inventory(xml):
         m.vendor=v
         m.product=p
         m.uuid = u
+        if un != 'Unknown' or m.username == 'Unknown':
+            m.username = un
         m.domain = d
         m.language = l
         m.typemachine_id=ch.id

@@ -67,6 +67,7 @@ class machine(models.Model):
     product = models.CharField(max_length=100,null=True, blank=True, default='undefined',verbose_name = _('machine|product'))
     domain = models.CharField(max_length=100,null=True, blank=True, default='undefined',verbose_name = _('machine|domain'))
     uuid = models.CharField(max_length=100,null=True, blank=True, default='undefined',verbose_name = _('machine|uuid'))
+    username = models.CharField(max_length=100,null=True, blank=True, default='undefined',verbose_name = _('machine|username'))
     language = models.CharField(max_length=100,null=True, blank=True, default='undefined',verbose_name = _('machine|language'))
     entity = models.ForeignKey(entity,null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('machine|entity'))
     packageprofile = models.ForeignKey('deploy.packageprofile',null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('machine|package profile'), help_text= _('machine|packages profile help text'))

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-09-06 09:52+0200\n"
+"POT-Creation-Date: 2013-09-06 10:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -198,14 +198,14 @@ msgid "Merge"
 msgstr ""
 
 #: configuration/models.py:27 inventory/admin.py:35 inventory/models.py:28
-#: inventory/models.py:61 inventory/models.py:131 inventory/models.py:152
-#: inventory/models.py:172
+#: inventory/models.py:61 inventory/models.py:132 inventory/models.py:153
+#: inventory/models.py:173
 msgid "yes"
 msgstr "yes"
 
 #: configuration/models.py:28 inventory/admin.py:44 inventory/models.py:29
-#: inventory/models.py:62 inventory/models.py:132 inventory/models.py:153
-#: inventory/models.py:173
+#: inventory/models.py:62 inventory/models.py:133 inventory/models.py:154
+#: inventory/models.py:174
 msgid "no"
 msgstr "no"
 
@@ -237,7 +237,7 @@ msgstr "Entity for new machines"
 msgid "deployconfig|package profile"
 msgstr "Software profile for new machines"
 
-#: configuration/models.py:37 inventory/models.py:72
+#: configuration/models.py:37 inventory/models.py:73
 msgid "machine|packages profile help text"
 msgstr ""
 "Software profile defines wich software must be installer on a host. Software "
@@ -298,7 +298,8 @@ msgstr "name"
 #: deploy/models.py:49
 msgid "packagecondition|softwarename help text"
 msgstr ""
-"For operating system condition, this field must contain the name of the operating system."
+"For operating system condition, this field must contain the name of the "
+"operating system."
 
 #: deploy/models.py:50
 msgid "packagecondition|softwareversion"
@@ -307,7 +308,9 @@ msgstr "version"
 #: deploy/models.py:50
 msgid "packagecondition|softwareversion help text"
 msgstr ""
-"For operating system condition, this field must contain the version of the operating system. You can use undefined (default) if you don't care about the operating system version (Service pack etc...)."
+"For operating system condition, this field must contain the version of the "
+"operating system. You can use undefined (default) if you don't care about "
+"the operating system version (Service pack etc...)."
 
 #: deploy/models.py:53
 msgid "packagecondition|package condition"
@@ -691,142 +694,146 @@ msgid "machine|uuid"
 msgstr "UUID"
 
 #: inventory/models.py:70
+msgid "machine|username"
+msgstr "username"
+
+#: inventory/models.py:71
 msgid "machine|language"
 msgstr "language"
 
-#: inventory/models.py:71
+#: inventory/models.py:72
 msgid "machine|entity"
 msgstr "entity"
 
-#: inventory/models.py:72
+#: inventory/models.py:73
 msgid "machine|package profile"
 msgstr "software configuration profile"
 
-#: inventory/models.py:73
+#: inventory/models.py:74
 msgid "machine|time deploy profile"
 msgstr "period profile"
 
-#: inventory/models.py:74
+#: inventory/models.py:75
 msgid "machine|lastsave"
 msgstr "last save"
 
-#: inventory/models.py:75
+#: inventory/models.py:76
 msgid "machine|typemachine"
 msgstr "type of machine"
 
-#: inventory/models.py:76
+#: inventory/models.py:77
 msgid "machine|netsum"
 msgstr "netsum"
 
-#: inventory/models.py:77
+#: inventory/models.py:78
 msgid "machine|ossum"
 msgstr "ossum"
 
-#: inventory/models.py:78
+#: inventory/models.py:79
 msgid "machine|softsum"
 msgstr "softsum"
 
-#: inventory/models.py:79
+#: inventory/models.py:80
 msgid "machine|packages"
 msgstr "software to install manualy"
 
-#: inventory/models.py:80
+#: inventory/models.py:81
 msgid "machine|manualy_created"
 msgstr "manualy created machine"
 
-#: inventory/models.py:83
+#: inventory/models.py:84
 msgid "machine|machine"
 msgstr "machine"
 
-#: inventory/models.py:84 updatengine/templates/admin/base.html:86
+#: inventory/models.py:85 updatengine/templates/admin/base.html:86
 msgid "machine|machines"
 msgstr "    Machines"
 
-#: inventory/models.py:134
+#: inventory/models.py:135
 msgid "osdistribution|name"
 msgstr "name"
 
-#: inventory/models.py:135
+#: inventory/models.py:136
 msgid "osdistribution|version"
 msgstr "version"
 
-#: inventory/models.py:136
+#: inventory/models.py:137
 msgid "osdistribution|arch"
 msgstr "architecture"
 
-#: inventory/models.py:137
+#: inventory/models.py:138
 msgid "osdistribution|systemdrive"
 msgstr "system drive"
 
-#: inventory/models.py:138
+#: inventory/models.py:139
 msgid "osdistribution|host"
 msgstr "machine"
 
-#: inventory/models.py:139
+#: inventory/models.py:140
 msgid "osdistribution|manualy_created"
 msgstr "system created manualy"
 
-#: inventory/models.py:145
+#: inventory/models.py:146
 msgid "osdistribution|osdistribution"
 msgstr "system and architecture"
 
-#: inventory/models.py:146 updatengine/templates/admin/base.html:102
+#: inventory/models.py:147 updatengine/templates/admin/base.html:102
 msgid "osdistribution|osdistributions"
 msgstr "Systems and architectures"
 
-#: inventory/models.py:155
+#: inventory/models.py:156
 msgid "net|ip"
 msgstr "IP adress"
 
-#: inventory/models.py:156
+#: inventory/models.py:157
 msgid "net|mask"
 msgstr "netmask"
 
-#: inventory/models.py:157
+#: inventory/models.py:158
 msgid "net|mac"
 msgstr "Mac address"
 
-#: inventory/models.py:158
+#: inventory/models.py:159
 msgid "net|host"
 msgstr "machine"
 
-#: inventory/models.py:159
+#: inventory/models.py:160
 msgid "net|manualy_created"
 msgstr "network created manualy"
 
-#: inventory/models.py:165
+#: inventory/models.py:166
 msgid "net|network"
 msgstr "network"
 
-#: inventory/models.py:166 updatengine/templates/admin/base.html:98
+#: inventory/models.py:167 updatengine/templates/admin/base.html:98
 msgid "net|networks"
 msgstr " Networks"
 
-#: inventory/models.py:175
+#: inventory/models.py:176
 msgid "software|name"
 msgstr "name"
 
-#: inventory/models.py:176
+#: inventory/models.py:177
 msgid "software|version"
 msgstr "version"
 
-#: inventory/models.py:177
+#: inventory/models.py:178
 msgid "software|uninstall"
 msgstr "uninstall"
 
-#: inventory/models.py:178
+#: inventory/models.py:179
 msgid "software|host"
 msgstr "machine"
 
-#: inventory/models.py:179
+#: inventory/models.py:180
 msgid "software|manualy_created"
 msgstr "software created manualy"
 
-#: inventory/models.py:185
+#: inventory/models.py:186
 msgid "software|software"
 msgstr "software"
 
-#: inventory/models.py:186 updatengine/templates/admin/base.html:94
+#: inventory/models.py:187 updatengine/templates/admin/base.html:94
 msgid "software|softwares"
 msgstr "  Software packages"
 
@@ -870,11 +877,11 @@ msgstr "Change password"
 msgid "Log out"
 msgstr "Log out"
 
-msgid "Django administration"
-msgstr "UpdatEngine administration"
+#~ msgid "Django administration"
+#~ msgstr "UpdatEngine administration"
 
-msgid "header|subtitle"
-msgstr "Free your updates"
+#~ msgid "header|subtitle"
+#~ msgstr "Free your updates"
 
 #, fuzzy
 #~ msgid "machine|packages help text"

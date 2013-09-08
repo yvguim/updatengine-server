@@ -197,11 +197,11 @@ class entityAdmin(ueAdmin):
 
 class machineAdmin(ueAdmin):
     select_related = True
-    fields = ['name', 'serial','uuid','domain','language', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
-    list_display = ('lastsave','name','serial','domain','vendor','product','entity','typemachine','packageprofile','timeprofile')
+    fields = ['name', 'serial','uuid','domain','username','language', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
+    list_display = ('lastsave','name','serial','domain','username','vendor','product','entity','typemachine','packageprofile','timeprofile')
     list_editable = ('entity','packageprofile','timeprofile')
-    list_filter = (('lastsave', DateFieldListFilter), 'entity','domain','language','typemachine', 'timeprofile','packageprofile', enableFilter, as_or_notFilter, softwareFilter, versionFilter)
-    search_fields = ('name', 'serial','vendor','product','domain','language')
+    list_filter = (('lastsave', DateFieldListFilter), 'entity','domain','username','language','typemachine', 'timeprofile','packageprofile', enableFilter, as_or_notFilter, softwareFilter, versionFilter)
+    search_fields = ('name', 'serial','vendor','product','domain','username','language')
     readonly_fields = ('typemachine', 'manualy_created',)
     inlines = [osInline, netInline, softInline]
     filter_horizontal = ('packages',)
