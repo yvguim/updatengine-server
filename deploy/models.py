@@ -38,6 +38,7 @@ class packagecondition(models.Model):
     choice = (
             ('installed', _('installed')),
             ('notinstalled',_('notinstalled')),
+            ('system_is',_('operating_system_is')),
             ('is_W64_bits',_('is_W64_bits')),
             ('is_W32_bits',_('is_W32_bits')),
             ('lower',_('lower')),
