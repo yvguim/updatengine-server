@@ -41,6 +41,7 @@ class packagecondition(models.Model):
             ('system_is',_('operating_system_is')),
             ('is_W64_bits',_('is_W64_bits')),
             ('is_W32_bits',_('is_W32_bits')),
+            ('language_is',_('language_is')),
             ('lower',_('lower')),
             ('higher',_('higher'))
         )

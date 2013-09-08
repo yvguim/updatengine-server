@@ -133,6 +133,11 @@ def check_conditions(m,pack):
                 install = False
                 status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
 
+    for condition in pack.conditions.filter(depends='language_is'):
+        if m.language != condition.softwarename:
+            install = False
+            status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
+
     for condition in pack.conditions.filter(depends='lower'):
         if software.objects.filter(host_id=m.id, name=condition.softwarename, version__gte=condition.softwareversion).exists():
             install = False

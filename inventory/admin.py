@@ -186,8 +186,9 @@ class softInline(admin.TabularInline):
     max_num = 10000
     extra = 0
     readonly_fields = ('name', 'version', 'uninstall', 'manualy_created',)
-    def has_add_permission(self, request):
-                return False
+    # Uncomment when django bug number #20807 will be fixed
+    #def has_add_permission(self, request):
+    #            return False
 
 class entityAdmin(ueAdmin):
     fields = ['name','description','parent','packageprofile','force_packageprofile','timeprofile','force_timeprofile']
