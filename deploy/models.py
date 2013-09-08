@@ -38,12 +38,12 @@ class packagecondition(models.Model):
     choice = (
             ('installed', _('installed')),
             ('notinstalled',_('notinstalled')),
+            ('lower',_('lower')),
+            ('higher',_('higher')),
             ('system_is',_('operating_system_is')),
             ('is_W64_bits',_('is_W64_bits')),
             ('is_W32_bits',_('is_W32_bits')),
-            ('language_is',_('language_is')),
-            ('lower',_('lower')),
-            ('higher',_('higher'))
+            ('language_is',_('language_is'))
         )
     name = models.CharField(max_length=100, unique=True, verbose_name = _('packagecondition|name'))
     depends = models.CharField(max_length=12, choices=choice, default='installed', verbose_name = _('packagecondition|depends'))
