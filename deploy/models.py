@@ -198,7 +198,7 @@ class packageprofile(models.Model):
     def __unicode__(self):
         return self.name
 	
-    def get_all_parents(self,plist = list()):
+    def get_all_parents(self,plist):
 	    if self.parent != None and self.parent not in plist:
 		plist.append(self.parent)
 	        return self.parent.get_all_parents(plist)
@@ -213,7 +213,8 @@ class packageprofile(models.Model):
 				packlist.append(package)
 
 		# Add packages of profile's parents
-		for profile in self.get_all_parents():
+        # Need to pass list() as parameter, Django bug??
+		for profile in self.get_all_parents(list()):
 			for package in profile.packages.all():
 				if package not in packlist:
 					packlist.append(package)

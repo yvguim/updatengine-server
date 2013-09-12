@@ -764,7 +764,7 @@ msgstr "    Machines"
 
 #: inventory/models.py:135
 msgid "osdistribution|name"
-msgstr "nom"
+msgstr "nom du système"
 
 #: inventory/models.py:136
 msgid "osdistribution|version"
