@@ -199,9 +199,9 @@ class entityAdmin(ueAdmin):
 class machineAdmin(ueAdmin):
     select_related = True
     fields = ['name', 'serial','uuid','domain','username','language', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
-    list_display = ('lastsave','entity','name','domain','username','vendor','product','typemachine','osdistribution__name','packageprofile','timeprofile')
+    list_display = ('lastsave','entity','name','domain','username','vendor','product','typemachine','packageprofile','timeprofile')
     list_editable = ('entity','packageprofile','timeprofile')
-    list_filter = (('lastsave', DateFieldListFilter), 'entity','domain','username','language','typemachine', 'timeprofile','packageprofile', enableFilter, as_or_notFilter, softwareFilter, versionFilter)
+    list_filter = (('lastsave', DateFieldListFilter), 'entity','domain','username','language','typemachine','osdistribution__name', 'timeprofile','packageprofile', enableFilter, as_or_notFilter, softwareFilter, versionFilter)
     search_fields = ('name', 'serial','vendor','product','domain','username','language')
     readonly_fields = ('typemachine', 'manualy_created',)
     inlines = [osInline, netInline, softInline]
