@@ -386,30 +386,22 @@ def inventory(xml):
 
         # packages program
         # check if it's the time to deploy and if it's authorized
-
         period_to_deploy = is_deploy_authorized(m, handling)
         config = deployconfig.objects.get(pk=1)
+        # Use a set and not a list to automaticly remove duplicates
+        package_to_deploy = set()
         if config.activate_deploy == 'yes':
             # Packages programmed manualy on machine
             for pack in m.packages.all().order_by('name'):
-                if period_to_deploy  or pack.ignoreperiod == 'yes':
-                    if check_conditions(m, pack):
-                        if pack.packagesum != 'nofile':
-                            packurl = pack.filename.url
-                        else:
-                            packurl = ''
-                        handling.append('<Package>\n\
-                                <Id>'+str(m.id)+'</Id>\n\
-                                <Pid>'+str(pack.id)+'</Pid>\n\
-                                <Name>'+pack.name+'</Name>\n\
-                                <Description>'+pack.description+'</Description>\n\
-                                <Command>'+pack.command+'</Command>\n\
-                                <Packagesum>'+pack.packagesum+'</Packagesum>\n\
-                                <Url>'+packurl+'</Url>\n</Package>')
+                package_to_deploy.add(pack)
 
             # Packages included in machine profilepackage
             if m.packageprofile:
                 for pack in m.packageprofile.get_soft():
+                    package_to_deploy.add(pack)
+
+             # Prepare response to Updatengine client
+                for pack in sorted(package_to_deploy ,key=lambda package: package.name):
                     if period_to_deploy or pack.ignoreperiod == 'yes':
                         if check_conditions(m, pack):
                             if pack.packagesum != 'nofile':

@@ -206,19 +206,18 @@ class packageprofile(models.Model):
 	        return plist
 	
     def get_soft(self,plist = list()):
-		packlist = list()
-		# Add packages of profile
-		for package in self.packages.all():
-			if package not in packlist:
-				packlist.append(package)
-
-		# Add packages of profile's parents
+        packlist = list()
+        # Add packages of profile
+        for package in self.packages.all():
+            if package not in packlist:
+                packlist.append(package)
+        # Add packages of profile's parents
         # Need to pass list() as parameter, Django bug??
-		for profile in self.get_all_parents(list()):
-			for package in profile.packages.all():
-				if package not in packlist:
-					packlist.append(package)
-		return packlist
+        for profile in self.get_all_parents(list()):
+            for package in profile.packages.all():
+                if package not in packlist:
+                    packlist.append(package)
+        return sorted(packlist, key=lambda package: package.name)
     
     def get_packages(self):
         return "<br/>".join([p.name for p in self.get_soft()])
