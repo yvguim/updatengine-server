@@ -69,8 +69,7 @@ class wakeonlanAdmin(ueAdmin):
 	filter_horizontal = ('machines',)
 
 class packageconditionAdmin(ueAdmin):
-	list_display = ('id','name','depends','softwarename','softwareversion')
-	list_editable = ('name','depends')
+	list_display = ('name','depends','softwarename','softwareversion')
 
 class impexAdmin(ueAdmin):
     list_display = ('date','name','description','filename_link','package')

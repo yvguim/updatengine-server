@@ -53,6 +53,7 @@ class packagecondition(models.Model):
     class Meta:
         verbose_name = _('packagecondition|package condition')
         verbose_name_plural = _('packagecondition|packages conditions')
+        ordering = ['name']
 
     def __unicode__(self):
         return self.name
@@ -73,6 +74,7 @@ class package(models.Model):
     class Meta:
         verbose_name = _('package|deployment package')
         verbose_name_plural = _('package|deployment packages')
+        ordering = ['name']
     
     def get_conditions(self):
         return "<br/>".join([c.name for c in self.conditions.all()])
@@ -181,6 +183,7 @@ class packagehistory(models.Model):
     class Meta:
         verbose_name = _('packagehistory|package history')
         verbose_name_plural = _('packagehistory|packages history')
+        ordering = ['date']
 
 
     def __unicode__(self):
@@ -240,6 +243,7 @@ class packagewakeonlan(models.Model):
     class Meta:
         verbose_name = _('packagewakeonlan|package wakeonlan')
         verbose_name_plural = _('packagewakeonlan|packages wakeonlan')
+        ordering = ['date']
 
     def __unicode__(self):
         return self.name
@@ -253,6 +257,7 @@ class timeprofile(models.Model):
     class Meta:
         verbose_name = _('timeprofile|time profile')
         verbose_name_plural = _('timeprofile|time profiles')
+        ordering = ['start_time']
 
     def __unicode__(self):
         return self.name
@@ -276,6 +281,7 @@ class impex(models.Model):
     class Meta:
         verbose_name = _('impex|import/export')
         verbose_name_plural = _('impex|imports/exports')
+        ordering = ['name']
 
     def save(self, *args, **kwargs):
         # delete old file when replacing by updating the file
