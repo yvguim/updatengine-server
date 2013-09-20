@@ -146,23 +146,25 @@ def predelete_package(sender, instance, **kwargs):
 # call packages_changed only when packages m2m changed
 @receiver(m2m_changed, sender=machine.packages.through)
 def packages_changed(sender, action, instance, **kwargs):
-    # Create and update packagehistory object
     allpackages = instance.packages.all()
-    for package in allpackages :
-        obj, created = packagehistory.objects.get_or_create(machine=instance, package=package)
-        obj.name = package.name
-        obj.description = package.description
-        obj.command = package.command
-        obj.packagesum = package.packagesum
-        if action == 'post_add':
-            obj.status = 'Programmed'
-        if package.packagesum != 'nofile':
-            obj.filename = package.filename.path
-        obj.save()
+    # Create and update packagehistory object
+    if action == 'post_add':
+        for package in allpackages :
+            obj, created = packagehistory.objects.get_or_create(machine=instance, package=package, status='Programmed')
+            obj.name = package.name
+            obj.description = package.description
+            obj.command = package.command
+            obj.packagesum = package.packagesum
+            if package.packagesum != 'nofile':
+                obj.filename = package.filename.path
+            obj.save()
     # delete packagehistory object if just programmed and deleted from machine
-    for package in packagehistory.objects.filter(machine=instance,status='Programmed'):
+    # Should use this: if action == 'post_remove':
+    # But don't work: bug #16073 of Django
+    # So try to remove from history at every m2m changed
+    for package_history in packagehistory.objects.filter(machine=instance,status='Programmed'):
         if not machine.objects.filter(packages__in=allpackages).exists():
-            package.delete()
+            package_history.delete()
 
 
 class packagehistory(models.Model):

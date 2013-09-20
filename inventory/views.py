@@ -78,7 +78,7 @@ def status(xml):
         # Update packagehistory status:
         m = machine.objects.get(pk = mid)
         p = package.objects.get(pk = pid)
-        obj, created = packagehistory.objects.get_or_create(machine=m,package=p)
+        obj, created = packagehistory.objects.get_or_create(machine=m,package=p,command=p.command,status=status)
         obj.name = p.name
         obj.description = p.description
         obj.command = p.command
@@ -89,10 +89,8 @@ def status(xml):
             obj.filename = ''
         obj.status=status
         obj.save()
-        # remove package from machine if package as been successfully installed
-        # or produce an error
-        if status == 'Operation completed' or 'Error when executing' or 'Error when downloading' in status:
-            m.packages.remove(p)
+        # remove package from machine
+        m.packages.remove(p)
         handling.append('Status saved')
     except:
         handling.append('Error when modifying status: %s' % str(sys.exc_info()))
@@ -309,7 +307,7 @@ def inventory(xml):
         m.typemachine_id=ch.id
         m.manualy_created='no'
         m.lastsave = datetime.utcnow().replace(tzinfo=utc)
-	
+
         if created:
 	        m.entity = config.entity
 	        if config.entity != None and config.entity.packageprofile != None and config.packageprofile == None:
@@ -323,7 +321,7 @@ def inventory(xml):
         if not created:
 		if m.entity != None and m.entity.packageprofile != None and m.entity.force_packageprofile == 'yes':
                         m.packageprofile = m.entity.packageprofile
- 
+
 		if m.entity != None and m.entity.timeprofile != None and m.entity.force_timeprofile == 'yes':
                         m.timeprofile = m.entity.timeprofile
         # System info import
