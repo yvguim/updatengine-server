@@ -399,21 +399,21 @@ def inventory(xml):
                     package_to_deploy.add(pack)
 
              # Prepare response to Updatengine client
-                for pack in sorted(package_to_deploy ,key=lambda package: package.name):
-                    if period_to_deploy or pack.ignoreperiod == 'yes':
-                        if check_conditions(m, pack):
-                            if pack.packagesum != 'nofile':
-                                packurl = pack.filename.url
-                            else:
-                                packurl = ''
-                            handling.append('<Package>\n\
-                                    <Id>'+str(m.id)+'</Id>\n\
-                                    <Pid>'+str(pack.id)+'</Pid>\n\
-                                    <Name>'+pack.name+'</Name>\n\
-                                    <Description>'+pack.description+'</Description>\n\
-                                    <Command>'+pack.command+'</Command>\n\
-                                    <Packagesum>'+pack.packagesum+'</Packagesum>\n\
-                                    <Url>'+packurl+'</Url>\n</Package>')
+            for pack in sorted(package_to_deploy ,key=lambda package: package.name):
+                if period_to_deploy or pack.ignoreperiod == 'yes':
+                    if check_conditions(m, pack):
+                        if pack.packagesum != 'nofile':
+                            packurl = pack.filename.url
+                        else:
+                            packurl = ''
+                        handling.append('<Package>\n\
+                                <Id>'+str(m.id)+'</Id>\n\
+                                <Pid>'+str(pack.id)+'</Pid>\n\
+                                <Name>'+pack.name+'</Name>\n\
+                                <Description>'+pack.description+'</Description>\n\
+                                <Command>'+pack.command+'</Command>\n\
+                                <Packagesum>'+pack.packagesum+'</Packagesum>\n\
+                                <Url>'+packurl+'</Url>\n</Package>')
         else:
             handling.append('<info>deployment function is not active </info>')
     except:
