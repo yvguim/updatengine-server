@@ -46,7 +46,18 @@ class entity(models.Model):
         verbose_name_plural = _('entity|entities')
         ordering = ['name']
 
+    def get_children(self):
+        return entity.objects.filter(parent = self)
 
+    @staticmethod
+    def get_all_children(query_entity, entity_list = list()):
+        for entity in query_entity:
+            if entity not in entity_list:
+                entity_list.append(entity)
+                entity_children = entity.get_children()
+                if entity_children:
+                    entity_list + entity.get_all_children(entity_children, entity_list)
+        return entity_list
 
 class typemachine (models.Model):
     name = models.CharField(max_length=100, verbose_name = _('typemachine|name'))

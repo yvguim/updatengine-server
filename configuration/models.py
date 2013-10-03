@@ -20,6 +20,8 @@
 
 from django.utils.translation import ugettext_lazy as _
 from django.db import models
+from inventory.models import entity
+from django.contrib.auth.models import User
 
 class deployconfig(models.Model):
     unique = True
@@ -34,7 +36,7 @@ class deployconfig(models.Model):
     end_time = models.TimeField(verbose_name = _('deployconfig|end_time'))
     entity = models.ForeignKey('inventory.entity',null=True, blank=True, default=None, on_delete=models.SET_NULL, verbose_name = _('deployconfig|entity'))
     packageprofile = models.ForeignKey('deploy.packageprofile',null=True, blank=True, default=None,on_delete=models.SET_NULL, 
-            verbose_name = _('deployconfig|package profile'), help_text= _('machine|packages profile help text'))
+    verbose_name = _('deployconfig|package profile'), help_text= _('machine|packages profile help text'))
     timeprofile = models.ForeignKey('deploy.timeprofile',null=True, blank=True, default=None, on_delete=models.SET_NULL, verbose_name = _('deployconfig|time deploy profile'))
 
     class Meta:
@@ -43,3 +45,22 @@ class deployconfig(models.Model):
 
     def __unicode__(self):
         return self.activate_deploy
+
+# Create subuser to extend default django user
+class subuser(models.Model):
+    user = models.OneToOneField(User, related_name='subuser')
+    entity = models.ManyToManyField(entity,null=True, blank=True, default=None, verbose_name = _('entity|entity'))
+    
+    def entities_allowed(self):
+        if self.user.is_superuser:
+            return entity.objects.all()           
+        else:
+            return entity.get_all_children(self.entity.all())
+
+    def id_entities_allowed(self):
+        return list(e.id for e in self.entities_allowed())
+
+    class Meta:
+        verbose_name = _('subuser|entity')
+        verbose_name_plural = _('subuser|entity')
+
