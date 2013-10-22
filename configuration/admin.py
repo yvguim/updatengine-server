@@ -65,15 +65,23 @@ class UserAdmin(UserAdmin):
         defaults.update(kwargs)
         return super(UserAdmin, self).get_form(request, obj, **defaults)
 
+    def save_model(self, request, obj, form, change):
+        if obj.is_active:
+            obj.is_staff = True
+        else:
+            obj.is_staff = False
+        obj.save()
+
     fieldsets = (
                 (None, {'fields': ('username', 'password')}),
                 (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
                 # Removing the permission part
-                (_('Permissions'), {'fields': ('is_staff', 'is_active', 'is_superuser', 'user_permissions')}),
+                #(_('Permissions'), {'fields': ('is_staff', 'is_active', 'is_superuser', 'user_permissions')}),
+                (_('Permissions'), {'fields': ('is_active', 'is_superuser', )}),
                 (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
                 # Keeping the group parts? Ok, but they shouldn't be able to define
                 # their own groups, up to you...
-                (_('Groups'), {'fields': ('groups',)}),
+                (_('Groups and permissions'), {'fields': ('groups','user_permissions')}),
 		)
 
 admin.site.unregister(User)
