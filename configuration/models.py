@@ -52,12 +52,20 @@ class subuser(models.Model):
     entity = models.ManyToManyField(entity,null=True, blank=True, default=None, verbose_name = _('entity|entity'))
     
     def entities_allowed(self):
+        """Return a list composed of all entities allowed for user"""
         if self.user.is_superuser:
             return entity.objects.all()           
         else:
-            return entity.get_all_children(self.entity.all())
+            entity_allowed = list()
+            for ent in self.entity.all():
+                entity_allowed.append(ent)
+                entity_allowed = entity_allowed + ent.get_all_children(ent.get_children(),list())
+            return entity_allowed
 
     def id_entities_allowed(self):
+        """Return a list composed of entities allowed id"""
+       # if self.user.is_superuser:
+        #    return entity.objects.all().values_list('id')
         return list(e.id for e in self.entities_allowed())
 
     class Meta:

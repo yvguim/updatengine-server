@@ -23,6 +23,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 class deployconfigAdmin(admin.ModelAdmin):
     actions = None
@@ -71,18 +72,25 @@ class UserAdmin(UserAdmin):
         else:
             obj.is_staff = False
         obj.save()
-
-    fieldsets = (
+    if settings.SHOW_PERM_CONFIG_AUTH:
+        fieldsets = (
                 (None, {'fields': ('username', 'password')}),
                 (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
-                # Removing the permission part
-                #(_('Permissions'), {'fields': ('is_staff', 'is_active', 'is_superuser', 'user_permissions')}),
+                # is_staff is automaticly set to True if is_active
                 (_('Permissions'), {'fields': ('is_active', 'is_superuser', )}),
                 (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
-                # Keeping the group parts? Ok, but they shouldn't be able to define
-                # their own groups, up to you...
                 (_('Groups and permissions'), {'fields': ('groups','user_permissions')}),
 		)
+    else:
+        fieldsets = (
+                (None, {'fields': ('username', 'password')}),
+                (_('Personal info'), {'fields': ('first_name', 'last_name', 'email')}),
+                # is_staff is automaticly set to True if is_active
+                (_('Permissions'), {'fields': ('is_active', 'is_superuser', )}),
+                (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
+                (_('Groups and permissions'), {'fields': ('groups',)}),
+		)
+
 
 admin.site.unregister(User)
 admin.site.register(User, UserAdmin)

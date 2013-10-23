@@ -47,10 +47,12 @@ class entity(models.Model):
         ordering = ['name']
 
     def get_children(self):
+        """Return a list composed of direct children"""
         return entity.objects.filter(parent = self)
 
     @staticmethod
     def get_all_children(query_entity, entity_list = list()):
+        """Return a list composed of all query_entity's children recursively"""
         for entity in query_entity:
             if entity not in entity_list:
                 entity_list.append(entity)
@@ -58,6 +60,10 @@ class entity(models.Model):
                 if entity_children:
                     entity_list + entity.get_all_children(entity_children, entity_list)
         return entity_list
+
+    def id_all_children(self):
+        """Return a list composed of all children's id"""
+        return list(e.id for e in self.get_all_children(self.get_children(),list()))
 
 class typemachine (models.Model):
     name = models.CharField(max_length=100, verbose_name = _('typemachine|name'))

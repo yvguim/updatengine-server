@@ -37,6 +37,10 @@ TIME_ZONE = 'Europe/Paris'
 LANGUAGE_CODE = 'fr'
 
 ### ------------------------------- ###
+# UpdatEngine admin options
+# Set SHOW_PERM_CONFIG_AUTH to true to be able to add permissions to users
+# without including him to a group
+SHOW_PERM_CONFIG_AUTH = False
 
 #Activate DEBUG
 DEBUG = True
