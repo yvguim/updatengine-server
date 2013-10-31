@@ -27,7 +27,6 @@ from deploy.filters import entityFilter, machineFilter, statusFilter,\
 from inventory.models import entity
 from django.utils.translation import ugettext_lazy as _
 from django.forms import ModelForm
-from django.core.exceptions import ValidationError
 from django.contrib import messages
 
 class ueAdmin(admin.ModelAdmin):
@@ -64,12 +63,6 @@ class packageForm(ModelForm):
     def clean_editor(self):
         return self.my_user
 
-    def clean(self):
-        if self.instance and hasattr(self.instance, 'editor'):
-            if not self.my_user.is_superuser and (self.instance.editor != self.my_user and self.instance.exclusive_editor == 'yes'):
-                raise ValidationError('You cannot edit, save or delete this object. Ask %s to do it.' % self.instance.editor.username)
-        return self.cleaned_data
-
 class packageAdmin(ueAdmin):
     list_display = ('name','description','command','filename','get_conditions','ignoreperiod','public','editor','exclusive_editor')
     list_display_link = ('name')
@@ -90,12 +83,6 @@ class packageAdmin(ueAdmin):
             messages.info(request,_("Warning: you will not be able to update a package that you didn't create if exclusive editor is set to yes for this package"))
         return chg_view
     
-    def get_readonly_fields(self, request, obj=None):
-        if not request.user.is_superuser and (obj is not None and obj.editor != request.user and obj.exclusive_editor == 'yes'):
-            return ['name','description','command','conditions','filename','ignoreperiod','public','exclusive_editor','entity'] 
-        else:
-            return []
-
     # Prevent deletion of objects when user hasn't enough permission
     def has_delete_permission(self, request, obj=None):
         if obj is not None: 
@@ -133,7 +120,7 @@ class packageAdmin(ueAdmin):
         if request.user.is_superuser:
             return package.objects.all()
         else:
-            return package.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed)
+            return package.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).distinct()
 
 
 class packagehistoryAdmin(ueAdmin):
@@ -156,7 +143,7 @@ class packagehistoryAdmin(ueAdmin):
         if request.user.is_superuser:
             return packagehistory.objects.all()
         else:
-            return packagehistory.objects.filter(machine__entity__pk__in = request.user.subuser.id_entities_allowed)
+            return packagehistory.objects.filter(machine__entity__pk__in = request.user.subuser.id_entities_allowed).distinct()
 
 class packageprofileAdmin(ueAdmin):
     list_display = ('name','description', 'get_packages', 'parent')
@@ -173,32 +160,83 @@ class wakeonlanAdmin(ueAdmin):
     list_editable = ('date','status',)
     filter_horizontal = ('machines',)
 
+
+class packageconditionForm(ModelForm):
+    class Meta:
+        model = packagecondition
+
+    # Custom form to be able to use request in clean method
+    # http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met/1057640#1057640
+    # http://stackoverflow.com/questions/2683689/django-access-request-object-from-admins-form-clean
+    def __init__(self, *args, **kwargs):
+        self.my_user = kwargs.pop('my_user')
+        super(packageconditionForm, self).__init__(*args, **kwargs)
+        self.fields['editor'].choices =([(self.my_user.id,self.my_user.username)])
+        self.fields['editor'].widget.can_add_related = False
+        if not self.my_user.is_superuser and self.fields.has_key('entity'):
+            #restrict entity choice
+            self.fields["entity"].queryset = entity.objects.filter(pk__in = self.my_user.subuser.id_entities_allowed).order_by('name').distinct() 
+            self.fields["entity"].required = True
+        if self.fields.has_key('entity'):
+            self.fields['entity'].widget.can_add_related = False
+    
+    def clean_editor(self):
+        return self.my_user
+
 class packageconditionAdmin(ueAdmin):
-    list_display = ('name','depends','softwarename','softwareversion')
+    list_display = ('name','depends','softwarename','softwareversion','editor','exclusive_editor')
     filter_horizontal = ('entity',)
     list_filter = (conditionEntityFilter,)
+    form = packageconditionForm
     fieldsets = (
-            (_('packageAdmin|condition edition'), {'fields': ('name','depends', 'softwarename', 'softwareversion')}),
-            (_('packageAdmin|permissions'), {'fields': ('entity',)}),
+            (_('packageAdmin|general information'), {'fields': ('name','depends', 'softwarename', 'softwareversion')}),
+            (_('packageAdmin|permissions'), {'fields': ('entity','editor', 'exclusive_editor')}),
     )
-    
-    def get_form(self, request, obj=None): 
-        form = super(packageconditionAdmin, self).get_form(request, obj) 
-        if request.user.is_superuser:
-            return form
-        else:
-            form.base_fields["entity"].queryset = entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed).\
-                    order_by('name').distinct() 
-            form.base_fields["entity"].empty_label = None
-            form.base_fields["entity"].required = True
-        return form 
+    def changelist_view(self, request, extra_context=None):
+        chg_view = super(packageconditionAdmin, self).changelist_view(request, extra_context)
+        # Show a warning if user is not superuser
+        if not request.user.is_superuser:
+            messages.info(request,_("Warning: you will not be able to update a package that you didn't create if exclusive editor is set to yes for this package"))
+        return chg_view
 
+    # Prevent deletion of objects when user hasn't enough permission
+    def has_delete_permission(self, request, obj=None):
+        if obj is not None: 
+            return request.user.is_superuser or obj.editor == request.user or obj.exclusive_editor == 'no' 
+        return True
+
+    # Prevent to change objects when user hasn't enough permission
+    def has_change_permission(self, request, obj=None):
+        if obj is not None: 
+            return request.user.is_superuser or obj.editor == request.user or obj.exclusive_editor == 'no' 
+        else:
+            return request.user.is_superuser or request.user.has_perm('deploy.change_packagecondition')
+
+    def get_form(self, request, obj=None, **kwargs): 
+        form = super(packageconditionAdmin, self).get_form(request, obj, **kwargs) 
+        # Custom form to be able to use request in clean method
+        # http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met/1057640#1057640
+        # http://stackoverflow.com/questions/2683689/django-access-request-object-from-admins-form-clean
+        class metaform(form):
+            def __new__(cls, *args, **kwargs):
+                kwargs['my_user'] = request.user
+                return form(*args, **kwargs)
+        return metaform 
+    
+    def get_actions(self, request):
+        actions = super(packageconditionAdmin, self).get_actions(request)
+        if not request.user.is_superuser:
+            del actions['delete_selected']
+            del actions['mass_update']
+            del actions['export_as_csv']
+        return actions
+    
     def queryset(self, request):
         # Re-create queryset with entity list returned by list_entities_allowed
         if request.user.is_superuser:
             return packagecondition.objects.all()
         else:
-            return packagecondition.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed)
+            return packagecondition.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).distinct()
 
 class impexAdmin(ueAdmin):
     list_display = ('date','name','description','filename_link','package')

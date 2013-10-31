@@ -37,6 +37,10 @@ def random_directory(size=8, chars=string.ascii_lowercase + string.ascii_upperca
 	return prefix+random_string+suffix
 
 class packagecondition(models.Model):
+    choice_yes_no = (
+            ('yes', _('package|yes')),
+            ('no', _('package|no'))
+        )
     choice = (
             ('installed', _('installed')),
             ('notinstalled',_('notinstalled')),
@@ -51,7 +55,9 @@ class packagecondition(models.Model):
     depends = models.CharField(max_length=12, choices=choice, default='installed', verbose_name = _('packagecondition|depends'))
     softwarename = models.CharField(max_length=100, null= True, blank=True, default="undefined", verbose_name = _('packagecondition|softwarename'), help_text= _('packagecondition|softwarename help text'))
     softwareversion = models.CharField(max_length=500, null= True, blank=True, default="undefined", verbose_name = _('packagecondition|softwareversion'), help_text= _('packagecondition|softwareversion help text'))
-    entity = models.ManyToManyField(entity,null=True, blank=True, verbose_name = _('machine|entity'))
+    entity = models.ManyToManyField(entity,null=True, blank=True, verbose_name = _('packagecondition|entity'))
+    editor = models.ForeignKey(User, null=True, verbose_name = _('packagecondition| condition last editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('packagecondition|condition editor'))
 
     class Meta:
         verbose_name = _('packagecondition|package condition')
@@ -62,7 +68,7 @@ class packagecondition(models.Model):
         return self.name
 
 class package(models.Model):
-    choice = (
+    choice_yes_no = (
             ('yes', _('package|yes')),
             ('no', _('package|no'))
         )
@@ -72,11 +78,11 @@ class package(models.Model):
     command = models.TextField(max_length=1000, verbose_name = _('package|command'), help_text= _('package|command help text'))
     packagesum = models.CharField(max_length=40, null= True, blank=True, verbose_name = _('package|packagesum'))
     filename  = models.FileField(upload_to=lambda self,name: random_directory(prefix='package-file/', suffix='/'+name), null=True, blank=True, verbose_name = _('package|filename'))
-    ignoreperiod = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package|ignore deploy period'))
-    public = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package| public package'))
-    entity = models.ManyToManyField(entity,null=True, blank=True, verbose_name = _('machine|entity'))
+    ignoreperiod = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('package|ignore deploy period'))
+    public = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('package| public package'))
+    entity = models.ManyToManyField(entity,null=True, blank=True, verbose_name = _('package|entity'))
     editor = models.ForeignKey(User, null=True, verbose_name = _('package| package last editor'))
-    exclusive_editor = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package|exclusive editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('package|exclusive editor'))
 
     class Meta:
         verbose_name = _('package|deployment package')
