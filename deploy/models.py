@@ -29,6 +29,7 @@ import os, string, random, shutil
 import zipfile
 from django.core import serializers
 from django.conf import settings
+from inventory.models import entity
 
 def random_directory(size=8, chars=string.ascii_lowercase + string.ascii_uppercase + string.digits,prefix='', suffix=''):
     	random_string=''.join(random.choice(chars) for x in range(size))
@@ -45,10 +46,11 @@ class packagecondition(models.Model):
             ('is_W32_bits',_('is_W32_bits')),
             ('language_is',_('language_is'))
         )
-    name = models.CharField(max_length=100, unique=True, verbose_name = _('packagecondition|name'))
+    name = models.CharField(max_length=100, verbose_name = _('packagecondition|name'))
     depends = models.CharField(max_length=12, choices=choice, default='installed', verbose_name = _('packagecondition|depends'))
     softwarename = models.CharField(max_length=100, null= True, blank=True, default="undefined", verbose_name = _('packagecondition|softwarename'), help_text= _('packagecondition|softwarename help text'))
     softwareversion = models.CharField(max_length=500, null= True, blank=True, default="undefined", verbose_name = _('packagecondition|softwareversion'), help_text= _('packagecondition|softwareversion help text'))
+    entity = models.ManyToManyField(entity,null=True, blank=True, verbose_name = _('machine|entity'))
 
     class Meta:
         verbose_name = _('packagecondition|package condition')
@@ -63,7 +65,7 @@ class package(models.Model):
             ('yes', _('package|yes')),
             ('no', _('package|no'))
         )
-    name = models.CharField(max_length=100, unique=True, verbose_name = _('package|name'))
+    name = models.CharField(max_length=100, verbose_name = _('package|name'))
     description = models.CharField(max_length=500, verbose_name = _('package|description'))
     conditions = models.ManyToManyField('packagecondition',null = True, blank = True, verbose_name = _('package|conditions'))
     command = models.TextField(max_length=1000, verbose_name = _('package|command'), help_text= _('package|command help text'))
@@ -71,6 +73,7 @@ class package(models.Model):
     filename  = models.FileField(upload_to=lambda self,name: random_directory(prefix='package-file/', suffix='/'+name), null=True, blank=True, verbose_name = _('package|filename'))
     ignoreperiod = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package|ignore deploy period'))
     public = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package| public package'))
+    entity = models.ManyToManyField(entity,null=True, blank=True, verbose_name = _('machine|entity'))
     class Meta:
         verbose_name = _('package|deployment package')
         verbose_name_plural = _('package|deployment packages')
