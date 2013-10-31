@@ -64,6 +64,27 @@ class entity(models.Model):
     def id_all_children(self):
         """Return a list composed of all children's id"""
         return list(e.id for e in self.get_all_children(self.get_children(),list()))
+    
+    @staticmethod
+    def calculate_position(prefix = str(), current_entity = None, entity_list = list(), decal = False):
+        level = 0
+        if current_entity is None:
+            all_root = entity.objects.filter(parent = None)
+        else:
+            all_root = entity.objects.filter(parent = current_entity)
+        prefix_init = prefix
+        for root in all_root:
+            print root.name
+            level += 1
+            if prefix_init == '':
+                prefix = "%s" % level
+            else:
+                prefix = "%s.%s" % (prefix_init, level)
+            root.name = '%s - %s' % (prefix, root.name)
+            entity_list.append(root.name)
+            if len(root.get_children()) > 0:
+                entity_list = entity.calculate_position(prefix,root,entity_list,True)
+        return entity_list
 
 class typemachine (models.Model):
     name = models.CharField(max_length=100, verbose_name = _('typemachine|name'))
