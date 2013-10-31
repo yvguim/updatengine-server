@@ -207,7 +207,7 @@ class packageprofile(models.Model):
             ('yes', _('package|yes')),
             ('no', _('package|no'))
         )
-    name = models.CharField(max_length=100, unique=True, verbose_name = _('packageprofile|name'))
+    name = models.CharField(max_length=100, verbose_name = _('packageprofile|name'))
     description = models.CharField(max_length=500, verbose_name = _('packageprofile|description'))
     packages = models.ManyToManyField('package',null = True, blank = True, verbose_name = _('packageprofile|packages'))
     parent = models.ForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.SET_NULL,verbose_name = _('packageprofile|parent'))
@@ -269,10 +269,17 @@ class packagewakeonlan(models.Model):
         return self.name
 
 class timeprofile(models.Model):
-    name = models.CharField(max_length=100, unique=True, verbose_name = _('timeprofile|name') , help_text= _('timeprofile|timeprofile help text'))
+    choice_yes_no = (
+            ('yes', _('package|yes')),
+            ('no', _('package|no'))
+        )
+    name = models.CharField(max_length=100, verbose_name = _('timeprofile|name') , help_text= _('timeprofile|timeprofile help text'))
     description = models.CharField(max_length=500,null= True, blank= True, verbose_name = _('timeprofile|description'))
     start_time = models.TimeField(verbose_name = _('timeprofile|start_time'))
     end_time = models.TimeField(verbose_name = _('timeprofile|end_time'))
+    entity = models.ManyToManyField(entity,null=True, blank=True,  related_name='time_profile_entity', verbose_name = _('timeprofile|entity'))
+    editor = models.ForeignKey(User, null=True, verbose_name = _('timeprofile| condition last editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('timeprofile|condition editor'))
 
     class Meta:
         verbose_name = _('timeprofile|time profile')

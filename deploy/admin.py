@@ -228,10 +228,85 @@ class packageprofileAdmin(ueAdmin):
         else:
             return packageprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).distinct()
 
+class timeprofileForm(ModelForm):
+    class Meta:
+        model = timeprofile
+
+    # Custom form to be able to use request in clean method
+    # http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met/1057640#1057640
+    # http://stackoverflow.com/questions/2683689/django-access-request-object-from-admins-form-clean
+    def __init__(self, *args, **kwargs):
+        self.my_user = kwargs.pop('my_user')
+        super(timeprofileForm, self).__init__(*args, **kwargs)
+        self.fields['editor'].choices =([(self.my_user.id,self.my_user.username)])
+        self.fields['editor'].widget.can_add_related = False
+        if not self.my_user.is_superuser and self.fields.has_key('entity'):
+            #restrict entity choice
+            self.fields["entity"].queryset = entity.objects.filter(pk__in = self.my_user.subuser.id_entities_allowed).order_by('name').distinct() 
+            self.fields["entity"].required = True
+        if self.fields.has_key('entity'):
+            self.fields['entity'].widget.can_add_related = False
+
+    def clean_editor(self):
+        return self.my_user
+
 class timeprofileAdmin(ueAdmin):
-    list_display = ('name','description','start_time','end_time')
+    list_display = ('name','description','start_time','end_time','editor','exclusive_editor')
     search_fields = ('name','description')
     list_editable = ('start_time','end_time')
+    filter_horizontal = ('entity',)
+    form = timeprofileForm
+    fieldsets = (
+            (_('timeprofile|general information'), {'fields': ('name','description', 'start_time','end_time')}),
+            (_('timeprofile|permissions'), {'fields': ('entity','editor', 'exclusive_editor')}),
+    )
+
+    def changelist_view(self, request, extra_context=None):
+        chg_view = super(timeprofileAdmin, self).changelist_view(request, extra_context)
+        # Show a warning if user is not superuser
+        if not request.user.is_superuser:
+            messages.info(request,_("timeprofile|Warning: you will not be able to update a profile that you didn't create if exclusive editor is set to yes for this package"))
+        return chg_view
+    
+    # Prevent deletion of objects when user hasn't enough permission
+    def has_delete_permission(self, request, obj=None):
+        if obj is not None: 
+            return request.user.is_superuser or obj.editor == request.user or obj.exclusive_editor == 'no' 
+        return True
+
+    # Prevent to change objects when user hasn't enough permission
+    def has_change_permission(self, request, obj=None):
+        if obj is not None: 
+            return request.user.is_superuser or obj.editor == request.user or obj.exclusive_editor == 'no' 
+        else:
+            return request.user.is_superuser or request.user.has_perm('deploy.change_timeprofile')
+
+    def get_form(self, request, obj=None, **kwargs): 
+        form = super(timeprofileAdmin, self).get_form(request, obj, **kwargs) 
+        # Custom form to be able to use request in clean method
+        # http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met/1057640#1057640
+        # http://stackoverflow.com/questions/2683689/django-access-request-object-from-admins-form-clean
+        class metaform(form):
+            def __new__(cls, *args, **kwargs):
+                kwargs['my_user'] = request.user
+                return form(*args, **kwargs)
+        return metaform 
+    
+    def get_actions(self, request):
+        actions = super(timeprofileAdmin, self).get_actions(request)
+        if not request.user.is_superuser:
+            del actions['delete_selected']
+            del actions['mass_update']
+            del actions['export_as_csv']
+        return actions
+
+    def queryset(self, request):
+        # Re-create queryset with entity list returned by list_entities_allowed
+        if request.user.is_superuser:
+            return timeprofile.objects.all()
+        else:
+            return timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).distinct()
+
 
 class wakeonlanAdmin(ueAdmin):
     list_display = ('name','description','date','status')

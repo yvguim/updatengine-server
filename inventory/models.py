@@ -34,7 +34,7 @@ class entity(models.Model):
     packageprofile = models.ForeignKey('deploy.packageprofile',null=True, blank=True,related_name="pprofile", on_delete=models.SET_NULL, verbose_name = _('entity|package profile'), help_text= _('entity|packages profile help text'))
     old_packageprofile = models.ForeignKey('deploy.packageprofile',null=True, blank=True, on_delete=models.SET_NULL, related_name = 'old_packageprofile', verbose_name = _('entity|old package profile'), help_text= _('entity|old packages profile help text'))
     force_packageprofile = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('entity|force_packageprofile'))
-    timeprofile = models.ForeignKey('deploy.timeprofile',null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('entity|time profile'), help_text= _('entity|time profile help text'))
+    timeprofile = models.ForeignKey('deploy.timeprofile',null=True, blank=True, related_name="timeprofile", on_delete=models.SET_NULL, verbose_name = _('entity|time profile'), help_text= _('entity|time profile help text'))
     old_timeprofile = models.ForeignKey('deploy.timeprofile',null=True, blank=True, on_delete=models.SET_NULL, related_name = 'old_timeprofile', verbose_name = _('entity|old time profile'), help_text= _('entity|old time profile help text'))
     force_timeprofile = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('entity|force_timeprofile'))
 
