@@ -30,6 +30,7 @@ import zipfile
 from django.core import serializers
 from django.conf import settings
 from inventory.models import entity
+from django.contrib.auth.models import User
 
 def random_directory(size=8, chars=string.ascii_lowercase + string.ascii_uppercase + string.digits,prefix='', suffix=''):
     	random_string=''.join(random.choice(chars) for x in range(size))
@@ -74,6 +75,9 @@ class package(models.Model):
     ignoreperiod = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package|ignore deploy period'))
     public = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package| public package'))
     entity = models.ManyToManyField(entity,null=True, blank=True, verbose_name = _('machine|entity'))
+    editor = models.ForeignKey(User, null=True, verbose_name = _('package| package last editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('package|exclusive editor'))
+
     class Meta:
         verbose_name = _('package|deployment package')
         verbose_name_plural = _('package|deployment packages')

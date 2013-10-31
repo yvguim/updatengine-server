@@ -51,6 +51,10 @@ class subuser(models.Model):
     user = models.OneToOneField(User, related_name='subuser')
     entity = models.ManyToManyField(entity,null=True, blank=True, default=None, verbose_name = _('entity|entity'))
     
+    class Meta:
+        verbose_name = _('subuser|entity')
+        verbose_name_plural = _('subuser|entity')
+
     def entities_allowed(self):
         """Return a list composed of all entities allowed for user"""
         if self.user.is_superuser:
@@ -68,7 +72,9 @@ class subuser(models.Model):
         #    return entity.objects.all().values_list('id')
         return list(e.id for e in self.entities_allowed())
 
-    class Meta:
-        verbose_name = _('subuser|entity')
-        verbose_name_plural = _('subuser|entity')
-
+    @staticmethod
+    def get_first_superuser():
+        for user in User.objects.all():
+            if user.is_superuser:
+                return user
+        raise Exception('No superuser found!')
