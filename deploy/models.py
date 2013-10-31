@@ -203,10 +203,17 @@ class packagehistory(models.Model):
         return self.name
 
 class packageprofile(models.Model):
+    choice_yes_no = (
+            ('yes', _('package|yes')),
+            ('no', _('package|no'))
+        )
     name = models.CharField(max_length=100, unique=True, verbose_name = _('packageprofile|name'))
     description = models.CharField(max_length=500, verbose_name = _('packageprofile|description'))
     packages = models.ManyToManyField('package',null = True, blank = True, verbose_name = _('packageprofile|packages'))
     parent = models.ForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.SET_NULL,verbose_name = _('packageprofile|parent'))
+    entity = models.ManyToManyField(entity,null=True, blank=True,  related_name='package_profile_entity', verbose_name = _('packageprofile|entity'))
+    editor = models.ForeignKey(User, null=True, verbose_name = _('packageprofile| condition last editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('packageprofile|condition editor'))
     
     class Meta:
         verbose_name = _('packageprofile|package profile')
