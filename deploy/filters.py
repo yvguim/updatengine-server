@@ -2,6 +2,7 @@ from django.contrib.admin import SimpleListFilter
 from django.utils.translation import ugettext_lazy as _
 from inventory.models import entity
 from deploy.models import packagehistory, packagecondition
+from django.utils.encoding import force_unicode
 
 # Filter dedicate to packagehistory pages
 class entityFilter(SimpleListFilter):
@@ -101,6 +102,36 @@ class packageEntityFilter(SimpleListFilter):
                 return queryset.filter(entity__name__iexact=self.value())
          else:
              return queryset
+# Filters dedicated to package pages
+class myPackagesFilter(SimpleListFilter):
+    title = _('only my packages')
+    parameter_name = 'my_packages'
+
+    def choices(self, cl):
+        yield {
+            'selected': self.value() is None,
+            'query_string': cl.get_query_string({}, [self.parameter_name]),
+            'display': _('no'),
+        }
+        for lookup, title in self.lookup_choices:
+            yield {
+                'selected': self.value() == force_unicode(lookup),
+                'query_string': cl.get_query_string({
+                    self.parameter_name: lookup,
+                }, []),
+                'display': title,
+            }
+
+    def lookups(self, request, model_admin):
+        return [('True',_('yes')),]
+    
+    def queryset(self, request, queryset):
+         if self.value() is not None:
+            if 'my_packages' in request.GET:
+                return queryset.filter(editor=request.user)
+         else:
+             return queryset
+
 
 class conditionFilter(SimpleListFilter):
     # Human-readable title which will be displayed in the

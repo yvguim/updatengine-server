@@ -22,7 +22,8 @@ from deploy.models import package, packagehistory, packageprofile, packagecondit
 from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
 from deploy.filters import entityFilter, machineFilter, statusFilter,\
-        packageEntityFilter, packageHistoryFilter, conditionEntityFilter, conditionFilter
+        packageEntityFilter, packageHistoryFilter, conditionEntityFilter, conditionFilter,\
+        myPackagesFilter
 from inventory.models import entity
 from django.utils.translation import ugettext_lazy as _
 from django.forms import ModelForm
@@ -73,7 +74,7 @@ class packageAdmin(ueAdmin):
     list_display = ('name','description','command','filename','get_conditions','ignoreperiod','public','editor','exclusive_editor')
     list_display_link = ('name')
     search_fields = ('name','description','command','filename','public')
-    list_filter = ('ignoreperiod',packageEntityFilter,conditionFilter)
+    list_filter = ('ignoreperiod',packageEntityFilter,conditionFilter, myPackagesFilter)
     filter_horizontal = ('conditions','entity')
     form = packageForm
     fieldsets = (
