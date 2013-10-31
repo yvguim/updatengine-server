@@ -81,6 +81,13 @@ class packageAdmin(ueAdmin):
                 (_('packageAdmin|package edition'), {'fields': ('conditions', 'command', 'filename')}),
                 (_('packageAdmin|permissions'), {'fields': ('public','ignoreperiod','entity','editor', 'exclusive_editor')}),
                 )
+
+    def changelist_view(self, request, extra_context=None):
+        chg_view = super(packageAdmin, self).changelist_view(request, extra_context)
+        # Show a warning if user is not superuser
+        if not request.user.is_superuser:
+            messages.info(request,_("Warning: you will not be able to update a package that you didn't create if exclusive editor is set to yes for this package"))
+        return chg_view
     
     def get_readonly_fields(self, request, obj=None):
         if not request.user.is_superuser and (obj is not None and obj.editor != request.user and obj.exclusive_editor == 'yes'):
@@ -110,8 +117,6 @@ class packageAdmin(ueAdmin):
             def __new__(cls, *args, **kwargs):
                 kwargs['my_user'] = request.user
                 return form(*args, **kwargs)
-        if obj is not None and not request.user.is_superuser and (obj.editor != request.user and obj.exclusive_editor == 'yes'):
-                messages.error(request,'An exclusive editor (%s) is set for this package, you will not be able to save your modification' % obj.editor.username)
         return metaform 
     
     def get_actions(self, request):
