@@ -25,7 +25,7 @@ from inventory.filters import enableFilter, as_or_notFilter, softwareFilter, ver
 from inventory.filters import (entityFilter, domainFilter,usernameFilter,languageFilter,typemachineFilter,\
         osdistributionFilter, timeprofileFilter,packageprofileFilter, hostFilter,\
         osnameFilter,osversionFilter,osarchFilter)
-
+from deploy.models import package
 class ueAdmin(admin.ModelAdmin):
     list_max_show_all = 500
     list_per_page = 50
@@ -136,8 +136,12 @@ class machineAdmin(ueAdmin):
         if request.user.is_superuser: 
             return form
         else: 
+            # Show only entites allowed if not superuser
             form.base_fields["entity"].queryset = entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
             form.base_fields["entity"].empty_label = None
+            
+            # Show only entites allowed if not superuser
+            form.base_fields["packages"].queryset = package.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
         return form 
 
 class netAdmin(ueAdmin):
