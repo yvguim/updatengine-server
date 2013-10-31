@@ -99,7 +99,7 @@ class packageAdmin(ueAdmin):
         if obj is not None: 
             return request.user.is_superuser or obj.editor == request.user or obj.exclusive_editor == 'no' 
         else:
-            return request.user.is_superuser or self.model._default_manager.filter(editor=request.user).exists()
+            return request.user.is_superuser or request.user.has_perm('deploy.change_package')
 
     def get_form(self, request, obj=None, **kwargs): 
         form = super(packageAdmin, self).get_form(request, obj, **kwargs) 
