@@ -250,6 +250,10 @@ class packageprofile(models.Model):
     get_packages.short_description = _('packageAdmin|get_packages')
 
 class packagewakeonlan(models.Model):
+    choice_yes_no = (
+            ('yes', _('package|yes')),
+            ('no', _('package|no'))
+        )
     choice = (
             ('Programmed', _('packagewakeonlan|Programmed')),
             ('Completed', _('packagewakeonlan|Completed'))
@@ -259,6 +263,9 @@ class packagewakeonlan(models.Model):
     machines = models.ManyToManyField('inventory.machine',null = True, blank = True, verbose_name = _('packagewakeonlan|machines to start'))
     date = models.DateTimeField(verbose_name = _('packagewakeonlan|start_time'))
     status = models.CharField(max_length=100, choices=choice, default='Programmed', verbose_name = _('packagewakeonlan|status'))
+    entity = models.ManyToManyField(entity,null=True, blank=True,  related_name='packagewakonelan_entity', verbose_name = _('packagewakonelan|entity'))
+    editor = models.ForeignKey(User, null=True, verbose_name = _('packagewakonelan| condition last editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('packagewakonelan|condition editor'))
 
     class Meta:
         verbose_name = _('packagewakeonlan|package wakeonlan')

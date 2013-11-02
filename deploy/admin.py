@@ -71,17 +71,16 @@ class packageAdmin(ueAdmin):
     filter_horizontal = ('conditions','entity')
     form = packageForm
     fieldsets = (
-                (_('packageAdmin|general information'), {'fields': ('name', 'description')}),
-                (_('packageAdmin|package edition'), {'fields': ('conditions', 'command', 'filename')}),
-                (_('packageAdmin|permissions'), {'fields': ('public','ignoreperiod','entity','editor', 'exclusive_editor')}),
+                (_('package|general information'), {'fields': ('name', 'description')}),
+                (_('package|package edition'), {'fields': ('conditions', 'command', 'filename')}),
+                (_('package|permissions'), {'fields': ('public','ignoreperiod','entity','editor', 'exclusive_editor')}),
                 )
 
     def changelist_view(self, request, extra_context=None):
-        chg_view = super(packageAdmin, self).changelist_view(request, extra_context)
         # Show a warning if user is not superuser
         if not request.user.is_superuser:
             messages.info(request,_("Warning: you will not be able to update a package that you didn't create if exclusive editor is set to yes for this package"))
-        return chg_view
+        return super(packageAdmin, self).changelist_view(request, extra_context)
     
     # Prevent deletion of objects when user hasn't enough permission
     def has_delete_permission(self, request, obj=None):
@@ -183,11 +182,10 @@ class packageprofileAdmin(ueAdmin):
     )
 
     def changelist_view(self, request, extra_context=None):
-        chg_view = super(packageprofileAdmin, self).changelist_view(request, extra_context)
         # Show a warning if user is not superuser
         if not request.user.is_superuser:
             messages.info(request,_("Warning: you will not be able to update a profile that you didn't create if exclusive editor is set to yes for this package"))
-        return chg_view
+        return super(packageprofileAdmin, self).changelist_view(request, extra_context)
     
     # Prevent deletion of objects when user hasn't enough permission
     def has_delete_permission(self, request, obj=None):
@@ -253,7 +251,6 @@ class timeprofileForm(ModelForm):
 class timeprofileAdmin(ueAdmin):
     list_display = ('name','description','start_time','end_time','editor','exclusive_editor')
     search_fields = ('name','description')
-    list_editable = ('start_time','end_time')
     filter_horizontal = ('entity',)
     form = timeprofileForm
     fieldsets = (
@@ -262,11 +259,12 @@ class timeprofileAdmin(ueAdmin):
     )
 
     def changelist_view(self, request, extra_context=None):
-        chg_view = super(timeprofileAdmin, self).changelist_view(request, extra_context)
         # Show a warning if user is not superuser
         if not request.user.is_superuser:
-            messages.info(request,_("timeprofile|Warning: you will not be able to update a profile that you didn't create if exclusive editor is set to yes for this package"))
-        return chg_view
+            messages.info(request,_("timeprofile|Warning: you will not be able to update a wake on lan task that you didn't create if exclusive editor is set to yes for this package"))
+        else:
+            self.list_editable = ('start_time','end_time')
+        return super(timeprofileAdmin, self).changelist_view(request, extra_context)
     
     # Prevent deletion of objects when user hasn't enough permission
     def has_delete_permission(self, request, obj=None):
@@ -308,12 +306,84 @@ class timeprofileAdmin(ueAdmin):
             return timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).distinct()
 
 
-class wakeonlanAdmin(ueAdmin):
-    list_display = ('name','description','date','status')
-    search_fields = ('name','description')
-    list_editable = ('date','status',)
-    filter_horizontal = ('machines',)
+class packagewakeonlanForm(ModelForm):
+    class Meta:
+        model = packagewakeonlan
 
+    # Custom form to be able to use request in clean method
+    # http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met/1057640#1057640
+    # http://stackoverflow.com/questions/2683689/django-access-request-object-from-admins-form-clean
+    def __init__(self, *args, **kwargs):
+        self.my_user = kwargs.pop('my_user')
+        super(packagewakeonlanForm, self).__init__(*args, **kwargs)
+        self.fields['editor'].choices =([(self.my_user.id,self.my_user.username)])
+        self.fields['editor'].widget.can_add_related = False
+        if not self.my_user.is_superuser and self.fields.has_key('entity'):
+            #restrict entity choice
+            self.fields["entity"].queryset = entity.objects.filter(pk__in = self.my_user.subuser.id_entities_allowed).order_by('name').distinct() 
+            self.fields["entity"].required = True
+        if self.fields.has_key('entity'):
+            self.fields['entity'].widget.can_add_related = False
+    
+    def clean_editor(self):
+        return self.my_user
+
+class packagewakeonlanAdmin(ueAdmin):
+    list_display = ('name','description','date','status','editor','exclusive_editor')
+    search_fields = ('name','description')
+    filter_horizontal = ('machines','entity')
+    form = packagewakeonlanForm
+    fieldsets = (
+            (_('packagewakeonlan|general information'), {'fields': ('name','description', 'date','status')}),
+            (_('packagewakeonlan|permissions'), {'fields': ('entity','editor', 'exclusive_editor')}),
+    )
+
+    def changelist_view(self, request, extra_context=None):
+        # Show a warning if user is not superuser
+        if not request.user.is_superuser:
+            messages.info(request,_("packagewakeonlan|Warning: you will not be able to update a wake on lan task that you didn't create if exclusive editor is set to yes for this package"))
+        else:
+            self.list_editable = ('date','status')
+        return super(packagewakeonlanAdmin, self).changelist_view(request, extra_context)
+    
+    # Prevent deletion of objects when user hasn't enough permission
+    def has_delete_permission(self, request, obj=None):
+        if obj is not None: 
+            return request.user.is_superuser or obj.editor == request.user or obj.exclusive_editor == 'no' 
+        return True
+
+    # Prevent to change objects when user hasn't enough permission
+    def has_change_permission(self, request, obj=None):
+        if obj is not None: 
+            return request.user.is_superuser or obj.editor == request.user or obj.exclusive_editor == 'no' 
+        else:
+            return request.user.is_superuser or request.user.has_perm('deploy.change_packagewakeonlan')
+
+    def get_form(self, request, obj=None, **kwargs): 
+        form = super(packagewakeonlanAdmin, self).get_form(request, obj, **kwargs) 
+        # Custom form to be able to use request in clean method
+        # http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met/1057640#1057640
+        # http://stackoverflow.com/questions/2683689/django-access-request-object-from-admins-form-clean
+        class metaform(form):
+            def __new__(cls, *args, **kwargs):
+                kwargs['my_user'] = request.user
+                return form(*args, **kwargs)
+        return metaform 
+    
+    def get_actions(self, request):
+        actions = super(packagewakeonlanAdmin, self).get_actions(request)
+        if not request.user.is_superuser:
+            del actions['delete_selected']
+            del actions['mass_update']
+            del actions['export_as_csv']
+        return actions
+
+    def queryset(self, request):
+        # Re-create queryset with entity list returned by list_entities_allowed
+        if request.user.is_superuser:
+            return packagewakeonlan.objects.all()
+        else:
+            return packagewakeonlan.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).distinct()
 
 class packageconditionForm(ModelForm):
     class Meta:
@@ -343,15 +413,14 @@ class packageconditionAdmin(ueAdmin):
     list_filter = (conditionEntityFilter,)
     form = packageconditionForm
     fieldsets = (
-            (_('packageAdmin|general information'), {'fields': ('name','depends', 'softwarename', 'softwareversion')}),
-            (_('packageAdmin|permissions'), {'fields': ('entity','editor', 'exclusive_editor')}),
+            (_('packagecondition|general information'), {'fields': ('name','depends', 'softwarename', 'softwareversion')}),
+            (_('package|permissions'), {'fields': ('entity','editor', 'exclusive_editor')}),
     )
     def changelist_view(self, request, extra_context=None):
-        chg_view = super(packageconditionAdmin, self).changelist_view(request, extra_context)
         # Show a warning if user is not superuser
         if not request.user.is_superuser:
-            messages.info(request,_("Warning: you will not be able to update a condition that you didn't create if exclusive editor is set to yes for this package"))
-        return chg_view
+            messages.info(request,_("packagecondition|Warning: you will not be able to update a condition that you didn't create if exclusive editor is set to yes for this package"))
+        return super(packageconditionAdmin, self).changelist_view(request, extra_context)
 
     # Prevent deletion of objects when user hasn't enough permission
     def has_delete_permission(self, request, obj=None):
@@ -401,7 +470,7 @@ class impexAdmin(ueAdmin):
         if obj: # editing an existing object
             return self.readonly_fields + ('filename', 'package')
         return self.readonly_fields
-admin.site.register(packagewakeonlan, wakeonlanAdmin)
+admin.site.register(packagewakeonlan, packagewakeonlanAdmin)
 admin.site.register(timeprofile, timeprofileAdmin)
 admin.site.register(packagecondition, packageconditionAdmin)
 admin.site.register(packageprofile, packageprofileAdmin)
