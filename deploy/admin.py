@@ -72,8 +72,10 @@ class packageAdmin(ueAdmin):
     form = packageForm
     fieldsets = (
                 (_('package|general information'), {'fields': ('name', 'description')}),
-                (_('package|package edition'), {'fields': ('conditions', 'command', 'filename')}),
-                (_('package|permissions'), {'fields': ('public','ignoreperiod','entity','editor', 'exclusive_editor')}),
+                (_('package|package edition'), {'fields': ('conditions', 'command', 'filename','public','ignoreperiod')}),
+                (_('package|permissions'), {
+                    'classes': ('grp-collapse grp-closed',),
+                    'fields': ('entity','editor', 'exclusive_editor')}),
                 )
 
     def changelist_view(self, request, extra_context=None):
@@ -178,8 +180,10 @@ class packageprofileAdmin(ueAdmin):
     form = packageprofileForm
     fieldsets = (
             (_('packageprofile|general information'), {'fields': ('name','description', 'parent','packages')}),
-            (_('packageprofile|permissions'), {'fields': ('entity','editor', 'exclusive_editor')}),
-    )
+                (_('package|permissions'), {
+                    'classes': ('grp-collapse grp-closed',),
+                    'fields': ('entity','editor', 'exclusive_editor')}),
+                )
 
     def changelist_view(self, request, extra_context=None):
         # Show a warning if user is not superuser
@@ -255,8 +259,10 @@ class timeprofileAdmin(ueAdmin):
     form = timeprofileForm
     fieldsets = (
             (_('timeprofile|general information'), {'fields': ('name','description', 'start_time','end_time')}),
-            (_('timeprofile|permissions'), {'fields': ('entity','editor', 'exclusive_editor')}),
-    )
+                (_('package|permissions'), {
+                    'classes': ('grp-collapse grp-closed',),
+                    'fields': ('entity','editor', 'exclusive_editor')}),
+                )
 
     def changelist_view(self, request, extra_context=None):
         # Show a warning if user is not superuser
@@ -335,8 +341,10 @@ class packagewakeonlanAdmin(ueAdmin):
     form = packagewakeonlanForm
     fieldsets = (
             (_('packagewakeonlan|general information'), {'fields': ('name','description', 'date','status')}),
-            (_('packagewakeonlan|permissions'), {'fields': ('entity','editor', 'exclusive_editor')}),
-    )
+                (_('package|permissions'), {
+                    'classes': ('grp-collapse grp-closed',),
+                    'fields': ('entity','editor', 'exclusive_editor')}),
+                )
 
     def changelist_view(self, request, extra_context=None):
         # Show a warning if user is not superuser
@@ -414,8 +422,10 @@ class packageconditionAdmin(ueAdmin):
     form = packageconditionForm
     fieldsets = (
             (_('packagecondition|general information'), {'fields': ('name','depends', 'softwarename', 'softwareversion')}),
-            (_('package|permissions'), {'fields': ('entity','editor', 'exclusive_editor')}),
-    )
+                (_('package|permissions'), {
+                    'classes': ('grp-collapse grp-closed',),
+                    'fields': ('entity','editor', 'exclusive_editor')}),
+                )
     def changelist_view(self, request, extra_context=None):
         # Show a warning if user is not superuser
         if not request.user.is_superuser:
