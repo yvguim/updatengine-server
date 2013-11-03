@@ -422,7 +422,7 @@ class packageconditionAdmin(ueAdmin):
     form = packageconditionForm
     fieldsets = (
             (_('packagecondition|general information'), {'fields': ('name','depends', 'softwarename', 'softwareversion')}),
-                (_('package|permissions'), {
+                (_('packagecondition|permissions'), {
                     'classes': ('grp-collapse grp-closed',),
                     'fields': ('entity','editor', 'exclusive_editor')}),
                 )
@@ -471,15 +471,69 @@ class packageconditionAdmin(ueAdmin):
         else:
             return packagecondition.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).distinct()
 
+class impexForm(ModelForm):
+    class Meta:
+        model = impex
+
+    # Custom form to be able to use request in clean method
+    # http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met/1057640#1057640
+    # http://stackoverflow.com/questions/2683689/django-access-request-object-from-admins-form-clean
+    def __init__(self, *args, **kwargs):
+        self.my_user = kwargs.pop('my_user')
+        super(impexForm, self).__init__(*args, **kwargs)
+        self.fields['editor'].choices =([(self.my_user.id,self.my_user.username)])
+        self.fields['editor'].widget.can_add_related = False
+        # Prepare entity for the future
+        #if not self.my_user.is_superuser and self.fields.has_key('entity'):
+        #    #restrict entity choice
+        #    self.fields["entity"].queryset = entity.objects.filter(pk__in = self.my_user.subuser.id_entities_allowed).order_by('name').distinct() 
+        #    self.fields["entity"].required = True
+        #if self.fields.has_key('entity'):
+        #    self.fields['entity'].widget.can_add_related = False
+
+    def clean_editor(self):
+        return self.my_user
+
 class impexAdmin(ueAdmin):
-    list_display = ('date','name','description','filename_link','package')
+    list_display = ('date','name','description','filename_link','package','editor')
+    list_display_links=('name',)
     search_fields = ('name','description')
     readonly_fields = ('packagesum',)
-
+    form = impexForm
+    # For the moment only Super Admin an superuser can use import
+    # Entity aren't show. They will be usefull only in the future (if admin profile will be able to use impex)
+    fieldsets = (
+            (_('impex|general information'), {'fields': ('name','description', 'filename', 'package','editor')}),
+                )
     def get_readonly_fields(self, request, obj=None):
         if obj: # editing an existing object
             return self.readonly_fields + ('filename', 'package')
         return self.readonly_fields
+
+    # Prevent deletion of objects when user hasn't enough permission
+    def has_delete_permission(self, request, obj=None):
+        if obj is not None: 
+            return request.user.is_superuser or obj.editor == request.user or obj.exclusive_editor == 'no' 
+        return True
+
+    # Prevent to change objects when user hasn't enough permission
+    def has_change_permission(self, request, obj=None):
+        if obj is not None: 
+            return request.user.is_superuser or obj.editor == request.user or obj.exclusive_editor == 'no' 
+        else:
+            return request.user.is_superuser or request.user.has_perm('deploy.change_impex')
+
+    def get_form(self, request, obj=None, **kwargs): 
+        form = super(impexAdmin, self).get_form(request, obj, **kwargs) 
+        # Custom form to be able to use request in clean method
+        # http://stackoverflow.com/questions/1057252/how-do-i-access-the-request-object-or-any-other-variable-in-a-forms-clean-met/1057640#1057640
+        # http://stackoverflow.com/questions/2683689/django-access-request-object-from-admins-form-clean
+        class metaform(form):
+            def __new__(cls, *args, **kwargs):
+                kwargs['my_user'] = request.user
+                return form(*args, **kwargs)
+        return metaform 
+
 admin.site.register(packagewakeonlan, packagewakeonlanAdmin)
 admin.site.register(timeprofile, timeprofileAdmin)
 admin.site.register(packagecondition, packageconditionAdmin)

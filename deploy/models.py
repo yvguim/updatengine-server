@@ -297,12 +297,19 @@ class timeprofile(models.Model):
         return self.name
 
 class impex(models.Model):
+    choice_yes_no = (
+            ('yes', _('package|yes')),
+            ('no', _('package|no'))
+        )
     name = models.CharField(max_length=100, unique=True, verbose_name = _('impex|name'))
     description = models.TextField(max_length=500, verbose_name = _('impex|description'))
     packagesum = models.CharField(max_length=40, null= True, blank=True, verbose_name = _('impex|packagesum'))
     filename  = models.FileField(upload_to=lambda self,name:random_directory(prefix='package-file/', suffix='/'+name), null=True, blank=True, default=None, verbose_name = _('impex|filename'))
     package = models.ForeignKey(package, null=True, blank=True, default=None, on_delete=models.SET_NULL, verbose_name = _('impex|package'))
     date = models.DateTimeField(auto_now=True, verbose_name = _('impex|date'))
+    entity = models.ManyToManyField(entity,null=True, blank=True,  related_name='impex_entity', verbose_name = _('impex|entity'))
+    editor = models.ForeignKey(User, null=True, verbose_name = _('impex| condition last editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('impex|condition editor'))
     
     # Function below allow us to display a link to download export packages in admin.py on a readonly filefield
     def filename_link(self):
@@ -403,6 +410,10 @@ def postcreate_impex(sender, instance, created, **kwargs):
                     else:
                         shutil.rmtree(fullpath)
                     obj.object.conditions.clear()
+                    # import entity, editor and exclusive_editor from impex object
+                    # can't save entity because m2m aren't saved at this time
+                    obj.object.editor = instance.editor
+                    obj.object.exclusive_editor = instance.exclusive_editor
                     obj.object.save()
                     instance.package = package.objects.get(id=obj.object.id)
                     idpack = obj.object.id
@@ -413,6 +424,11 @@ def postcreate_impex(sender, instance, created, **kwargs):
                             softwareversion=obj.object.softwareversion).exists():
                         obj.object.name = 'Import/ '+obj.object.name
                     cond, created = packagecondition.objects.get_or_create(name=obj.object.name, depends=obj.object.depends, softwarename= obj.object.softwarename, softwareversion=obj.object.softwareversion)
+                    # import editor and exclusive_editor from impex object
+                    # can't save entity because m2m aren't saved at this time
+                    cond.editor = instance.editor
+                    cond.exclusive_editor = instance.exclusive_editor
+                    cond.save()
                     condlist.append(cond) 
             # Add new conditions to package imported from json file
             pack = package.objects.get(id=idpack)
