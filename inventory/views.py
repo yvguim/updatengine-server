@@ -184,13 +184,17 @@ def check_conditions(m,pack):
                     else:
                         looplimit = len(condversiontab)
                     for i in range(0, looplimit):
-                        try: 
+                        try:
                             if int(condversiontab[i]) > int(vtab[i]):
                                 install = True
+                                break
+                            if int(condversiontab[i]) < int(vtab[i]):
                                 break
                         except ValueError:
                             if condversiontab[i] > vtab[i]:
                                 install = True
+                                break
+                            if condversiontab[i] < vtab[i]:
                                 break
 
                 if install == False:
@@ -212,9 +216,13 @@ def check_conditions(m,pack):
                             if int(condversiontab[i]) > int(vtab[i]):
                                 install = True
                                 break
+                            if int(condversiontab[i]) < int(vtab[i]):
+                                break
                         except ValueError:
                             if condversiontab[i] > vtab[i]:
                                 install = True
+                                break
+                            if condversiontab[i] < vtab[i]:
                                 break
                 if install == False:
                     status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
@@ -239,11 +247,14 @@ def check_conditions(m,pack):
                             if int(condversiontab[i]) < int(vtab[i]):
                                 install = True
                                 break
+                            if int(condversiontab[i]) > int(vtab[i]):
+                                break
                         except ValueError:
                             if condversiontab[i] < vtab[i]:
                                 install = True
                                 break
-                            
+                            if condversiontab[i] > vtab[i]:
+                                break
                 if install == False:
                     status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
             else:
@@ -266,11 +277,14 @@ def check_conditions(m,pack):
                             if int(condversiontab[i]) < int(vtab[i]):
                                 install = True
                                 break
+                            if int(condversiontab[i]) > int(vtab[i]):
+                                break
                         except ValueError:
                             if condversiontab[i] < vtab[i]:
                                 install = True
                                 break
-
+                            if condversiontab[i] > vtab[i]:
+                                break
                 if install == False:
                     status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
             else:
