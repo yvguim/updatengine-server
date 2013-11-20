@@ -47,27 +47,27 @@ class machineTestCase(TestCase):
 
         # Packages with Joker and lower condition
         jpackage_pdf171 = package.objects.create(name = 'jPDFCreator 1.7.1', description = 'install PDFCreator 1.7.1', command = 'rem')
-        jcondition_lowerpdf171 = packagecondition.objects.create(name = 'install if PDFCreator < 1.7.1', softwarename = 'PDFCrea*', softwareversion = '1.7.1',depends = 'lower')
+        jcondition_lowerpdf171 = packagecondition.objects.create(name = 'install if PDFCrea* < 1.7.1', softwarename = 'PDFCrea*', softwareversion = '1.7.1',depends = 'lower')
         jpackage_pdf171.conditions.add(jcondition_lowerpdf171)
         jpackage_pdf171.save()
         
         jpackage_pdf162 = package.objects.create(name = 'jPDFCreator 1.6.2', description = 'install PDFCreator 1.6.2', command = 'rem')
-        jcondition_lowerpdf162 = packagecondition.objects.create(name = 'install if PDFCreator < 1.6.2', softwarename = 'PDFCrea*', softwareversion = '1.6.2',depends = 'lower')
+        jcondition_lowerpdf162 = packagecondition.objects.create(name = 'install if PDFCrea* < 1.6.2', softwarename = 'PDFCrea*', softwareversion = '1.6.2',depends = 'lower')
         jpackage_pdf162.conditions.add(jcondition_lowerpdf162)
         jpackage_pdf162.save()
 
         jpackage_moz25 = package.objects.create(name = 'jmozilla 25', description = 'install mozilla 25', command = 'rem')
-        jcondition_lowermoz25 = packagecondition.objects.create(name = 'install mozilla if < 25', softwarename = 'moz*lla', softwareversion = '25',depends = 'lower')
+        jcondition_lowermoz25 = packagecondition.objects.create(name = 'install moz*lla if < 25', softwarename = 'moz*lla', softwareversion = '25',depends = 'lower')
         jpackage_moz25.conditions.add(jcondition_lowermoz25)
         jpackage_moz25.save()
 
         jpackage_moz17 = package.objects.create(name = 'jmozilla 17', description = 'install mozilla 17', command = 'rem')
-        jcondition_lowermoz17 = packagecondition.objects.create(name = 'install mozilla if < 17', softwarename = 'moz*lla', softwareversion = '17',depends = 'lower')
+        jcondition_lowermoz17 = packagecondition.objects.create(name = 'install moz*lla if < 17', softwarename = 'moz*lla', softwareversion = '17',depends = 'lower')
         jpackage_moz17.conditions.add(jcondition_lowermoz17)
         jpackage_moz17.save()
 
         jpackage_moz24b = package.objects.create(name = 'jmozilla 24 beta b', description = 'install mozilla 24 beta b', command = 'rem')
-        jcondition_lowermoz24b = packagecondition.objects.create(name = 'install mozilla if < 24.0.1.b', softwarename = 'jmozilla * beta b', softwareversion = '24.0.1.b',depends = 'lower')
+        jcondition_lowermoz24b = packagecondition.objects.create(name = 'install mozilla* if < 24.0.1.b', softwarename = 'jmozilla * beta b', softwareversion = '24.0.1.b',depends = 'lower')
         jpackage_moz24b.conditions.add(jcondition_lowermoz24b)
         jpackage_moz24b.save()
 
