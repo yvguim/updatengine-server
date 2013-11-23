@@ -5,8 +5,13 @@ from inventory.views import *
 class machineTestCase(TestCase):
     def setUp(self):
         # Define machine and software associated
+
+        #machine xp 
+        mlinux = machine.objects.create(serial='1234', name='mlinux', language = 'fr_CA')
+        osdistribution.objects.create(name = 'Linux Mint', version = '15', arch = '64bits', systemdrive = 'undefined', host=mlinux, manualy_created='no')
+
         #machine 32 bits windows 7
-        m = machine.objects.create(serial='1234', name='machine_windows_7_32')
+        m = machine.objects.create(serial='1234', name='machine_windows_7_32', language = 'fr_FR')
         software.objects.create(name = 'PDFCreator', version = '1.6.2',uninstall = 'bla', host=m, manualy_created = 'no')
         software.objects.create(name = 'mozilla', version = '24.0.1',uninstall = 'bla', host=m, manualy_created = 'no')
         software.objects.create(name = 'mozilla-beta', version = '24.0.1.a',uninstall = 'bla', host=m, manualy_created = 'no')
@@ -18,6 +23,12 @@ class machineTestCase(TestCase):
         software.objects.create(name = 'mozilla', version = '24.0.1',uninstall = 'bla', host=m64, manualy_created = 'no')
         software.objects.create(name = 'mozilla-beta', version = '24.0.1.a',uninstall = 'bla', host=m64, manualy_created = 'no')
         osdistribution.objects.create(name = 'Microsoft Windows 7', version = 'sp1', arch = '64bits', systemdrive = 'c', host=m64, manualy_created='no')
+
+        # packages with language condition
+        package_test_fr_FR = package.objects.create(name = 'fr_FR', description = 'install si fr_FR', command = 'rem')
+        condition_test_fr_FR = packagecondition.objects.create(name = 'fr_FR', softwarename = 'fr_FR', depends = 'language_is')
+        package_test_fr_FR.conditions.add(condition_test_fr_FR)
+        package_test_fr_FR.save()
 
         # Packages without Joker and lower condition
         package_pdf171 = package.objects.create(name = 'PDFCreator 1.7.1', description = 'install PDFCreator 1.7.1', command = 'rem')
@@ -44,6 +55,25 @@ class machineTestCase(TestCase):
         condition_lowermoz24b = packagecondition.objects.create(name = 'install mozilla if < 24.0.1.b', softwarename = 'mozilla-beta', softwareversion = '24.0.1.b',depends = 'lower')
         package_moz24b.conditions.add(condition_lowermoz24b)
         package_moz24b.save()
+
+        # Packages with higher condition
+        package_moz17 = package.objects.create(name = 'mozilla 17 higher', description = 'install mozilla 17', command = 'rem')
+        condition_moz17 = packagecondition.objects.create(name = 'install mozilla if installed and > 24.a', softwarename = 'mozilla-beta', softwareversion = '24.a',depends = 'higher')
+        package_moz17.conditions.add(condition_moz17)
+        package_moz17.save()
+        
+        package_pdf162h = package.objects.create(name = 'PDFCreator 1.6.2 higher', description = 'install PDFCreator 1.6.2', command = 'rem')
+        condition_higherpdf162 = packagecondition.objects.create(name = 'install if PDFCreator >= 1.6.1', softwarename = 'PDFCreator', softwareversion = '1.6.1',depends = 'higher')
+        package_pdf162h.conditions.add(condition_higherpdf162)
+        package_pdf162h.save()
+
+        # Packages with higher condition and joker
+        jpackage_moz17 = package.objects.create(name = 'jmozilla 17 higher', description = 'install mozilla 17', command = 'rem')
+        jcondition_moz17 = packagecondition.objects.create(name = 'install mozilla*beta if installed and > 24.a', softwarename = 'mozilla*beta', softwareversion = '24.a',depends = 'higher')
+        jpackage_moz17.conditions.add(jcondition_moz17)
+        jpackage_moz17.save()
+
+
 
         # Packages with Joker and lower condition
         jpackage_pdf171 = package.objects.create(name = 'jPDFCreator 1.7.1', description = 'install PDFCreator 1.7.1', command = 'rem')
@@ -95,6 +125,17 @@ class machineTestCase(TestCase):
         lower_arch64.conditions.add(condition_lowerpdf171)
         lower_arch64.save()
 
+        # package with condition system_is Microsoft Windows 7 
+        package_MS7 = package.objects.create(name = 'MS7', description = 'install if Microsoft Windows 7', command = 'rem')
+        condition_MS7 = packagecondition.objects.create(name = 'install if Microsoft Windows 7', softwarename = 'Microsoft Windows 7', softwareversion = 'undefined',depends = 'system_is')
+        package_MS7.conditions.add(condition_MS7)
+        package_MS7.save()
+
+        # package with condition system_is Microsoft Windows 7 
+        jpackage_MS7 = package.objects.create(name = 'jMS7', description = 'install if Microsoft *', command = 'rem')
+        jcondition_MS7 = packagecondition.objects.create(name = 'install if Microsoft *', softwarename = 'Microsoft Windows *', softwareversion = 'undefined',depends = 'system_is')
+        jpackage_MS7.conditions.add(jcondition_MS7)
+        jpackage_MS7.save()
 
 
     def test_lower_condition_without_joker(self):
@@ -110,6 +151,24 @@ class machineTestCase(TestCase):
         self.assertEqual(check_conditions(m,moz25), True)
         self.assertEqual(check_conditions(m,moz17), False)
         self.assertEqual(check_conditions(m,moz24b), True)
+    
+    def test_higher_condition_without_joker(self):
+        m = machine.objects.get(name = 'machine_windows_7_32')
+        moz17 = package.objects.get(name = 'mozilla 17 higher')
+        self.assertEqual(check_conditions(m,moz17), False)
+
+    def test_higher_condition_with_joker(self):
+        m = machine.objects.get(name = 'machine_windows_7_32')
+        pdf162h = package.objects.get(name = 'PDFCreator 1.6.2 higher')
+        self.assertEqual(check_conditions(m,pdf162h), True)
+    
+    def test_lang_condition(self):
+        m = machine.objects.get(name = 'machine_windows_7_32')
+        mlinux = machine.objects.get(name = 'mlinux')
+        fr_FR = package.objects.get(name = 'fr_FR')
+        self.assertEqual(check_conditions(mlinux,fr_FR), False)
+        self.assertEqual(check_conditions(m,fr_FR), True)
+
 
     def test_lower_condition_with_joker(self):
         m = machine.objects.get(name = 'machine_windows_7_32')
@@ -136,6 +195,20 @@ class machineTestCase(TestCase):
         self.assertEqual(check_conditions(m32,arch64), False)
         self.assertEqual(check_conditions(m64,arch32), False)
     
+    def test_system_is_without_joker(self):
+        m32 = machine.objects.get(name = 'machine_windows_7_32')
+        mlinux = machine.objects.get(name = 'mlinux')
+        pms7 = package.objects.get(name = 'MS7')
+        self.assertEqual(check_conditions(m32,pms7), True)
+        self.assertEqual(check_conditions(mlinux,pms7), False)
+
+    def test_system_is_with_joker(self):
+        m32 = machine.objects.get(name = 'machine_windows_7_32')
+        mlinux = machine.objects.get(name = 'mlinux')
+        jpms7 = package.objects.get(name = 'jMS7')
+        self.assertEqual(check_conditions(m32,jpms7), True)
+        self.assertEqual(check_conditions(mlinux,jpms7), False)
+
     def test_package_with_condition_lower_arch(self):
         m32 = machine.objects.get(name = 'machine_windows_7_32')
         m64 = machine.objects.get(name = 'machine_windows_7_64')
