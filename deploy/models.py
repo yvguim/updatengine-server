@@ -57,7 +57,7 @@ class packagecondition(models.Model):
     softwareversion = models.CharField(max_length=500, null= True, blank=True, default="undefined", verbose_name = _('packagecondition|softwareversion'), help_text= _('packagecondition|softwareversion help text'))
     entity = models.ManyToManyField(entity,null=True, blank=True, verbose_name = _('packagecondition|entity'))
     editor = models.ForeignKey(User, null=True, verbose_name = _('packagecondition| condition last editor'))
-    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('packagecondition|condition editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('packagecondition|exclusive editor'))
 
     class Meta:
         verbose_name = _('packagecondition|package condition')
@@ -213,7 +213,7 @@ class packageprofile(models.Model):
     parent = models.ForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.SET_NULL,verbose_name = _('packageprofile|parent'))
     entity = models.ManyToManyField(entity,null=True, blank=True,  related_name='package_profile_entity', verbose_name = _('packageprofile|entity'))
     editor = models.ForeignKey(User, null=True, verbose_name = _('packageprofile| condition last editor'))
-    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('packageprofile|condition editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('packageprofile|exclusive editor'))
     
     class Meta:
         verbose_name = _('packageprofile|package profile')
@@ -265,7 +265,7 @@ class packagewakeonlan(models.Model):
     status = models.CharField(max_length=100, choices=choice, default='Programmed', verbose_name = _('packagewakeonlan|status'))
     entity = models.ManyToManyField(entity,null=True, blank=True,  related_name='packagewakonelan_entity', verbose_name = _('packagewakonelan|entity'))
     editor = models.ForeignKey(User, null=True, verbose_name = _('packagewakonelan| condition last editor'))
-    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('packagewakonelan|condition editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('packagewakonelan|exclusive editor'))
 
     class Meta:
         verbose_name = _('packagewakeonlan|package wakeonlan')
@@ -286,7 +286,7 @@ class timeprofile(models.Model):
     end_time = models.TimeField(verbose_name = _('timeprofile|end_time'))
     entity = models.ManyToManyField(entity,null=True, blank=True,  related_name='time_profile_entity', verbose_name = _('timeprofile|entity'))
     editor = models.ForeignKey(User, null=True, verbose_name = _('timeprofile| condition last editor'))
-    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('timeprofile|condition editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('timeprofile|exclusive editor'))
 
     class Meta:
         verbose_name = _('timeprofile|time profile')
@@ -309,7 +309,7 @@ class impex(models.Model):
     date = models.DateTimeField(auto_now=True, verbose_name = _('impex|date'))
     entity = models.ManyToManyField(entity,null=True, blank=True,  related_name='impex_entity', verbose_name = _('impex|entity'))
     editor = models.ForeignKey(User, null=True, verbose_name = _('impex| condition last editor'))
-    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('impex|condition editor'))
+    exclusive_editor = models.CharField(max_length=3, choices=choice_yes_no, default='no', verbose_name = _('impex|exclusive editor'))
     
     # Function below allow us to display a link to download export packages in admin.py on a readonly filefield
     def filename_link(self):
