@@ -328,6 +328,7 @@ class packagewakeonlanForm(ModelForm):
             #restrict entity choice
             self.fields["entity"].queryset = entity.objects.filter(pk__in = self.my_user.subuser.id_entities_allowed).order_by('name').distinct() 
             self.fields["entity"].required = True
+            self.fields["machines"].queryset = machine.objects.filter(entity__pk__in = self.my_user.subuser.id_entities_allowed).order_by('name').distinct() 
         if self.fields.has_key('entity'):
             self.fields['entity'].widget.can_add_related = False
     
@@ -340,7 +341,7 @@ class packagewakeonlanAdmin(ueAdmin):
     filter_horizontal = ('machines','entity')
     form = packagewakeonlanForm
     fieldsets = (
-            (_('packagewakeonlan|general information'), {'fields': ('name','description', 'date','status')}),
+            (_('packagewakeonlan|general information'), {'fields': ('name','description', 'date','status','machines')}),
                 (_('package|permissions'), {
                     'classes': ('grp-collapse grp-closed',),
                     'fields': ('entity','editor', 'exclusive_editor')}),

@@ -121,6 +121,7 @@ class machine(models.Model):
     class Meta:
         verbose_name = _('machine|machine')
         verbose_name_plural = _('machine|machines')
+        ordering = ['name']
 
     def get_pack_from_profile(self):
         return "\n".join([p.name for p in self.packageprofile.packages.all()])
