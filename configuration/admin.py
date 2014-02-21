@@ -56,7 +56,7 @@ class UserAdmin(UserAdmin):
         Use special form during user creation
         """
         defaults = {}
-        if obj is None:
+        if not obj:
             defaults.update({
             'form': self.add_form,
             'fields': admin.util.flatten_fieldsets(self.add_fieldsets),
@@ -72,6 +72,7 @@ class UserAdmin(UserAdmin):
         else:
             obj.is_staff = False
         obj.save()
+
     if settings.SHOW_PERM_CONFIG_AUTH:
         fieldsets = (
                 (None, {'fields': ('username', 'password')}),
