@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-21 10:11+0100\n"
+"POT-Creation-Date: 2014-03-21 14:35+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,19 +197,19 @@ msgstr "Aperçu"
 msgid "Merge"
 msgstr "Fusionner"
 
-#: configuration/admin.py:78 configuration/admin.py:87
+#: configuration/admin.py:79 configuration/admin.py:88
 msgid "Personal info"
 msgstr "Informations personnelles"
 
-#: configuration/admin.py:80 configuration/admin.py:89
+#: configuration/admin.py:81 configuration/admin.py:90
 msgid "Permissions"
 msgstr "Permissions"
 
-#: configuration/admin.py:81 configuration/admin.py:90
+#: configuration/admin.py:82 configuration/admin.py:91
 msgid "Important dates"
 msgstr "Evenements"
 
-#: configuration/admin.py:82 configuration/admin.py:91
+#: configuration/admin.py:83 configuration/admin.py:92
 msgid "Groups and permissions"
 msgstr "Groupes et permissions"
 
@@ -1087,11 +1087,11 @@ msgstr "Gestion des droits"
 msgid "ModelList: Links"
 msgstr "Liens"
 
-#: updatengine/settings.py:84
+#: updatengine/settings.py:85
 msgid "french"
 msgstr "français"
 
-#: updatengine/settings.py:85
+#: updatengine/settings.py:86
 msgid "english"
 msgstr "anglais"
 
@@ -1114,6 +1114,9 @@ msgstr "changer le mot de passe"
 #: updatengine/templates/admin/base.html:191
 msgid "Log out"
 msgstr "Se déconnecter"
+
+#~ msgid "subuser|user"
+#~ msgstr "Utilisateur"
 
 #, fuzzy
 #~ msgid "packagecondition|condition editor"

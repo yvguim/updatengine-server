@@ -23,7 +23,7 @@ from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
 from deploy.filters import entityFilter, machineFilter, statusFilter,\
         packageEntityFilter, packageHistoryFilter, conditionEntityFilter, conditionFilter,\
-        myPackagesFilter
+        myPackagesFilter, myConditionsFilter
 from inventory.models import entity
 from django.utils.translation import ugettext_lazy as _
 from django.forms import ModelForm
@@ -419,7 +419,7 @@ class packageconditionForm(ModelForm):
 class packageconditionAdmin(ueAdmin):
     list_display = ('name','depends','softwarename','softwareversion','editor','exclusive_editor')
     filter_horizontal = ('entity',)
-    list_filter = (conditionEntityFilter,)
+    list_filter = (conditionEntityFilter, myConditionsFilter)
     form = packageconditionForm
     fieldsets = (
             (_('packagecondition|general information'), {'fields': ('name','depends', 'softwarename', 'softwareversion')}),

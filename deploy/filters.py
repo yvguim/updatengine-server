@@ -174,3 +174,33 @@ class conditionEntityFilter(SimpleListFilter):
                 return queryset.filter(entity__name__iexact=self.value())
          else:
              return queryset
+
+class myConditionsFilter(SimpleListFilter):
+    title = _('only my conditions')
+    parameter_name = 'my_conditions'
+
+    def choices(self, cl):
+        yield {
+            'selected': self.value() is None,
+            'query_string': cl.get_query_string({}, [self.parameter_name]),
+            'display': _('no'),
+        }
+        for lookup, title in self.lookup_choices:
+            yield {
+                'selected': self.value() == force_unicode(lookup),
+                'query_string': cl.get_query_string({
+                    self.parameter_name: lookup,
+                }, []),
+                'display': title,
+            }
+
+    def lookups(self, request, model_admin):
+        return [('True',_('yes')),]
+    
+    def queryset(self, request, queryset):
+         if self.value() is not None:
+            if 'my_conditions' in request.GET:
+                return queryset.filter(editor=request.user)
+         else:
+             return queryset
+
