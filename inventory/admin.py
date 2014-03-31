@@ -78,7 +78,8 @@ class entityAdmin(ueAdmin):
                 form.base_fields["parent"].queryset = entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed).\
                         exclude(pk__in = obj.id_all_children).\
                         exclude(pk = obj.id).\
-                        order_by('name').distinct() 
+                        order_by('name').distinct()
+                form.base_fields["parent"].required = True
                 form.base_fields["parent"].empty_label = None
         else:
             if request.user.is_superuser:
