@@ -161,7 +161,8 @@ class entityFilter(SimpleListFilter):
     def queryset(self, request, queryset):
          if self.value() is not None:
             if 'entity' in request.GET:
-                return queryset.filter(entity__name__iexact=self.value())
+                list_head_entity = [entity.objects.get(name__iexact = self.value())]
+                return queryset.filter(entity__name__in = list_head_entity + entity.get_all_children(list_head_entity))
          else:
              return queryset
 

@@ -28,7 +28,7 @@ class entity(models.Model):
             ('yes', _('yes')),
             ('no', _('no'))
         )
-    name = models.CharField(max_length=100,verbose_name = _('entity|name'))
+    name = models.CharField(max_length=100, unique = True, verbose_name = _('entity|name'))
     description = models.TextField(max_length=1000,verbose_name = _('entity|description'))
     parent = models.ForeignKey('self', null=True, blank=True, related_name='child', on_delete=models.SET_NULL,verbose_name = _('entity|parent'))
     packageprofile = models.ForeignKey('deploy.packageprofile',null=True, blank=True,related_name="pprofile", on_delete=models.SET_NULL, verbose_name = _('entity|package profile'), help_text= _('entity|packages profile help text'))
