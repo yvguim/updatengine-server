@@ -69,8 +69,8 @@ class entityAdmin(ueAdmin):
         else:
             return entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed)
     
-    def get_form(self, request, obj=None): 
-        form = super(entityAdmin, self).get_form(request, obj) 
+    def get_form(self, request, obj=None, **kwargs): 
+        form = super(entityAdmin, self).get_form(request, object, **kwargs) 
         if obj is not None:
             if request.user.is_superuser: 
                 form.base_fields["parent"].queryset = entity.objects.exclude(pk__in = obj.id_all_children()).exclude(pk = obj.id) 
@@ -132,8 +132,8 @@ class machineAdmin(ueAdmin):
         formset.form.base_fields["entity"].empty_label = None
         return formset
 
-    def get_form(self, request, obj=None): 
-        form = super(machineAdmin, self).get_form(request, obj) 
+    def get_form(self, request, obj=None, **kwargs): 
+        form = super(machineAdmin, self).get_form(request, object, **kwargs) 
         if request.user.is_superuser: 
             return form
         else: 
@@ -158,8 +158,8 @@ class netAdmin(ueAdmin):
         else:
             return net.objects.filter(host__entity__pk__in = request.user.subuser.id_entities_allowed)
     
-    def get_form(self, request, obj=None): 
-        form = super(netAdmin, self).get_form(request, obj) 
+    def get_form(self, request, obj=None, **kwargs): 
+        form = super(netAdmin, self).get_form(request, object, **kwargs) 
         if request.user.is_superuser: 
             return form
         else: 
@@ -179,9 +179,9 @@ class osAdmin(ueAdmin):
             return osdistribution.objects.all()
         else:
             return osdistribution.objects.filter(host__entity__pk__in = request.user.subuser.id_entities_allowed)
-    
-    def get_form(self, request, obj=None): 
-        form = super(osAdmin, self).get_form(request, obj) 
+   
+    def get_form(self, request, obj=None, **kwargs): 
+        form = super(osAdmin, self).get_form(request, object, **kwargs) 
         if request.user.is_superuser: 
             return form
         else: 
@@ -202,14 +202,15 @@ class softwareAdmin(ueAdmin):
         else:
             return software.objects.filter(host__entity__pk__in = request.user.subuser.id_entities_allowed)
     
-    def get_form(self, request, obj=None): 
-        form = super(softwareAdmin, self).get_form(request, obj) 
+    def get_form(self, request, obj=None, **kwargs): 
+        form = super(softwareAdmin, self).get_form(request, object, **kwargs) 
         if request.user.is_superuser: 
             return form
         else: 
             form.base_fields["host"].queryset = machine.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
             form.base_fields["host"].empty_label = None
         return form 
+
 
 admin.site.register(osdistribution,osAdmin)
 admin.site.register(machine, machineAdmin)

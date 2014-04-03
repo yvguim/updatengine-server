@@ -1,21 +1,67 @@
 from django.db import models
 from django.db.models.query import QuerySet
+from django.db import connections, router
 
 
-def clone_instance(instance):
+def clone_instance(instance, fieldnames=None):
     """
         returns a copy of the passed instance.
 
         .. warning: All fields are copied, even primary key
 
-    :param instance: `django.db.models.Model`_ instance
-    :return: `django.db.models.Model`_ instance
+    :param instance: :py:class:`django.db.models.Model` instance
+    :return: :py:class:`django.db.models.Model` instance
     """
-    new_kwargs = dict([(fld.name, getattr(instance, fld.name)) for fld in instance._meta.fields])
+
+    if fieldnames is None:
+        fieldnames = [fld.name for fld in instance._meta.fields]
+
+    new_kwargs = dict([(name, getattr(instance, name)) for name in fieldnames])
     return instance.__class__(**new_kwargs)
 
 
-def get_field_value(obj, field, usedisplay=True):
+def get_copy_of_instance(instance):
+    return instance.__class__.objects.get(pk=instance.pk)
+
+
+def get_attr(obj, attr, default=None):
+    """Recursive get object's attribute. May use dot notation.
+
+    >>> class C(object): pass
+    >>> a = C()
+    >>> a.b = C()
+    >>> a.b.c = 4
+    >>> get_attr(a, 'b.c')
+    4
+
+    >>> get_attr(a, 'b.c.y', None)
+
+    >>> get_attr(a, 'b.c.y', 1)
+    1
+    """
+    if '.' not in attr:
+        ret = getattr(obj, attr, default)
+    else:
+        L = attr.split('.')
+        ret = get_attr(getattr(obj, L[0], default), '.'.join(L[1:]), default)
+
+    if isinstance(ret, BaseException):
+        raise ret
+    return ret
+
+
+def getattr_or_item(obj, name):
+    try:
+        ret = get_attr(obj, name, AttributeError())
+    except AttributeError:
+        try:
+            ret = obj[name]
+        except KeyError:
+            raise AttributeError("%s object has no attribute/item '%s'" % (obj.__class__.__name__, name))
+    return ret
+
+
+def get_field_value(obj, field, usedisplay=True, raw_callable=False):
     """
     returns the field value or field representation if get_FIELD_display exists
 
@@ -24,7 +70,7 @@ def get_field_value(obj, field, usedisplay=True):
     :param usedisplay: boolean if True return the get_FIELD_display() result
     :return: field value
 
-    >>> from django.contrib.auth.models import User, Permission
+    >>> from django.contrib.auth.models import Permission
     >>> p = Permission(name='perm')
     >>> print get_field_value(p, 'name')
     perm
@@ -37,10 +83,13 @@ def get_field_value(obj, field, usedisplay=True):
     else:
         raise ValueError('Invalid value for parameter `field`: Should be a field name or a Field instance ')
 
-    if hasattr(obj, 'get_%s_display' % fieldname) and usedisplay:
+    if usedisplay and hasattr(obj, 'get_%s_display' % fieldname):
         value = getattr(obj, 'get_%s_display' % fieldname)()
     else:
-        value = getattr(obj, fieldname)
+        value = getattr_or_item(obj, fieldname)
+
+    if not raw_callable and callable(value):
+        return value()
 
     return value
 
@@ -54,7 +103,7 @@ def get_field_by_path(model, field_path):
     :return: :class:`django.db.models.Field`
 
 
-    >>> from django.contrib.auth.models import User, Permission
+    >>> from django.contrib.auth.models import Permission
 
     >>> p = Permission(name='perm')
     >>> f = get_field_by_path(Permission, 'content_type')
@@ -107,8 +156,16 @@ def get_verbose_name(model_or_queryset, field):
     username
     >>> print unicode(get_verbose_name(User.objects.all(), 'username'))
     username
+    >>> print unicode(get_verbose_name(User.objects, 'username'))
+    username
+    >>> print unicode(get_verbose_name(User.objects, user._meta.get_field_by_name('username')[0]))
+    username
     >>> print unicode(get_verbose_name(p, 'content_type.model'))
     python model class name
+    >>> get_verbose_name(object, 'aaa')
+    Traceback (most recent call last):
+    ...
+    ValueError: `get_verbose_name` expects Manager, Queryset or Model as first parameter (got <type 'type'>)
     """
 
     if isinstance(model_or_queryset, models.Manager):
@@ -128,7 +185,7 @@ def get_verbose_name(model_or_queryset, field):
     elif isinstance(field, models.Field):
         field = field
     else:
-        raise ValueError('`get_verbose_name` field_path muset be string or Field class')
+        raise ValueError('`get_verbose_name` field_path must be string or Field class')
 
     return field.verbose_name
 
@@ -160,3 +217,8 @@ def flatten(iterable):
         else:
             result.append(el)
     return list(result)
+
+
+def model_supports_transactions(instance):
+    alias = router.db_for_write(instance)
+    return connections[alias].features.supports_transactions

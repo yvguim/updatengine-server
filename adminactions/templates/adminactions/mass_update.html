@@ -18,7 +18,7 @@
     </style>
     <script language="javascript" type="text/javascript" src="{% static 'admin/js/jquery.js' %}"></script>
     <script language="javascript" type="text/javascript" src="{% static 'admin/js/jquery.init.js' %}"></script>
-    <script language="javascript" type="text/javascript" src="{% static 'adminactions/js/massupdate.js' %}"></script>
+    <script language="javascript" type="text/javascript" src="{% static 'adminactions/js/massupdate.min.js' %}"></script>
 {% endblock %}
 
 {% block breadcrumbs %}{% if not is_popup %}
@@ -43,9 +43,7 @@
         <form action="." method="post">
             {% csrf_token %}
             <table border="1">
-                <!-- Little hack to simplify form and force save method -->
-                <input type="hidden" value="1" name="_validate" id="id__validate" checked="checked">
-                <!-- {% for field in adminform.form.configured_fields %}
+                {% for field in adminform.form.configured_fields %}
                     <tr>
                         <td>{{ field.label_tag }}</td>
                         <td colspan="4">
@@ -53,19 +51,19 @@
                             {{ field }}&nbsp;<span class="help">{{ field.help_text }}</span>
                         </td>
                     </tr>
-                    {% endfor %}
+                {% endfor %}
                 <tr>
                     <td colspan="5">
 {#                        <hr/>#}
-                    </td>-->
+                    </td>
                 </tr>
                 <tr>
-                    <th>{% trans 'field name' %}</th>
-                    <th>{% trans 'update' %}</th>
-                    <th>{% trans 'function' %}</th>
-                    <th>{% trans 'new value' %}</th>
-                    <th>{% trans 'existing values' %}
-                        <small><i>{% trans '(sample)' %}</i></small>
+                    <th>field name</th>
+                    <th>update</th>
+                    <th>function</th>
+                    <th>new value</th>
+                    <th>existing values
+                        <small><i>(sample)</i></small>
                     </th>
                 </tr>
                 {% for field in adminform.form.model_fields %}
@@ -89,17 +87,19 @@
                 {{ hidden }}
             {% endfor %}
 {#            <input type="hidden" name="action" value="{{ action }}"/>#}
-<input type="submit" name="apply" value="{% trans "Update records" %}"/>
+            <input type="submit" name="apply" value="Update records"/>
         </form>
     </div>
 {#    <div id='col2'>#}
 {#        Selected records:#}
-{#        <select size="30">#}
+{#        <ul>#}
 {#            {% for el in selection %}#}
-{#                <option>{{ el }}</option>#}
+{#                <li>#}
+{#                    <input name="prefill-with" type="radio" value="{{ object.pk }}"{% if el.pk == form.instance.pk %} checked="checked"{% endif %}>#}
+{#                    {{ el }}#}
+{#                </li>#}
 {#            {% endfor %}#}
-{#        </select>#}
-{##}
-{##}
+{#        </ul>#}
+{#        <input type="submit" class="grp-button grp-default" value="Prefill fields with selected record">#}
 {#    </div>#}
 {% endblock %}

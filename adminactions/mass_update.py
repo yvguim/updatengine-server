@@ -3,14 +3,15 @@ import json
 import datetime
 import string
 from collections import defaultdict
+
 from django import forms
 from django.db import IntegrityError, transaction
 from django.db.models import fields as df
 from django.forms import fields as ff
-from django.forms.models import modelform_factory, ModelMultipleChoiceField
+from django.forms.models import modelform_factory, ModelMultipleChoiceField, construct_instance, InlineForeignKeyField
 from django.contrib import messages
 from django.contrib.admin import helpers
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response
 from django.template.context import RequestContext
@@ -20,6 +21,7 @@ from django.utils.datastructures import SortedDict
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
+from adminactions.models import get_permission_codename
 from adminactions.exceptions import ActionInterrupted
 from adminactions.forms import GenericActionForm
 from adminactions.signals import adminaction_requested, adminaction_start, adminaction_end
@@ -58,8 +60,8 @@ class OperationManager(object):
     description: string description of the operator
     """
 
-    COMMON = [(_('set'), (None, True, disable_if_unique, "")),
-              (_('set null'), (lambda old_value: None, False, disable_if_not_nullable, ""))]
+    COMMON = [('set', (None, True, disable_if_unique, "")),
+              ('set null', (lambda old_value: None, False, disable_if_not_nullable, ""))]
 
     def __init__(self, _dict):
         self._dict = dict()
@@ -85,42 +87,43 @@ class OperationManager(object):
         return self.get(field_class)
 
 
-#OPERATIONS = OperationManager({
-#    df.CharField: [('upper', (string.upper, False, True, "convert to uppercase")),
-#                   ('lower', (string.lower, False, True, "convert to lowercase")),
-#                   ('capitalize', (string.capitalize, False, True, "capitalize first character")),
-#                   ('capwords', (string.capwords, False, True, "capitalize each word")),
-#                   ('swapcase', (string.swapcase, False, True, "")),
-#                   ('trim', (string.strip, False, True, "leading and trailing whitespace"))],
-#    df.IntegerField: [('add percent', (add_percent, True, True, "add <arg> percent to existing value")),
-#                      ('sub percent', (sub_percent, True, True, "")),
-#                      ('sub', (sub_percent, True, True, "")),
-#                      ('add', (add, True, True, ""))],
-#    df.BooleanField: [('swap', (negate, False, True, ""))],
-#    df.NullBooleanField: [('swap', (negate, False, True, ""))],
-#    df.EmailField: [('change domain', (change_domain, True, True, ""))],
-#    df.URLField: [('change protocol', (change_protocol, True, True, ""))]
-#})
 OPERATIONS = OperationManager({
-    df.CharField: [],
-    df.IntegerField: [],
-    df.BooleanField: [],
-    df.NullBooleanField: [],
-    df.EmailField: [],
-    df.URLField: []
+    df.CharField: [('upper', (string.upper, False, True, "convert to uppercase")),
+                   ('lower', (string.lower, False, True, "convert to lowercase")),
+                   ('capitalize', (string.capitalize, False, True, "capitalize first character")),
+                   ('capwords', (string.capwords, False, True, "capitalize each word")),
+                   ('swapcase', (string.swapcase, False, True, "")),
+                   ('trim', (string.strip, False, True, "leading and trailing whitespace"))],
+    df.IntegerField: [('add percent', (add_percent, True, True, "add <arg> percent to existing value")),
+                      ('sub percent', (sub_percent, True, True, "")),
+                      ('sub', (sub_percent, True, True, "")),
+                      ('add', (add, True, True, ""))],
+    df.BooleanField: [('swap', (negate, False, True, ""))],
+    df.NullBooleanField: [('swap', (negate, False, True, ""))],
+    df.EmailField: [('change domain', (change_domain, True, True, ""))],
+    df.URLField: [('change protocol', (change_protocol, True, True, ""))]
 })
 
 
 class MassUpdateForm(GenericActionForm):
+    _no_sample_for = []
+    _clean = forms.BooleanField(label='clean()',
+                                required=False,
+                                help_text="if checked calls obj.clean()")
+
     _validate = forms.BooleanField(label='Validate',
                                    help_text="if checked use obj.save() instead of manager.update()")
     _unique_transaction = forms.BooleanField(label='Unique transaction',
-                                             help_text="if checked create one transaction for the whole update. "
-                                                       "If some record cannot be updated everything will be rolled-back")
+                                             required=False,
+                                             help_text="If checked create one transaction for the whole update. "
+                                                       "If any record cannot be updated everything will be rolled-back")
 
     def __init__(self, *args, **kwargs):
         super(MassUpdateForm, self).__init__(*args, **kwargs)
         self._errors = None
+
+    #def is_valid(self):
+    #    return super(MassUpdateForm, self).is_valid()
 
     def _get_validation_exclusions(self):
         exclude = super(MassUpdateForm, self)._get_validation_exclusions()
@@ -129,6 +132,25 @@ class MassUpdateForm(GenericActionForm):
             if function:
                 exclude.append(name)
         return exclude
+
+    #def _clean_fields(self):
+    #    if self.cleaned_data.get('_clean', False):
+    #        super(MassUpdateForm, self)._clean_fields()
+    #
+    def _post_clean(self):
+        # must be overriden to bypass instance.clean()
+        if self.cleaned_data.get('_clean', False):
+            opts = self._meta
+            self.instance = construct_instance(self, self.instance, opts.fields, opts.exclude)
+            exclude = self._get_validation_exclusions()
+            for f_name, field in self.fields.items():
+                if isinstance(field, InlineForeignKeyField):
+                    exclude.append(f_name)
+                    # Clean the model instance's fields.
+            try:
+                self.instance.clean_fields(exclude=exclude)
+            except ValidationError, e:
+                self._update_errors(e.message_dict)
 
     def _clean_fields(self):
         for name, field in self.fields.items():
@@ -164,8 +186,11 @@ class MassUpdateForm(GenericActionForm):
     def clean__validate(self):
         return bool(self.data.get('_validate', 0))
 
-#    def clean(self):
-#        return super(MassUpdateForm, self).clean()
+    def clean__unique_transaction(self):
+        return bool(self.data.get('_unique_transaction', 0))
+
+    def clean__clean(self):
+        return bool(self.data.get('_clean', 0))
 
 
 def mass_update(modeladmin, request, queryset):
@@ -178,12 +203,18 @@ def mass_update(modeladmin, request, queryset):
         kwargs['required'] = False
         return field.formfield(**kwargs)
 
-    if not request.user.has_perm('adminactions_massupdate'):
+    opts = modeladmin.model._meta
+    perm = "{0}.{1}".format(opts.app_label.lower(), get_permission_codename('adminactions_massupdate', opts))
+    if not request.user.has_perm(perm):
         messages.error(request, _('Sorry you do not have rights to execute this action'))
         return
 
     try:
-        adminaction_requested.send(sender=modeladmin.model, action='mass_update', request=request, queryset=queryset)
+        adminaction_requested.send(sender=modeladmin.model,
+                                   action='mass_update',
+                                   request=request,
+                                   queryset=queryset,
+                                   modeladmin=modeladmin)
     except ActionInterrupted as e:
         messages.error(request, str(e))
         return
@@ -194,24 +225,34 @@ def mass_update(modeladmin, request, queryset):
     MForm = modelform_factory(modeladmin.model, form=mass_update_form, formfield_callback=not_required)
     grouped = defaultdict(lambda: [])
     selected_fields = []
+    initial = {'_selected_action': request.POST.getlist(helpers.ACTION_CHECKBOX_NAME),
+               'select_across': request.POST.get('select_across') == '1',
+               'action': 'mass_update'}
+
     if 'apply' in request.POST:
         form = MForm(request.POST)
         if form.is_valid():
             try:
-                adminaction_start.send(sender=modeladmin.model, action='mass_update',
-                                       request=request, queryset=queryset, form=form)
+                adminaction_start.send(sender=modeladmin.model,
+                                       action='mass_update',
+                                       request=request,
+                                       queryset=queryset,
+                                       modeladmin=modeladmin,
+                                       form=form)
             except ActionInterrupted as e:
                 messages.error(request, str(e))
                 return HttpResponseRedirect(request.get_full_path())
 
             need_transaction = form.cleaned_data.get('_unique_transaction', False)
             validate = form.cleaned_data.get('_validate', False)
+            clean = form.cleaned_data.get('_clean', False)
 
             updated = 0
             errors = {}
             if validate:
                 if need_transaction:
                     transaction.enter_transaction_management()
+                    transaction.managed(True)
                 for record in queryset:
                     for field_name, value_or_func in form.cleaned_data.items():
                         if callable(value_or_func):
@@ -220,7 +261,8 @@ def mass_update(modeladmin, request, queryset):
                         else:
                             setattr(record, field_name, value_or_func)
                     try:
-                        record.clean()
+                        if clean:
+                            record.clean()
                         record.save()
                     except IntegrityError as e:
                         errors[record.pk] = str(e)
@@ -239,13 +281,18 @@ def mass_update(modeladmin, request, queryset):
                                          action='mass_update',
                                          request=request,
                                          queryset=queryset,
+                                         modeladmin=modeladmin,
                                          form=form,
-                                         errors=errors)
+                                         errors=errors,
+                                         updated=updated)
                     if need_transaction:
                         transaction.commit()
                 except ActionInterrupted:
                     if need_transaction:
                         transaction.rollback()
+                finally:
+                    if need_transaction:
+                        transaction.leave_transaction_management()
 
             else:
                 values = {}
@@ -262,14 +309,21 @@ def mass_update(modeladmin, request, queryset):
 
             return HttpResponseRedirect(request.get_full_path())
     else:
-        machines_selected = [ machine.id for machine in queryset]
-        initial = {'_selected_action': machines_selected,
-                   'action': 'mass_update',
-                   '_validate': 1}
-        form = MForm(initial=initial)
+        initial.update({'action': 'mass_update', '_validate': 1})
+        #form = MForm(initial=initial)
+        prefill_with = request.POST.get('prefill-with', None)
+        prefill_instance = None
+        try:
+            # Gets the instance directly from the queryset for data security
+            prefill_instance = queryset.get(pk=prefill_with)
+        except ObjectDoesNotExist:
+            pass
 
-        for el in queryset.all()[:10]:
-            for f in modeladmin.model._meta.fields:
+        form = MForm(initial=initial, instance=prefill_instance)
+
+    for el in queryset.all()[:10]:
+        for f in modeladmin.model._meta.fields:
+            if f.name not in form._no_sample_for:
                 if hasattr(f, 'flatchoices') and f.flatchoices:
                     grouped[f.name] = dict(getattr(f, 'flatchoices')).values()
                 elif hasattr(f, 'choices') and f.choices:
@@ -280,7 +334,7 @@ def mass_update(modeladmin, request, queryset):
                     value = getattr(el, f.name)
                     if value is not None and value not in grouped[f.name]:
                         grouped[f.name].append(value)
-                initial[f.name] = initial.get(f.name, value)
+                    initial[f.name] = initial.get(f.name, value)
 
     adminForm = helpers.AdminForm(form, modeladmin.get_fieldsets(request), {}, [], model_admin=modeladmin)
     media = modeladmin.media + adminForm.media
@@ -288,7 +342,7 @@ def mass_update(modeladmin, request, queryset):
     tpl = 'adminactions/mass_update.html'
     ctx = {'adminform': adminForm,
            'form': form,
-           'title': _("Mass update %s") % force_unicode(modeladmin.opts.verbose_name_plural),
+           'title': u"Mass update %s" % force_unicode(modeladmin.opts.verbose_name_plural),
            'grouped': grouped,
            'fieldvalues': json.dumps(grouped, default=dthandler),
            'change': True,
@@ -308,4 +362,4 @@ def mass_update(modeladmin, request, queryset):
     return render_to_response(tpl, RequestContext(request, ctx))
 
 
-mass_update.short_description = _("Mass update")
+mass_update.short_description = "Mass update"

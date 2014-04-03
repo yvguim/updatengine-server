@@ -26,7 +26,7 @@
                             }
                     );
                 };
-                $('#id_datetime_format, #id_date_format, #id_time_format,').after('&nbsp;&nbsp;<span class="sample"></span>').keyup(function () {
+                $('#id_datetime_format, #id_date_format, #id_time_format').after('&nbsp;&nbsp;<span class="sample"></span>').keyup(function () {
                     clearTimeout($(this).data('timer'));
                     var target = $(this);
                     var wait = setTimeout(function () {
@@ -47,7 +47,7 @@
         <a href="{% url 'admin:index' %}{{ app_label}}">{{ app_label|capfirst }}</a> &rsaquo;
         {% if has_change_permission %}<a
                 href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} &rsaquo;
-            {% trans 'CSV Export Options' %}
+        {% trans "CSV Export Options" %}
     </div>
 {% endif %}{% endblock %}
 
@@ -66,16 +66,16 @@
                 {{ adminform.form }}
             </table>
 {#            <input type="hidden" name="action" value="{{ action }}"/>#}
-            <input type="submit" name="apply" value="Export"/>
+            <input type="submit" name="apply" value="{% trans 'Export' %}"/>
         </form>
     </div>
     {% url 'adminactions.format_date' as url_format_date %}
-    <!--YG: Dirty hack to remove format date legend -->
-    {% if url_format_date and False %}
+    {% if url_format_date %}
     <div id='legend-date'>
     <table xmlns="http://www.w3.org/1999/xhtml" lass="doctable table">
     <caption><b>The following characters are recognized in the
         <i><tt class="parameter">format</tt></i> parameter string</b></caption>
+
     <thead valign="middle">
     <tr valign="middle">
         <th><i><tt class="parameter">format</tt></i> character</th>
