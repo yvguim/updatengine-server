@@ -23,7 +23,7 @@ from django.contrib.admin import DateFieldListFilter
 from django.utils.translation import ugettext_lazy as _
 from inventory.filters import enableFilter, as_or_notFilter, softwareFilter, versionFilter
 from inventory.filters import (entityFilter, domainFilter,usernameFilter,languageFilter,typemachineFilter,\
-        osdistributionFilter, timeprofileFilter,packageprofileFilter, hostFilter,\
+        osdistributionFilter, timeprofileFilter,packageprofileFilter, hostFilter, commentFilter, \
         osnameFilter,osversionFilter,osarchFilter)
 from deploy.models import package
 class ueAdmin(admin.ModelAdmin):
@@ -97,7 +97,7 @@ class machineAdmin(ueAdmin):
     fields = ['name', 'comment', 'serial','uuid','domain','username','language', 'vendor','product','manualy_created','entity','typemachine','timeprofile','packageprofile','packages']
     list_display = ('lastsave','entity','name','domain','username','vendor','product','typemachine','packageprofile','timeprofile','comment')
     list_editable = ('entity','packageprofile','timeprofile','comment')
-    list_filter = (('lastsave', DateFieldListFilter), entityFilter, domainFilter,usernameFilter,languageFilter,typemachineFilter,osarchFilter, osdistributionFilter, timeprofileFilter,packageprofileFilter, enableFilter, as_or_notFilter, softwareFilter, versionFilter)
+    list_filter = (('lastsave', DateFieldListFilter), entityFilter, domainFilter,usernameFilter,languageFilter,typemachineFilter,osarchFilter, osdistributionFilter, commentFilter, timeprofileFilter,packageprofileFilter, enableFilter, as_or_notFilter, softwareFilter, versionFilter)
     search_fields = ('name', 'serial','vendor','product','domain','username','language','comment')
     readonly_fields = ('typemachine', 'manualy_created',)
     inlines = [osInline, netInline, softInline]

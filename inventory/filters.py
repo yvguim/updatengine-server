@@ -384,3 +384,20 @@ class hostFilter(SimpleListFilter):
                  return queryset.filter(host__name__iexact=self.value())
          else:
              return queryset
+
+class commentFilter(SimpleListFilter):
+    title = _('commentFilter')
+    parameter_name = 'comment'
+ 
+    def lookups(self, request, model_admin):
+        if request.user.is_superuser:
+            return machine.objects.all().order_by('comment').values_list('comment','comment').distinct()
+        else:
+            return machine.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('comment').values_list('comment','comment').distinct()
+    
+    def queryset(self, request, queryset):
+         if self.value() is not None:
+             if 'comment' in request.GET:
+                 return queryset.filter(comment__iexact=self.value())
+         else:
+             return queryset
