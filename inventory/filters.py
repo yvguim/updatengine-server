@@ -360,7 +360,11 @@ class osarchFilter(SimpleListFilter):
     def queryset(self, request, queryset):
          if self.value() is not None:
              if 'osarch' in request.GET:
-                 return queryset.filter(arch__iexact=self.value())
+                 # Allow filter to be used with machine or osdistribution objects
+                 if type(queryset[0]) == machine:
+                    return queryset.filter(osdistribution__arch__iexact=self.value())
+                 else:
+                    return queryset.filter(arch__iexact=self.value())
          else:
              return queryset
 
