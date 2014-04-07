@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-21 14:35+0100\n"
+"POT-Creation-Date: 2014-04-07 11:32+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,125 +31,158 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: adminactions/export.py:44
-msgid "header"
+#: adminactions/export.py:30 adminactions/export.py:212
+#: adminactions/export.py:289 adminactions/merge.py:79
+#, python-format
+msgid "Sorry you do not have rights to execute this action (%s)"
 msgstr ""
 
-#: adminactions/export.py:45
-msgid "delimiter"
-msgstr ""
-
-#: adminactions/export.py:46
-msgid "quotechar"
-msgstr ""
-
-#: adminactions/export.py:47
-msgid "quoting"
-msgstr ""
-
-#: adminactions/export.py:48
-msgid "All"
-msgstr ""
-
-#: adminactions/export.py:49
-msgid "Minimal"
-msgstr ""
-
-#: adminactions/export.py:50
-msgid "None"
-msgstr ""
-
-#: adminactions/export.py:51
-msgid "Non Numeric"
-msgstr ""
-
-#: adminactions/export.py:53
-msgid "escapechar"
-msgstr ""
-
-#: adminactions/export.py:65 adminactions/export.py:253
-#: adminactions/export.py:321 adminactions/mass_update.py:182
-msgid "Sorry you do not have rights to execute this action"
-msgstr ""
-
-#: adminactions/export.py:146
-msgid "Export to CSV"
-msgstr ""
-
-#: adminactions/export.py:159
+#: adminactions/export.py:111 adminactions/export.py:116
+#: adminactions.back/export.py:159
 msgid "Export as CSV"
 msgstr ""
 
-#: adminactions/export.py:299
+#: adminactions/export.py:123 adminactions/export.py:128
+msgid "Export as XLS"
+msgstr ""
+
+#: adminactions/export.py:265 adminactions.back/export.py:299
 msgid "Export as Fixture"
 msgstr ""
 
-#: adminactions/export.py:377
+#: adminactions/export.py:278
+msgid "Export as fixture"
+msgstr ""
+
+#: adminactions/export.py:351 adminactions.back/export.py:377
 msgid "Export Delete Tree"
 msgstr ""
 
-#: adminactions/mass_update.py:61
-msgid "set"
+#: adminactions/export.py:364
+msgid "Export delete tree"
 msgstr ""
 
-#: adminactions/mass_update.py:62
-msgid "set null"
+#: adminactions/mass_update.py:209 adminactions.back/export.py:65
+#: adminactions.back/export.py:253 adminactions.back/export.py:321
+#: adminactions.back/mass_update.py:182
+msgid "Sorry you do not have rights to execute this action"
 msgstr ""
 
-#: adminactions/mass_update.py:234
+#: adminactions/mass_update.py:276 adminactions.back/mass_update.py:234
 #, python-format
 msgid "Updated %s records"
 msgstr ""
 
-#: adminactions/mass_update.py:291
+#: adminactions/merge.py:32 adminactions.back/merge.py:25
+msgid "Dependencies"
+msgstr ""
+
+#: adminactions/merge.py:33 adminactions.back/merge.py:26
+msgid "Move"
+msgstr ""
+
+#: adminactions/merge.py:33 adminactions.back/merge.py:26
+msgid "Delete"
+msgstr ""
+
+#: adminactions/merge.py:152 adminactions.back/merge.py:107
+msgid "Please select exactly 2 records"
+msgstr ""
+
+#: adminactions/merge.py:176
+#, python-format
+msgid "Merge selected %(verbose_name_plural)s"
+msgstr ""
+
+#: adminactions.back/export.py:44
+msgid "header"
+msgstr ""
+
+#: adminactions.back/export.py:45
+msgid "delimiter"
+msgstr ""
+
+#: adminactions.back/export.py:46
+msgid "quotechar"
+msgstr ""
+
+#: adminactions.back/export.py:47
+msgid "quoting"
+msgstr ""
+
+#: adminactions.back/export.py:48
+msgid "All"
+msgstr ""
+
+#: adminactions.back/export.py:49
+msgid "Minimal"
+msgstr ""
+
+#: adminactions.back/export.py:50
+msgid "None"
+msgstr ""
+
+#: adminactions.back/export.py:51
+msgid "Non Numeric"
+msgstr ""
+
+#: adminactions.back/export.py:53
+msgid "escapechar"
+msgstr ""
+
+#: adminactions.back/export.py:146
+msgid "Export to CSV"
+msgstr ""
+
+#: adminactions.back/mass_update.py:61
+msgid "set"
+msgstr ""
+
+#: adminactions.back/mass_update.py:62
+msgid "set null"
+msgstr ""
+
+#: adminactions.back/mass_update.py:291
 #, python-format
 msgid "Mass update %s"
 msgstr ""
 
-#: adminactions/mass_update.py:311
+#: adminactions.back/mass_update.py:311
 msgid "Mass update"
 msgstr ""
 
-#: adminactions/merge.py:25
-msgid "Dependencies"
-msgstr ""
-
-#: adminactions/merge.py:26
-msgid "Move"
-msgstr ""
-
-#: adminactions/merge.py:26
-msgid "Delete"
-msgstr ""
-
-#: adminactions/merge.py:28
+#: adminactions.back/merge.py:28
 msgid "Search GenericForeignKeys"
 msgstr ""
 
-#: adminactions/merge.py:29
+#: adminactions.back/merge.py:29
 msgid "Search for generic relation"
 msgstr ""
 
-#: adminactions/merge.py:30
+#: adminactions.back/merge.py:30
 msgid "No"
 msgstr ""
 
-#: adminactions/merge.py:31
+#: adminactions.back/merge.py:31
 msgid "Only Related (look for Managers)"
 msgstr ""
 
-#: adminactions/merge.py:32
+#: adminactions.back/merge.py:32
 msgid "Analyze Mode (very slow)"
 msgstr ""
 
-#: adminactions/merge.py:107
-msgid "Please select exactly 2 records"
-msgstr ""
-
+#: adminactions.back/templates/adminactions/any_model.html:26
+#: adminactions.back/templates/adminactions/charts.html:34
+#: adminactions.back/templates/adminactions/export_csv.html:46
+#: adminactions.back/templates/adminactions/export_fixture.html:6
+#: adminactions.back/templates/adminactions/mass_update.html:26
+#: adminactions.back/templates/adminactions/merge.html:5
+#: adminactions.back/templates/adminactions/merge_preview.html:5
 #: adminactions/templates/adminactions/any_model.html:26
-#: adminactions/templates/adminactions/charts.html:34
+#: adminactions/templates/adminactions/charts.html:18
 #: adminactions/templates/adminactions/export_csv.html:46
 #: adminactions/templates/adminactions/export_fixture.html:6
+#: adminactions/templates/adminactions/export_xls.html:19
 #: adminactions/templates/adminactions/mass_update.html:26
 #: adminactions/templates/adminactions/merge.html:5
 #: adminactions/templates/adminactions/merge_preview.html:5
@@ -157,44 +190,97 @@ msgstr ""
 msgid "Home"
 msgstr ""
 
+#: adminactions.back/templates/adminactions/export_csv.html:50
 #: adminactions/templates/adminactions/export_csv.html:50
 msgid "CSV Export Options"
 msgstr ""
 
-#: adminactions/templates/adminactions/mass_update.html:63
+#: adminactions.back/templates/adminactions/mass_update.html:63
 msgid "field name"
 msgstr ""
 
-#: adminactions/templates/adminactions/mass_update.html:64
+#: adminactions.back/templates/adminactions/mass_update.html:64
 msgid "update"
 msgstr ""
 
-#: adminactions/templates/adminactions/mass_update.html:65
+#: adminactions.back/templates/adminactions/mass_update.html:65
 msgid "function"
 msgstr ""
 
-#: adminactions/templates/adminactions/mass_update.html:66
+#: adminactions.back/templates/adminactions/mass_update.html:66
 msgid "new value"
 msgstr ""
 
-#: adminactions/templates/adminactions/mass_update.html:67
+#: adminactions.back/templates/adminactions/mass_update.html:67
 msgid "existing values"
 msgstr ""
 
-#: adminactions/templates/adminactions/mass_update.html:68
+#: adminactions.back/templates/adminactions/mass_update.html:68
 msgid "(sample)"
 msgstr ""
 
-#: adminactions/templates/adminactions/mass_update.html:92
+#: adminactions.back/templates/adminactions/mass_update.html:92
 msgid "Update records"
 msgstr ""
 
+#: adminactions.back/templates/adminactions/merge.html:70
 #: adminactions/templates/adminactions/merge.html:70
+#: adminactions/templates/adminactions/merge_preview.html:9
 msgid "Preview"
 msgstr ""
 
-#: adminactions/templates/adminactions/merge_preview.html:40
+#: adminactions.back/templates/adminactions/merge_preview.html:40
+#: adminactions/templates/adminactions/merge_preview.html:39
 msgid "Merge"
+msgstr ""
+
+#: adminactions/templates/adminactions/export_csv.html:69
+msgid "Export"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge.html:8
+#: adminactions/templates/adminactions/merge_preview.html:8
+msgid "Merge records"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge.html:35
+msgid "Field"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge.html:36
+msgid "Master"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge.html:36
+msgid "This will be preserved"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge.html:38
+msgid "swap"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge.html:39
+msgid "Result"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge.html:41
+msgid "Other"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge.html:41
+msgid "This will be removed"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge_preview.html:18
+msgid "Key"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge_preview.html:23
+msgid "Original"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge_preview.html:24
+msgid "After Merging"
 msgstr ""
 
 #: configuration/admin.py:79 configuration/admin.py:88
@@ -213,15 +299,15 @@ msgstr ""
 msgid "Groups and permissions"
 msgstr ""
 
-#: configuration/models.py:29 deploy/filters.py:126 inventory/filters.py:12
-#: inventory/models.py:28 inventory/models.py:99 inventory/models.py:171
-#: inventory/models.py:192 inventory/models.py:212
+#: configuration/models.py:29 deploy/filters.py:126 deploy/filters.py:198
+#: inventory/filters.py:12 inventory/models.py:28 inventory/models.py:99
+#: inventory/models.py:172 inventory/models.py:193 inventory/models.py:213
 msgid "yes"
 msgstr "yes"
 
-#: configuration/models.py:30 deploy/filters.py:114 inventory/filters.py:21
-#: inventory/models.py:29 inventory/models.py:100 inventory/models.py:172
-#: inventory/models.py:193 inventory/models.py:213
+#: configuration/models.py:30 deploy/filters.py:114 deploy/filters.py:186
+#: inventory/filters.py:21 inventory/models.py:29 inventory/models.py:100
+#: inventory/models.py:173 inventory/models.py:194 inventory/models.py:214
 msgid "no"
 msgstr "no"
 
@@ -361,7 +447,7 @@ msgstr "description"
 msgid "entity"
 msgstr "name"
 
-#: deploy/filters.py:30 inventory/filters.py:367
+#: deploy/filters.py:30 inventory/filters.py:372
 msgid "hostFilter"
 msgstr ""
 
@@ -382,6 +468,10 @@ msgstr ""
 #, fuzzy
 msgid "packagecondition"
 msgstr "conditions"
+
+#: deploy/filters.py:179
+msgid "only my conditions"
+msgstr ""
 
 #: deploy/models.py:41 deploy/models.py:72 deploy/models.py:207
 #: deploy/models.py:254 deploy/models.py:280 deploy/models.py:301
@@ -780,11 +870,11 @@ msgstr "import/export"
 msgid "impex|imports/exports"
 msgstr "Imports/Exports"
 
-#: inventory/admin.py:118
+#: inventory/admin.py:119
 msgid "force_wakeup"
 msgstr "Wake up now"
 
-#: inventory/admin.py:123
+#: inventory/admin.py:124
 msgid "force_inventory"
 msgstr "Force inventory now"
 
@@ -812,52 +902,56 @@ msgstr "name"
 msgid "softversion"
 msgstr "version"
 
-#: inventory/filters.py:171
+#: inventory/filters.py:172
 #, fuzzy
 msgid "domain"
 msgstr "domain"
 
-#: inventory/filters.py:192
+#: inventory/filters.py:193
 #, fuzzy
 msgid "username"
 msgstr "username"
 
-#: inventory/filters.py:213
+#: inventory/filters.py:214
 #, fuzzy
 msgid "language"
 msgstr "Operating system language is:"
 
-#: inventory/filters.py:234
+#: inventory/filters.py:235
 #, fuzzy
 msgid "typemachine"
 msgstr "name"
 
-#: inventory/filters.py:255
+#: inventory/filters.py:256
 #, fuzzy
 msgid "osdistribution"
 msgstr "OS name"
 
-#: inventory/filters.py:276
+#: inventory/filters.py:277
 #, fuzzy
 msgid "timeprofile"
 msgstr "profile name"
 
-#: inventory/filters.py:297
+#: inventory/filters.py:298
 #, fuzzy
 msgid "packageprofile"
 msgstr "name"
 
-#: inventory/filters.py:316
+#: inventory/filters.py:317
 msgid "osname"
 msgstr ""
 
-#: inventory/filters.py:333
+#: inventory/filters.py:334
 #, fuzzy
 msgid "osversion"
 msgstr "version"
 
-#: inventory/filters.py:350
+#: inventory/filters.py:351
 msgid "osarch"
+msgstr ""
+
+#: inventory/filters.py:389
+msgid "commentFilter"
 msgstr ""
 
 #: inventory/models.py:31
@@ -1008,99 +1102,104 @@ msgstr "software to install manualy"
 msgid "machine|manualy_created"
 msgstr "manualy created machine"
 
-#: inventory/models.py:122
+#: inventory/models.py:120
+#, fuzzy
+msgid "machine|comment"
+msgstr "domain"
+
+#: inventory/models.py:123
 msgid "machine|machine"
 msgstr "machine"
 
-#: inventory/models.py:123 updatengine/templates/admin/base.html:86
+#: inventory/models.py:124 updatengine/templates/admin/base.html:86
 msgid "machine|machines"
 msgstr "    Machines"
 
-#: inventory/models.py:174
+#: inventory/models.py:175
 msgid "osdistribution|name"
 msgstr "OS name"
 
-#: inventory/models.py:175
+#: inventory/models.py:176
 msgid "osdistribution|version"
 msgstr "version"
 
-#: inventory/models.py:176
+#: inventory/models.py:177
 msgid "osdistribution|arch"
 msgstr "architecture"
 
-#: inventory/models.py:177
+#: inventory/models.py:178
 msgid "osdistribution|systemdrive"
 msgstr "system drive"
 
-#: inventory/models.py:178
+#: inventory/models.py:179
 msgid "osdistribution|host"
 msgstr "machine"
 
-#: inventory/models.py:179
+#: inventory/models.py:180
 msgid "osdistribution|manualy_created"
 msgstr "system created manualy"
 
-#: inventory/models.py:185
+#: inventory/models.py:186
 msgid "osdistribution|osdistribution"
 msgstr "system and architecture"
 
-#: inventory/models.py:186 updatengine/templates/admin/base.html:102
+#: inventory/models.py:187 updatengine/templates/admin/base.html:102
 msgid "osdistribution|osdistributions"
 msgstr "Systems and architectures"
 
-#: inventory/models.py:195
+#: inventory/models.py:196
 msgid "net|ip"
 msgstr "IP adress"
 
-#: inventory/models.py:196
+#: inventory/models.py:197
 msgid "net|mask"
 msgstr "netmask"
 
-#: inventory/models.py:197
+#: inventory/models.py:198
 msgid "net|mac"
 msgstr "Mac address"
 
-#: inventory/models.py:198
+#: inventory/models.py:199
 msgid "net|host"
 msgstr "machine"
 
-#: inventory/models.py:199
+#: inventory/models.py:200
 msgid "net|manualy_created"
 msgstr "network created manualy"
 
-#: inventory/models.py:205
+#: inventory/models.py:206
 msgid "net|network"
 msgstr "network"
 
-#: inventory/models.py:206 updatengine/templates/admin/base.html:98
+#: inventory/models.py:207 updatengine/templates/admin/base.html:98
 msgid "net|networks"
 msgstr " Networks"
 
-#: inventory/models.py:215
+#: inventory/models.py:216
 msgid "software|name"
 msgstr "name"
 
-#: inventory/models.py:216
+#: inventory/models.py:217
 msgid "software|version"
 msgstr "version"
 
-#: inventory/models.py:217
+#: inventory/models.py:218
 msgid "software|uninstall"
 msgstr "uninstall"
 
-#: inventory/models.py:218
+#: inventory/models.py:219
 msgid "software|host"
 msgstr "machine"
 
-#: inventory/models.py:219
+#: inventory/models.py:220
 msgid "software|manualy_created"
 msgstr "software created manualy"
 
-#: inventory/models.py:225
+#: inventory/models.py:226
 msgid "software|software"
 msgstr "software"
 
-#: inventory/models.py:226 updatengine/templates/admin/base.html:94
+#: inventory/models.py:227 updatengine/templates/admin/base.html:94
 msgid "software|softwares"
 msgstr "  Software packages"
 
@@ -1116,11 +1215,11 @@ msgstr "Rights confguration"
 msgid "ModelList: Links"
 msgstr "Links"
 
-#: updatengine/settings.py:85
+#: updatengine/settings.py:82
 msgid "french"
 msgstr "french"
 
-#: updatengine/settings.py:86
+#: updatengine/settings.py:83
 msgid "english"
 msgstr "english"
 
