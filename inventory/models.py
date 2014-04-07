@@ -117,6 +117,7 @@ class machine(models.Model):
     softsum = models.CharField(max_length=40, null = True, blank=True, verbose_name = _('machine|softsum'))
     packages = models.ManyToManyField('deploy.package',null = True, blank = True, verbose_name = _('machine|packages'))
     manualy_created = models.CharField(max_length=3, choices=choice, default='yes', verbose_name = _('machine|manualy_created'))
+    comment = models.CharField(max_length=200, null = True, blank=True, verbose_name = _('machine|comment'))
 
     class Meta:
         verbose_name = _('machine|machine')
