@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-07 11:32+0200\n"
+"POT-Creation-Date: 2014-05-08 13:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,7 +38,6 @@ msgid "Sorry you do not have rights to execute this action (%s)"
 msgstr ""
 
 #: adminactions/export.py:111 adminactions/export.py:116
-#: adminactions.back/export.py:159
 msgid "Export as CSV"
 msgstr ""
 
@@ -46,7 +45,7 @@ msgstr ""
 msgid "Export as XLS"
 msgstr ""
 
-#: adminactions/export.py:265 adminactions.back/export.py:299
+#: adminactions/export.py:265
 msgid "Export as Fixture"
 msgstr ""
 
@@ -54,7 +53,7 @@ msgstr ""
 msgid "Export as fixture"
 msgstr ""
 
-#: adminactions/export.py:351 adminactions.back/export.py:377
+#: adminactions/export.py:351
 msgid "Export Delete Tree"
 msgstr ""
 
@@ -62,30 +61,28 @@ msgstr ""
 msgid "Export delete tree"
 msgstr ""
 
-#: adminactions/mass_update.py:209 adminactions.back/export.py:65
-#: adminactions.back/export.py:253 adminactions.back/export.py:321
-#: adminactions.back/mass_update.py:182
+#: adminactions/mass_update.py:209
 msgid "Sorry you do not have rights to execute this action"
 msgstr ""
 
-#: adminactions/mass_update.py:276 adminactions.back/mass_update.py:234
+#: adminactions/mass_update.py:276
 #, python-format
 msgid "Updated %s records"
 msgstr ""
 
-#: adminactions/merge.py:32 adminactions.back/merge.py:25
+#: adminactions/merge.py:32
 msgid "Dependencies"
 msgstr ""
 
-#: adminactions/merge.py:33 adminactions.back/merge.py:26
+#: adminactions/merge.py:33
 msgid "Move"
 msgstr ""
 
-#: adminactions/merge.py:33 adminactions.back/merge.py:26
+#: adminactions/merge.py:33
 msgid "Delete"
 msgstr ""
 
-#: adminactions/merge.py:152 adminactions.back/merge.py:107
+#: adminactions/merge.py:152
 msgid "Please select exactly 2 records"
 msgstr ""
 
@@ -94,90 +91,6 @@ msgstr ""
 msgid "Merge selected %(verbose_name_plural)s"
 msgstr ""
 
-#: adminactions.back/export.py:44
-msgid "header"
-msgstr ""
-
-#: adminactions.back/export.py:45
-msgid "delimiter"
-msgstr ""
-
-#: adminactions.back/export.py:46
-msgid "quotechar"
-msgstr ""
-
-#: adminactions.back/export.py:47
-msgid "quoting"
-msgstr ""
-
-#: adminactions.back/export.py:48
-msgid "All"
-msgstr ""
-
-#: adminactions.back/export.py:49
-msgid "Minimal"
-msgstr ""
-
-#: adminactions.back/export.py:50
-msgid "None"
-msgstr ""
-
-#: adminactions.back/export.py:51
-msgid "Non Numeric"
-msgstr ""
-
-#: adminactions.back/export.py:53
-msgid "escapechar"
-msgstr ""
-
-#: adminactions.back/export.py:146
-msgid "Export to CSV"
-msgstr ""
-
-#: adminactions.back/mass_update.py:61
-msgid "set"
-msgstr ""
-
-#: adminactions.back/mass_update.py:62
-msgid "set null"
-msgstr ""
-
-#: adminactions.back/mass_update.py:291
-#, python-format
-msgid "Mass update %s"
-msgstr ""
-
-#: adminactions.back/mass_update.py:311
-msgid "Mass update"
-msgstr ""
-
-#: adminactions.back/merge.py:28
-msgid "Search GenericForeignKeys"
-msgstr ""
-
-#: adminactions.back/merge.py:29
-msgid "Search for generic relation"
-msgstr ""
-
-#: adminactions.back/merge.py:30
-msgid "No"
-msgstr ""
-
-#: adminactions.back/merge.py:31
-msgid "Only Related (look for Managers)"
-msgstr ""
-
-#: adminactions.back/merge.py:32
-msgid "Analyze Mode (very slow)"
-msgstr ""
-
-#: adminactions.back/templates/adminactions/any_model.html:26
-#: adminactions.back/templates/adminactions/charts.html:34
-#: adminactions.back/templates/adminactions/export_csv.html:46
-#: adminactions.back/templates/adminactions/export_fixture.html:6
-#: adminactions.back/templates/adminactions/mass_update.html:26
-#: adminactions.back/templates/adminactions/merge.html:5
-#: adminactions.back/templates/adminactions/merge_preview.html:5
 #: adminactions/templates/adminactions/any_model.html:26
 #: adminactions/templates/adminactions/charts.html:18
 #: adminactions/templates/adminactions/export_csv.html:46
@@ -186,52 +99,12 @@ msgstr ""
 #: adminactions/templates/adminactions/mass_update.html:26
 #: adminactions/templates/adminactions/merge.html:5
 #: adminactions/templates/adminactions/merge_preview.html:5
-#: updatengine/templates/admin/base.html:224
+#: updatengine/templates/admin/base.html:213
 msgid "Home"
 msgstr ""
 
-#: adminactions.back/templates/adminactions/export_csv.html:50
 #: adminactions/templates/adminactions/export_csv.html:50
 msgid "CSV Export Options"
-msgstr ""
-
-#: adminactions.back/templates/adminactions/mass_update.html:63
-msgid "field name"
-msgstr ""
-
-#: adminactions.back/templates/adminactions/mass_update.html:64
-msgid "update"
-msgstr ""
-
-#: adminactions.back/templates/adminactions/mass_update.html:65
-msgid "function"
-msgstr ""
-
-#: adminactions.back/templates/adminactions/mass_update.html:66
-msgid "new value"
-msgstr ""
-
-#: adminactions.back/templates/adminactions/mass_update.html:67
-msgid "existing values"
-msgstr ""
-
-#: adminactions.back/templates/adminactions/mass_update.html:68
-msgid "(sample)"
-msgstr ""
-
-#: adminactions.back/templates/adminactions/mass_update.html:92
-msgid "Update records"
-msgstr ""
-
-#: adminactions.back/templates/adminactions/merge.html:70
-#: adminactions/templates/adminactions/merge.html:70
-#: adminactions/templates/adminactions/merge_preview.html:9
-msgid "Preview"
-msgstr ""
-
-#: adminactions.back/templates/adminactions/merge_preview.html:40
-#: adminactions/templates/adminactions/merge_preview.html:39
-msgid "Merge"
 msgstr ""
 
 #: adminactions/templates/adminactions/export_csv.html:69
@@ -271,6 +144,11 @@ msgstr ""
 msgid "This will be removed"
 msgstr ""
 
+#: adminactions/templates/adminactions/merge.html:70
+#: adminactions/templates/adminactions/merge_preview.html:9
+msgid "Preview"
+msgstr ""
+
 #: adminactions/templates/adminactions/merge_preview.html:18
 msgid "Key"
 msgstr ""
@@ -281,6 +159,10 @@ msgstr ""
 
 #: adminactions/templates/adminactions/merge_preview.html:24
 msgid "After Merging"
+msgstr ""
+
+#: adminactions/templates/adminactions/merge_preview.html:39
+msgid "Merge"
 msgstr ""
 
 #: configuration/admin.py:79 configuration/admin.py:88
@@ -1215,11 +1097,11 @@ msgstr "Rights confguration"
 msgid "ModelList: Links"
 msgstr "Links"
 
-#: updatengine/settings.py:82
+#: updatengine/settings.py:81
 msgid "french"
 msgstr "french"
 
-#: updatengine/settings.py:83
+#: updatengine/settings.py:82
 msgid "english"
 msgstr "english"
 
@@ -1242,6 +1124,10 @@ msgstr "Change password"
 #: updatengine/templates/admin/base.html:191
 msgid "Log out"
 msgstr "Log out"
+
+#: updatengine/templates/grappelli/dashboard/dashboard.html:22
+msgid "Choose_language"
+msgstr "Choose language"
 
 #, fuzzy
 #~ msgid "packagecondition|condition editor"
