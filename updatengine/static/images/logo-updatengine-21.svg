@@ -16,9 +16,19 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.4 r9939"
-   sodipodi:docname="logo-updatengine-2.1.svg">
+   sodipodi:docname="logo-updatengine-2.1.svg"
+   inkscape:export-filename="/home/tyv/Bureau/logo-updatengine-2.1-2-line.png"
+   inkscape:export-xdpi="19.118629"
+   inkscape:export-ydpi="19.118629">
   <defs
      id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 27.5 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="290 : 27.5 : 1"
+       inkscape:persp3d-origin="145 : 18.333333 : 1"
+       id="perspective3853" />
     <linearGradient
        inkscape:collect="always"
        id="linearGradient3828">
@@ -322,17 +332,64 @@
        r="59.679688"
        gradientTransform="matrix(1,0,0,0.35364577,0,664.78874)"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3904"
+       id="linearGradient3829"
+       x1="157.45808"
+       y1="18.744947"
+       x2="157.45808"
+       y2="20.86203"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3904-7"
+       id="linearGradient3829-7"
+       x1="157.45808"
+       y1="18.744947"
+       x2="157.45808"
+       y2="20.86203"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient3904-7">
+      <stop
+         id="stop3906-7"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         id="stop3908-4"
+         offset="1"
+         style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+    <linearGradient
+       y2="20.86203"
+       x2="157.45808"
+       y1="18.744947"
+       x1="157.45808"
+       gradientUnits="userSpaceOnUse"
+       id="linearGradient3865"
+       xlink:href="#linearGradient3904-7"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient3904-7"
+       id="linearGradient3884"
+       gradientUnits="userSpaceOnUse"
+       x1="157.45808"
+       y1="18.744947"
+       x2="157.45808"
+       y2="20.86203" />
   </defs>
   <sodipodi:namedview
      id="base"
-     pagecolor="#000000"
+     pagecolor="#464646"
      bordercolor="#666666"
      borderopacity="1.0"
-     inkscape:pageopacity="0.11372549"
+     inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:zoom="3.7787836"
-     inkscape:cx="159.09705"
-     inkscape:cy="23.8958"
+     inkscape:zoom="5.344007"
+     inkscape:cx="154.70389"
+     inkscape:cy="57.173939"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
@@ -349,7 +406,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title />
+        <dc:title></dc:title>
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -360,34 +417,34 @@
      transform="translate(0,-997.36218)">
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:3.50000000000000000;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Sans"
-       x="35.130909"
-       y="1039.5559"
+       style="font-size:37.62028885px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.82152176;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Sans"
+       x="32.656776"
+       y="1040.3336"
        id="text3778"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="/home/tyv/Bureau/rect3800-8-3.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-filename="/home/tyv/Bureau/logo-updatengine-2.1-1-line.png"
+       inkscape:export-xdpi="100.83538"
+       inkscape:export-ydpi="100.83538"><tspan
          sodipodi:role="line"
          id="tspan3780"
-         x="35.130909"
-         y="1039.5559"
-         style="fill-opacity:1;fill:#ffffff;stroke:#ffffff;stroke-opacity:1">Updat</tspan></text>
+         x="32.656776"
+         y="1040.3336"
+         style="line-height:125%;fill:#ffffff;fill-opacity:1;stroke:#ffffff;stroke-width:2.82152176;stroke-linecap:square;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">Updat</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#4fb2d3;fill-opacity:1;stroke:#4fb2d3;stroke-opacity:1;font-family:Sans"
-       x="154.91701"
-       y="1040.5582"
+       style="font-size:37.62028885px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:-5.65244865px;word-spacing:0px;fill:#4fb2d3;fill-opacity:1;stroke:#4fb2d3;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Sans"
+       x="145.31647"
+       y="1041.2762"
        id="text3786"
        sodipodi:linespacing="125%"
-       inkscape:export-filename="/home/tyv/Bureau/rect3800-8-3.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90"><tspan
+       inkscape:export-filename="/home/tyv/Bureau/logo-updatengine-2.1-1-line.png"
+       inkscape:export-xdpi="100.83538"
+       inkscape:export-ydpi="100.83538"><tspan
          sodipodi:role="line"
          id="tspan3788"
-         x="154.91701"
-         y="1040.5582"
-         style="letter-spacing:-5.13999748px;fill:#4fb2d3;fill-opacity:1;stroke:#4fb2d3;stroke-opacity:1">Engine</tspan></text>
+         x="145.31647"
+         y="1041.2762"
+         style="letter-spacing:-5.65244865px;fill:#4fb2d3;fill-opacity:1;stroke:#4fb2d3;stroke-width:0;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none">Engine</tspan></text>
     <flowRoot
        xml:space="preserve"
        id="flowRoot3790"
@@ -408,33 +465,36 @@
        y="103"
        transform="translate(0,652.36218)" />
     <path
-       style="fill:#4fb2d3;fill-opacity:1;stroke:#4fb2d3;stroke-width:1.35849059;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
-       d="m 1.6856478,1037.8867 10.9159602,10.916 24.48357,-24.4835 -24.48357,-24.48361 -10.9159602,10.91601 0,27.1351 z"
+       style="fill:#4fb2d3;fill-opacity:1;stroke:#4fb2d3;stroke-width:1.27767026;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
+       d="m 1.2012669,1038.7636 10.2665391,10.2666 23.026975,-23.0269 -23.026975,-23.027 -10.2665391,10.2666 0,25.5207 z"
        id="path3824"
        inkscape:connector-curvature="0"
-       inkscape:export-filename="/home/tyv/Bureau/rect3800-8-3.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-filename="/home/tyv/Bureau/logo-updatengine-2.1-1-line.png"
+       inkscape:export-xdpi="100.83538"
+       inkscape:export-ydpi="100.83538" />
     <path
-       style="fill:#1a6d88;fill-opacity:1;stroke:#ffffff;stroke-width:1.35849058999999994;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
-       d="m 1.8174278,1011.1207 1e-5,27.1352 13.5676002,-13.5676 -13.5676102,-13.5676 z"
+       style="fill:#1a6d88;fill-opacity:1;stroke:#ffffff;stroke-width:1.27767026;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
+       d="m 1.325207,1013.59 9.4e-6,25.5209 L 14.085642,1026.3504 1.325207,1013.59 z"
        id="rect3800"
        inkscape:connector-curvature="0"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="100.83538"
+       inkscape:export-ydpi="100.83538"
+       inkscape:export-filename="/home/tyv/Bureau/logo-updatengine-2.1-1-line.png" />
     <path
-       style="fill:#1a6d88;fill-opacity:1;stroke:#4fb2d3;stroke-width:1.35849059;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
-       d="m 11.205618,1010.7009 1e-5,27.1351 13.5676,-13.5676 -13.56761,-13.5675 z"
+       style="fill:#1a6d88;fill-opacity:1;stroke:#4fb2d3;stroke-width:1.27767026;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
+       d="m 10.154868,1013.1952 9e-6,25.5207 12.760426,-12.7604 -12.760435,-12.7603 z"
        id="rect3800-8"
        inkscape:connector-curvature="0"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="100.83538"
+       inkscape:export-ydpi="100.83538"
+       inkscape:export-filename="/home/tyv/Bureau/logo-updatengine-2.1-1-line.png" />
     <path
-       style="fill:#1a6d88;fill-opacity:1;stroke:#4fb2d3;stroke-width:1.35849059;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
-       d="m 23.500158,1010.7914 10e-6,27.1351 13.5676,-13.5676 -13.56761,-13.5675 z"
+       style="fill:#1a6d88;fill-opacity:1;stroke:#4fb2d3;stroke-width:1.27767026;stroke-miterlimit:4;stroke-opacity:0;stroke-dasharray:none"
+       d="m 21.717972,1013.2803 9e-6,25.5208 12.760426,-12.7605 -12.760435,-12.7603 z"
        id="rect3800-8-3"
        inkscape:connector-curvature="0"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+       inkscape:export-xdpi="100.83538"
+       inkscape:export-ydpi="100.83538"
+       inkscape:export-filename="/home/tyv/Bureau/logo-updatengine-2.1-1-line.png" />
   </g>
 </svg>
