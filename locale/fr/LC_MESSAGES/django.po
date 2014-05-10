@@ -33,7 +33,6 @@ msgstr ""
 
 #: adminactions/export.py:30 adminactions/export.py:212
 #: adminactions/export.py:289 adminactions/merge.py:79
-#, fuzzy, python-format
 msgid "Sorry you do not have rights to execute this action (%s)"
 msgstr "Désolé mais vous n'avez pas les droits d'exécuter cette action"
 
@@ -265,7 +264,7 @@ msgstr "Permissions"
 msgid ""
 "Warning: you will not be able to update a package that you didn't create if "
 "exclusive editor is set to yes for this package"
-msgstr ""
+msgstr "Attention, vous ne pouvez pas éditer un paquet que vous n'avez pas crée si il est verrouillé en 'éditeur exclusif'"
 
 #: deploy/admin.py:182
 msgid "packageprofile|general information"
@@ -275,7 +274,7 @@ msgstr "Général"
 msgid ""
 "Warning: you will not be able to update a profile that you didn't create if "
 "exclusive editor is set to yes for this package"
-msgstr ""
+msgstr "Attention, vous ne pouvez pas éditer un profil que vous n'avez pas crée si il est verrouillé en 'éditeur exclusif'"
 
 #: deploy/admin.py:261
 msgid "timeprofile|general information"
@@ -285,7 +284,7 @@ msgstr "Général"
 msgid ""
 "timeprofile|Warning: you will not be able to update a wake on lan task that "
 "you didn't create if exclusive editor is set to yes for this package"
-msgstr ""
+msgstr "Attention, vous ne pouvez pas éditer un profil horaire que vous n'avez pas crée si il est verrouillé en 'éditeur exclusif'"
 
 #: deploy/admin.py:344
 msgid "packagewakeonlan|general information"
@@ -295,7 +294,7 @@ msgstr "Général"
 msgid ""
 "packagewakeonlan|Warning: you will not be able to update a wake on lan task "
 "that you didn't create if exclusive editor is set to yes for this package"
-msgstr ""
+msgstr "Attention, vous ne pouvez pas éditer une tâche de wake on lan que vous n'avez pas créée si elle est verrouillée en 'éditeur exclusif'"
 
 #: deploy/admin.py:425
 msgid "packagecondition|general information"
@@ -309,7 +308,7 @@ msgstr "Permissions"
 msgid ""
 "packagecondition|Warning: you will not be able to update a condition that "
 "you didn't create if exclusive editor is set to yes for this package"
-msgstr ""
+msgstr "Attention, vous ne pouvez pas éditer une condition que vous n'avez pas créée si elle est verrouillée en 'éditeur exclusif'"
 
 #: deploy/admin.py:507
 msgid "impex|general information"
