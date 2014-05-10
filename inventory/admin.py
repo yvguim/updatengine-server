@@ -88,6 +88,8 @@ class entityAdmin(ueAdmin):
                 form.base_fields["parent"].queryset = entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed).\
                         order_by('name').distinct() 
                 form.base_fields["parent"].empty_label = None
+                form.base_fields["packageprofile"].queryset = packageprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+                form.base_fields["timeprofile"].queryset = timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
 
         return form 
 
