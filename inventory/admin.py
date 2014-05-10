@@ -25,7 +25,7 @@ from inventory.filters import enableFilter, as_or_notFilter, softwareFilter, ver
 from inventory.filters import (entityFilter, domainFilter,usernameFilter,languageFilter,typemachineFilter,\
         osdistributionFilter, timeprofileFilter,packageprofileFilter, hostFilter, commentFilter, \
         osnameFilter,osversionFilter,osarchFilter)
-from deploy.models import package
+from deploy.models import package, packageprofile, timeprofile
 class ueAdmin(admin.ModelAdmin):
     list_max_show_all = 500
     list_per_page = 50
@@ -143,6 +143,8 @@ class machineAdmin(ueAdmin):
             
             # Show only entites allowed if not superuser
             form.base_fields["packages"].queryset = package.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+            form.base_fields["packageprofile"].queryset = packageprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+            form.base_fields["timeprofile"].queryset = timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
         return form 
 
 class netAdmin(ueAdmin):

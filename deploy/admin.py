@@ -24,7 +24,7 @@ from django.contrib.admin import DateFieldListFilter
 from deploy.filters import entityFilter, machineFilter, statusFilter,\
         packageEntityFilter, packageHistoryFilter, conditionEntityFilter, conditionFilter,\
         myPackagesFilter, myConditionsFilter
-from inventory.models import entity
+from inventory.models import entity, machine
 from django.utils.translation import ugettext_lazy as _
 from django.forms import ModelForm
 from django.contrib import messages
