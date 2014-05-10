@@ -26,6 +26,11 @@ from adminactions.exceptions import ActionInterrupted
 from adminactions.forms import GenericActionForm
 from adminactions.signals import adminaction_requested, adminaction_start, adminaction_end
 
+# adapted for UE
+from inventory.models import machine, entity
+from deploy.models import package, packageprofile, timeprofile
+# 
+
 
 DO_NOT_MASS_UPDATE = 'do_NOT_mass_UPDATE'
 
@@ -219,10 +224,23 @@ def mass_update(modeladmin, request, queryset):
         messages.error(request, str(e))
         return
 
-    # Allows to specified a custom mass update Form in the ModelAdmin
-    mass_update_form = getattr(modeladmin, 'mass_update_form', MassUpdateForm)
 
-    MForm = modelform_factory(modeladmin.model, form=mass_update_form, formfield_callback=not_required)
+    # adapted for UE: Check type of modeladmin.model to initialise form
+    #raise Exception(modeladmin.model, type(modeladmin.model))
+    if modeladmin.model == machine:
+        mass_update_form = getattr(modeladmin, 'mass_update_form', MassUpdateForm)
+        MForm = modelform_factory(modeladmin.model, form=mass_update_form, formfield_callback=not_required)
+        if not request.user.is_superuser: 
+            # Show only entites allowed if not superuser
+            MForm.base_fields["entity"].queryset = entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+            MForm.base_fields["entity"].empty_label = None
+            MForm.base_fields["packages"].queryset = package.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+            MForm.base_fields["packageprofile"].queryset = packageprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+            MForm.base_fields["timeprofile"].queryset = timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+    else:
+        # Allows to specified a custom mass update Form in the ModelAdmin
+        mass_update_form = getattr(modeladmin, 'mass_update_form', MassUpdateForm)
+        MForm = modelform_factory(modeladmin.model, form=mass_update_form, formfield_callback=not_required)
     grouped = defaultdict(lambda: [])
     selected_fields = []
     initial = {'_selected_action': request.POST.getlist(helpers.ACTION_CHECKBOX_NAME),
