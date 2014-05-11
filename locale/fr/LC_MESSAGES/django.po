@@ -871,7 +871,7 @@ msgstr "Profil de configuration"
 
 #: inventory/filters.py:317
 msgid "osname"
-msgstr ""
+msgstr "système"
 
 #: inventory/filters.py:334
 msgid "osversion"
@@ -879,7 +879,7 @@ msgstr "version"
 
 #: inventory/filters.py:351
 msgid "osarch"
-msgstr ""
+msgstr "architecture"
 
 #: inventory/filters.py:389
 msgid "commentFilter"
