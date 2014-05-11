@@ -112,16 +112,16 @@ OPERATIONS = OperationManager({
 
 class MassUpdateForm(GenericActionForm):
     _no_sample_for = []
-    _clean = forms.BooleanField(label='clean()',
-                                required=False,
-                                help_text="if checked calls obj.clean()")
+    #_clean = forms.BooleanField(label='clean()',
+    #                            required=False,
+    #                            help_text="if checked calls obj.clean()")
 
-    _validate = forms.BooleanField(label='Validate',
-                                   help_text="if checked use obj.save() instead of manager.update()")
-    _unique_transaction = forms.BooleanField(label='Unique transaction',
-                                             required=False,
-                                             help_text="If checked create one transaction for the whole update. "
-                                                       "If any record cannot be updated everything will be rolled-back")
+    #_validate = forms.BooleanField(label='Validate',
+    #                               help_text="if checked use obj.save() instead of manager.update()")
+    #_unique_transaction = forms.BooleanField(label='Unique transaction',
+    #                                         required=False,
+    #                                         help_text="If checked create one transaction for the whole update. "
+    #                                                   "If any record cannot be updated everything will be rolled-back")
 
     def __init__(self, *args, **kwargs):
         super(MassUpdateForm, self).__init__(*args, **kwargs)

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-08 13:44+0200\n"
+"POT-Creation-Date: 2014-05-11 14:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -61,11 +61,53 @@ msgstr ""
 msgid "Export delete tree"
 msgstr ""
 
-#: adminactions/mass_update.py:209
+#: adminactions/forms.py:33
+msgid "adminactions|header"
+msgstr ""
+
+#: adminactions/forms.py:34
+msgid "adminactions|delimiter"
+msgstr ""
+
+#: adminactions/forms.py:35
+msgid "adminactions|quotechar"
+msgstr ""
+
+#: adminactions/forms.py:37
+#, fuzzy
+msgid "adminactions|All"
+msgstr "%s"
+
+#: adminactions/forms.py:38
+msgid "adminactions|Minimal"
+msgstr ""
+
+#: adminactions/forms.py:39
+msgid "adminactions|None"
+msgstr ""
+
+#: adminactions/forms.py:40
+msgid "adminactions|Non Numeric"
+msgstr ""
+
+#: adminactions/forms.py:40
+msgid "adminactions|quoting"
+msgstr ""
+
+#: adminactions/forms.py:42
+msgid "adminactions|escapechar"
+msgstr ""
+
+#: adminactions/forms.py:46
+#, fuzzy
+msgid "adminactions| columns"
+msgstr "%s"
+
+#: adminactions/mass_update.py:214
 msgid "Sorry you do not have rights to execute this action"
 msgstr ""
 
-#: adminactions/mass_update.py:276
+#: adminactions/mass_update.py:294
 #, python-format
 msgid "Updated %s records"
 msgstr ""
@@ -109,6 +151,38 @@ msgstr ""
 
 #: adminactions/templates/adminactions/export_csv.html:69
 msgid "Export"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:29
+msgid "adminactions|Mass Update"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:56
+msgid "adminactions|field name"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:57
+msgid "adminactions|update"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:58
+msgid "adminactions|function"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:59
+msgid "adminactions|new value"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:60
+msgid "adminactions|existing values"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:61
+msgid "adminactions|(sample)"
+msgstr ""
+
+#: adminactions/templates/adminactions/mass_update.html:85
+msgid "adminactions|Update records"
 msgstr ""
 
 #: adminactions/templates/adminactions/merge.html:8
@@ -752,11 +826,11 @@ msgstr "import/export"
 msgid "impex|imports/exports"
 msgstr "Imports/Exports"
 
-#: inventory/admin.py:119
+#: inventory/admin.py:121
 msgid "force_wakeup"
 msgstr "Wake up now"
 
-#: inventory/admin.py:124
+#: inventory/admin.py:126
 msgid "force_inventory"
 msgstr "Force inventory now"
 
@@ -1171,10 +1245,6 @@ msgstr "Choose language"
 
 #~ msgid "AppList: Applications"
 #~ msgstr "Fonctions principales"
-
-#, fuzzy
-#~ msgid "Administration"
-#~ msgstr "%s"
 
 #, fuzzy
 #~ msgid "Applications"

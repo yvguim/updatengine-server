@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-08 13:44+0200\n"
+"POT-Creation-Date: 2014-05-11 14:44+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -33,6 +33,7 @@ msgstr ""
 
 #: adminactions/export.py:30 adminactions/export.py:212
 #: adminactions/export.py:289 adminactions/merge.py:79
+#, fuzzy, python-format
 msgid "Sorry you do not have rights to execute this action (%s)"
 msgstr "Désolé mais vous n'avez pas les droits d'exécuter cette action"
 
@@ -60,11 +61,51 @@ msgstr "Exporter comme 'Delete Tree'"
 msgid "Export delete tree"
 msgstr "Exporter comme 'Delete Tree'"
 
-#: adminactions/mass_update.py:209
+#: adminactions/forms.py:33
+msgid "adminactions|header"
+msgstr "Entêtes"
+
+#: adminactions/forms.py:34
+msgid "adminactions|delimiter"
+msgstr "Séparateur"
+
+#: adminactions/forms.py:35
+msgid "adminactions|quotechar"
+msgstr "Délimiteur"
+
+#: adminactions/forms.py:37
+msgid "adminactions|All"
+msgstr "Tout"
+
+#: adminactions/forms.py:38
+msgid "adminactions|Minimal"
+msgstr "Minimum"
+
+#: adminactions/forms.py:39
+msgid "adminactions|None"
+msgstr "Aucun"
+
+#: adminactions/forms.py:40
+msgid "adminactions|Non Numeric"
+msgstr "Non numériques"
+
+#: adminactions/forms.py:40
+msgid "adminactions|quoting"
+msgstr "Délimiter"
+
+#: adminactions/forms.py:42
+msgid "adminactions|escapechar"
+msgstr "Echappement"
+
+#: adminactions/forms.py:46
+msgid "adminactions| columns"
+msgstr "Colonnes"
+
+#: adminactions/mass_update.py:214
 msgid "Sorry you do not have rights to execute this action"
 msgstr "Désolé mais vous n'avez pas les droits d'exécuter cette action"
 
-#: adminactions/mass_update.py:276
+#: adminactions/mass_update.py:294
 #, python-format
 msgid "Updated %s records"
 msgstr "Mis à jour %s enregistrements"
@@ -109,6 +150,38 @@ msgstr "Options d'export"
 #: adminactions/templates/adminactions/export_csv.html:69
 msgid "Export"
 msgstr "Exporter en CSV"
+
+#: adminactions/templates/adminactions/mass_update.html:29
+msgid "adminactions|Mass Update"
+msgstr "Modification massive"
+
+#: adminactions/templates/adminactions/mass_update.html:56
+msgid "adminactions|field name"
+msgstr "Nom du champ"
+
+#: adminactions/templates/adminactions/mass_update.html:57
+msgid "adminactions|update"
+msgstr "Mettre à jour"
+
+#: adminactions/templates/adminactions/mass_update.html:58
+msgid "adminactions|function"
+msgstr "Fonction"
+
+#: adminactions/templates/adminactions/mass_update.html:59
+msgid "adminactions|new value"
+msgstr "Nouvelle valeur"
+
+#: adminactions/templates/adminactions/mass_update.html:60
+msgid "adminactions|existing values"
+msgstr "Valeurs existantes"
+
+#: adminactions/templates/adminactions/mass_update.html:61
+msgid "adminactions|(sample)"
+msgstr "Exemple"
+
+#: adminactions/templates/adminactions/mass_update.html:85
+msgid "adminactions|Update records"
+msgstr "Mettre à jour"
 
 #: adminactions/templates/adminactions/merge.html:8
 #: adminactions/templates/adminactions/merge_preview.html:8
@@ -264,7 +337,9 @@ msgstr "Permissions"
 msgid ""
 "Warning: you will not be able to update a package that you didn't create if "
 "exclusive editor is set to yes for this package"
-msgstr "Attention, vous ne pouvez pas éditer un paquet que vous n'avez pas crée si il est verrouillé en 'éditeur exclusif'"
+msgstr ""
+"Attention, vous ne pouvez pas éditer un paquet que vous n'avez pas crée si "
+"il est verrouillé en 'éditeur exclusif'"
 
 #: deploy/admin.py:182
 msgid "packageprofile|general information"
@@ -274,7 +349,9 @@ msgstr "Général"
 msgid ""
 "Warning: you will not be able to update a profile that you didn't create if "
 "exclusive editor is set to yes for this package"
-msgstr "Attention, vous ne pouvez pas éditer un profil que vous n'avez pas crée si il est verrouillé en 'éditeur exclusif'"
+msgstr ""
+"Attention, vous ne pouvez pas éditer un profil que vous n'avez pas crée si "
+"il est verrouillé en 'éditeur exclusif'"
 
 #: deploy/admin.py:261
 msgid "timeprofile|general information"
@@ -284,7 +361,9 @@ msgstr "Général"
 msgid ""
 "timeprofile|Warning: you will not be able to update a wake on lan task that "
 "you didn't create if exclusive editor is set to yes for this package"
-msgstr "Attention, vous ne pouvez pas éditer un profil horaire que vous n'avez pas crée si il est verrouillé en 'éditeur exclusif'"
+msgstr ""
+"Attention, vous ne pouvez pas éditer un profil horaire que vous n'avez pas "
+"crée si il est verrouillé en 'éditeur exclusif'"
 
 #: deploy/admin.py:344
 msgid "packagewakeonlan|general information"
@@ -294,7 +373,9 @@ msgstr "Général"
 msgid ""
 "packagewakeonlan|Warning: you will not be able to update a wake on lan task "
 "that you didn't create if exclusive editor is set to yes for this package"
-msgstr "Attention, vous ne pouvez pas éditer une tâche de wake on lan que vous n'avez pas créée si elle est verrouillée en 'éditeur exclusif'"
+msgstr ""
+"Attention, vous ne pouvez pas éditer une tâche de wake on lan que vous "
+"n'avez pas créée si elle est verrouillée en 'éditeur exclusif'"
 
 #: deploy/admin.py:425
 msgid "packagecondition|general information"
@@ -308,7 +389,9 @@ msgstr "Permissions"
 msgid ""
 "packagecondition|Warning: you will not be able to update a condition that "
 "you didn't create if exclusive editor is set to yes for this package"
-msgstr "Attention, vous ne pouvez pas éditer une condition que vous n'avez pas créée si elle est verrouillée en 'éditeur exclusif'"
+msgstr ""
+"Attention, vous ne pouvez pas éditer une condition que vous n'avez pas créée "
+"si elle est verrouillée en 'éditeur exclusif'"
 
 #: deploy/admin.py:507
 msgid "impex|general information"
@@ -726,11 +809,11 @@ msgstr "import/export"
 msgid "impex|imports/exports"
 msgstr "Imports/Exports"
 
-#: inventory/admin.py:119
+#: inventory/admin.py:121
 msgid "force_wakeup"
 msgstr "Réveiller maintenant (Wake on lan)"
 
-#: inventory/admin.py:124
+#: inventory/admin.py:126
 msgid "force_inventory"
 msgstr "Forcer la remontée maintenant"
 
@@ -1155,9 +1238,6 @@ msgstr "Langue de l'interface"
 #~ msgid "Analyze Mode (very slow)"
 #~ msgstr "Mode analyse (très lent)"
 
-#~ msgid "field name"
-#~ msgstr "Nom du champ"
-
 #~ msgid "update"
 #~ msgstr "Mettre à jour"
 
@@ -1167,14 +1247,8 @@ msgstr "Langue de l'interface"
 #~ msgid "new value"
 #~ msgstr "Nouvelle valeur"
 
-#~ msgid "existing values"
-#~ msgstr "Valeurs existantes"
-
 #~ msgid "(sample)"
 #~ msgstr "(exemples)"
-
-#~ msgid "Update records"
-#~ msgstr "Mettre à jour"
 
 #~ msgid "subuser|user"
 #~ msgstr "Utilisateur"

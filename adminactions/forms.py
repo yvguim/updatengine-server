@@ -4,6 +4,7 @@ from .api import csv
 from django.forms.widgets import SelectMultiple
 from django.utils import formats
 from adminactions.api import delimiters, quotes
+from django.utils.translation import ugettext_lazy as _
 
 
 class GenericActionForm(ModelForm):
@@ -29,20 +30,20 @@ class CSVOptions(forms.Form):
                                        widget=forms.HiddenInput({'class': 'select-across'}))
     action = forms.CharField(label='', required=True, initial='', widget=forms.HiddenInput())
 
-    header = forms.BooleanField(required=False)
-    delimiter = forms.ChoiceField(choices=zip(delimiters, delimiters), initial=',')
-    quotechar = forms.ChoiceField(choices=zip(quotes, quotes), initial="'")
+    header = forms.BooleanField(required=False, label = _('adminactions|header'))
+    delimiter = forms.ChoiceField(choices=zip(delimiters, delimiters), initial=',', label = _('adminactions|delimiter'))
+    quotechar = forms.ChoiceField(choices=zip(quotes, quotes), initial="'", label = _('adminactions|quotechar'))
     quoting = forms.ChoiceField(
-        choices=((csv.QUOTE_ALL, 'All'),
-                 (csv.QUOTE_MINIMAL, 'Minimal'),
-                 (csv.QUOTE_NONE, 'None'),
-                 (csv.QUOTE_NONNUMERIC, 'Non Numeric')), initial=csv.QUOTE_ALL)
+        choices=((csv.QUOTE_ALL, _('adminactions|All')),
+                 (csv.QUOTE_MINIMAL, _('adminactions|Minimal')),
+                 (csv.QUOTE_NONE, _('adminactions|None')),
+                 (csv.QUOTE_NONNUMERIC, _('adminactions|Non Numeric'))), initial=csv.QUOTE_ALL, label = _('adminactions|quoting'))
 
-    escapechar = forms.ChoiceField(choices=(('', ''), ('\\', '\\')), required=False)
-    datetime_format = forms.CharField(initial=formats.get_format('DATETIME_FORMAT'))
-    date_format = forms.CharField(initial=formats.get_format('DATE_FORMAT'))
-    time_format = forms.CharField(initial=formats.get_format('TIME_FORMAT'))
-    columns = forms.MultipleChoiceField(widget=SelectMultiple(attrs={'size': 20}))
+    escapechar = forms.ChoiceField(choices=(('', ''), ('\\', '\\')), required=False, label = _('adminactions|escapechar'))
+#    datetime_format = forms.CharField(initial=formats.get_format('DATETIME_FORMAT'))
+#    date_format = forms.CharField(initial=formats.get_format('DATE_FORMAT'))
+#    time_format = forms.CharField(initial=formats.get_format('TIME_FORMAT'))
+    columns = forms.MultipleChoiceField(widget=SelectMultiple(attrs={'size': 20}),label = _('adminactions| columns') )
 
 
 class XLSOptions(forms.Form):
