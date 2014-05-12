@@ -223,6 +223,7 @@ class software(models.Model):
         return self.name
 
     class Meta:
+        ordering = ['name']
         verbose_name = _('software|software')
         verbose_name_plural = _('software|softwares')
 
