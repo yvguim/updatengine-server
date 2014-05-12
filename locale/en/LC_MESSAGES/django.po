@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-11 14:44+0200\n"
+"POT-Creation-Date: 2014-05-12 09:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,49 +63,47 @@ msgstr ""
 
 #: adminactions/forms.py:33
 msgid "adminactions|header"
-msgstr ""
+msgstr "header"
 
 #: adminactions/forms.py:34
 msgid "adminactions|delimiter"
-msgstr ""
+msgstr "delimiter"
 
 #: adminactions/forms.py:35
 msgid "adminactions|quotechar"
-msgstr ""
+msgstr "quotechar"
 
 #: adminactions/forms.py:37
-#, fuzzy
 msgid "adminactions|All"
 msgstr "%s"
 
 #: adminactions/forms.py:38
 msgid "adminactions|Minimal"
-msgstr ""
+msgstr "Minimal"
 
 #: adminactions/forms.py:39
 msgid "adminactions|None"
-msgstr ""
+msgstr "None"
 
 #: adminactions/forms.py:40
 msgid "adminactions|Non Numeric"
-msgstr ""
+msgstr "Non Numeric"
 
 #: adminactions/forms.py:40
 msgid "adminactions|quoting"
-msgstr ""
+msgstr "quoting"
 
 #: adminactions/forms.py:42
 msgid "adminactions|escapechar"
-msgstr ""
+msgstr "escapechar"
 
 #: adminactions/forms.py:46
-#, fuzzy
 msgid "adminactions| columns"
 msgstr "%s"
 
 #: adminactions/mass_update.py:214
 msgid "Sorry you do not have rights to execute this action"
-msgstr ""
+msgstr "Sorry you do not have rights to execute this action"
 
 #: adminactions/mass_update.py:294
 #, python-format
@@ -155,35 +153,35 @@ msgstr ""
 
 #: adminactions/templates/adminactions/mass_update.html:29
 msgid "adminactions|Mass Update"
-msgstr ""
+msgstr "Mass Update"
 
 #: adminactions/templates/adminactions/mass_update.html:56
 msgid "adminactions|field name"
-msgstr ""
+msgstr "field name"
 
 #: adminactions/templates/adminactions/mass_update.html:57
 msgid "adminactions|update"
-msgstr ""
+msgstr "update"
 
 #: adminactions/templates/adminactions/mass_update.html:58
 msgid "adminactions|function"
-msgstr ""
+msgstr "function"
 
 #: adminactions/templates/adminactions/mass_update.html:59
 msgid "adminactions|new value"
-msgstr ""
+msgstr "new value"
 
 #: adminactions/templates/adminactions/mass_update.html:60
 msgid "adminactions|existing values"
-msgstr ""
+msgstr "existing value"
 
 #: adminactions/templates/adminactions/mass_update.html:61
 msgid "adminactions|(sample)"
-msgstr ""
+msgstr "(sample)"
 
 #: adminactions/templates/adminactions/mass_update.html:85
 msgid "adminactions|Update records"
-msgstr ""
+msgstr "Update records"
 
 #: adminactions/templates/adminactions/merge.html:8
 #: adminactions/templates/adminactions/merge_preview.html:8
@@ -322,20 +320,17 @@ msgid "subuser|entity"
 msgstr ""
 
 #: deploy/admin.py:74
-#, fuzzy
 msgid "package|general information"
-msgstr "description"
+msgstr "general information"
 
 #: deploy/admin.py:75
-#, fuzzy
 msgid "package|package edition"
-msgstr "package software condition"
+msgstr "package edition"
 
 #: deploy/admin.py:76 deploy/admin.py:183 deploy/admin.py:262
 #: deploy/admin.py:345
-#, fuzzy
 msgid "package|permissions"
-msgstr "description"
+msgstr "permissions"
 
 #: deploy/admin.py:84
 msgid ""
@@ -344,9 +339,8 @@ msgid ""
 msgstr ""
 
 #: deploy/admin.py:182
-#, fuzzy
 msgid "packageprofile|general information"
-msgstr "description"
+msgstr "general information"
 
 #: deploy/admin.py:191
 msgid ""
@@ -355,9 +349,8 @@ msgid ""
 msgstr ""
 
 #: deploy/admin.py:261
-#, fuzzy
 msgid "timeprofile|general information"
-msgstr "description"
+msgstr "general information"
 
 #: deploy/admin.py:270
 msgid ""
@@ -366,9 +359,8 @@ msgid ""
 msgstr ""
 
 #: deploy/admin.py:344
-#, fuzzy
 msgid "packagewakeonlan|general information"
-msgstr "description"
+msgstr "general information"
 
 #: deploy/admin.py:353
 msgid ""
@@ -377,14 +369,12 @@ msgid ""
 msgstr ""
 
 #: deploy/admin.py:425
-#, fuzzy
 msgid "packagecondition|general information"
-msgstr "description"
+msgstr "general information"
 
 #: deploy/admin.py:426
-#, fuzzy
 msgid "packagecondition|permissions"
-msgstr "description"
+msgstr "permissions"
 
 #: deploy/admin.py:433
 msgid ""
@@ -393,15 +383,13 @@ msgid ""
 msgstr ""
 
 #: deploy/admin.py:507
-#, fuzzy
 msgid "impex|general information"
-msgstr "description"
+msgstr "general information"
 
 #: deploy/filters.py:11 deploy/filters.py:88 deploy/filters.py:160
 #: inventory/filters.py:150
-#, fuzzy
 msgid "entity"
-msgstr "name"
+msgstr "entity"
 
 #: deploy/filters.py:30 inventory/filters.py:372
 msgid "hostFilter"
@@ -412,7 +400,6 @@ msgid "statusFilter"
 msgstr ""
 
 #: deploy/filters.py:66
-#, fuzzy
 msgid "package"
 msgstr "no"
 
@@ -421,7 +408,6 @@ msgid "only my packages"
 msgstr ""
 
 #: deploy/filters.py:139
-#, fuzzy
 msgid "packagecondition"
 msgstr "conditions"
 
@@ -501,19 +487,16 @@ msgstr ""
 "the operating system version (Service pack etc...)."
 
 #: deploy/models.py:58
-#, fuzzy
 msgid "packagecondition|entity"
-msgstr "condition name"
+msgstr "entity"
 
 #: deploy/models.py:59
-#, fuzzy
 msgid "packagecondition| condition last editor"
-msgstr "  Packages software conditions"
+msgstr "Last editor"
 
 #: deploy/models.py:60
-#, fuzzy
 msgid "packagecondition|exclusive editor"
-msgstr "conditions"
+msgstr "exclusive editor"
 
 #: deploy/models.py:63
 msgid "packagecondition|package condition"
@@ -562,19 +545,16 @@ msgid "package| public package"
 msgstr "public package"
 
 #: deploy/models.py:83
-#, fuzzy
 msgid "package|entity"
-msgstr "no"
+msgstr "entity"
 
 #: deploy/models.py:84
-#, fuzzy
 msgid "package| package last editor"
-msgstr "    Deployment history"
+msgstr "    Last editor"
 
 #: deploy/models.py:85
-#, fuzzy
 msgid "package|exclusive editor"
-msgstr "conditions"
+msgstr "exclusive editor"
 
 #: deploy/models.py:88
 msgid "package|deployment package"
@@ -649,19 +629,16 @@ msgid "packageprofile|parent"
 msgstr "Profile's parent"
 
 #: deploy/models.py:214
-#, fuzzy
 msgid "packageprofile|entity"
-msgstr "Profile's parent"
+msgstr "entity"
 
 #: deploy/models.py:215
-#, fuzzy
 msgid "packageprofile| condition last editor"
-msgstr "description"
+msgstr "last editor"
 
 #: deploy/models.py:216
-#, fuzzy
 msgid "packageprofile|exclusive editor"
-msgstr "conditions"
+msgstr "exclusive editor"
 
 #: deploy/models.py:219
 msgid "packageprofile|package profile"
@@ -709,19 +686,16 @@ msgid "packagewakeonlan|status"
 msgstr "status"
 
 #: deploy/models.py:266
-#, fuzzy
 msgid "packagewakonelan|entity"
-msgstr "status"
+msgstr "entity"
 
 #: deploy/models.py:267
-#, fuzzy
 msgid "packagewakonelan| condition last editor"
-msgstr "machines to wake up"
+msgstr "last editor"
 
 #: deploy/models.py:268
-#, fuzzy
 msgid "packagewakonelan|exclusive editor"
-msgstr "conditions"
+msgstr "exclusive editor"
 
 #: deploy/models.py:271
 msgid "packagewakeonlan|package wakeonlan"
@@ -754,19 +728,16 @@ msgid "timeprofile|end_time"
 msgstr "End of period"
 
 #: deploy/models.py:287
-#, fuzzy
 msgid "timeprofile|entity"
-msgstr "End of period"
+msgstr "entity"
 
 #: deploy/models.py:288
-#, fuzzy
 msgid "timeprofile| condition last editor"
-msgstr "description"
+msgstr "last editor"
 
 #: deploy/models.py:289
-#, fuzzy
 msgid "timeprofile|exclusive editor"
-msgstr "End of period"
+msgstr "exclusive editor"
 
 #: deploy/models.py:292
 msgid "timeprofile|time profile"
@@ -801,7 +772,6 @@ msgid "impex|date"
 msgstr "date"
 
 #: deploy/models.py:310
-#, fuzzy
 msgid "impex|entity"
 msgstr "entity"
 
@@ -810,9 +780,8 @@ msgid "impex| condition last editor"
 msgstr ""
 
 #: deploy/models.py:312
-#, fuzzy
 msgid "impex|exclusive editor"
-msgstr "conditions"
+msgstr "exclusive editor"
 
 #: deploy/models.py:321
 msgid "impex|filename_link"
@@ -859,56 +828,48 @@ msgid "softversion"
 msgstr "version"
 
 #: inventory/filters.py:172
-#, fuzzy
 msgid "domain"
 msgstr "domain"
 
 #: inventory/filters.py:193
-#, fuzzy
 msgid "username"
 msgstr "username"
 
 #: inventory/filters.py:214
-#, fuzzy
 msgid "language"
 msgstr "Operating system language is:"
 
 #: inventory/filters.py:235
-#, fuzzy
 msgid "typemachine"
-msgstr "name"
+msgstr "type"
 
 #: inventory/filters.py:256
-#, fuzzy
 msgid "osdistribution"
 msgstr "OS name"
 
 #: inventory/filters.py:277
-#, fuzzy
 msgid "timeprofile"
-msgstr "profile name"
+msgstr "time profile"
 
 #: inventory/filters.py:298
-#, fuzzy
 msgid "packageprofile"
-msgstr "name"
+msgstr "package profile"
 
 #: inventory/filters.py:317
 msgid "osname"
-msgstr ""
+msgstr "os name"
 
 #: inventory/filters.py:334
-#, fuzzy
 msgid "osversion"
-msgstr "version"
+msgstr "os version"
 
 #: inventory/filters.py:351
 msgid "osarch"
-msgstr ""
+msgstr "os arch"
 
 #: inventory/filters.py:389
 msgid "commentFilter"
-msgstr ""
+msgstr "comments"
 
 #: inventory/models.py:31
 msgid "entity|name"
@@ -1059,9 +1020,8 @@ msgid "machine|manualy_created"
 msgstr "manualy created machine"
 
 #: inventory/models.py:120
-#, fuzzy
 msgid "machine|comment"
-msgstr "domain"
+msgstr "comment"
 
 #: inventory/models.py:123
 msgid "machine|machine"
@@ -1179,9 +1139,25 @@ msgstr "french"
 msgid "english"
 msgstr "english"
 
+#: updatengine/templates/admin/base.html:82
+msgid "header|Inventory"
+msgstr "Inventory"
+
+#: updatengine/templates/admin/base.html:110
+msgid "header|Deploy"
+msgstr "Deployment"
+
 #: updatengine/templates/admin/base.html:138
 msgid "impex|impex title"
 msgstr "imports/exports"
+
+#: updatengine/templates/admin/base.html:146
+msgid "header|Configuration"
+msgstr "Configuration"
+
+#: updatengine/templates/admin/base.html:158
+msgid "header|Auth"
+msgstr "Users and groups"
 
 #: updatengine/templates/admin/base.html:162
 msgid "groups"
@@ -1203,49 +1179,3 @@ msgstr "Log out"
 msgid "Choose_language"
 msgstr "Choose language"
 
-#, fuzzy
-#~ msgid "packagecondition|condition editor"
-#~ msgstr "package software condition"
-
-#, fuzzy
-#~ msgid "packageprofile|condition editor"
-#~ msgstr "description"
-
-#, fuzzy
-#~ msgid "packagewakonelan|condition editor"
-#~ msgstr "description"
-
-#, fuzzy
-#~ msgid "impex|condition editor"
-#~ msgstr "description"
-
-#, fuzzy
-#~ msgid "Groups"
-#~ msgstr "groups"
-
-#~ msgid "Django administration"
-#~ msgstr "UpdatEngine administration"
-
-#~ msgid "header|subtitle"
-#~ msgstr "Free your updates"
-
-#, fuzzy
-#~ msgid "machine|packages help text"
-#~ msgstr "paquets"
-
-#~ msgid "Django site admin"
-#~ msgstr "UpdatEngine administration"
-
-#~ msgid "packageprofile|packages wakeonlan"
-#~ msgstr "Tâches de wake on lan"
-
-# template header.html
-#~ msgid "ModelList: Latest News"
-#~ msgstr "Dernières informations"
-
-#~ msgid "AppList: Applications"
-#~ msgstr "Fonctions principales"
-
-#, fuzzy
-#~ msgid "Applications"
-#~ msgstr "Software packages"

@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-11 14:44+0200\n"
+"POT-Creation-Date: 2014-05-12 09:01+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -1157,9 +1157,25 @@ msgstr "français"
 msgid "english"
 msgstr "anglais"
 
+#: updatengine/templates/admin/base.html:82
+msgid "header|Inventory"
+msgstr "Inventaires"
+
+#: updatengine/templates/admin/base.html:110
+msgid "header|Deploy"
+msgstr "Déploiements"
+
 #: updatengine/templates/admin/base.html:138
 msgid "impex|impex title"
 msgstr "imports/exports"
+
+#: updatengine/templates/admin/base.html:146
+msgid "header|Configuration"
+msgstr "Configuration"
+
+#: updatengine/templates/admin/base.html:158
+msgid "header|Auth"
+msgstr "Authentification"
 
 #: updatengine/templates/admin/base.html:162
 msgid "groups"
@@ -1180,9 +1196,6 @@ msgstr "Se déconnecter"
 #: updatengine/templates/grappelli/dashboard/dashboard.html:22
 msgid "Choose_language"
 msgstr "Langue de l'interface"
-
-#~ msgid "header"
-#~ msgstr "Entêtes des colonnes"
 
 #~ msgid "delimiter"
 #~ msgstr "Séparateur de champ"

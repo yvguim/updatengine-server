@@ -79,7 +79,7 @@
             <!-- inventory -->
             {% if perms.inventory %}
             <li class="grp-user-options-container grp-collapse grp-closed">
-                <a href="javascript://" class="user-options-handler grp-collapse-handler">Inventory</a>
+            <a href="javascript://" class="user-options-handler grp-collapse-handler">{% trans 'header|Inventory' %}</a>
                 <ul class="grp-user-options">
                     {% if perms.inventory.change_machine %}
                         {%url 'admin:inventory_machine_changelist' as machine_url %}
@@ -107,7 +107,7 @@
             <!-- deploy -->
             {% if perms.deploy %}
             <li class="grp-user-options-container grp-collapse grp-closed">
-                <a href="javascript://" class="user-options-handler grp-collapse-handler">Deploy</a>
+            <a href="javascript://" class="user-options-handler grp-collapse-handler">{% trans 'header|Deploy' %}</a>
                 <ul class="grp-user-options">
                     {% if perms.deploy.change_packagehistory %}
                         {%url 'admin:deploy_packagehistory_changelist' as ph_url %}
@@ -143,7 +143,7 @@
             <!-- conf -->
             {% if perms.configuration %}
             <li class="grp-user-options-container grp-collapse grp-closed">
-                <a href="javascript://" class="user-options-handler grp-collapse-handler">Configuration</a>
+            <a href="javascript://" class="user-options-handler grp-collapse-handler">{% trans 'header|Configuration' %}</a>
                 <ul class="grp-user-options">
                     {% if perms.configuration.change_deployconfig %}
                         {%url 'admin:configuration_deployconfig_changelist' as deployconfig_url %}
@@ -155,7 +155,7 @@
 	    <!-- Authentification -->
             {% if perms.Auth %}
             <li class="grp-user-options-container grp-collapse grp-closed">
-                <a href="javascript://" class="user-options-handler grp-collapse-handler">Auth</a>
+            <a href="javascript://" class="user-options-handler grp-collapse-handler">{% trans 'header|Auth' %}</a>
                 <ul class="grp-user-options">
                 {% if perms.Auth.change_group %}
                     {%url 'admin:auth_group_changelist' as group_url %}
