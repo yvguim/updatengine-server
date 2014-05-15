@@ -69,6 +69,15 @@ class entityAdmin(ueAdmin):
         else:
             return entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed)
     
+    def get_changelist_formset(self, request, **kwargs):
+        formset = super(entityAdmin, self).get_changelist_formset(request, **kwargs)
+        if request.user.is_superuser:
+            return formset
+        else:
+            formset.form.base_fields["packageprofile"].queryset = packageprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+            formset.form.base_fields["timeprofile"].queryset = timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+            return formset
+
     def get_form(self, request, obj=None, **kwargs): 
         form = super(entityAdmin, self).get_form(request, object, **kwargs) 
         if obj is not None:
@@ -81,6 +90,8 @@ class entityAdmin(ueAdmin):
                         order_by('name').distinct()
                 form.base_fields["parent"].required = True
                 form.base_fields["parent"].empty_label = None
+                form.base_fields["packageprofile"].queryset = packageprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+                form.base_fields["timeprofile"].queryset = timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
         else:
             if request.user.is_superuser:
                 return form
