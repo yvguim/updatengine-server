@@ -132,6 +132,8 @@ class machineAdmin(ueAdmin):
             return formset
         formset.form.base_fields["entity"].queryset = entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct()
         formset.form.base_fields["entity"].empty_label = None
+        formset.form.base_fields["packageprofile"].queryset = packageprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+        formset.form.base_fields["timeprofile"].queryset = timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
         return formset
 
     def get_form(self, request, obj=None, **kwargs): 
