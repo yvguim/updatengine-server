@@ -84,14 +84,19 @@ class entityAdmin(ueAdmin):
             if request.user.is_superuser: 
                 form.base_fields["parent"].queryset = entity.objects.exclude(pk__in = obj.id_all_children()).exclude(pk = obj.id) 
             else: 
-                form.base_fields["parent"].queryset = entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed).\
-                        exclude(pk__in = obj.id_all_children).\
-                        exclude(pk = obj.id).\
-                        order_by('name').distinct()
-                form.base_fields["parent"].required = True
-                form.base_fields["parent"].empty_label = None
-                form.base_fields["packageprofile"].queryset = packageprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
-                form.base_fields["timeprofile"].queryset = timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+                if obj.parent not in entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed):
+                    form.base_fields["parent"].queryset = entity.objects.filter(pk = obj.parent.pk)
+                    form.base_fields["packageprofile"].queryset = packageprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+                    form.base_fields["timeprofile"].queryset = timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+                else:
+                    form.base_fields["parent"].queryset = entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed).\
+                            exclude(pk__in = obj.id_all_children).\
+                            exclude(pk = obj.id).\
+                            order_by('name').distinct()
+                    form.base_fields["parent"].required = True
+                    form.base_fields["parent"].empty_label = None
+                    form.base_fields["packageprofile"].queryset = packageprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
+                    form.base_fields["timeprofile"].queryset = timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
         else:
             if request.user.is_superuser:
                 return form
@@ -103,7 +108,22 @@ class entityAdmin(ueAdmin):
                 form.base_fields["timeprofile"].queryset = timeprofile.objects.filter(entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').distinct() 
 
         return form 
+    # Prevent deletion of entity created by a superuser
+    def has_delete_permission(self, request, obj=None):
+        if request.user.is_superuser:
+            return True
+        else:
+            if obj is not None: 
+                return obj.parent in entity.objects.filter(pk__in = request.user.subuser.id_entities_allowed)
 
+    def get_actions(self, request):
+        actions = super(entityAdmin, self).get_actions(request)
+        if not request.user.is_superuser:
+            del actions['delete_selected']
+            del actions['mass_update']
+            del actions['export_as_csv']
+
+        return actions
 
 class machineAdmin(ueAdmin):
     select_related = True
