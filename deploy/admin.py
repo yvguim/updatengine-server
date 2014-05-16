@@ -113,7 +113,7 @@ class packageAdmin(ueAdmin):
         if not request.user.is_superuser:
             del actions['delete_selected']
             del actions['mass_update']
-            del actions['export_as_csv']
+#            del actions['export_as_csv']
         return actions
 
     def queryset(self, request):
@@ -145,6 +145,12 @@ class packagehistoryAdmin(ueAdmin):
             return packagehistory.objects.all()
         else:
             return packagehistory.objects.filter(machine__entity__pk__in = request.user.subuser.id_entities_allowed).distinct()
+    
+    def get_actions(self, request):
+        actions = super(packagehistoryAdmin, self).get_actions(request)
+        if not request.user.is_superuser:
+            del actions['mass_update']
+        return actions
 
 class packageprofileForm(ModelForm):
     class Meta:
@@ -220,7 +226,7 @@ class packageprofileAdmin(ueAdmin):
         if not request.user.is_superuser:
             del actions['delete_selected']
             del actions['mass_update']
-            del actions['export_as_csv']
+        #    del actions['export_as_csv']
         return actions
 
     def queryset(self, request):
@@ -301,7 +307,7 @@ class timeprofileAdmin(ueAdmin):
         if not request.user.is_superuser:
             del actions['delete_selected']
             del actions['mass_update']
-            del actions['export_as_csv']
+        #    del actions['export_as_csv']
         return actions
 
     def queryset(self, request):
@@ -384,7 +390,7 @@ class packagewakeonlanAdmin(ueAdmin):
         if not request.user.is_superuser:
             del actions['delete_selected']
             del actions['mass_update']
-            del actions['export_as_csv']
+        #    del actions['export_as_csv']
         return actions
 
     def queryset(self, request):
@@ -462,7 +468,7 @@ class packageconditionAdmin(ueAdmin):
         if not request.user.is_superuser:
             del actions['delete_selected']
             del actions['mass_update']
-            del actions['export_as_csv']
+        #    del actions['export_as_csv']
         return actions
     
     def queryset(self, request):
