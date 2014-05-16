@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-12 09:01+0200\n"
+"POT-Creation-Date: 2014-05-16 16:40+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -100,6 +100,15 @@ msgstr "escapechar"
 #: adminactions/forms.py:46
 msgid "adminactions| columns"
 msgstr "%s"
+
+#: adminactions/mass_update.py:119
+#, fuzzy
+msgid "adminactions| Validate"
+msgstr "update"
+
+#: adminactions/mass_update.py:120
+msgid "adminactions|if checked use obj.save() instead of manager.update()"
+msgstr ""
 
 #: adminactions/mass_update.py:214
 msgid "Sorry you do not have rights to execute this action"
@@ -327,8 +336,8 @@ msgstr "general information"
 msgid "package|package edition"
 msgstr "package edition"
 
-#: deploy/admin.py:76 deploy/admin.py:183 deploy/admin.py:262
-#: deploy/admin.py:345
+#: deploy/admin.py:76 deploy/admin.py:189 deploy/admin.py:268
+#: deploy/admin.py:351
 msgid "package|permissions"
 msgstr "permissions"
 
@@ -338,51 +347,51 @@ msgid ""
 "exclusive editor is set to yes for this package"
 msgstr ""
 
-#: deploy/admin.py:182
+#: deploy/admin.py:188
 msgid "packageprofile|general information"
 msgstr "general information"
 
-#: deploy/admin.py:191
+#: deploy/admin.py:197
 msgid ""
 "Warning: you will not be able to update a profile that you didn't create if "
 "exclusive editor is set to yes for this package"
 msgstr ""
 
-#: deploy/admin.py:261
+#: deploy/admin.py:267
 msgid "timeprofile|general information"
 msgstr "general information"
 
-#: deploy/admin.py:270
+#: deploy/admin.py:276
 msgid ""
 "timeprofile|Warning: you will not be able to update a wake on lan task that "
 "you didn't create if exclusive editor is set to yes for this package"
 msgstr ""
 
-#: deploy/admin.py:344
+#: deploy/admin.py:350
 msgid "packagewakeonlan|general information"
 msgstr "general information"
 
-#: deploy/admin.py:353
+#: deploy/admin.py:359
 msgid ""
 "packagewakeonlan|Warning: you will not be able to update a wake on lan task "
 "that you didn't create if exclusive editor is set to yes for this package"
 msgstr ""
 
-#: deploy/admin.py:425
+#: deploy/admin.py:431
 msgid "packagecondition|general information"
 msgstr "general information"
 
-#: deploy/admin.py:426
+#: deploy/admin.py:432
 msgid "packagecondition|permissions"
 msgstr "permissions"
 
-#: deploy/admin.py:433
+#: deploy/admin.py:439
 msgid ""
 "packagecondition|Warning: you will not be able to update a condition that "
 "you didn't create if exclusive editor is set to yes for this package"
 msgstr ""
 
-#: deploy/admin.py:507
+#: deploy/admin.py:513
 msgid "impex|general information"
 msgstr "general information"
 
@@ -795,11 +804,11 @@ msgstr "import/export"
 msgid "impex|imports/exports"
 msgstr "Imports/Exports"
 
-#: inventory/admin.py:121
+#: inventory/admin.py:152
 msgid "force_wakeup"
 msgstr "Wake up now"
 
-#: inventory/admin.py:126
+#: inventory/admin.py:157
 msgid "force_inventory"
 msgstr "Force inventory now"
 
@@ -1111,11 +1120,11 @@ msgstr "machine"
 msgid "software|manualy_created"
 msgstr "software created manualy"
 
-#: inventory/models.py:226
+#: inventory/models.py:227
 msgid "software|software"
 msgstr "software"
 
-#: inventory/models.py:227 updatengine/templates/admin/base.html:94
+#: inventory/models.py:228 updatengine/templates/admin/base.html:94
 msgid "software|softwares"
 msgstr "  Software packages"
 
@@ -1131,11 +1140,11 @@ msgstr "Rights confguration"
 msgid "ModelList: Links"
 msgstr "Links"
 
-#: updatengine/settings.py:81
+#: updatengine/settings.py:82
 msgid "french"
 msgstr "french"
 
-#: updatengine/settings.py:82
+#: updatengine/settings.py:83
 msgid "english"
 msgstr "english"
 
@@ -1178,4 +1187,3 @@ msgstr "Log out"
 #: updatengine/templates/grappelli/dashboard/dashboard.html:22
 msgid "Choose_language"
 msgstr "Choose language"
-
