@@ -162,9 +162,9 @@ class entityFilter(SimpleListFilter):
          if self.value() is not None:
             if 'entity' in request.GET:
                 list_head_entity = [entity.objects.get(name__iexact = self.value())]
-                return queryset.filter(entity__name__in = list_head_entity + entity.get_all_children(list_head_entity))
-         else:
-             return queryset
+                entity_children_list = entity.get_all_children(list_head_entity, list())
+                return queryset.filter(entity__name__in = entity_children_list)
+         return queryset
 
 class domainFilter(SimpleListFilter):
     # Human-readable title which will be displayed in the
