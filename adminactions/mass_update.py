@@ -243,9 +243,12 @@ def mass_update(modeladmin, request, queryset):
         MForm = modelform_factory(modeladmin.model, form=mass_update_form, formfield_callback=not_required)
     grouped = defaultdict(lambda: [])
     selected_fields = []
-    initial = {'_selected_action': request.POST.getlist(helpers.ACTION_CHECKBOX_NAME),
-               'select_across': request.POST.get('select_across') == '1',
-               'action': 'mass_update'}
+    #initial = {'_selected_action': request.POST.getlist(helpers.ACTION_CHECKBOX_NAME),
+    #           'select_across': request.POST.get('select_across') == '1',
+    machines_selected = [ obj.id for obj in queryset]
+    initial = {'_selected_action': machines_selected,
+                'action': 'mass_update',
+                '_validate': 1}
 
     if 'apply' in request.POST:
         form = MForm(request.POST)
