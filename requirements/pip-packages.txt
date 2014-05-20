@@ -4,7 +4,6 @@ PyMySQL==0.6.1
 PyYAML==3.11
 South==0.8.4
 argparse==1.2.1
-distribute==0.7.3
 django-grappelli==2.5.2
 lxml==3.3.3
 unicodecsv==0.9.4
