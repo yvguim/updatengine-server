@@ -70,9 +70,22 @@ class packageHistoryFilter(SimpleListFilter):
  
     def lookups(self, request, model_admin):
         if request.user.is_superuser:
-            return packagehistory.objects.all().order_by('name').values_list('name','name')
+            all_packagehistory = packagehistory.objects.all()
+            ph_list = list()
+            for ph in all_packagehistory:
+                if (ph.name, ph.name) not in ph_list:
+                    ph_list.append((ph.name, ph.name))
+            return ph_list        
+            #return packagehistory.objects.all().order_by('name').values_list('name','name')
         else:
-            return packagehistory.objects.filter(machine__entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').values_list('name','name').distinct()
+
+            all_packagehistory = packagehistory.objects.filter(machine__entity__pk__in = request.user.subuser.id_entities_allowed)
+            ph_list = list()
+            for ph in all_packagehistory:
+                if (ph.name, ph.name) not in ph_list:
+                    ph_list.append((ph.name, ph.name))
+            return ph_list        
+            #return packagehistory.objects.filter(machine__entity__pk__in = request.user.subuser.id_entities_allowed).order_by('name').values_list('name','name')
     
     def queryset(self, request, queryset):
          if self.value() is not None:
