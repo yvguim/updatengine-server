@@ -72,6 +72,12 @@ class subuser(models.Model):
         #    return entity.objects.all().values_list('id')
         return list(e.id for e in self.entities_allowed())
 
+    def id_entities_parents_children(self):
+        """Return a list composed of entities allowed id"""
+       # if self.user.is_superuser:
+        #    return entity.objects.all().values_list('id')
+        return list(e.id for e in entity.get_all_parents(self.entities_allowed(), list()))
+
     @staticmethod
     def get_first_superuser():
         for user in User.objects.all():
