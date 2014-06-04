@@ -37,6 +37,7 @@ class entity(models.Model):
     timeprofile = models.ForeignKey('deploy.timeprofile',null=True, blank=True, related_name="timeprofile", on_delete=models.SET_NULL, verbose_name = _('entity|time profile'), help_text= _('entity|time profile help text'))
     old_timeprofile = models.ForeignKey('deploy.timeprofile',null=True, blank=True, on_delete=models.SET_NULL, related_name = 'old_timeprofile', verbose_name = _('entity|old time profile'), help_text= _('entity|old time profile help text'))
     force_timeprofile = models.CharField(max_length=3, choices=choice, default='no', verbose_name = _('entity|force_timeprofile'))
+    redistrib_url = models.CharField(max_length=200, null=True, blank=True, verbose_name = _('entity|redistrib_url'))
 
     def __unicode__(self):
         return self.name
