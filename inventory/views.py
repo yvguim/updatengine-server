@@ -448,7 +448,7 @@ def inventory(xml):
                 if period_to_deploy or pack.ignoreperiod == 'yes':
                     if check_conditions(m, pack):
                         if pack.packagesum != 'nofile':
-                            if m.entity.redistrib_url:
+                            if m.entity != None and m.entity.redistrib_url:
                                 packurl = str(m.entity.redistrib_url)+str(pack.filename)
                             else:
                                 packurl = pack.filename.url
