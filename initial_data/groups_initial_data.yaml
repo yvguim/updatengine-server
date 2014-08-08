@@ -1,22 +1,228 @@
--   fields:
-        name: ' Super Admin'
-        permissions: [69, 89, 70, 71, 66, 87, 67, 68, 91, 73, 74, 75, 93, 76, 77,
-            78, 95, 79, 80, 81, 97, 82, 83, 36, 54, 37, 38, 42, 58, 59, 43, 44, 48,
-            62, 63, 49, 50, 45, 60, 61, 46, 47, 51, 64, 65, 52, 53, 39, 56, 57, 40,
-            41]
-    model: auth.group
-    pk: 1000
--   fields:
-        name: Admin
-        permissions: [29, 27, 28, 69, 89, 70, 71, 66, 87, 67, 68, 72, 91, 73, 74,
-            75, 93, 76, 77, 78, 95, 79, 80, 81, 97, 82, 83, 42, 58, 59, 43, 44, 48,
-            62, 63, 49, 50, 45, 60, 61, 46, 47, 51, 64, 65, 52, 53, 39, 56, 57, 40,
-            41]
-    model: auth.group
-    pk: 1001
--   fields:
-        name: Operator
-        permissions: [91, 73, 74, 42, 58, 43, 44, 48, 62, 49, 50, 45, 60, 46, 47,
-            51, 64, 52, 53, 39, 57, 40, 41]
-    model: auth.group
-    pk: 1003
+[
+{
+  "pk": 1000, 
+  "model": "auth.group", 
+  "fields": {
+    "name": " Super Admin", 
+    "permissions": []
+  }
+},
+{
+  "pk": 1001, 
+  "model": "auth.group", 
+  "fields": {
+    "name": "Admin", 
+    "permissions": [
+      [
+        "add_machine", 
+        "inventory", 
+        "machine"
+      ], 
+      [
+        "adminactions_export_machine", 
+        "inventory", 
+        "machine"
+      ], 
+      [
+        "change_machine", 
+        "inventory", 
+        "machine"
+      ], 
+      [
+        "delete_machine", 
+        "inventory", 
+        "machine"
+      ], 
+      [
+        "add_net", 
+        "inventory", 
+        "net"
+      ], 
+      [
+        "adminactions_export_net", 
+        "inventory", 
+        "net"
+      ], 
+      [
+        "change_net", 
+        "inventory", 
+        "net"
+      ], 
+      [
+        "delete_net", 
+        "inventory", 
+        "net"
+      ], 
+      [
+        "add_osdistribution", 
+        "inventory", 
+        "osdistribution"
+      ], 
+      [
+        "adminactions_export_osdistribution", 
+        "inventory", 
+        "osdistribution"
+      ], 
+      [
+        "change_osdistribution", 
+        "inventory", 
+        "osdistribution"
+      ], 
+      [
+        "delete_osdistribution", 
+        "inventory", 
+        "osdistribution"
+      ], 
+      [
+        "add_software", 
+        "inventory", 
+        "software"
+      ], 
+      [
+        "adminactions_export_software", 
+        "inventory", 
+        "software"
+      ], 
+      [
+        "change_software", 
+        "inventory", 
+        "software"
+      ], 
+      [
+        "delete_software", 
+        "inventory", 
+        "software"
+      ], 
+      [
+        "add_typemachine", 
+        "inventory", 
+        "typemachine"
+      ], 
+      [
+        "adminactions_export_typemachine", 
+        "inventory", 
+        "typemachine"
+      ], 
+      [
+        "change_typemachine", 
+        "inventory", 
+        "typemachine"
+      ], 
+      [
+        "delete_typemachine", 
+        "inventory", 
+        "typemachine"
+      ]
+    ]
+  }
+},
+{
+  "pk": 1003, 
+  "model": "auth.group", 
+  "fields": {
+    "name": "Operator", 
+    "permissions": [
+      [
+        "add_machine", 
+        "inventory", 
+        "machine"
+      ], 
+      [
+        "adminactions_export_machine", 
+        "inventory", 
+        "machine"
+      ], 
+      [
+        "change_machine", 
+        "inventory", 
+        "machine"
+      ], 
+      [
+        "delete_machine", 
+        "inventory", 
+        "machine"
+      ], 
+      [
+        "add_net", 
+        "inventory", 
+        "net"
+      ], 
+      [
+        "adminactions_export_net", 
+        "inventory", 
+        "net"
+      ], 
+      [
+        "change_net", 
+        "inventory", 
+        "net"
+      ], 
+      [
+        "delete_net", 
+        "inventory", 
+        "net"
+      ], 
+      [
+        "add_osdistribution", 
+        "inventory", 
+        "osdistribution"
+      ], 
+      [
+        "adminactions_export_osdistribution", 
+        "inventory", 
+        "osdistribution"
+      ], 
+      [
+        "change_osdistribution", 
+        "inventory", 
+        "osdistribution"
+      ], 
+      [
+        "delete_osdistribution", 
+        "inventory", 
+        "osdistribution"
+      ], 
+      [
+        "add_software", 
+        "inventory", 
+        "software"
+      ], 
+      [
+        "adminactions_export_software", 
+        "inventory", 
+        "software"
+      ], 
+      [
+        "change_software", 
+        "inventory", 
+        "software"
+      ], 
+      [
+        "delete_software", 
+        "inventory", 
+        "software"
+      ], 
+      [
+        "add_typemachine", 
+        "inventory", 
+        "typemachine"
+      ], 
+      [
+        "adminactions_export_typemachine", 
+        "inventory", 
+        "typemachine"
+      ], 
+      [
+        "change_typemachine", 
+        "inventory", 
+        "typemachine"
+      ], 
+      [
+        "delete_typemachine", 
+        "inventory", 
+        "typemachine"
+      ]
+    ]
+  }
+}
+]
