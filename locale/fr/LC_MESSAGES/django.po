@@ -1209,6 +1209,9 @@ msgstr "Se déconnecter"
 msgid "Choose_language"
 msgstr "Langue de l'interface"
 
+msgid "Django site admin"
+msgstr "UpdatEngine administration"
+
 #~ msgid "delimiter"
 #~ msgstr "Séparateur de champ"
 
@@ -1300,8 +1303,6 @@ msgstr "Langue de l'interface"
 #~ msgid "Groups"
 #~ msgstr "Groupes"
 
-#~ msgid "Django site admin"
-#~ msgstr "UpdatEngine administration"
 
 #~ msgid "header|subtitle"
 #~ msgstr "Maîtrisez vos mises à jour de logiciels"
