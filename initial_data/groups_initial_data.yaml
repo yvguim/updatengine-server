@@ -51,6 +51,11 @@
         "packagehistory"
       ], 
       [
+        "change_packagehistory", 
+        "deploy", 
+        "packagehistory"
+      ], 
+      [
         "delete_packagehistory", 
         "deploy", 
         "packagehistory"
@@ -295,6 +300,11 @@
         "packagehistory"
       ], 
       [
+        "change_packagehistory", 
+        "deploy", 
+        "packagehistory"
+      ], 
+      [
         "delete_packagehistory", 
         "deploy", 
         "packagehistory"
@@ -473,6 +483,16 @@
   "fields": {
     "name": "Operator", 
     "permissions": [
+      [
+        "change_packagehistory", 
+        "deploy", 
+        "packagehistory"
+      ], 
+      [
+        "delete_packagehistory", 
+        "deploy", 
+        "packagehistory"
+      ], 
       [
         "add_machine", 
         "inventory", 
