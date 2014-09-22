@@ -225,7 +225,7 @@ class software(models.Model):
             ('yes', _('yes')),
             ('no', _('no'))
         )
-    name = models.CharField(max_length=100, verbose_name = _('software|name'))
+    name = models.CharField(max_length=300, verbose_name = _('software|name'))
     version = models.CharField(max_length=500,null=True, blank=True, default='undefined', verbose_name = _('software|version'))
     uninstall = models.CharField(max_length=500,null=True, blank=True, default='undefined', verbose_name = _('software|uninstall'))
     host = models.ForeignKey(machine, verbose_name = _('software|host'))
