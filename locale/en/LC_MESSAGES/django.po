@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-02 22:59+0200\n"
+"POT-Creation-Date: 2014-10-15 21:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Yves Guimard <yves.guimard@gmail.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,6 +30,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
+
+#: settings.py:84 updatengine/settings.py:86
+msgid "french"
+msgstr "french"
+
+#: settings.py:85 updatengine/settings.py:87
+msgid "english"
+msgstr "english"
 
 #: adminactions/export.py:30 adminactions/export.py:212
 #: adminactions/export.py:289 adminactions/merge.py:79
@@ -262,13 +270,13 @@ msgstr ""
 msgid "Groups and permissions"
 msgstr ""
 
-#: configuration/models.py:29 deploy/filters.py:139 deploy/filters.py:211
+#: configuration/models.py:29 deploy/filters.py:156 deploy/filters.py:228
 #: inventory/filters.py:12 inventory/models.py:28 inventory/models.py:111
 #: inventory/models.py:184 inventory/models.py:205 inventory/models.py:225
 msgid "yes"
 msgstr "yes"
 
-#: configuration/models.py:30 deploy/filters.py:127 deploy/filters.py:199
+#: configuration/models.py:30 deploy/filters.py:144 deploy/filters.py:216
 #: inventory/filters.py:21 inventory/models.py:29 inventory/models.py:112
 #: inventory/models.py:185 inventory/models.py:206 inventory/models.py:226
 msgid "no"
@@ -395,7 +403,7 @@ msgstr ""
 msgid "impex|general information"
 msgstr "general information"
 
-#: deploy/filters.py:11 deploy/filters.py:101 deploy/filters.py:173
+#: deploy/filters.py:11 deploy/filters.py:118 deploy/filters.py:190
 #: inventory/filters.py:150
 msgid "entity"
 msgstr "entity"
@@ -408,29 +416,33 @@ msgstr ""
 msgid "statusFilter"
 msgstr ""
 
-#: deploy/filters.py:66
+#: deploy/filters.py:64
+msgid "categoryFilter"
+msgstr ""
+
+#: deploy/filters.py:83
 msgid "package"
 msgstr "no"
 
-#: deploy/filters.py:120
+#: deploy/filters.py:137
 msgid "only my packages"
 msgstr ""
 
-#: deploy/filters.py:152
+#: deploy/filters.py:169
 msgid "packagecondition"
 msgstr "conditions"
 
-#: deploy/filters.py:192
+#: deploy/filters.py:209
 msgid "only my conditions"
 msgstr ""
 
-#: deploy/models.py:41 deploy/models.py:72 deploy/models.py:207
-#: deploy/models.py:254 deploy/models.py:280 deploy/models.py:301
+#: deploy/models.py:41 deploy/models.py:72 deploy/models.py:208
+#: deploy/models.py:255 deploy/models.py:281 deploy/models.py:302
 msgid "package|yes"
 msgstr "yes"
 
-#: deploy/models.py:42 deploy/models.py:73 deploy/models.py:208
-#: deploy/models.py:255 deploy/models.py:281 deploy/models.py:302
+#: deploy/models.py:42 deploy/models.py:73 deploy/models.py:209
+#: deploy/models.py:256 deploy/models.py:282 deploy/models.py:303
 msgid "package|no"
 msgstr "no"
 
@@ -613,194 +625,198 @@ msgstr "status"
 msgid "packagehistory|date"
 msgstr "date"
 
-#: deploy/models.py:197
+#: deploy/models.py:195
+msgid "packagehistory|category"
+msgstr "Type of status"
+
+#: deploy/models.py:198
 msgid "packagehistory|package history"
 msgstr "deployment history"
 
-#: deploy/models.py:198 updatengine/templates/admin/base.html:114
+#: deploy/models.py:199 updatengine/templates/admin/base.html:114
 msgid "packagehistory|packages history"
 msgstr "    Deployment history"
 
-#: deploy/models.py:210
+#: deploy/models.py:211
 msgid "packageprofile|name"
 msgstr "name"
 
-#: deploy/models.py:211
+#: deploy/models.py:212
 msgid "packageprofile|description"
 msgstr "description"
 
-#: deploy/models.py:212
+#: deploy/models.py:213
 msgid "packageprofile|packages"
 msgstr "packages"
 
-#: deploy/models.py:213
+#: deploy/models.py:214
 msgid "packageprofile|parent"
 msgstr "Profile's parent"
 
-#: deploy/models.py:214
+#: deploy/models.py:215
 msgid "packageprofile|entity"
 msgstr "entity"
 
-#: deploy/models.py:215
+#: deploy/models.py:216
 msgid "packageprofile| condition last editor"
 msgstr "last editor"
 
-#: deploy/models.py:216
+#: deploy/models.py:217
 msgid "packageprofile|exclusive editor"
 msgstr "exclusive editor"
 
-#: deploy/models.py:219
+#: deploy/models.py:220
 msgid "packageprofile|package profile"
 msgstr "software profile configuration"
 
-#: deploy/models.py:220 updatengine/templates/admin/base.html:126
+#: deploy/models.py:221 updatengine/templates/admin/base.html:126
 msgid "packageprofile|packages profiles"
 msgstr " Software packages profiles"
 
-#: deploy/models.py:250
+#: deploy/models.py:251
 msgid "packageAdmin|get_packages"
 msgstr "Software packages"
 
-#: deploy/models.py:258
+#: deploy/models.py:259
 msgid "packagewakeonlan|Programmed"
 msgstr "Programmed"
 
-#: deploy/models.py:259
+#: deploy/models.py:260
 msgid "packagewakeonlan|Completed"
 msgstr "Completed"
 
-#: deploy/models.py:261
+#: deploy/models.py:262
 msgid "packagewakeonlan|name"
 msgstr "Name"
 
-#: deploy/models.py:261
+#: deploy/models.py:262
 msgid "packagewakeonlan|packagewakeonlan help text"
 msgstr ""
 "Warning: this function can only be used on the lan of the updatengine server"
 
-#: deploy/models.py:262
+#: deploy/models.py:263
 msgid "packagewakeonlan|description"
 msgstr "description"
 
-#: deploy/models.py:263
+#: deploy/models.py:264
 msgid "packagewakeonlan|machines to start"
 msgstr "machines to wake up"
 
-#: deploy/models.py:264
+#: deploy/models.py:265
 msgid "packagewakeonlan|start_time"
 msgstr "date and time of start"
 
-#: deploy/models.py:265
+#: deploy/models.py:266
 msgid "packagewakeonlan|status"
 msgstr "status"
 
-#: deploy/models.py:266
+#: deploy/models.py:267
 msgid "packagewakonelan|entity"
 msgstr "entity"
 
-#: deploy/models.py:267
+#: deploy/models.py:268
 msgid "packagewakonelan| condition last editor"
 msgstr "last editor"
 
-#: deploy/models.py:268
+#: deploy/models.py:269
 msgid "packagewakonelan|exclusive editor"
 msgstr "exclusive editor"
 
-#: deploy/models.py:271
+#: deploy/models.py:272
 msgid "packagewakeonlan|package wakeonlan"
 msgstr "wake on lan planning"
 
-#: deploy/models.py:272 updatengine/templates/admin/base.html:134
+#: deploy/models.py:273 updatengine/templates/admin/base.html:134
 msgid "packagewakeonlan|packages wakeonlan"
 msgstr "Wake on lan planning"
 
-#: deploy/models.py:283
+#: deploy/models.py:284
 msgid "timeprofile|name"
 msgstr "profile name"
 
-#: deploy/models.py:283
+#: deploy/models.py:284
 msgid "timeprofile|timeprofile help text"
 msgstr ""
 "Warning: a deployment period can be override by a global configuration (see "
 "configuration menu) or if a package is configured to ignore them."
 
-#: deploy/models.py:284
+#: deploy/models.py:285
 msgid "timeprofile|description"
 msgstr "description"
 
-#: deploy/models.py:285
+#: deploy/models.py:286
 msgid "timeprofile|start_time"
 msgstr "Start of period"
 
-#: deploy/models.py:286
+#: deploy/models.py:287
 msgid "timeprofile|end_time"
 msgstr "End of period"
 
-#: deploy/models.py:287
+#: deploy/models.py:288
 msgid "timeprofile|entity"
 msgstr "entity"
 
-#: deploy/models.py:288
+#: deploy/models.py:289
 msgid "timeprofile| condition last editor"
 msgstr "last editor"
 
-#: deploy/models.py:289
+#: deploy/models.py:290
 msgid "timeprofile|exclusive editor"
 msgstr "exclusive editor"
 
-#: deploy/models.py:292
+#: deploy/models.py:293
 msgid "timeprofile|time profile"
 msgstr "Deployment period"
 
-#: deploy/models.py:293 updatengine/templates/admin/base.html:130
+#: deploy/models.py:294 updatengine/templates/admin/base.html:130
 msgid "timeprofile|time profiles"
 msgstr "Deployment periods"
 
-#: deploy/models.py:304
+#: deploy/models.py:305
 msgid "impex|name"
 msgstr "Name"
 
-#: deploy/models.py:305
+#: deploy/models.py:306
 msgid "impex|description"
 msgstr "description"
 
-#: deploy/models.py:306
+#: deploy/models.py:307
 msgid "impex|packagesum"
 msgstr "md5 sum"
 
-#: deploy/models.py:307
+#: deploy/models.py:308
 msgid "impex|filename"
 msgstr "file name"
 
-#: deploy/models.py:308
+#: deploy/models.py:309
 msgid "impex|package"
 msgstr "package"
 
-#: deploy/models.py:309
+#: deploy/models.py:310
 msgid "impex|date"
 msgstr "date"
 
-#: deploy/models.py:310
+#: deploy/models.py:311
 msgid "impex|entity"
 msgstr "entity"
 
-#: deploy/models.py:311
+#: deploy/models.py:312
 msgid "impex| condition last editor"
 msgstr ""
 
-#: deploy/models.py:312
+#: deploy/models.py:313
 msgid "impex|exclusive editor"
 msgstr "exclusive editor"
 
-#: deploy/models.py:321
+#: deploy/models.py:322
 msgid "impex|filename_link"
 msgstr "export's file"
 
-#: deploy/models.py:323
+#: deploy/models.py:324
 msgid "impex|import/export"
 msgstr "import/export"
 
-#: deploy/models.py:324
+#: deploy/models.py:325
 msgid "impex|imports/exports"
 msgstr "Imports/Exports"
 
@@ -1143,14 +1159,6 @@ msgstr "Rights confguration"
 #: updatengine/dashboard.py:95
 msgid "ModelList: Links"
 msgstr "Links"
-
-#: updatengine/settings.py:84
-msgid "french"
-msgstr "french"
-
-#: updatengine/settings.py:85
-msgid "english"
-msgstr "english"
 
 #: updatengine/templates/admin/base.html:82
 msgid "header|Inventory"

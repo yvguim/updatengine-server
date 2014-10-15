@@ -21,7 +21,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-02 22:59+0200\n"
+"POT-Creation-Date: 2014-10-15 21:26+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -31,9 +31,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
+#: settings.py:84 updatengine/settings.py:86
+msgid "french"
+msgstr "français"
+
+#: settings.py:85 updatengine/settings.py:87
+msgid "english"
+msgstr "anglais"
+
 #: adminactions/export.py:30 adminactions/export.py:212
 #: adminactions/export.py:289 adminactions/merge.py:79
-#, fuzzy, python-format
 msgid "Sorry you do not have rights to execute this action (%s)"
 msgstr "Désolé mais vous n'avez pas les droits d'exécuter cette action"
 
@@ -261,13 +268,13 @@ msgstr "Evenements"
 msgid "Groups and permissions"
 msgstr "Groupes et permissions"
 
-#: configuration/models.py:29 deploy/filters.py:139 deploy/filters.py:211
+#: configuration/models.py:29 deploy/filters.py:156 deploy/filters.py:228
 #: inventory/filters.py:12 inventory/models.py:28 inventory/models.py:111
 #: inventory/models.py:184 inventory/models.py:205 inventory/models.py:225
 msgid "yes"
 msgstr "oui"
 
-#: configuration/models.py:30 deploy/filters.py:127 deploy/filters.py:199
+#: configuration/models.py:30 deploy/filters.py:144 deploy/filters.py:216
 #: inventory/filters.py:21 inventory/models.py:29 inventory/models.py:112
 #: inventory/models.py:185 inventory/models.py:206 inventory/models.py:226
 msgid "no"
@@ -405,7 +412,7 @@ msgstr ""
 msgid "impex|general information"
 msgstr "Général"
 
-#: deploy/filters.py:11 deploy/filters.py:101 deploy/filters.py:173
+#: deploy/filters.py:11 deploy/filters.py:118 deploy/filters.py:190
 #: inventory/filters.py:150
 msgid "entity"
 msgstr "Entité"
@@ -418,29 +425,34 @@ msgstr "Machine"
 msgid "statusFilter"
 msgstr "Status"
 
-#: deploy/filters.py:66
+#: deploy/filters.py:64
+#, fuzzy
+msgid "categoryFilter"
+msgstr "Status"
+
+#: deploy/filters.py:83
 msgid "package"
 msgstr "Paquet"
 
-#: deploy/filters.py:120
+#: deploy/filters.py:137
 msgid "only my packages"
 msgstr "Mes paquets"
 
-#: deploy/filters.py:152
+#: deploy/filters.py:169
 msgid "packagecondition"
 msgstr "conditions"
 
-#: deploy/filters.py:192
+#: deploy/filters.py:209
 msgid "only my conditions"
 msgstr ""
 
-#: deploy/models.py:41 deploy/models.py:72 deploy/models.py:207
-#: deploy/models.py:254 deploy/models.py:280 deploy/models.py:301
+#: deploy/models.py:41 deploy/models.py:72 deploy/models.py:208
+#: deploy/models.py:255 deploy/models.py:281 deploy/models.py:302
 msgid "package|yes"
 msgstr "oui"
 
-#: deploy/models.py:42 deploy/models.py:73 deploy/models.py:208
-#: deploy/models.py:255 deploy/models.py:281 deploy/models.py:302
+#: deploy/models.py:42 deploy/models.py:73 deploy/models.py:209
+#: deploy/models.py:256 deploy/models.py:282 deploy/models.py:303
 msgid "package|no"
 msgstr "non"
 
@@ -623,197 +635,201 @@ msgstr "statut"
 msgid "packagehistory|date"
 msgstr "date"
 
-#: deploy/models.py:197
+#: deploy/models.py:195
+msgid "packagehistory|category"
+msgstr "Type de message"
+
+#: deploy/models.py:198
 msgid "packagehistory|package history"
 msgstr "historique de déploiement"
 
-#: deploy/models.py:198 updatengine/templates/admin/base.html:114
+#: deploy/models.py:199 updatengine/templates/admin/base.html:114
 msgid "packagehistory|packages history"
 msgstr "    Historique des déploiements"
 
-#: deploy/models.py:210
+#: deploy/models.py:211
 msgid "packageprofile|name"
 msgstr "nom"
 
-#: deploy/models.py:211
+#: deploy/models.py:212
 msgid "packageprofile|description"
 msgstr "description"
 
-#: deploy/models.py:212
+#: deploy/models.py:213
 msgid "packageprofile|packages"
 msgstr "paquets"
 
-#: deploy/models.py:213
+#: deploy/models.py:214
 msgid "packageprofile|parent"
 msgstr "profile parent"
 
-#: deploy/models.py:214
+#: deploy/models.py:215
 msgid "packageprofile|entity"
 msgstr "Entité"
 
-#: deploy/models.py:215
+#: deploy/models.py:216
 msgid "packageprofile| condition last editor"
 msgstr "Dernier éditeur"
 
-#: deploy/models.py:216
+#: deploy/models.py:217
 msgid "packageprofile|exclusive editor"
 msgstr "Editeur exclusif"
 
-#: deploy/models.py:219
+#: deploy/models.py:220
 msgid "packageprofile|package profile"
 msgstr "profil de configuration logicielle"
 
-#: deploy/models.py:220 updatengine/templates/admin/base.html:126
+#: deploy/models.py:221 updatengine/templates/admin/base.html:126
 msgid "packageprofile|packages profiles"
 msgstr " Profils de configurations"
 
-#: deploy/models.py:250
+#: deploy/models.py:251
 msgid "packageAdmin|get_packages"
 msgstr "Paquets inclus"
 
-#: deploy/models.py:258
+#: deploy/models.py:259
 msgid "packagewakeonlan|Programmed"
 msgstr "Tâche programmée"
 
-#: deploy/models.py:259
+#: deploy/models.py:260
 msgid "packagewakeonlan|Completed"
 msgstr "Tâche terminée"
 
-#: deploy/models.py:261
+#: deploy/models.py:262
 msgid "packagewakeonlan|name"
 msgstr "Nom"
 
-#: deploy/models.py:261
+#: deploy/models.py:262
 msgid "packagewakeonlan|packagewakeonlan help text"
 msgstr ""
 "Attention: Dans cette version cette tâche ne peut être utile que sur le sous-"
 "réseau \td'installation du serveur updatengine ou sur les vlans \"environnant"
 "\" \t(nécessite le paramétrage de vos équipements.)"
 
-#: deploy/models.py:262
+#: deploy/models.py:263
 msgid "packagewakeonlan|description"
 msgstr "description"
 
-#: deploy/models.py:263
+#: deploy/models.py:264
 msgid "packagewakeonlan|machines to start"
 msgstr "machines à démarrer"
 
-#: deploy/models.py:264
+#: deploy/models.py:265
 msgid "packagewakeonlan|start_time"
 msgstr "date et heure de démarrage"
 
-#: deploy/models.py:265
+#: deploy/models.py:266
 msgid "packagewakeonlan|status"
 msgstr "statut"
 
-#: deploy/models.py:266
+#: deploy/models.py:267
 msgid "packagewakonelan|entity"
 msgstr "Entité"
 
-#: deploy/models.py:267
+#: deploy/models.py:268
 msgid "packagewakonelan| condition last editor"
 msgstr "Dernier éditeur"
 
-#: deploy/models.py:268
+#: deploy/models.py:269
 msgid "packagewakonelan|exclusive editor"
 msgstr "Editeur exclusif"
 
-#: deploy/models.py:271
+#: deploy/models.py:272
 msgid "packagewakeonlan|package wakeonlan"
 msgstr "tâche de wake on lan"
 
-#: deploy/models.py:272 updatengine/templates/admin/base.html:134
+#: deploy/models.py:273 updatengine/templates/admin/base.html:134
 msgid "packagewakeonlan|packages wakeonlan"
 msgstr "Tâches de wake on lan"
 
-#: deploy/models.py:283
+#: deploy/models.py:284
 msgid "timeprofile|name"
 msgstr "nom du profil"
 
-#: deploy/models.py:283
+#: deploy/models.py:284
 msgid "timeprofile|timeprofile help text"
 msgstr ""
 "Attention les périodes de déploiement peuvent être ignorées si une période "
 "globale est activée \t(menu configuration) ou si un paquet est configuré "
 "pour ignorer ces périodes."
 
-#: deploy/models.py:284
+#: deploy/models.py:285
 msgid "timeprofile|description"
 msgstr "description"
 
-#: deploy/models.py:285
+#: deploy/models.py:286
 msgid "timeprofile|start_time"
 msgstr "Heure de début de période"
 
-#: deploy/models.py:286
+#: deploy/models.py:287
 msgid "timeprofile|end_time"
 msgstr "Heure de fin de période"
 
-#: deploy/models.py:287
+#: deploy/models.py:288
 msgid "timeprofile|entity"
 msgstr "Entité"
 
-#: deploy/models.py:288
+#: deploy/models.py:289
 msgid "timeprofile| condition last editor"
 msgstr "Dernier éditeur"
 
-#: deploy/models.py:289
+#: deploy/models.py:290
 msgid "timeprofile|exclusive editor"
 msgstr "Editeur exclusif"
 
-#: deploy/models.py:292
+#: deploy/models.py:293
 msgid "timeprofile|time profile"
 msgstr "Période de déploiement"
 
-#: deploy/models.py:293 updatengine/templates/admin/base.html:130
+#: deploy/models.py:294 updatengine/templates/admin/base.html:130
 msgid "timeprofile|time profiles"
 msgstr "Périodes de déploiement"
 
-#: deploy/models.py:304
+#: deploy/models.py:305
 msgid "impex|name"
 msgstr "Nom de l'import/export"
 
-#: deploy/models.py:305
+#: deploy/models.py:306
 msgid "impex|description"
 msgstr "description"
 
-#: deploy/models.py:306
+#: deploy/models.py:307
 msgid "impex|packagesum"
 msgstr "somme md5"
 
-#: deploy/models.py:307
+#: deploy/models.py:308
 msgid "impex|filename"
 msgstr "fichier"
 
-#: deploy/models.py:308
+#: deploy/models.py:309
 msgid "impex|package"
 msgstr "paquet"
 
-#: deploy/models.py:309
+#: deploy/models.py:310
 msgid "impex|date"
 msgstr "Date de dernière sauvegarde"
 
-#: deploy/models.py:310
+#: deploy/models.py:311
 msgid "impex|entity"
 msgstr "Entité"
 
-#: deploy/models.py:311
+#: deploy/models.py:312
 msgid "impex| condition last editor"
 msgstr "Dernier éditeur"
 
-#: deploy/models.py:312
+#: deploy/models.py:313
 msgid "impex|exclusive editor"
 msgstr "Editeur exclusif"
 
-#: deploy/models.py:321
+#: deploy/models.py:322
 msgid "impex|filename_link"
 msgstr "fichier d'export"
 
-#: deploy/models.py:323
+#: deploy/models.py:324
 msgid "impex|import/export"
 msgstr "import/export"
 
-#: deploy/models.py:324
+#: deploy/models.py:325
 msgid "impex|imports/exports"
 msgstr "Imports/Exports"
 
@@ -1161,14 +1177,6 @@ msgstr "Gestion des droits"
 msgid "ModelList: Links"
 msgstr "Liens"
 
-#: updatengine/settings.py:84
-msgid "french"
-msgstr "français"
-
-#: updatengine/settings.py:85
-msgid "english"
-msgstr "anglais"
-
 #: updatengine/templates/admin/base.html:82
 msgid "header|Inventory"
 msgstr "Inventaires"
@@ -1212,74 +1220,74 @@ msgstr "Langue de l'interface"
 msgid "Django site admin"
 msgstr "UpdatEngine administration"
 
-#~ msgid "delimiter"
-#~ msgstr "Séparateur de champ"
+msgid "delimiter"
+msgstr "Séparateur de champ"
 
-#~ msgid "quotechar"
-#~ msgstr "Séparateur de texte"
+msgid "quotechar"
+msgstr "Séparateur de texte"
 
-#~ msgid "quoting"
-#~ msgstr "Séparer"
+msgid "quoting"
+msgstr "Séparer"
 
-#~ msgid "All"
-#~ msgstr "Tout"
+msgid "All"
+msgstr "Tout"
 
-#~ msgid "Minimal"
-#~ msgstr "Minimum"
+msgid "Minimal"
+msgstr "Minimum"
 
-#~ msgid "None"
-#~ msgstr "Aucun"
+msgid "None"
+msgstr "Aucun"
 
-#~ msgid "Non Numeric"
-#~ msgstr "Non numérique"
+msgid "Non Numeric"
+msgstr "Non numérique"
 
-#~ msgid "escapechar"
-#~ msgstr "Caractère d'echappement"
+msgid "escapechar"
+msgstr "Caractère d'echappement"
 
-#~ msgid "Export to CSV"
-#~ msgstr "Exporter en CSV"
+msgid "Export to CSV"
+msgstr "Exporter en CSV"
 
-#~ msgid "set"
-#~ msgstr "Fixer à"
+msgid "set"
+msgstr "Fixer à"
 
-#~ msgid "set null"
-#~ msgstr "Fixer à nul"
+msgid "set null"
+msgstr "Fixer à nul"
 
-#~ msgid "Mass update %s"
-#~ msgstr "Modifications massives: %s "
+msgid "Mass update %s"
+msgstr "Modifications massives: %s "
 
-#~ msgid "Mass update"
-#~ msgstr "Modifications massives"
+msgid "Mass update"
+msgstr "Modifications massives"
 
-#~ msgid "Search GenericForeignKeys"
-#~ msgstr "Recherche de clefs étrangères"
+msgid "Search GenericForeignKeys"
+msgstr "Recherche de clefs étrangères"
 
-#~ msgid "Search for generic relation"
-#~ msgstr "Recherche de relation"
+msgid "Search for generic relation"
+msgstr "Recherche de relation"
 
-#~ msgid "No"
-#~ msgstr "Non"
+msgid "No"
+msgstr "Non"
 
-#~ msgid "Only Related (look for Managers)"
-#~ msgstr "Seulement 'Related'"
+msgid "Only Related (look for Managers)"
+msgstr "Seulement 'Related'"
 
-#~ msgid "Analyze Mode (very slow)"
-#~ msgstr "Mode analyse (très lent)"
+msgid "Analyze Mode (very slow)"
+msgstr "Mode analyse (très lent)"
 
-#~ msgid "update"
-#~ msgstr "Mettre à jour"
+msgid "update"
+msgstr "Mettre à jour"
 
-#~ msgid "function"
-#~ msgstr "Action"
+msgid "function"
+msgstr "Action"
 
-#~ msgid "new value"
-#~ msgstr "Nouvelle valeur"
+msgid "new value"
+msgstr "Nouvelle valeur"
 
-#~ msgid "(sample)"
-#~ msgstr "(exemples)"
+msgid "(sample)"
+msgstr "(exemples)"
 
-#~ msgid "subuser|user"
-#~ msgstr "Utilisateur"
+msgid "subuser|user"
+msgstr "Utilisateur"
 
 #, fuzzy
 #~ msgid "packagecondition|condition editor"
@@ -1302,7 +1310,6 @@ msgstr "UpdatEngine administration"
 
 #~ msgid "Groups"
 #~ msgstr "Groupes"
-
 
 #~ msgid "header|subtitle"
 #~ msgstr "Maîtrisez vos mises à jour de logiciels"
