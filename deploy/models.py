@@ -192,6 +192,7 @@ class packagehistory(models.Model):
     package = models.ForeignKey(package, null=True, blank=True, on_delete=models.SET_NULL, verbose_name = _('packagehistory|package'))
     status = models.CharField(max_length=500, default = 'Programmed', null=True, blank = True, verbose_name = _('packagehistory|status'))
     date = models.DateTimeField(auto_now=True, verbose_name = _('packagehistory|date'))
+    category = models.CharField(max_length=30, default = 'Information', null=True, blank = True, verbose_name = _('packagehistory|category'))
 
     class Meta:
         verbose_name = _('packagehistory|package history')

@@ -60,6 +60,23 @@ class statusFilter(SimpleListFilter):
          else:
              return queryset
 
+class categoryFilter(SimpleListFilter):
+    title = _('categoryFilter')
+    parameter_name = 'category'
+ 
+    def lookups(self, request, model_admin):
+        if request.user.is_superuser:
+            return packagehistory.objects.all().order_by('category').values_list('category','category').distinct()
+        else:
+            return packagehistory.objects.filter(machine__entity__pk__in = request.user.subuser.id_entities_allowed).order_by('category').values_list('category','category').distinct()
+    
+    def queryset(self, request, queryset):
+         if self.value() is not None:
+             if 'category' in request.GET:
+                 return queryset.filter(category__iexact=self.value())
+         else:
+             return queryset
+
 class packageHistoryFilter(SimpleListFilter):
     # Human-readable title which will be displayed in the
     # right admin sidebar just above the filter options.

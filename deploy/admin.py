@@ -21,7 +21,7 @@
 from deploy.models import package, packagehistory, packageprofile, packagecondition, timeprofile, packagewakeonlan, impex
 from django.contrib import admin
 from django.contrib.admin import DateFieldListFilter
-from deploy.filters import entityFilter, machineFilter, statusFilter,\
+from deploy.filters import entityFilter, machineFilter, statusFilter, categoryFilter,\
         packageEntityFilter, packageHistoryFilter, conditionEntityFilter, conditionFilter,\
         myPackagesFilter, myConditionsFilter
 from inventory.models import entity, machine
@@ -125,9 +125,9 @@ class packageAdmin(ueAdmin):
 
 
 class packagehistoryAdmin(ueAdmin):
-    list_display = ('date','machine','status','name','description','command','filename','package')
-    search_fields = ('status','name','description','command')
-    list_filter = (entityFilter, machineFilter,packageHistoryFilter,statusFilter,
+    list_display = ('date','machine','category','status','name','description','command','filename','package')
+    search_fields = ('status','machine','name','description','command')
+    list_filter = (entityFilter, machineFilter,packageHistoryFilter,categoryFilter,statusFilter,
             ('date', DateFieldListFilter))
     ordering =('-date',)
     def has_add_permission(self, request):

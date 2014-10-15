@@ -88,6 +88,12 @@ def status(xml):
         else:
             obj.filename = ''
         obj.status=status
+        if "Error" in obj.status:
+             obj.category = "Error"
+        elif "Warning condition" in obj.status:
+             obj.category = "Warning"
+        else:
+             obj.category = "Information"
         obj.save()
         # remove package from machine
         m.packages.remove(p)
