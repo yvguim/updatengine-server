@@ -78,7 +78,7 @@ def status(xml):
         # Update packagehistory status:
         m = machine.objects.get(pk = mid)
         p = package.objects.get(pk = pid)
-        obj, created = packagehistory.objects.get_or_create(machine=m,package=p,command=p.command,status=status)
+        obj, created = packagehistory.objects.get_or_create(machine=m,package=p,command=p.command)
         obj.name = p.name
         obj.description = p.description
         obj.command = p.command
