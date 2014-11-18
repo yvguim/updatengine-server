@@ -165,11 +165,12 @@ def packages_changed(sender, action, instance, **kwargs):
     # Create and update packagehistory object
     if action == 'post_add':
         for package in allpackages :
-            obj, created = packagehistory.objects.get_or_create(machine=instance, package=package, status='Programmed')
+            obj, created = packagehistory.objects.get_or_create(machine=instance, package=package)
             obj.name = package.name
             obj.description = package.description
             obj.command = package.command
             obj.packagesum = package.packagesum
+            obj.status = 'Programmed'
             if package.packagesum != 'nofile':
                 obj.filename = package.filename.path
             obj.save()
