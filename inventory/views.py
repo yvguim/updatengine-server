@@ -182,10 +182,8 @@ def check_conditions(m,pack):
                 if software.objects.filter(host_id=m.id, name__startswith=nametab[0],name__endswith=nametab[1]).exists():
                     softtab = software.objects.filter(host_id=m.id, name__startswith=nametab[0],name__endswith=nametab[1])
                     condversiontab = condition.softwareversion.split('.')
-                    install = False
                     for s in softtab:
-                        vclean = re.sub('[^.0-9]','',s.version)
-                        vtab = vclean.split('.')
+                        vtab = s.version.split('.')
                         if len(condversiontab) > len(vtab):
                             looplimit = len(vtab)
                         else:
@@ -193,27 +191,25 @@ def check_conditions(m,pack):
                         for i in range(0, looplimit):
                             try:
                                 if int(condversiontab[i]) > int(vtab[i]):
-                                    install = True
                                     break
                                 if int(condversiontab[i]) < int(vtab[i]):
+                                    install = False
                                     break
                             except ValueError:
                                 if condversiontab[i] > vtab[i]:
-                                    install = True
                                     break
                                 if condversiontab[i] < vtab[i]:
+                                    install = False
                                     break
-
-                    if install == False:
-                        status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
+                            if (i == looplimit - 1) and (len(vtab) >= len(condversiontab)):
+                                install = False
+                                break
             else:
                 if software.objects.filter(host_id=m.id, name=condition.softwarename).exists():
                     softtab = software.objects.filter(host_id=m.id, name=condition.softwarename)
                     condversiontab = condition.softwareversion.split('.')
-                    install = False
                     for s in softtab:
-                        vclean = re.sub('[^.0-9]','',s.version)
-                        vtab = vclean.split('.')
+                        vtab = s.version.split('.')
                         if len(condversiontab) > len(vtab):
                             looplimit = len(vtab)
                         else:
@@ -221,18 +217,22 @@ def check_conditions(m,pack):
                         for i in range(0, looplimit):
                             try:
                                 if int(condversiontab[i]) > int(vtab[i]):
-                                    install = True
                                     break
                                 if int(condversiontab[i]) < int(vtab[i]):
+                                    install = False
                                     break
                             except ValueError:
                                 if condversiontab[i] > vtab[i]:
-                                    install = True
                                     break
                                 if condversiontab[i] < vtab[i]:
+                                    install = False
                                     break
-                    if install == False:
-                        status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
+                            if (i == looplimit - 1) and (len(vtab) >= len(condversiontab)):
+                                install = False
+                                break
+            if install == False:
+                status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
+                break
 
     # Software installed and version higher than
     if install == True:
@@ -242,10 +242,8 @@ def check_conditions(m,pack):
                 if software.objects.filter(host_id=m.id, name__startswith=nametab[0],name__endswith=nametab[1]).exists():
                     softtab = software.objects.filter(host_id=m.id, name__startswith=nametab[0],name__endswith=nametab[1])
                     condversiontab = condition.softwareversion.split('.')
-                    install = False
                     for s in softtab:
-                        vclean = re.sub('[^.0-9]','',s.version)
-                        vtab = vclean.split('.')
+                        vtab = s.version.split('.')
                         if len(condversiontab) > len(vtab):
                             looplimit = len(vtab)
                         else:
@@ -253,29 +251,27 @@ def check_conditions(m,pack):
                         for i in range(0, looplimit):
                             try:
                                 if int(condversiontab[i]) < int(vtab[i]):
-                                    install = True
                                     break
                                 if int(condversiontab[i]) > int(vtab[i]):
+                                    install = False
                                     break
                             except ValueError:
                                 if condversiontab[i] < vtab[i]:
-                                    install = True
                                     break
                                 if condversiontab[i] > vtab[i]:
+                                    install = False
                                     break
-                    if install == False:
-                        status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
+                            if (i == looplimit - 1) and (len(vtab) <= len(condversiontab)):
+                                install = False
+                                break
                 else:
                     install = False
-                    status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
             else:
                 if software.objects.filter(host_id=m.id, name=condition.softwarename).exists():
                     softtab = software.objects.filter(host_id=m.id, name=condition.softwarename)
                     condversiontab = condition.softwareversion.split('.')
-                    install = False
                     for s in softtab:
-                        vclean = re.sub('[^.0-9]','',s.version)
-                        vtab = vclean.split('.')
+                        vtab = s.version.split('.')
                         if len(condversiontab) > len(vtab):
                             looplimit = len(vtab)
                         else:
@@ -283,21 +279,24 @@ def check_conditions(m,pack):
                         for i in range(0, looplimit):
                             try:
                                 if int(condversiontab[i]) < int(vtab[i]):
-                                    install = True
                                     break
                                 if int(condversiontab[i]) > int(vtab[i]):
+                                    install = False
                                     break
                             except ValueError:
                                 if condversiontab[i] < vtab[i]:
-                                    install = True
                                     break
                                 if condversiontab[i] > vtab[i]:
+                                    install = False
                                     break
-                    if install == False:
-                        status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
+                            if (i == looplimit - 1) and (len(vtab) <= len(condversiontab)):
+                                install = False
+                                break
                 else:
                     install = False
-                    status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
+            if install == False:
+                status('<Packagestatus><Mid>'+str(m.id)+'</Mid><Pid>'+str(pack.id)+'</Pid><Status>Warning condition: '+escape(condition.name)+'</Status></Packagestatus>')
+                break
 
     return install
 
