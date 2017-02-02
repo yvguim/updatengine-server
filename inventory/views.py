@@ -32,11 +32,11 @@ import sys
 def compare_versions(version1, version2):
     from distutils.version import StrictVersion, LooseVersion
     if version1 == "":
-        v1 = 0
+        v1 = "0"
     else:
         v1 = version1.encode('ascii', 'ignore')
     if version2 == "":
-        v2 = 0
+        v2 = "0"
     else:
         v2 = version2.encode('ascii', 'ignore')
     try:
